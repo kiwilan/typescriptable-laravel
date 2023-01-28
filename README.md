@@ -5,7 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/kiwilan/laravel-typeable/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/kiwilan/laravel-typeable/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/kiwilan/laravel-typeable.svg?style=flat-square)](https://packagist.org/packages/kiwilan/laravel-typeable)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Laravel package to types Eloquent models with full TypeScript type.
 
 ## Installation
 
@@ -30,9 +30,8 @@ return [
 
 ## Usage
 
-```php
-$Typeable = new Kiwilan\Typeable();
-echo $Typeable->echoPhrase('Hello, Kiwilan!');
+```bash
+php artisan typeable:models
 ```
 
 ## Testing
