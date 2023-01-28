@@ -1,0 +1,156 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "COMPOSER install",
+      "type": "shell",
+      "command": "composer i",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "COMPOSER update",
+      "type": "shell",
+      "command": "composer update",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "COMPOSER format",
+      "type": "shell",
+      "command": "composer format",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "COMPOSER analyse",
+      "type": "shell",
+      "command": "composer analyse",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "COMPOSER queue",
+      "type": "shell",
+      "command": "composer queue:listen",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "COMPOSER tests",
+      "type": "shell",
+      "command": "composer tests",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "grumphp",
+      "type": "shell",
+      "command": "composer grumphp",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "NPM install",
+      "type": "shell",
+      "command": "pnpm i",
+      "problemMatcher": [],
+      "presentation": {
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "NPM update",
+      "type": "shell",
+      "command": "pnpm update --latest",
+      "problemMatcher": [],
+      "presentation": {
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "NPM build",
+      "type": "shell",
+      "command": "pnpm build",
+      "problemMatcher": [],
+      "presentation": {
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "NPM watch",
+      "type": "shell",
+      "command": "pnpm watch",
+      "problemMatcher": [],
+      "presentation": {
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "NPM pack-local",
+      "type": "shell",
+      "command": "pnpm build && rm -f ~/kiwilan-vite-plugin-laravel-steward-*.tgz || true && npm pack && mv kiwilan-vite-plugin-laravel-steward-*.tgz ~/",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never",
+        "revealProblems": "never",
+        "close": true
+      }
+    },
+    {
+      "label": "NPM deploy",
+      "type": "shell",
+      "command": "npm pack --dry-run && npm publish",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "revealProblems": "always",
+        "close": false
+      }
+    },
+    {
+      "label": "GIT pre-deploy",
+      "type": "shell",
+      "command": "git checkout main && git merge develop && git push && git checkout develop",
+      "problemMatcher": [],
+      "presentation": {
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    }
+  ]
+}
