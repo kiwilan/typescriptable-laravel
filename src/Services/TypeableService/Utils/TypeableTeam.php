@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\TypeableModels\Services\TypeableService\Utils;
+namespace Kiwilan\Typeable\Services\TypeableService\Utils;
 
-use Kiwilan\TypeableModels\Services\TypeableService\TypeableProperty;
+use Kiwilan\Typeable\Services\TypeableService\TypeableProperty;
 
 class TypeableTeam
 {

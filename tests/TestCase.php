@@ -1,10 +1,10 @@
 <?php
 
-namespace Kiwilan\TypeableModels\Tests;
+namespace Kiwilan\Typeable\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Kiwilan\Typeable\TypeableServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Kiwilan\TypeableModels\TypeableModelsServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Kiwilan\\TypeableModels\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Kiwilan\\Typeable\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            TypeableModelsServiceProvider::class,
+            TypeableServiceProvider::class,
         ];
     }
 
@@ -29,7 +29,7 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
 
         /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-typeable-models_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_laravel-typeable_table.php.stub';
         $migration->up();
         */
     }

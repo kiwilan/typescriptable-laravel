@@ -1,9 +1,9 @@
 <?php
 
-namespace Kiwilan\TypeableModels\Services\TypeableService;
+namespace Kiwilan\Typeable\Services\TypeableService;
 
-use Kiwilan\TypeableModels\Services\TypeableService\Utils\TypeableDbColumn;
-use Kiwilan\TypeableModels\Services\TypeableService\Utils\TypeableTypes;
+use Kiwilan\Typeable\Services\TypeableService\Utils\TypeableDbColumn;
+use Kiwilan\Typeable\Services\TypeableService\Utils\TypeableTypes;
 
 /**
  * @property string[] $enum

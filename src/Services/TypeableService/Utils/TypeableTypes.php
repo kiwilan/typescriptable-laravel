@@ -1,9 +1,9 @@
 <?php
 
-namespace Kiwilan\TypeableModels\Services\TypeableService\Utils;
+namespace Kiwilan\Typeable\Services\TypeableService\Utils;
 
 use Doctrine\DBAL\Types\Types;
-use Kiwilan\TypeableModels\Services\TypeableService\TypeableProperty;
+use Kiwilan\Typeable\Services\TypeableService\TypeableProperty;
 use ReflectionClass;
 
 class TypeableTypes

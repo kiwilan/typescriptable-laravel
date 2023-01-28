@@ -1,11 +1,11 @@
 <?php
 
-namespace Kiwilan\TypeableModels\Services\TypeableService;
+namespace Kiwilan\Typeable\Services\TypeableService;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Kiwilan\TypeableModels\Services\TypeableService\Utils\TypeableDbColumn;
-use Kiwilan\TypeableModels\Services\TypeableService\Utils\TypeableTeam;
+use Kiwilan\Typeable\Services\TypeableService\Utils\TypeableDbColumn;
+use Kiwilan\Typeable\Services\TypeableService\Utils\TypeableTeam;
 use ReflectionMethod;
 use ReflectionNamedType;
 

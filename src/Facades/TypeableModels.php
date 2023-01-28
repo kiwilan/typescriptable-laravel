@@ -1,16 +1,16 @@
 <?php
 
-namespace Kiwilan\TypeableModels\Facades;
+namespace Kiwilan\Typeable\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Kiwilan\TypeableModels\TypeableModels
+ * @see \Kiwilan\Typeable\Typeable
  */
-class TypeableModels extends Facade
+class Typeable extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Kiwilan\TypeableModels\TypeableModels::class;
+        return \Kiwilan\Typeable\Typeable::class;
     }
 }

@@ -1,5 +1,5 @@
 <?php
 
-use Kiwilan\TypeableModels\Tests\TestCase;
+use Kiwilan\Typeable\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

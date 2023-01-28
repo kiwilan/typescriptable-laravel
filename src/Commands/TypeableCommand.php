@@ -1,11 +1,11 @@
 <?php
 
-namespace Kiwilan\TypeableModels\Commands;
+namespace Kiwilan\Typeable\Commands;
 
 use Illuminate\Console\Command;
-use Kiwilan\TypeableModels\Services\TypeableService;
+use Kiwilan\Typeable\Services\TypeableService;
 
-class TypeableModelsCommand extends Command
+class TypeableCommand extends Command
 {
     public $signature = 'typeable:models';
 

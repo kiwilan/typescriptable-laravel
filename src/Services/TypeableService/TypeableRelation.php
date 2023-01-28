@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\TypeableModels\Services\TypeableService;
+namespace Kiwilan\Typeable\Services\TypeableService;
 
 use ReflectionMethod;
 

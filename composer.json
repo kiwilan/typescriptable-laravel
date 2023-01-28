@@ -1,12 +1,12 @@
 {
-    "name": "kiwilan/laravel-typeable-models",
-    "description": "This is my package laravel-typeable-models",
+    "name": "kiwilan/laravel-typeable",
+    "description": "This is my package laravel-typeable",
     "keywords": [
         "kiwilan",
         "laravel",
-        "laravel-typeable-models"
+        "laravel-typeable"
     ],
-    "homepage": "https://github.com/kiwilan/laravel-typeable-models",
+    "homepage": "https://github.com/kiwilan/laravel-typeable",
     "license": "MIT",
     "authors": [
         {
@@ -38,13 +38,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Kiwilan\\TypeableModels\\": "src",
-            "Kiwilan\\TypeableModels\\Database\\Factories\\": "database/factories"
+            "Kiwilan\\Typeable\\": "src",
+            "Kiwilan\\Typeable\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Kiwilan\\TypeableModels\\Tests\\": "tests"
+            "Kiwilan\\Typeable\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -64,10 +64,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Kiwilan\\TypeableModels\\TypeableModelsServiceProvider"
+                "Kiwilan\\Typeable\\TypeableServiceProvider"
             ],
             "aliases": {
-                "TypeableModels": "Kiwilan\\TypeableModels\\Facades\\TypeableModels"
+                "Typeable": "Kiwilan\\Typeable\\Facades\\Typeable"
             }
         }
     },

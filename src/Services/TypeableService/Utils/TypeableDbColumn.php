@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\TypeableModels\Services\TypeableService\Utils;
+namespace Kiwilan\Typeable\Services\TypeableService\Utils;
 
 class TypeableDbColumn
 {

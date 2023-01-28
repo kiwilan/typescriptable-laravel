@@ -1,10 +1,10 @@
 <?php
 
-namespace Kiwilan\TypeableModels\Services;
+namespace Kiwilan\Typeable\Services;
 
 use Illuminate\Support\Facades\File;
-use Kiwilan\TypeableModels\Services\TypeableService\TypeableClass;
-use Kiwilan\TypeableModels\Services\TypeableService\Utils\TypeableTeam;
+use Kiwilan\Typeable\Services\TypeableService\TypeableClass;
+use Kiwilan\Typeable\Services\TypeableService\Utils\TypeableTeam;
 
 /**
  * @property string $path
@@ -63,8 +63,8 @@ class TypeableService
 
         $content = implode(PHP_EOL, $content);
 
-        $path = config('TypeableModels.typescript.path') ?? resource_path('js');
-        $filename = config('TypeableModels.typescript.file.models') ?? 'types-models.d.ts';
+        $path = config('Typeable.typescript.path') ?? resource_path('js');
+        $filename = config('Typeable.typescript.file.models') ?? 'types-models.d.ts';
 
         $path = "{$path}/{$filename}";
         File::put($path, $content);

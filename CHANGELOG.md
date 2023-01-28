@@ -1,3 +1,3 @@
 # Changelog
 
-All notable changes to `laravel-typeable-models` will be documented in this file.
+All notable changes to `laravel-typeable` will be documented in this file.
