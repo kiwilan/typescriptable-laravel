@@ -28,6 +28,14 @@ return [
 ];
 ```
 
+## Features
+
+-   [x] Generate TypeScript types for Eloquent models
+-   [x] Generate TypeScript types for Eloquent relations
+-   [x] Generate TypeScript types for `casts` (include native `enum` support)
+-   [x] Generate TypeScript types for `dates`
+-   [x] Generate TypeScript types for `appends` (partial for Attribute Casting)
+
 ## Usage
 
 ```bash

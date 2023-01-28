@@ -37,7 +37,6 @@ class TypeableService
     {
         foreach ($this->typeables as $name => $typeable) {
             unset($typeable->reflector);
-            dump($typeable);
             $path = app_path('Types');
 
             if (! File::exists($path)) {
