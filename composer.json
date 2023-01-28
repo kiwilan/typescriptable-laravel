@@ -39,8 +39,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kiwilan\\Typeable\\": "src",
-            "Kiwilan\\Typeable\\Database\\Factories\\": "database/factories"
+            "Kiwilan\\Typeable\\": "src"
         }
     },
     "autoload-dev": {
