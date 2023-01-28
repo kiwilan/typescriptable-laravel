@@ -51,7 +51,7 @@ class TypeableModel
         $parser->setAppends();
         $parser->setRelations();
 
-        if ($parser->class->name === 'User') {
+        if ($parser->class->command?->fakeTeam && $parser->class->name === 'User') {
             $parser->setFakeTeam();
         }
         $parser->setProperties();

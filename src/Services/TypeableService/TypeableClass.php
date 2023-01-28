@@ -4,6 +4,7 @@ namespace Kiwilan\Typeable\Services\TypeableService;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Kiwilan\Typeable\Commands\TypeableCommand;
 use ReflectionClass;
 use SplFileInfo;
 
@@ -29,6 +30,7 @@ class TypeableClass
     protected function __construct(
         public ?string $path = null,
         public ?SplFileInfo $file = null,
+        public ?TypeableCommand $command = null,
         public ?string $namespace = null,
         public ?string $name = null,
         public ?ReflectionClass $reflector = null,
@@ -51,7 +53,7 @@ class TypeableClass
     ) {
     }
 
-    public static function make(string $path, SplFileInfo $file): self
+    public static function make(string $path, SplFileInfo $file, TypeableCommand $command): self
     {
         $namespace = TypeableClass::getFileNamespace($file);
         $class = new $namespace();
@@ -65,6 +67,7 @@ class TypeableClass
             name: $reflector->getShortName(),
             reflector: $reflector,
             isModel: $isModel,
+            command: $command,
         );
 
         if ($parser->isModel) {

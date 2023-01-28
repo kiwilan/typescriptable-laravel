@@ -15,23 +15,6 @@ You can install the package via composer:
 composer require kiwilan/laravel-typeable
 ```
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="laravel-typeable-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-  'models' => [
-    'path' => resource_path('js'),
-    'file' => 'types-models.d.ts',
-  ],
-];
-```
-
 ## Features
 
 -   [x] Generate TypeScript types for [Eloquent models](https://laravel.com/docs/9.x/eloquent)
@@ -47,7 +30,16 @@ return [
 php artisan typeable:models
 ```
 
+### Options
+
+-   `--M|--models-path=`: The path to the models.
+-   `--O|--output=`: Output path for Typescript file.
+-   `--F|--output-file=`: Output name for Typescript file.
+-   `--T|--fake-team`: For Jetstream, add fake Team model if you choose to not install teams to prevent errors in components.
+
 ## Example
+
+An example of Eloquent model.
 
 ```php
 <?php
@@ -80,32 +72,18 @@ class Story extends Model
     ];
 
     public function getTimeToReadAttribute(): int
-    {
-        $chapters = $this->chapters()->get();
-        $times = array_map(
-            fn ($chapter) => $chapter['time_to_read'],
-            $chapters->toArray()
-        );
-
-        return array_sum($times);
-    }
 
     public function chapters(): HasMany
-    {
-        return $this->hasMany(Chapter::class);
-    }
 
     public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class, 'category_id');
-    }
 
     public function author(): BelongsTo
-    {
-        return $this->belongsTo(Author::class, 'author_id');
-    }
+
+    public function tags(): BelongsToMany
 }
 ```
+
+TS file generated at `resources/js/types-models.d.ts`
 
 ```typescript
 declare namespace App.Models {
@@ -130,9 +108,18 @@ declare namespace App.Models {
         chapters?: Chapter[];
         category?: Category;
         author?: Author;
+        tags?: Tag[];
         mediable?: { picture: string };
     };
 }
+```
+
+```vue
+<script lang="ts" setup>
+defineProps<{
+    story?: App.Models.Story;
+}>();
+</script>
 ```
 
 ## Testing

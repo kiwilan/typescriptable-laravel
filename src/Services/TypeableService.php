@@ -3,6 +3,7 @@
 namespace Kiwilan\Typeable\Services;
 
 use Illuminate\Support\Facades\File;
+use Kiwilan\Typeable\Commands\TypeableCommand;
 use Kiwilan\Typeable\Services\TypeableService\TypeableClass;
 use Kiwilan\Typeable\Services\TypeableService\Utils\TypeableTeam;
 
@@ -14,18 +15,22 @@ class TypeableService
 {
     protected function __construct(
         public string $path,
+        public TypeableCommand $command,
         /** @var TypeableClass[] */
         public array $typeables = [],
     ) {
     }
 
-    public static function make(): self
+    public static function make(TypeableCommand $command): self
     {
-        $path = app_path('Models');
+        $path = $command->modelsPath;
 
-        $service = new TypeableService($path);
+        $service = new TypeableService($path, $command);
         $service->typeables = $service->setTypeables();
-        $service->typeables['Team'] = TypeableClass::fake('Team', TypeableTeam::setFakeTeam());
+
+        if ($service->command->fakeTeam) {
+            $service->typeables['Team'] = TypeableClass::fake('Team', TypeableTeam::setFakeTeam());
+        }
 
         $service->setTsModelTypes();
         // $service->setPhpModelTypes();
@@ -62,8 +67,8 @@ class TypeableService
 
         $content = implode(PHP_EOL, $content);
 
-        $path = config('typeable.models.path') ?? resource_path('js');
-        $filename = config('typeable.models.file.models') ?? 'types-models.d.ts';
+        $path = $this->command->outputPath;
+        $filename = $this->command->outputFile;
 
         $path = "{$path}/{$filename}";
         File::put($path, $content);
@@ -86,6 +91,7 @@ class TypeableService
                 $model = TypeableClass::make(
                     path: $file->getPathname(),
                     file: $file,
+                    command: $this->command
                 );
                 $classes[$model->name] = $model;
             }
