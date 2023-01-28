@@ -1,7 +1,7 @@
 {
     "name": "kiwilan/laravel-typeable",
     "description": "Laravel package to types Eloquent models with full TypeScript type.",
-    "version": "0.0.1",
+    "version": "0.0.11",
     "keywords": [
         "kiwilan",
         "laravel",
