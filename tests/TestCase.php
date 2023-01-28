@@ -3,8 +3,8 @@
 namespace Kiwilan\TypeableModels\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Kiwilan\TypeableModels\TypeableModelsServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
