@@ -32,10 +32,10 @@ php artisan typeable:models
 
 ### Options
 
--   `--M|--models-path=`: The path to the models.
--   `--O|--output=`: Output path for Typescript file.
--   `--F|--output-file=`: Output name for Typescript file.
--   `--T|--fake-team`: For Jetstream, add fake Team model if you choose to not install teams to prevent errors in components.
+-   `-M|--models-path=`: The path to the models. (default: `app/Models`)
+-   `-O|--output=`: Output path for Typescript file. (default: `resources/js`)
+-   `-F|--output-file=`: Output name for Typescript file. (default: `types-models.d.ts`)
+-   `-T|--fake-team`: For Jetstream, add fake Team model if you choose to not install teams to prevent errors in components. (default: `false`)
 
 ## Example
 
