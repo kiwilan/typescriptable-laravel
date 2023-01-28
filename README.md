@@ -25,21 +25,114 @@ This is the contents of the published config file:
 
 ```php
 return [
+  'models' => [
+    'path' => resource_path('js'),
+    'file' => 'types-models.d.ts',
+  ],
 ];
 ```
 
 ## Features
 
--   [x] Generate TypeScript types for Eloquent models
--   [x] Generate TypeScript types for Eloquent relations
+-   [x] Generate TypeScript types for [Eloquent models](https://laravel.com/docs/9.x/eloquent)
+-   [x] Generate TypeScript types for [Eloquent relations](https://laravel.com/docs/9.x/eloquent-relationships) (except `morphTo`)
 -   [x] Generate TypeScript types for `casts` (include native `enum` support)
 -   [x] Generate TypeScript types for `dates`
--   [x] Generate TypeScript types for `appends` (partial for Attribute Casting)
+-   [x] Generate TypeScript types for `appends` (partial for [Attribute Casting](https://laravel.com/docs/9.x/eloquent-mutators))
+-   [x] Generate TypeScript types `counts`
 
 ## Usage
 
 ```bash
 php artisan typeable:models
+```
+
+## Example
+
+```php
+<?php
+
+namespace App\Models;
+
+class Story extends Model
+{
+    use HasFactory;
+    use HasSlug;
+    use HasSearchableName;
+    use HasSeo;
+    use Publishable;
+    use Mediable;
+    use Searchable;
+
+    protected $fillable = [
+        'title',
+        'abstract',
+        'original_link',
+        'picture',
+    ];
+
+    protected $appends = [
+        'time_to_read',
+    ];
+
+    protected $withCount = [
+        'chapters',
+    ];
+
+    public function getTimeToReadAttribute(): int
+    {
+        $chapters = $this->chapters()->get();
+        $times = array_map(
+            fn ($chapter) => $chapter['time_to_read'],
+            $chapters->toArray()
+        );
+
+        return array_sum($times);
+    }
+
+    public function chapters(): HasMany
+    {
+        return $this->hasMany(Chapter::class);
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(Author::class, 'author_id');
+    }
+}
+```
+
+```typescript
+declare namespace App.Models {
+    export type Story = {
+        id: number;
+        title: string;
+        slug?: string;
+        abstract?: string;
+        original_link?: string;
+        picture?: string;
+        status: "draft" | "scheduled" | "published";
+        published_at?: Date;
+        meta_title?: string;
+        meta_description?: string;
+        created_at?: Date;
+        updated_at?: Date;
+        author_id?: number;
+        category_id?: number;
+        time_to_read?: number;
+        seo?: string[];
+        mediables_list?: string[];
+        chapters?: Chapter[];
+        category?: Category;
+        author?: Author;
+        mediable?: { picture: string };
+    };
+}
 ```
 
 ## Testing

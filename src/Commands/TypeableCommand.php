@@ -9,7 +9,7 @@ class TypeableCommand extends Command
 {
     public $signature = 'typeable:models';
 
-    public $description = 'My command';
+    public $description = 'Generate model types.';
 
     public function handle(): int
     {

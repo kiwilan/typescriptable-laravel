@@ -62,8 +62,8 @@ class TypeableService
 
         $content = implode(PHP_EOL, $content);
 
-        $path = config('Typeable.typescript.path') ?? resource_path('js');
-        $filename = config('Typeable.typescript.file.models') ?? 'types-models.d.ts';
+        $path = config('typeable.models.path') ?? resource_path('js');
+        $filename = config('typeable.models.file.models') ?? 'types-models.d.ts';
 
         $path = "{$path}/{$filename}";
         File::put($path, $content);
