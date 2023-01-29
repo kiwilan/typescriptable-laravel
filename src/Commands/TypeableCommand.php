@@ -27,9 +27,12 @@ class TypeableCommand extends Command
     public function handle(): int
     {
         $this->fakeTeam = $this->option('fake-team') ?? false;
-        $this->modelsPath = $this->option('models-path') ?? app_path('Models');
-        $this->outputPath = $this->option('output') ?? resource_path('js');
+        $this->modelsPath = $this->option('models-path') ?? 'app/Models';
+        $this->outputPath = $this->option('output') ?? 'resources/js';
         $this->outputFile = $this->option('output-file') ?? 'types-models.d.ts';
+
+        $this->modelsPath = base_path($this->modelsPath);
+        $this->outputPath = base_path($this->outputPath);
 
         $service = TypeableService::make($this);
         $namespaces = [];
