@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\Typeable\Services\TypeableService\Utils;
+namespace Kiwilan\Typescriptable\Services\TypescriptableService\Utils;
 
-class TypeableDbColumn
+class TypescriptableDbColumn
 {
     public function __construct(
         public ?string $Field = null,

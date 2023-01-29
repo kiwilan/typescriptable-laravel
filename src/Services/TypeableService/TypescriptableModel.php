@@ -1,51 +1,51 @@
 <?php
 
-namespace Kiwilan\Typeable\Services\TypeableService;
+namespace Kiwilan\Typescriptable\Services\TypescriptableService;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Kiwilan\Typeable\Services\TypeableService\Utils\TypeableDbColumn;
-use Kiwilan\Typeable\Services\TypeableService\Utils\TypeableTeam;
+use Kiwilan\Typescriptable\Services\TypescriptableService\Utils\TypescriptableDbColumn;
+use Kiwilan\Typescriptable\Services\TypescriptableService\Utils\TypescriptableTeam;
 use ReflectionMethod;
 use ReflectionNamedType;
 
 /**
  * @property string $table
- * @property TypeableClass|null $class
- * @property TypeableProperty[] $columns
- * @property TypeableRelation[] $relations
+ * @property TypescriptableClass|null $class
+ * @property TypescriptableProperty[] $columns
+ * @property TypescriptableRelation[] $relations
  * @property string[] $appends
- * @property TypeableProperty[] $properties
+ * @property TypescriptableProperty[] $properties
  */
-class TypeableModel
+class TypescriptableModel
 {
     public function __construct(
         public ?string $table = null,
         public ?string $name = null,
-        public ?TypeableClass $class = null,
-        /** @var TypeableProperty[] */
+        public ?TypescriptableClass $class = null,
+        /** @var TypescriptableProperty[] */
         public array $columns = [],
-        /** @var TypeableRelation[] */
+        /** @var TypescriptableRelation[] */
         public array $relations = [],
         public array $appends = [],
         public ?string $mediable = null,
-        /** @var TypeableProperty[] */
+        /** @var TypescriptableProperty[] */
         public array $properties = [],
         public ?string $tsString = null,
         public ?string $phpString = null,
     ) {
     }
 
-    public static function make(TypeableClass $class): self
+    public static function make(TypescriptableClass $class): self
     {
         $parser = new self(table: $class->table, name: $class->name, class: $class);
 
-        /** @var TypeableDbColumn[] */
+        /** @var TypescriptableDbColumn[] */
         $dbColumns = DB::select(DB::raw("SHOW COLUMNS FROM {$class->table}"));
 
         foreach ($dbColumns as $column) {
-            $column = TypeableDbColumn::make($column);
-            $parser->columns[$column->Field] = TypeableProperty::make($class->table, $column);
+            $column = TypescriptableDbColumn::make($column);
+            $parser->columns[$column->Field] = TypescriptableProperty::make($class->table, $column);
         }
 
         $parser->setAppends();
@@ -70,9 +70,9 @@ class TypeableModel
     }
 
     /**
-     * @param  TypeableProperty[]  $properties
+     * @param  TypescriptableProperty[]  $properties
      */
-    public static function fake(TypeableClass $class, array $properties): self
+    public static function fake(TypescriptableClass $class, array $properties): self
     {
         $model = new self(table: $class->table, name: $class->name, class: $class, columns: $properties);
         $model->setProperties();
@@ -120,12 +120,12 @@ class TypeableModel
 
     private function setFakeTeam()
     {
-        $this->properties = TypeableTeam::setUserFakeTeam();
+        $this->properties = TypescriptableTeam::setUserFakeTeam();
     }
 
     private function setRelations()
     {
-        $this->relations = TypeableRelation::make($this);
+        $this->relations = TypescriptableRelation::make($this);
     }
 
     private function setProperties()
@@ -137,17 +137,17 @@ class TypeableModel
         }
 
         foreach ($this->appends as $field => $type) {
-            $this->properties[$field] = TypeableProperty::make(
+            $this->properties[$field] = TypescriptableProperty::make(
                 table: $this->table,
-                dbColumn: new TypeableDbColumn($field, $type),
+                dbColumn: new TypescriptableDbColumn($field, $type),
                 isAppend: true,
             );
         }
 
         foreach ($this->relations as $field => $relation) {
-            $this->properties[$field] = TypeableProperty::make(
+            $this->properties[$field] = TypescriptableProperty::make(
                 table: $this->class->table,
-                dbColumn: new TypeableDbColumn($field, $relation->type),
+                dbColumn: new TypescriptableDbColumn($field, $relation->type),
                 overrideTsType: true,
                 isRelation: true,
                 isArray: $relation->isArray,
@@ -155,9 +155,9 @@ class TypeableModel
         }
 
         if ($this->mediable) {
-            $this->properties['mediable'] = TypeableProperty::make(
+            $this->properties['mediable'] = TypescriptableProperty::make(
                 table: $this->table,
-                dbColumn: new TypeableDbColumn('mediable', $this->mediable),
+                dbColumn: new TypescriptableDbColumn('mediable', $this->mediable),
                 overrideTsType: true,
             );
         }

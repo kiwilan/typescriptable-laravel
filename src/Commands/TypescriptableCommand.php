@@ -1,13 +1,13 @@
 <?php
 
-namespace Kiwilan\Typeable\Commands;
+namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
-use Kiwilan\Typeable\Services\TypeableService;
+use Kiwilan\Typescriptable\Services\TypescriptableService;
 
-class TypeableCommand extends Command
+class TypescriptableCommand extends Command
 {
-    public $signature = 'typeable:models
+    public $signature = 'typescriptable:models
                         {--T|fake-team : For Jetstream, add fake Team model if you choose to not install teams to prevent errors in components.}
                         {--M|models-path= : The path to the models.}
                         {--O|output= : Output path for Typescript file.}
@@ -34,11 +34,11 @@ class TypeableCommand extends Command
         $this->modelsPath = base_path($this->modelsPath);
         $this->outputPath = base_path($this->outputPath);
 
-        $service = TypeableService::make($this);
+        $service = TypescriptableService::make($this);
         $namespaces = [];
 
-        foreach ($service->typeables as $typeable) {
-            $namespace = "{$typeable->namespace}\\{$typeable->name}";
+        foreach ($service->typeables as $typescriptable) {
+            $namespace = "{$typescriptable->namespace}\\{$typescriptable->name}";
             $namespaces[] = [$namespace];
         }
         $this->table(['Models'], $namespaces);

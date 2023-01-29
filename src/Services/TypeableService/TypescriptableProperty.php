@@ -1,19 +1,19 @@
 <?php
 
-namespace Kiwilan\Typeable\Services\TypeableService;
+namespace Kiwilan\Typescriptable\Services\TypescriptableService;
 
-use Kiwilan\Typeable\Services\TypeableService\Utils\TypeableDbColumn;
-use Kiwilan\Typeable\Services\TypeableService\Utils\TypeableTypes;
+use Kiwilan\Typescriptable\Services\TypescriptableService\Utils\TypescriptableDbColumn;
+use Kiwilan\Typescriptable\Services\TypescriptableService\Utils\TypescriptableTypes;
 
 /**
  * @property string[] $enum
  */
-class TypeableProperty
+class TypescriptableProperty
 {
     public function __construct(
         public string $table,
         public string $name,
-        public ?TypeableDbColumn $dbColumn = null,
+        public ?TypescriptableDbColumn $dbColumn = null,
         public bool $isPrimary = false,
         public bool $isNullable = false,
         public ?string $phpType = null,
@@ -34,7 +34,7 @@ class TypeableProperty
 
     public static function make(
         string $table,
-        TypeableDbColumn $dbColumn,
+        TypescriptableDbColumn $dbColumn,
         bool $overrideTsType = false,
         bool $isRelation = false,
         bool $isAppend = false,
@@ -52,7 +52,7 @@ class TypeableProperty
         if ($property->overrideTsType) {
             $property->phpType = $property->dbColumn->Type;
         } else {
-            $property->phpType = TypeableTypes::phpType($dbColumn->Type);
+            $property->phpType = TypescriptableTypes::phpType($dbColumn->Type);
         }
 
         $property->isRelation = $isRelation;
@@ -65,7 +65,7 @@ class TypeableProperty
 
     public function setAdvancedType(): self
     {
-        $type = TypeableTypes::docTypeToTsType($this);
+        $type = TypescriptableTypes::docTypeToTsType($this);
 
         if ($type && ! $this->overrideTsType) {
             $this->phpType = $type;
@@ -106,7 +106,7 @@ class TypeableProperty
             $this->phpType = str_replace('?', '', $this->phpType);
         }
 
-        $this->tsType = TypeableTypes::phpToTs($this->phpType);
+        $this->tsType = TypescriptableTypes::phpToTs($this->phpType);
 
         if ($this->overrideTsType) {
             $this->tsType = $this->phpType;
@@ -140,7 +140,7 @@ class TypeableProperty
         }
 
         $this->cast = $casts[$field];
-        $castType = TypeableTypes::castToPhpType($this->cast);
+        $castType = TypescriptableTypes::castToPhpType($this->cast);
 
         $this->phpType = $castType;
 
@@ -156,12 +156,12 @@ class TypeableProperty
     private function setEnum(): self
     {
         $reflector = new \ReflectionClass($this->cast);
-        $this->isEnum = TypeableTypes::isEnum($reflector);
+        $this->isEnum = TypescriptableTypes::isEnum($reflector);
 
         if ($this->isEnum) {
-            $this->enum = TypeableTypes::setEnum($reflector);
+            $this->enum = TypescriptableTypes::setEnum($reflector);
             $this->overrideTsType = true;
-            $this->phpType = TypeableTypes::phpEnumToTsType($this->enum);
+            $this->phpType = TypescriptableTypes::phpEnumToTsType($this->enum);
         }
 
         return $this;

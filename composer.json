@@ -1,13 +1,13 @@
 {
-  "name": "kiwilan/laravel-typeable",
+  "name": "kiwilan/laravel-typescriptable",
   "description": "Laravel package to types Eloquent models with full TypeScript type.",
-  "version": "0.0.21",
+  "version": "0.0.3",
   "keywords": [
     "kiwilan",
     "laravel",
-    "laravel-typeable"
+    "laravel-typescriptable"
   ],
-  "homepage": "https://github.com/kiwilan/laravel-typeable",
+  "homepage": "https://github.com/kiwilan/laravel-typescriptable",
   "license": "MIT",
   "authors": [
     {
@@ -39,12 +39,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Kiwilan\\Typeable\\": "src"
+      "Kiwilan\\Typescriptable\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Kiwilan\\Typeable\\Tests\\": "tests"
+      "Kiwilan\\Typescriptable\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -64,10 +64,10 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Kiwilan\\Typeable\\TypeableServiceProvider"
+        "Kiwilan\\Typescriptable\\TypescriptableServiceProvider"
       ],
       "aliases": {
-        "Typeable": "Kiwilan\\Typeable\\Facades\\Typeable"
+        "Typescriptable": "Kiwilan\\Typescriptable\\Facades\\Typescriptable"
       }
     }
   },

@@ -1,9 +1,9 @@
-# laravel-typeable
+# laravel-typescriptable
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/kiwilan/laravel-typeable.svg?style=flat-square)](https://packagist.org/packages/kiwilan/laravel-typeable)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/kiwilan/laravel-typeable/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/kiwilan/laravel-typeable/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/kiwilan/laravel-typeable/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/kiwilan/laravel-typeable/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/kiwilan/laravel-typeable.svg?style=flat-square)](https://packagist.org/packages/kiwilan/laravel-typeable)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/kiwilan/laravel-typescriptable.svg?style=flat-square)](https://packagist.org/packages/kiwilan/laravel-typescriptable)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/kiwilan/laravel-typescriptable/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/kiwilan/laravel-typescriptable/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/kiwilan/laravel-typescriptable/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/kiwilan/laravel-typescriptable/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/kiwilan/laravel-typescriptable.svg?style=flat-square)](https://packagist.org/packages/kiwilan/laravel-typescriptable)
 
 Laravel package to types Eloquent models with full TypeScript type.
 
@@ -12,7 +12,7 @@ Laravel package to types Eloquent models with full TypeScript type.
 You can install the package via composer:
 
 ```bash
-composer require kiwilan/laravel-typeable
+composer require kiwilan/laravel-typescriptable
 ```
 
 ## Features
@@ -27,7 +27,7 @@ composer require kiwilan/laravel-typeable
 ## Usage
 
 ```bash
-php artisan typeable:models
+php artisan typescriptable:models
 ```
 
 ### Options

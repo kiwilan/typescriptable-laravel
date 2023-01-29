@@ -1,12 +1,12 @@
 <?php
 
-namespace Kiwilan\Typeable;
+namespace Kiwilan\Typescriptable;
 
-use Kiwilan\Typeable\Commands\TypeableCommand;
+use Kiwilan\Typescriptable\Commands\TypescriptableCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class TypeableServiceProvider extends PackageServiceProvider
+class TypescriptableServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,8 +16,8 @@ class TypeableServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-typeable')
+            ->name('laravel-typescriptable')
             ->hasConfigFile()
-            ->hasCommand(TypeableCommand::class);
+            ->hasCommand(TypescriptableCommand::class);
     }
 }

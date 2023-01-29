@@ -1,13 +1,13 @@
 <?php
 
-namespace Kiwilan\Typeable\Services\TypeableService\Utils;
+namespace Kiwilan\Typescriptable\Services\TypescriptableService\Utils;
 
-use Kiwilan\Typeable\Services\TypeableService\TypeableProperty;
+use Kiwilan\Typescriptable\Services\TypescriptableService\TypescriptableProperty;
 
-class TypeableTeam
+class TypescriptableTeam
 {
     /**
-     * @return TypeableProperty[]
+     * @return TypescriptableProperty[]
      */
     public static function setUserFakeTeam(): array
     {
@@ -23,14 +23,14 @@ class TypeableTeam
         $properties = [];
 
         foreach ($interface as $field => $type) {
-            $properties[$field] = TypeableProperty::make('users', new TypeableDbColumn($field, $type), true);
+            $properties[$field] = TypescriptableProperty::make('users', new TypescriptableDbColumn($field, $type), true);
         }
 
         return $properties;
     }
 
     /**
-     * @return TypeableProperty[]
+     * @return TypescriptableProperty[]
      */
     public static function setFakeTeam()
     {
@@ -46,7 +46,7 @@ class TypeableTeam
         $properties = [];
 
         foreach ($interface as $field => $type) {
-            $properties[$field] = TypeableProperty::make('teams', new TypeableDbColumn($field, $type), true);
+            $properties[$field] = TypescriptableProperty::make('teams', new TypescriptableDbColumn($field, $type), true);
         }
 
         return $properties;
