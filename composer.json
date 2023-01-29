@@ -1,76 +1,76 @@
 {
-    "name": "kiwilan/laravel-typeable",
-    "description": "Laravel package to types Eloquent models with full TypeScript type.",
-    "version": "0.0.2",
-    "keywords": [
-        "kiwilan",
-        "laravel",
-        "laravel-typeable"
-    ],
-    "homepage": "https://github.com/kiwilan/laravel-typeable",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Kiwilan",
-            "email": "ewilan.riviere@gmail.com",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": "^8.1",
-        "doctrine/dbal": "^3.5",
-        "illuminate/contracts": "^9.0",
-        "illuminate/database": "^9.0",
-        "illuminate/support": "^9.0",
-        "spatie/laravel-package-tools": "^1.14.0"
-    },
-    "require-dev": {
-        "laravel/pint": "^1.0",
-        "nunomaduro/collision": "^6.0",
-        "nunomaduro/larastan": "^2.0.1",
-        "orchestra/testbench": "^7.0",
-        "pestphp/pest": "^1.21",
-        "pestphp/pest-plugin-laravel": "^1.1",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0",
-        "phpunit/phpunit": "^9.5",
-        "spatie/laravel-ray": "^1.26"
-    },
-    "autoload": {
-        "psr-4": {
-            "Kiwilan\\Typeable\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Kiwilan\\Typeable\\Tests\\": "tests"
-        }
-    },
-    "scripts": {
-        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
-    },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Kiwilan\\Typeable\\TypeableServiceProvider"
-            ],
-            "aliases": {
-                "Typeable": "Kiwilan\\Typeable\\Facades\\Typeable"
-            }
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "kiwilan/laravel-typeable",
+  "description": "Laravel package to types Eloquent models with full TypeScript type.",
+  "version": "0.0.21",
+  "keywords": [
+    "kiwilan",
+    "laravel",
+    "laravel-typeable"
+  ],
+  "homepage": "https://github.com/kiwilan/laravel-typeable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Kiwilan",
+      "email": "ewilan.riviere@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^8.1",
+    "doctrine/dbal": "^3.5",
+    "illuminate/contracts": "^9.0",
+    "illuminate/database": "^9.0",
+    "illuminate/support": "^9.0",
+    "spatie/laravel-package-tools": "^1.14.0"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.0",
+    "nunomaduro/collision": "^6.0",
+    "nunomaduro/larastan": "^2.0.1",
+    "orchestra/testbench": "^7.0",
+    "pestphp/pest": "^1.21",
+    "pestphp/pest-plugin-laravel": "^1.1",
+    "phpstan/extension-installer": "^1.1",
+    "phpstan/phpstan-deprecation-rules": "^1.0",
+    "phpstan/phpstan-phpunit": "^1.0",
+    "phpunit/phpunit": "^9.5",
+    "spatie/laravel-ray": "^1.26"
+  },
+  "autoload": {
+    "psr-4": {
+      "Kiwilan\\Typeable\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Kiwilan\\Typeable\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+    "analyse": "vendor/bin/phpstan analyse",
+    "test": "vendor/bin/pest",
+    "test-coverage": "vendor/bin/pest --coverage",
+    "format": "vendor/bin/pint"
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "phpstan/extension-installer": true
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Kiwilan\\Typeable\\TypeableServiceProvider"
+      ],
+      "aliases": {
+        "Typeable": "Kiwilan\\Typeable\\Facades\\Typeable"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
