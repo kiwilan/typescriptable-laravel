@@ -35,7 +35,7 @@ php artisan typescriptable:models
 -   `-M|--models-path=`: The path to the models. (default: `app/Models`)
 -   `-O|--output=`: Output path for Typescript file. (default: `resources/js`)
 -   `-F|--output-file=`: Output name for Typescript file. (default: `types-models.d.ts`)
--   `-T|--fake-team`: For Jetstream, add fake Team model if you choose to not install teams to prevent errors in components. (default: `false`)
+-   `-T|--fake-team`: For [Jetstream](https://jetstream.laravel.com/2.x/introduction.html), add fake Team model if you choose to not install teams to prevent errors in components. (default: `false`)
 
 ## Example
 
