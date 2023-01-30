@@ -21,7 +21,7 @@ composer require kiwilan/laravel-typescriptable
 -   [x] Generate TypeScript types for [Eloquent relations](https://laravel.com/docs/9.x/eloquent-relationships) (except `morphTo`)
 -   [x] Generate TypeScript types for `casts` (include native `enum` support)
 -   [x] Generate TypeScript types for `dates`
--   [x] Generate TypeScript types for `appends` (partial for [Attribute Casting](https://laravel.com/docs/9.x/eloquent-mutators))
+-   [x] Generate TypeScript types for `appends` (partial for [`Casts\Attribute`](https://laravel.com/docs/9.x/eloquent-mutators#defining-an-accessor), you can use old way to define `get*Attribute` methods)
 -   [x] Generate TypeScript types `counts`
 
 ## Usage

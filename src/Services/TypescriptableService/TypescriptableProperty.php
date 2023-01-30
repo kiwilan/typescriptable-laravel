@@ -25,6 +25,7 @@ class TypescriptableProperty
         public bool $isRelation = false,
         public bool $isArray = false,
         public bool $isAppend = false,
+        public bool $isCount = false,
         public bool $overrideTsType = false,
         public ?string $tsType = null,
         public ?string $tsString = null,
@@ -39,6 +40,7 @@ class TypescriptableProperty
         bool $isRelation = false,
         bool $isAppend = false,
         bool $isArray = false,
+        bool $isCount = false,
     ): self {
         $property = new self(
             table: $table,
@@ -58,6 +60,7 @@ class TypescriptableProperty
         $property->isRelation = $isRelation;
         $property->isAppend = $isAppend;
         $property->isArray = $isArray;
+        $property->isCount = $isCount;
         $property->setPhpString();
 
         return $property;

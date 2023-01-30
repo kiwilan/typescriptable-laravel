@@ -31,6 +31,7 @@ class TypescriptableModel
         public ?string $mediable = null,
         /** @var TypescriptableProperty[] */
         public array $properties = [],
+        public array $counts = [],
         public ?string $tsString = null,
         public ?string $phpString = null,
     ) {
@@ -50,6 +51,7 @@ class TypescriptableModel
 
         $parser->setAppends();
         $parser->setRelations();
+        $parser->setCounts();
 
         if ($parser->class->command?->fakeTeam && $parser->class->name === 'User') {
             $parser->setFakeTeam();
@@ -83,6 +85,15 @@ class TypescriptableModel
         $model->tsString = $model->convertToTs();
 
         return $model;
+    }
+
+    private function setCounts()
+    {
+        foreach ($this->relations as $field => $relation) {
+            if ($relation->isArray) {
+                $this->counts[$field] = $relation->type;
+            }
+        }
     }
 
     private function convertToPhp(): string
@@ -151,6 +162,15 @@ class TypescriptableModel
                 overrideTsType: true,
                 isRelation: true,
                 isArray: $relation->isArray,
+            );
+        }
+
+        foreach ($this->counts as $field => $type) {
+            $this->properties["{$field}_count"] = TypescriptableProperty::make(
+                table: $this->class->table,
+                dbColumn: new TypescriptableDbColumn("{$field}_count", 'number'),
+                overrideTsType: true,
+                isCount: true,
             );
         }
 
