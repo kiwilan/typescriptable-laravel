@@ -16,7 +16,7 @@ class TypescriptableServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-typescriptable')
+            ->name('typescriptable-laravel')
             ->hasConfigFile()
             ->hasCommand(TypescriptableCommand::class);
     }

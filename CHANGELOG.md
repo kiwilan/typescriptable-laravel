@@ -1,3 +1,3 @@
 # Changelog
 
-All notable changes to `laravel-typescriptable` will be documented in this file.
+All notable changes to `typescriptable-laravel` will be documented in this file.
