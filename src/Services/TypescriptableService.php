@@ -4,8 +4,9 @@ namespace Kiwilan\Typescriptable\Services;
 
 use Illuminate\Support\Facades\File;
 use Kiwilan\Typescriptable\Commands\TypescriptableCommand;
-use Kiwilan\Typescriptable\Services\TypescriptableService\TypescriptableClass;
-use Kiwilan\Typescriptable\Services\TypescriptableService\Utils\TypescriptableTeam;
+use Kiwilan\Typescriptable\Services\Typescriptable\TypescriptableClass;
+use Kiwilan\Typescriptable\Services\Typescriptable\Utils\TypescriptablePaginate;
+use Kiwilan\Typescriptable\Services\Typescriptable\Utils\TypescriptableTeam;
 
 /**
  * @property string $path
@@ -63,6 +64,7 @@ class TypescriptableService
         foreach ($this->typeables as $typescriptable) {
             $content[] = $typescriptable->typeableModel?->tsString;
         }
+        $content[] = TypescriptablePaginate::make();
         $content[] = '}';
 
         $content = implode(PHP_EOL, $content);

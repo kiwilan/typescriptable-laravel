@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\TypescriptableService\Utils;
+namespace Kiwilan\Typescriptable\Services\Typescriptable\Utils;
 
-use Kiwilan\Typescriptable\Services\TypescriptableService\TypescriptableProperty;
+use Kiwilan\Typescriptable\Services\Typescriptable\TypescriptableProperty;
 
 class TypescriptableTeam
 {

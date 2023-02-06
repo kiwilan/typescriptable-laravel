@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\TypescriptableService\Utils;
+namespace Kiwilan\Typescriptable\Services\Typescriptable\Utils;
 
 class TypescriptableDbColumn
 {

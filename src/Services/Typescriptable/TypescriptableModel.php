@@ -1,11 +1,11 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\TypescriptableService;
+namespace Kiwilan\Typescriptable\Services\Typescriptable;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Kiwilan\Typescriptable\Services\TypescriptableService\Utils\TypescriptableDbColumn;
-use Kiwilan\Typescriptable\Services\TypescriptableService\Utils\TypescriptableTeam;
+use Kiwilan\Typescriptable\Services\Typescriptable\Utils\TypescriptableDbColumn;
+use Kiwilan\Typescriptable\Services\Typescriptable\Utils\TypescriptableTeam;
 use ReflectionMethod;
 use ReflectionNamedType;
 

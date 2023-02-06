@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\TypescriptableService;
+namespace Kiwilan\Typescriptable\Services\Typescriptable;
 
 use ReflectionMethod;
 
