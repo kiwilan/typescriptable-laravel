@@ -11,7 +11,8 @@ class TypescriptableCommand extends Command
                         {--T|fake-team : For Jetstream, add fake Team model if you choose to not install teams to prevent errors in components.}
                         {--M|models-path= : The path to the models.}
                         {--O|output= : Output path for Typescript file.}
-                        {--F|output-file= : Output name for Typescript file.}';
+                        {--F|output-file= : Output name for Typescript file.}
+                        {--P|paginate : Add paginate type for Laravel pagination.}';
 
     public $description = 'Generate model types.';
 
@@ -20,6 +21,7 @@ class TypescriptableCommand extends Command
         public string $modelsPath = 'app/Models',
         public string $outputPath = 'resources/js',
         public string $outputFile = 'types-models.d.ts',
+        public bool $paginate = false,
     ) {
         parent::__construct();
     }
@@ -30,6 +32,7 @@ class TypescriptableCommand extends Command
         $this->modelsPath = $this->option('models-path') ?? 'app/Models';
         $this->outputPath = $this->option('output') ?? 'resources/js';
         $this->outputFile = $this->option('output-file') ?? 'types-models.d.ts';
+        $this->paginate = $this->option('paginate') ?? false;
 
         $this->modelsPath = base_path($this->modelsPath);
         $this->outputPath = base_path($this->outputPath);

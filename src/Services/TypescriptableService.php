@@ -64,7 +64,9 @@ class TypescriptableService
         foreach ($this->typeables as $typescriptable) {
             $content[] = $typescriptable->typeableModel?->tsString;
         }
-        $content[] = TypescriptablePaginate::make();
+        if ($this->command->paginate) {
+            $content[] = TypescriptablePaginate::make();
+        }
         $content[] = '}';
 
         $content = implode(PHP_EOL, $content);
