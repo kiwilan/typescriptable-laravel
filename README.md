@@ -25,6 +25,7 @@ composer require kiwilan/typescriptable-laravel
 -   Generate TypeScript types for `casts` (include native `enum` support)
 -   Generate TypeScript types for `dates`
 -   Generate TypeScript types for `appends` (partial for [`Casts\Attribute`](https://laravel.com/docs/9.x/eloquent-mutators#defining-an-accessor), you can use old way to define `get*Attribute` methods)
+    -   [ ] Use `appends` to define type for `Casts\Attribute` methods
 -   Generate TypeScript types `counts`
 -   Generate pagination types for [Laravel pagination](https://laravel.com/docs/9.x/pagination) with option `paginate`
 
@@ -120,6 +121,8 @@ declare namespace App {
             category?: Category;
             author?: Author;
             tags?: Tag[];
+            chapters_count?: number;
+            tags_count?: number;
         };
     }
     // With `paginate` option.
