@@ -7,6 +7,11 @@ class TypescriptablePaginate
     public static function make()
     {
         return <<<'typescript'
+  export type PaginateLink = {
+    url: string;
+    label: string;
+    active: boolean;
+  };
   export type Paginate<T = any> = {
     data: T[];
     current_page: number;
@@ -14,11 +19,7 @@ class TypescriptablePaginate
     from: number;
     last_page: number;
     last_page_url: string;
-    links: {
-      url: string;
-      label: string;
-      active: boolean;
-    }[];
+    links: App.PaginateLink[];
     next_page_url: string;
     path: string;
     per_page: number;

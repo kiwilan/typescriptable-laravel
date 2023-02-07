@@ -118,13 +118,13 @@ class TypescriptableModel
 
     private function convertToTs(): string
     {
-        $typescript[] = "  export type {$this->class->name} = {";
+        $typescript[] = "export type {$this->class->name} = {";
 
         foreach ($this->properties as $property) {
-            $typescript[] = $property->tsString;
+            $typescript[] = "  {$property->tsString}";
         }
 
-        $typescript[] = '  };';
+        $typescript[] = '    };';
 
         return implode(PHP_EOL, $typescript);
     }
