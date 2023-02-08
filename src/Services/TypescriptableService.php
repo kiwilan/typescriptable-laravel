@@ -2,9 +2,10 @@
 
 namespace Kiwilan\Typescriptable\Services;
 
-use Kiwilan\Steward\Services\Typescriptable\ZiggyType;
 use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableZiggyCommand;
+use Kiwilan\Typescriptable\Services\Typescriptable\EloquentType;
+use Kiwilan\Typescriptable\Services\Typescriptable\ZiggyType;
 
 class TypescriptableService
 {

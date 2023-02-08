@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services;
+namespace Kiwilan\Typescriptable\Services\Typescriptable;
 
 use Illuminate\Support\Facades\File;
 use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
