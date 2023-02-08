@@ -53,11 +53,11 @@ php artisan typescriptable:models
     -   `$page`
     -   `sessions`
 
-Requirements:
+### Requirements
 
--   [tightenco/ziggy](https://github.com/tighten/ziggy) for `composer`
--   [ziggy-js](https://www.npmjs.com/package/ziggy-js) for `npm` (optional for `embed` option)
--   [@kiwilan/vite-plugin-steward-laravel](https://www.npmjs.com/package/@kiwilan/vite-plugin-steward-laravel) for `npm` (optional for `embed` option, `kiwilan/steward-laravel` package is not required)
+> -   [tightenco/ziggy](https://github.com/tighten/ziggy) for `composer`
+> -   [ziggy-js](https://www.npmjs.com/package/ziggy-js) for `npm` (optional for `embed` option)
+> -   [@kiwilan/vite-plugin-steward-laravel](https://www.npmjs.com/package/@kiwilan/vite-plugin-steward-laravel) for `npm` (optional for `embed` option, `kiwilan/steward-laravel` package is not required)
 
 ### Command
 
