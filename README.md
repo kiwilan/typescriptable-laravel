@@ -17,9 +17,7 @@ You can install the package via composer:
 composer require kiwilan/typescriptable-laravel
 ```
 
-## Features
-
-### For models
+## Models
 
 -   Generate TypeScript types for [Eloquent models](https://laravel.com/docs/9.x/eloquent)
 -   Generate TypeScript types for [Eloquent relations](https://laravel.com/docs/9.x/eloquent-relationships) (except `morphTo`)
@@ -31,9 +29,19 @@ composer require kiwilan/typescriptable-laravel
 -   Generate TypeScript types `counts`
 -   Generate pagination types for [Laravel pagination](https://laravel.com/docs/9.x/pagination) with option `paginate`
 
-### For Ziggy
+### Command
 
-[**Check requirements before use Ziggy feature.**](#with-ziggy)
+```bash
+php artisan typescriptable:models
+```
+
+-   --`O`|`output=` : Output path for Typescript file, default is `resources/js`.
+-   --`F`|`output-file=` : Output name for Typescript file, default is `types-models.d.ts`.
+-   --`M`|`models-path=` : The path to the models.
+-   --`P`|`paginate` : Add paginate type for Laravel pagination.
+-   --`T`|`fake-team` : For Jetstream, add fake Team model if you choose to not install teams to prevent errors in components.
+
+## Ziggy
 
 -   Router feature (can be disable with `skip-router` option): generate TypeScript interface for Laravel routes as `ZiggyLaravelRoutes`.
 -   Page feature (can be disable with `skip-page` option): generate TypeScript interface for `usePage` Inertia composable as `InertiaPage`.
@@ -45,37 +53,17 @@ composer require kiwilan/typescriptable-laravel
     -   `$page`
     -   `sessions`
 
-## Usage
-
-### With models
-
-```bash
-php artisan typescriptable:models
-```
-
-### With Ziggy
-
 Requirements:
 
 -   [tightenco/ziggy](https://github.com/tighten/ziggy) for `composer`
 -   [ziggy-js](https://www.npmjs.com/package/ziggy-js) for `npm` (optional for `embed` option)
 -   [@kiwilan/vite-plugin-steward-laravel](https://www.npmjs.com/package/@kiwilan/vite-plugin-steward-laravel) for `npm` (optional for `embed` option, `kiwilan/steward-laravel` package is not required)
 
+### Command
+
 ```bash
 php artisan typescriptable:ziggy
 ```
-
-### Options
-
-#### Models
-
--   --`O`|`output=` : Output path for Typescript file, default is `resources/js`.
--   --`F`|`output-file=` : Output name for Typescript file, default is `types-models.d.ts`.
--   --`M`|`models-path=` : The path to the models.
--   --`P`|`paginate` : Add paginate type for Laravel pagination.
--   --`T`|`fake-team` : For Jetstream, add fake Team model if you choose to not install teams to prevent errors in components.
-
-#### Ziggy
 
 -   --`O`|`output=` : Output path for Typescript file, default is `resources/js`.
 -   --`F`|`output-file=` : Output name for Ziggy Typescript file, default is `types-ziggy.d.ts`.
@@ -83,7 +71,7 @@ php artisan typescriptable:ziggy
 -   --`skip-page` : Skip generation of `usePage` interface with `InertiaPage` interface.
 -   --`E`|`embed` : For Vue plugin `InertiaTyped` only, generate global methods interface (default is `false`). Require `ziggy-js` package.
 
-## Example
+## Examples
 
 ### Models
 
