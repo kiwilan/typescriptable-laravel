@@ -40,7 +40,7 @@ composer require kiwilan/typescriptable-laravel
 ### Ziggy
 
 -   Router feature (can be disable with `skip-router` option): generate TypeScript interface for Laravel routes as `ZiggyLaravelRoutes`.
--   Page feature (can be disable with `skip-page`): generate TypeScript interface for `usePage` Inertia composable as `InertiaPage`.
+-   Page feature (can be disable with `skip-page` option): generate TypeScript interface for `usePage` Inertia composable as `InertiaPage`.
 -   `embed` option (default to `false`): generate some global components methods, you need to install `@kiwilan/vite-plugin-steward-laravel`, `ziggy-js` package and `InertiaTyped` Vue plugin from `@kiwilan/vite-plugin-steward-laravel`.
     -   `$route`
     -   `$isRoute`
