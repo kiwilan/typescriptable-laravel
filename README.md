@@ -19,7 +19,7 @@ composer require kiwilan/typescriptable-laravel
 
 ## Features
 
-### Models
+### For models
 
 -   Generate TypeScript types for [Eloquent models](https://laravel.com/docs/9.x/eloquent)
 -   Generate TypeScript types for [Eloquent relations](https://laravel.com/docs/9.x/eloquent-relationships) (except `morphTo`)
@@ -31,9 +31,9 @@ composer require kiwilan/typescriptable-laravel
 -   Generate TypeScript types `counts`
 -   Generate pagination types for [Laravel pagination](https://laravel.com/docs/9.x/pagination) with option `paginate`
 
-### Ziggy
+### For Ziggy
 
-[**Check requirements before use Ziggy feature.**](#ziggy-2)
+[**Check requirements before use Ziggy feature.**](#with-ziggy)
 
 -   Router feature (can be disable with `skip-router` option): generate TypeScript interface for Laravel routes as `ZiggyLaravelRoutes`.
 -   Page feature (can be disable with `skip-page` option): generate TypeScript interface for `usePage` Inertia composable as `InertiaPage`.
@@ -47,13 +47,13 @@ composer require kiwilan/typescriptable-laravel
 
 ## Usage
 
-### Models
+### With models
 
 ```bash
 php artisan typescriptable:models
 ```
 
-### Ziggy
+### With Ziggy
 
 Requirements:
 
