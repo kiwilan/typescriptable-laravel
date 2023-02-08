@@ -2,12 +2,12 @@
 
 namespace Kiwilan\Typescriptable\Services\Typescriptable\Utils;
 
-use Kiwilan\Typescriptable\Services\Typescriptable\TypescriptableProperty;
+use Kiwilan\Typescriptable\Services\Typescriptable\Models\ClassProperty;
 
-class TypescriptableTeam
+class LaravelTeamType
 {
     /**
-     * @return TypescriptableProperty[]
+     * @return ClassProperty[]
      */
     public static function setUserFakeTeam(): array
     {
@@ -23,14 +23,14 @@ class TypescriptableTeam
         $properties = [];
 
         foreach ($interface as $field => $type) {
-            $properties[$field] = TypescriptableProperty::make('users', new TypescriptableDbColumn($field, $type), true);
+            $properties[$field] = ClassProperty::make('users', new DatabaseColumn($field, $type), true);
         }
 
         return $properties;
     }
 
     /**
-     * @return TypescriptableProperty[]
+     * @return ClassProperty[]
      */
     public static function setFakeTeam()
     {
@@ -46,7 +46,7 @@ class TypescriptableTeam
         $properties = [];
 
         foreach ($interface as $field => $type) {
-            $properties[$field] = TypescriptableProperty::make('teams', new TypescriptableDbColumn($field, $type), true);
+            $properties[$field] = ClassProperty::make('teams', new DatabaseColumn($field, $type), true);
         }
 
         return $properties;

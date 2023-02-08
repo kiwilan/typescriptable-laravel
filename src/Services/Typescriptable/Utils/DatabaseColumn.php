@@ -2,7 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Services\Typescriptable\Utils;
 
-class TypescriptableDbColumn
+class DatabaseColumn
 {
     public function __construct(
         public ?string $Field = null,

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\Typescriptable;
+namespace Kiwilan\Typescriptable\Services\Typescriptable\Models;
 
 use ReflectionMethod;
 
-class TypescriptableRelation
+class ClassRelation
 {
     public function __construct(
         public string $name,
@@ -15,9 +15,9 @@ class TypescriptableRelation
     }
 
     /**
-     * @return array<string,TypescriptableRelation>
+     * @return array<string,ClassRelation>
      */
-    public static function make(TypescriptableModel $model): array
+    public static function make(EloquentModel $model): array
     {
         $reflector = $model->class->reflector;
         $relations = [];
@@ -29,7 +29,7 @@ class TypescriptableRelation
                 continue;
             }
 
-            $relation = TypescriptableRelation::setRelation($method);
+            $relation = ClassRelation::setRelation($method);
             $relations[$relation->name] = $relation;
         }
 
@@ -38,7 +38,7 @@ class TypescriptableRelation
 
     private static function setRelation(ReflectionMethod $method): self
     {
-        $relation = new TypescriptableRelation(
+        $relation = new ClassRelation(
             name: $method->getName(),
             isArray: str_contains($method->getReturnType(), 'Many'),
         );

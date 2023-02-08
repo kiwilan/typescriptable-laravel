@@ -3,10 +3,10 @@
 namespace Kiwilan\Typescriptable\Services\Typescriptable\Utils;
 
 use Doctrine\DBAL\Types\Types;
-use Kiwilan\Typescriptable\Services\Typescriptable\TypescriptableProperty;
+use Kiwilan\Typescriptable\Services\Typescriptable\Models\ClassProperty;
 use ReflectionClass;
 
-class TypescriptableTypes
+class TypescriptConverter
 {
     protected function __construct(
     ) {
@@ -130,7 +130,7 @@ class TypescriptableTypes
         return trim($type);
     }
 
-    public static function docTypeToTsType(TypescriptableProperty $property): ?string
+    public static function docTypeToTsType(ClassProperty $property): ?string
     {
         $type = null;
 
@@ -159,7 +159,7 @@ class TypescriptableTypes
         }
 
         if ($type) {
-            $type = TypescriptableTypes::phpToTs($type);
+            $type = TypescriptConverter::phpToTs($type);
             $type = "{$type}[]";
         }
 

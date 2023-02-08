@@ -1,15 +1,15 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\Typescriptable;
+namespace Kiwilan\Typescriptable\Services\Typescriptable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Kiwilan\Typescriptable\Commands\TypescriptableCommand;
+use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
 use ReflectionClass;
 use SplFileInfo;
 
 /**
- * Class TypescriptableClass
+ * Class ClassTemplate
  *
  * @property string $path
  * @property SplFileInfo $file
@@ -18,26 +18,26 @@ use SplFileInfo;
  * @property ReflectionClass $reflector
  * @property bool $isModel
  * @property ?string $table
- * @property TypescriptableProperty[] $columns
+ * @property ClassProperty[] $columns
  * @property string[] $appends
  * @property string[] $casts
  * @property string[] $dates
  * @property string[] $fillable
  * @property string[] $hidden
  */
-class TypescriptableClass
+class ClassTemplate
 {
     protected function __construct(
         public ?string $path = null,
         public ?SplFileInfo $file = null,
-        public ?TypescriptableCommand $command = null,
+        public ?TypescriptableModelsCommand $command = null,
         public ?string $namespace = null,
         public ?string $name = null,
         public ?ReflectionClass $reflector = null,
         public bool $isModel = false,
         public ?Model $model = null,
         public ?string $table = null,
-        /** @var TypescriptableProperty[] */
+        /** @var ClassProperty[] */
         public array $columns = [],
         /** @var string[] */
         public array $appends = [],
@@ -49,13 +49,13 @@ class TypescriptableClass
         public array $fillable = [],
         /** @var string[] */
         public array $hidden = [],
-        public ?TypescriptableModel $typeableModel = null,
+        public ?EloquentModel $typeableModel = null,
     ) {
     }
 
-    public static function make(string $path, SplFileInfo $file, TypescriptableCommand $command): self
+    public static function make(string $path, SplFileInfo $file, TypescriptableModelsCommand $command): self
     {
-        $namespace = TypescriptableClass::getFileNamespace($file);
+        $namespace = ClassTemplate::getFileNamespace($file);
         $class = new $namespace();
         $reflector = new ReflectionClass($class);
         $isModel = $class instanceof \Illuminate\Database\Eloquent\Model;
@@ -82,14 +82,14 @@ class TypescriptableClass
             $parser->hidden = $parser->model->getHidden();
         }
 
-        $parser->typeableModel = TypescriptableModel::make($parser);
+        $parser->typeableModel = EloquentModel::make($parser);
         $parser->columns = $parser->typeableModel->columns;
 
         return $parser;
     }
 
     /**
-     * @param  TypescriptableProperty[]  $properties
+     * @param  ClassProperty[]  $properties
      */
     public static function fake(string $name, array $properties): self
     {
@@ -100,7 +100,7 @@ class TypescriptableClass
             table: $table,
             name: $name,
         );
-        $class->typeableModel = TypescriptableModel::fake($class, $properties);
+        $class->typeableModel = EloquentModel::fake($class, $properties);
 
         return $class;
     }

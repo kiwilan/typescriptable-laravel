@@ -2,7 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Services\Typescriptable\Utils;
 
-class TypescriptablePaginate
+class LaravelPaginateType
 {
     public static function make()
     {
