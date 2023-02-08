@@ -55,9 +55,9 @@ php artisan typescriptable:models
 
 ### Requirements
 
-> -   [tightenco/ziggy](https://github.com/tighten/ziggy) for `composer`
-> -   [ziggy-js](https://www.npmjs.com/package/ziggy-js) for `npm` (optional for `embed` option)
-> -   [@kiwilan/vite-plugin-steward-laravel](https://www.npmjs.com/package/@kiwilan/vite-plugin-steward-laravel) for `npm` (optional for `embed` option, `kiwilan/steward-laravel` package is not required)
+> -   [tightenco/ziggy](https://github.com/tighten/ziggy) for `composer`: `composer require tightenco/ziggy`
+> -   [ziggy-js](https://www.npmjs.com/package/ziggy-js) for `npm` (optional for `embed` option): `npm install ziggy-js --save-dev`
+> -   [@kiwilan/vite-plugin-steward-laravel](https://www.npmjs.com/package/@kiwilan/vite-plugin-steward-laravel) for `npm` (optional for `embed` option, `kiwilan/steward-laravel` package is not required): `npm install @kiwilan/vite-plugin-steward-laravel --save-dev`
 
 ### Command
 
