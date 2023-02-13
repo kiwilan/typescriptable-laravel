@@ -24,7 +24,7 @@ class InertiaPage
                 banner?: string,
                 message?: string,
                 style?: string,
-              } | string[],
+              },
             }
             [x: string]: unknown;
             errors: import("@inertiajs/core").Errors & import("@inertiajs/core").ErrorBag;
