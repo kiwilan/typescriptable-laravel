@@ -20,10 +20,10 @@ class InertiaPage
               canManageTwoFactorAuthentication?: boolean,
               hasAccountDeletionFeatures?: boolean,
               flash?: {
-                bannerStyle: string,
-                banner: string,
-                message: string,
-                style: string,
+                bannerStyle?: string,
+                banner?: string,
+                message?: string,
+                style?: string,
               } | string[],
             }
             [x: string]: unknown;
