@@ -10,7 +10,22 @@ class InertiaPage
         declare interface IPage {
           props: {
             user: App.Models.User
-            jetstream?: { canCreateTeams?: boolean, hasTeamFeatures?: boolean, managesProfilePhotos?: boolean, hasApiFeatures?: boolean, canUpdateProfileInformation?: boolean, canUpdatePassword?: boolean, canManageTwoFactorAuthentication?: boolean, hasAccountDeletionFeatures?: boolean }
+            jetstream?: {
+              canCreateTeams?: boolean,
+              hasTeamFeatures?: boolean,
+              managesProfilePhotos?: boolean,
+              hasApiFeatures?: boolean,
+              canUpdateProfileInformation?: boolean,
+              canUpdatePassword?: boolean,
+              canManageTwoFactorAuthentication?: boolean,
+              hasAccountDeletionFeatures?: boolean,
+              flash?: {
+                bannerStyle: string,
+                banner: string,
+                message: string,
+                style: string,
+              } | string[],
+            }
             [x: string]: unknown;
             errors: import("@inertiajs/core").Errors & import("@inertiajs/core").ErrorBag;
           }
