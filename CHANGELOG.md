@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 0.2.20 - 2023-02-13
+
+- Add `flash` into `InertiaPage`
+
 ## 0.2.1 - 2023-02-08
 
 - Fix namespace
