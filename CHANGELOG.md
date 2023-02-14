@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 0.2.21 - 2023-02-13
+
+- remove `string[]` for `flash`, only `object` type
+
 ## 0.2.20 - 2023-02-13
 
 - Add `flash` into `InertiaPage`
