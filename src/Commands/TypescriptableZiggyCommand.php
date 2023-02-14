@@ -3,6 +3,7 @@
 namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
+use Kiwilan\Typescriptable\Services\TypescriptableService;
 use Kiwilan\Typescriptable\Utils\TypeOption;
 
 class TypescriptableZiggyCommand extends Command
@@ -33,7 +34,7 @@ class TypescriptableZiggyCommand extends Command
         $this->skipPage = $this->option('skip-page') ?? true;
         $this->useEmbed = $this->option('embed') ?? false;
 
-        $converter = TypescriptableService::ziggy($this);
+        TypescriptableService::ziggy($this);
 
         $this->info('Generated Ziggy types.');
 

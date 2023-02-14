@@ -3,6 +3,7 @@
 namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
+use Kiwilan\Typescriptable\Services\TypescriptableService;
 use Kiwilan\Typescriptable\Utils\TypeOption;
 
 class TypescriptableModelsCommand extends Command
