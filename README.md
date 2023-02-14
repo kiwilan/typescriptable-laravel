@@ -17,6 +17,12 @@ You can install the package via composer:
 composer require kiwilan/typescriptable-laravel
 ```
 
+Publish config
+
+```bash
+php artisan vendor:publish --tag="typescriptable-config"
+```
+
 ## Models
 
 -   Generate TypeScript types for [Eloquent models](https://laravel.com/docs/9.x/eloquent)

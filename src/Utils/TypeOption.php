@@ -1,10 +1,10 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Commands;
+namespace Kiwilan\Typescriptable\Utils;
 
 use Illuminate\Console\Command;
 
-class Typescriptable
+class TypeOption
 {
     public function __construct(
         public string $outputPath = 'resources/js',
@@ -12,9 +12,9 @@ class Typescriptable
     ) {
     }
 
-    public static function make(Command $command, string $outputPath = 'resources/js', string $outputFile = 'types-models.d.ts'): Typescriptable
+    public static function make(Command $command, string $outputPath = 'resources/js', string $outputFile = 'types-models.d.ts'): TypeOption
     {
-        $item = new Typescriptable();
+        $item = new TypeOption();
 
         $outputPath = $command->option('output') ?? $outputPath;
         $item->outputPath = base_path($outputPath);

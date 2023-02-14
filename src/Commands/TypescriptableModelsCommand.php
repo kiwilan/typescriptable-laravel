@@ -4,6 +4,7 @@ namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
 use Kiwilan\Typescriptable\Services\TypescriptableService;
+use Kiwilan\Typescriptable\Utils\TypeOption;
 
 class TypescriptableModelsCommand extends Command
 {
@@ -17,13 +18,13 @@ class TypescriptableModelsCommand extends Command
     public $description = 'Generate model types.';
 
     public function __construct(
-        public Typescriptable $typescriptable,
+        public TypeOption $opts,
         public string $modelsPath = 'app/Models',
         public bool $paginate = false,
         public bool $fakeTeam = false,
     ) {
         parent::__construct();
-        $this->typescriptable = new Typescriptable();
+        $this->opts = new TypeOption();
     }
 
     public function handle(): int
@@ -34,7 +35,7 @@ class TypescriptableModelsCommand extends Command
         $modelsPath = $this->option('models-path') ?? 'app/Models';
         $this->modelsPath = base_path($modelsPath);
 
-        $this->typescriptable = Typescriptable::make($this);
+        $this->opts = TypeOption::make($this);
 
         $service = TypescriptableService::models($this);
         $namespaces = [];

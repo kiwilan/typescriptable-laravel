@@ -20,8 +20,8 @@ class ZiggyType
 
     public static function make(TypescriptableZiggyCommand $command): self
     {
-        $outputPath = $command->typescriptable->outputPath;
-        $outputFile = $command->typescriptable->outputFile;
+        $outputPath = $command->opts->outputPath;
+        $outputFile = $command->opts->outputFile;
 
         $file = "{$outputPath}/{$outputFile}";
         $service = new self(

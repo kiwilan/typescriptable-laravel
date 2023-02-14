@@ -4,6 +4,7 @@ namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
 use Kiwilan\Typescriptable\Services\TypescriptableService;
+use Kiwilan\Typescriptable\Utils\TypeOption;
 
 class TypescriptableZiggyCommand extends Command
 {
@@ -17,18 +18,18 @@ class TypescriptableZiggyCommand extends Command
     public $description = 'Generate Ziggy types.';
 
     public function __construct(
-        public Typescriptable $typescriptable,
+        public TypeOption $opts,
         public bool $skipRouter = true,
         public bool $skipPage = true,
         public bool $useEmbed = false,
     ) {
         parent::__construct();
-        $this->typescriptable = new Typescriptable();
+        $this->opts = new TypeOption();
     }
 
     public function handle(): int
     {
-        $this->typescriptable = Typescriptable::make($this, outputFile: 'types-ziggy.d.ts');
+        $this->opts = TypeOption::make($this, outputFile: 'types-ziggy.d.ts');
         $this->skipRouter = $this->option('skip-router') ?? true;
         $this->skipPage = $this->option('skip-page') ?? true;
         $this->useEmbed = $this->option('embed') ?? false;

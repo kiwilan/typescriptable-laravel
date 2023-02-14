@@ -3,8 +3,10 @@
 namespace Kiwilan\Typescriptable\Services;
 
 use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
+use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableZiggyCommand;
 use Kiwilan\Typescriptable\Services\Typescriptable\EloquentType;
+use Kiwilan\Typescriptable\Services\Typescriptable\RouteType;
 use Kiwilan\Typescriptable\Services\Typescriptable\ZiggyType;
 
 class TypescriptableService
@@ -14,6 +16,13 @@ class TypescriptableService
         $models = EloquentType::make($command);
 
         return $models;
+    }
+
+    public static function route(TypescriptableRoutesCommand $command): RouteType
+    {
+        $route = RouteType::make($command);
+
+        return $route;
     }
 
     public static function ziggy(TypescriptableZiggyCommand $command): ZiggyType
