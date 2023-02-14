@@ -23,4 +23,14 @@ class TypescriptableConfig
     {
         return  config('typescriptable.filename.ziggy') ?? 'types-ziggy.d.ts';
     }
+
+    public static function routesSkipName(): array
+    {
+        return  config('typescriptable.routes.skip_name') ?? [];
+    }
+
+    public static function routesSkipPath(): array
+    {
+        return  config('typescriptable.routes.skip_path') ?? [];
+    }
 }
