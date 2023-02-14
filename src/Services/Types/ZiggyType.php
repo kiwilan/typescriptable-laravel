@@ -1,12 +1,12 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\Typescriptable;
+namespace Kiwilan\Typescriptable\Services\Types;
 
 use Illuminate\Support\Facades\File;
 use Kiwilan\Typescriptable\Commands\TypescriptableZiggyCommand;
-use Kiwilan\Typescriptable\Services\Typescriptable\Ziggy\InertiaEmbed;
-use Kiwilan\Typescriptable\Services\Typescriptable\Ziggy\InertiaPage;
-use Kiwilan\Typescriptable\Services\Typescriptable\Ziggy\ZiggyRouter;
+use Kiwilan\Typescriptable\Services\Types\Ziggy\InertiaEmbed;
+use Kiwilan\Typescriptable\Services\Types\Ziggy\InertiaPage;
+use Kiwilan\Typescriptable\Services\Types\Ziggy\ZiggyRouter;
 
 class ZiggyType
 {

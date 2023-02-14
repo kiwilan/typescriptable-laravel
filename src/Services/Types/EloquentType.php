@@ -1,12 +1,12 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\Typescriptable;
+namespace Kiwilan\Typescriptable\Services\Types;
 
 use Illuminate\Support\Facades\File;
 use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
 use Kiwilan\Typescriptable\Services\Types\Models\ClassTemplate;
-use Kiwilan\Typescriptable\Services\Typescriptable\Utils\LaravelPaginateType;
-use Kiwilan\Typescriptable\Services\Typescriptable\Utils\LaravelTeamType;
+use Kiwilan\Typescriptable\Services\Types\Utils\LaravelPaginateType;
+use Kiwilan\Typescriptable\Services\Types\Utils\LaravelTeamType;
 
 /**
  * @property string $path

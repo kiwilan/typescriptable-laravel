@@ -2,8 +2,8 @@
 
 namespace Kiwilan\Typescriptable\Services\Types\Models;
 
-use Kiwilan\Typescriptable\Services\Typescriptable\Utils\DatabaseColumn;
-use Kiwilan\Typescriptable\Services\Typescriptable\Utils\TypescriptConverter;
+use Kiwilan\Typescriptable\Services\Types\Utils\DatabaseColumn;
+use Kiwilan\Typescriptable\Services\Types\Utils\TypescriptConverter;
 
 /**
  * @property string[] $enum

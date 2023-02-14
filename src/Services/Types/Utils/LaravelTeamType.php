@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\Typescriptable\Utils;
+namespace Kiwilan\Typescriptable\Services\Types\Utils;
 
 use Kiwilan\Typescriptable\Services\Types\Models\ClassProperty;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\Typescriptable\Ziggy;
+namespace Kiwilan\Typescriptable\Services\Types\Ziggy;
 
 use Tightenco\Ziggy\Ziggy;
 

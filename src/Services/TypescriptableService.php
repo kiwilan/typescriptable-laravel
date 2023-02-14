@@ -5,9 +5,9 @@ namespace Kiwilan\Typescriptable\Services;
 use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableZiggyCommand;
-use Kiwilan\Typescriptable\Services\Typescriptable\EloquentType;
-use Kiwilan\Typescriptable\Services\Typescriptable\RouteType;
-use Kiwilan\Typescriptable\Services\Typescriptable\ZiggyType;
+use Kiwilan\Typescriptable\Services\Types\EloquentType;
+use Kiwilan\Typescriptable\Services\Types\RouteType;
+use Kiwilan\Typescriptable\Services\Types\ZiggyType;
 
 class TypescriptableService
 {

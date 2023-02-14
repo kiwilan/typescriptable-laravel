@@ -4,8 +4,8 @@ namespace Kiwilan\Typescriptable\Services\Types\Models;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Kiwilan\Typescriptable\Services\Typescriptable\Utils\DatabaseColumn;
-use Kiwilan\Typescriptable\Services\Typescriptable\Utils\LaravelTeamType;
+use Kiwilan\Typescriptable\Services\Types\Utils\DatabaseColumn;
+use Kiwilan\Typescriptable\Services\Types\Utils\LaravelTeamType;
 use ReflectionMethod;
 use ReflectionNamedType;
 

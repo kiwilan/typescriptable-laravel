@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\Typescriptable;
+namespace Kiwilan\Typescriptable\Services\Types;
 
 use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
 
