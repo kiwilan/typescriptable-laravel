@@ -3,6 +3,7 @@
 namespace Kiwilan\Typescriptable;
 
 use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
+use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableZiggyCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -21,6 +22,7 @@ class TypescriptableServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasCommands([
                 TypescriptableModelsCommand::class,
+                TypescriptableRoutesCommand::class,
                 TypescriptableZiggyCommand::class,
             ]);
     }

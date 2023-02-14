@@ -8,7 +8,7 @@ use Kiwilan\Typescriptable\Utils\TypeOption;
 
 class TypescriptableRoutesCommand extends Command
 {
-    public $signature = 'typescriptable:route';
+    public $signature = 'typescriptable:routes';
 
     public $description = 'Generate Routes types.';
 
