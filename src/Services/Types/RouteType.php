@@ -13,6 +13,9 @@ class RouteType
 
     public static function make(TypescriptableRoutesCommand $command): self
     {
+        $path = config('typescriptable.output_path');
+        $filename = config('typescriptable.filename.routes');
+
         $route = new self($command);
 
         return $route;

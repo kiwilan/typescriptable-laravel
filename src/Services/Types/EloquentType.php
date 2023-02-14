@@ -74,8 +74,8 @@ class EloquentType
 
         $content = implode(PHP_EOL, $content);
 
-        $path = $this->command->opts->outputPath;
-        $filename = $this->command->opts->outputFile;
+        $path = config('typescriptable.output_path');
+        $filename = config('typescriptable.filename.models');
 
         $path = "{$path}/{$filename}";
         File::put($path, $content);

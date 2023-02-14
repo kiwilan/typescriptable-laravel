@@ -4,7 +4,6 @@ namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
 use Kiwilan\Typescriptable\Services\TypescriptableService;
-use Kiwilan\Typescriptable\Utils\TypeOption;
 
 class TypescriptableRoutesCommand extends Command
 {
@@ -13,13 +12,8 @@ class TypescriptableRoutesCommand extends Command
     public $description = 'Generate Routes types.';
 
     public function __construct(
-        public TypeOption $opts,
-        public bool $skipRouter = true,
-        public bool $skipPage = true,
-        public bool $useEmbed = false,
     ) {
         parent::__construct();
-        $this->opts = new TypeOption();
     }
 
     public function handle(): int

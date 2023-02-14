@@ -20,10 +20,10 @@ class ZiggyType
 
     public static function make(TypescriptableZiggyCommand $command): self
     {
-        $outputPath = $command->opts->outputPath;
-        $outputFile = $command->opts->outputFile;
+        $path = config('typescriptable.output_path');
+        $filename = config('typescriptable.filename.ziggy');
 
-        $file = "{$outputPath}/{$outputFile}";
+        $file = "{$path}/{$filename}";
         $service = new self(
             filePath: $file,
             skipRouter: $command->skipRouter,
@@ -32,8 +32,8 @@ class ZiggyType
         );
         $generatedRoutes = $service->generate();
 
-        if (! File::isDirectory($outputPath)) {
-            File::makeDirectory($outputPath);
+        if (! File::isDirectory($path)) {
+            File::makeDirectory($filename);
         }
         File::put($file, $generatedRoutes);
 
