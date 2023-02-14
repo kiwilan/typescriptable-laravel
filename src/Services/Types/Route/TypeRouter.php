@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\Typescriptable\Ziggy;
+namespace Kiwilan\Typescriptable\Services\Types\Route;
 
-class ZiggyRouter
+class TypeRouter
 {
     public static function make(): string
     {

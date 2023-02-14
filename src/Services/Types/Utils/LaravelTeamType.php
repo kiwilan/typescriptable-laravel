@@ -2,7 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Services\Typescriptable\Utils;
 
-use Kiwilan\Typescriptable\Services\Typescriptable\Models\ClassProperty;
+use Kiwilan\Typescriptable\Services\Types\Models\ClassProperty;
 
 class LaravelTeamType
 {

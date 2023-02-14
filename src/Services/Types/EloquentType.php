@@ -4,7 +4,7 @@ namespace Kiwilan\Typescriptable\Services\Typescriptable;
 
 use Illuminate\Support\Facades\File;
 use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
-use Kiwilan\Typescriptable\Services\Typescriptable\Models\ClassTemplate;
+use Kiwilan\Typescriptable\Services\Types\Models\ClassTemplate;
 use Kiwilan\Typescriptable\Services\Typescriptable\Utils\LaravelPaginateType;
 use Kiwilan\Typescriptable\Services\Typescriptable\Utils\LaravelTeamType;
 

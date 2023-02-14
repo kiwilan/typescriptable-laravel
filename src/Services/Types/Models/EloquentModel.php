@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Services\Typescriptable\Models;
+namespace Kiwilan\Typescriptable\Services\Types\Models;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

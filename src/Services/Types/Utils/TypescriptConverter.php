@@ -3,7 +3,7 @@
 namespace Kiwilan\Typescriptable\Services\Typescriptable\Utils;
 
 use Doctrine\DBAL\Types\Types;
-use Kiwilan\Typescriptable\Services\Typescriptable\Models\ClassProperty;
+use Kiwilan\Typescriptable\Services\Types\Models\ClassProperty;
 use ReflectionClass;
 
 class TypescriptConverter
