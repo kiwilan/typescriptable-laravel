@@ -9,18 +9,20 @@ return [
         'ziggy' => 'types-ziggy.d.ts',
     ],
     'routes' => [
-        'skip_name' => [
-            'debugbar.*',
-            'horizon.*',
-            'telescope.*',
-            'nova.*',
-            'lighthouse.*',
-            'livewire.*',
-            'ignition.*',
-            'filament.*',
-        ],
-        'skip_path' => [
-            'api/*',
+        'skip' => [
+            'name' => [
+                'debugbar.*',
+                'horizon.*',
+                'telescope.*',
+                'nova.*',
+                'lighthouse.*',
+                'livewire.*',
+                'ignition.*',
+                'filament.*',
+            ],
+            'path' => [
+                'api/*',
+            ],
         ],
     ],
 ];

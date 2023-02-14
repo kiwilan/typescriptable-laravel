@@ -26,11 +26,11 @@ class TypescriptableConfig
 
     public static function routesSkipName(): array
     {
-        return  config('typescriptable.routes.skip_name') ?? [];
+        return  config('typescriptable.routes.skip.name') ?? [];
     }
 
     public static function routesSkipPath(): array
     {
-        return  config('typescriptable.routes.skip_path') ?? [];
+        return  config('typescriptable.routes.skip.path') ?? [];
     }
 }
