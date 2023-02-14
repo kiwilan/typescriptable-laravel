@@ -3,6 +3,7 @@
 namespace Kiwilan\Typescriptable\Services\Types;
 
 use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class RouteType
 {
@@ -13,8 +14,8 @@ class RouteType
 
     public static function make(TypescriptableRoutesCommand $command): self
     {
-        $path = config('typescriptable.output_path');
-        $filename = config('typescriptable.filename.routes');
+        $path = TypescriptableConfig::outputPath();
+        $filename = TypescriptableConfig::filenameRoutes();
 
         $route = new self($command);
 

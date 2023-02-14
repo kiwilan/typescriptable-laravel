@@ -7,6 +7,7 @@ use Kiwilan\Typescriptable\Commands\TypescriptableZiggyCommand;
 use Kiwilan\Typescriptable\Services\Types\Ziggy\InertiaEmbed;
 use Kiwilan\Typescriptable\Services\Types\Ziggy\InertiaPage;
 use Kiwilan\Typescriptable\Services\Types\Ziggy\ZiggyRouter;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class ZiggyType
 {
@@ -20,8 +21,8 @@ class ZiggyType
 
     public static function make(TypescriptableZiggyCommand $command): self
     {
-        $path = config('typescriptable.output_path');
-        $filename = config('typescriptable.filename.ziggy');
+        $path = TypescriptableConfig::outputPath();
+        $filename = TypescriptableConfig::filenameZiggy();
 
         $file = "{$path}/{$filename}";
         $service = new self(

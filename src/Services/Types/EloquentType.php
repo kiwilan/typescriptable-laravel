@@ -7,6 +7,7 @@ use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
 use Kiwilan\Typescriptable\Services\Types\Models\ClassTemplate;
 use Kiwilan\Typescriptable\Services\Types\Utils\LaravelPaginateType;
 use Kiwilan\Typescriptable\Services\Types\Utils\LaravelTeamType;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
 /**
  * @property string $path
@@ -74,8 +75,8 @@ class EloquentType
 
         $content = implode(PHP_EOL, $content);
 
-        $path = config('typescriptable.output_path');
-        $filename = config('typescriptable.filename.models');
+        $path = TypescriptableConfig::outputPath();
+        $filename = TypescriptableConfig::filenameModels();
 
         $path = "{$path}/{$filename}";
         File::put($path, $content);
