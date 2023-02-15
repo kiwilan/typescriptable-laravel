@@ -33,6 +33,7 @@ return [
     ],
     'inertia' => [
         'filename' => 'types-inertia.d.ts',
+        'filename_global' => 'types-inertia-global.d.ts',
         'page' => true,
         'use_embed' => false,
     ],

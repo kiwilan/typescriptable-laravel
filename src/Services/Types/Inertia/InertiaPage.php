@@ -9,7 +9,7 @@ class InertiaPage
         return <<<'typescript'
 type Errors = Record<string, string>;
 type ErrorBag = Record<string, Errors>;
-declare interface InertiaPage {
+declare interface Page {
   component: string;
   props: Inertia.Props;
   url: string;
@@ -21,7 +21,7 @@ declare interface InertiaPage {
   rememberedState: Record<string, unknown>;
   resolvedErrors: Inertia.Errors;
 }
-declare interface InertiaPageProps {
+declare interface PageProps {
   user: App.Models.User;
   jetstream?: {
       canCreateTeams?: boolean;

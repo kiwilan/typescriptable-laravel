@@ -59,6 +59,11 @@ class TypescriptableConfig
         return  config('typescriptable.inertia.filename') ?? 'types-inertia.d.ts';
     }
 
+    public static function inertiaFilenameGlobal(): string
+    {
+        return  config('typescriptable.inertia.filename_global') ?? 'types-inertia-global.d.ts';
+    }
+
     public static function inertiaPage(): bool
     {
         return  config('typescriptable.inertia.page') ?? true;
