@@ -11,6 +11,7 @@ class TypeRouter
         /** @var TypeRoute[] */
         protected array $routes = [],
         protected string $routesFull = '',
+        protected string $routesFullReverse = '',
         protected string $routesNameTypes = '',
         protected string $routesUriTypes = '',
         protected string $routesParamsTypes = '',
@@ -27,6 +28,7 @@ class TypeRouter
         $type->routes = $type->setRoutes();
 
         $type->routesFull = $type->setRoutesFull();
+        $type->routesFullReverse = $type->setRoutesFullReverse();
         $type->routesNameTypes = $type->setRoutesNameTypes();
         $type->routesUriTypes = $type->setRoutesUriTypes();
         $type->routesParamsTypes = $type->setRoutesParamsTypes();
@@ -93,7 +95,18 @@ class TypeRouter
             ->map(function (TypeRoute $route, string $key) {
                 $methods = json_encode($route->methods());
 
-                return "    '{$route->name()}': { 'uri': '{$route->uri()}', 'methods': {$methods} }";
+                return "    '{$route->name()}': { name: '{$route->name()}', 'uri': '{$route->uri()}', 'fullUri': '{$route->fullUri()}', 'methods': {$methods} }";
+            })
+            ->join("\n");
+    }
+
+    private function setRoutesFullReverse(): string
+    {
+        return collect($this->routes)
+            ->map(function (TypeRoute $route, string $key) {
+                $methods = json_encode($route->methods());
+
+                return "    '{$route->fullUri()}': { name: '{$route->name()}', 'uri': '{$route->uri()}', 'fullUri': '{$route->fullUri()}', 'methods': {$methods} }";
             })
             ->join("\n");
     }
