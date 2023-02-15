@@ -55,6 +55,10 @@ class TypeRouter
         {$this->routesFull}
           };
 
+          export type ListReverse = {
+        {$this->routesFullReverse}
+          };
+
           export type Name = {$this->routesNameTypes};
           export type Uri = {$this->routesUriTypes};
           export type Params = {
