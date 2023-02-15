@@ -7,34 +7,43 @@ class InertiaPage
     public static function make(): string
     {
         return <<<'typescript'
-        export interface Page {
-            props: {
-              user: App.Models.User
-              jetstream?: {
-                canCreateTeams?: boolean,
-                hasTeamFeatures?: boolean,
-                managesProfilePhotos?: boolean,
-                hasApiFeatures?: boolean,
-                canUpdateProfileInformation?: boolean,
-                canUpdatePassword?: boolean,
-                canManageTwoFactorAuthentication?: boolean,
-                hasAccountDeletionFeatures?: boolean,
-                flash?: {
-                  bannerStyle?: string,
-                  banner?: string,
-                  message?: string,
-                  style?: string,
-                },
-              }
-              [x: string]: unknown;
-              errors: import("@inertiajs/core").Errors & import("@inertiajs/core").ErrorBag;
-            }
-            url?: string;
-            version?: string;
-            scrollRegions?: { top: number; left: number; }[];
-            rememberedState?: Record<string, unknown>;
-            resolvedErrors?: import("@inertiajs/core").Errors;
-          };
-        typescript;
+declare namespace Inertia {
+  type Errors = Record<string, string>;
+  type ErrorBag = Record<string, Errors>;
+  export interface Page {
+    component: string;
+    props: Inertia.Props;
+    url: string;
+    version: string | null;
+    scrollRegions: Array<{
+      top: number;
+      left: number;
+    }>;
+    rememberedState: Record<string, unknown>;
+    resolvedErrors: Inertia.Errors;
+  }
+  export interface Props {
+    user: App.Models.User;
+    jetstream?: {
+      canCreateTeams?: boolean;
+      hasTeamFeatures?: boolean;
+      managesProfilePhotos?: boolean;
+      hasApiFeatures?: boolean;
+      canUpdateProfileInformation?: boolean;
+      canUpdatePassword?: boolean;
+      canManageTwoFactorAuthentication?: boolean;
+      hasAccountDeletionFeatures?: boolean;
+      flash?: {
+        bannerStyle?: string;
+        banner?: string;
+        message?: string;
+        style?: string;
+      };
+    };
+    [key: string]: unknown
+    errors: Inertia.Errors & Inertia.ErrorBag;
+  }
+}
+typescript;
     }
 }

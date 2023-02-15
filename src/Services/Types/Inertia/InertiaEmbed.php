@@ -18,7 +18,7 @@ class InertiaEmbed
         $sessions = self::SESSIONS;
 
         return <<<typescript
-declare module "@vue/runtime-core" {
+declare module 'vue' {
   interface ComponentCustomProperties {
     {$route}: (name: Route.Name, params?: Route.Params[Route.Name]) => string;
     {$isRoute}: (name: Route.Name, params?: Route.Params[Route.Name]) => boolean;
@@ -39,7 +39,6 @@ typescript;
         return <<<typescript
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
-    {$page}
     {$sessions}
   }
 }
