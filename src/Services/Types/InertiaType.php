@@ -35,7 +35,10 @@ class InertiaType
             File::makeDirectory($filename);
         }
         File::put($file, $types);
-        File::put($fileGlobal, $global);
+
+        if (TypescriptableConfig::inertiaGlobal()) {
+            File::put($fileGlobal, $global);
+        }
 
         return $service;
     }
