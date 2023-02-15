@@ -2,6 +2,7 @@
 
 namespace Kiwilan\Typescriptable;
 
+use Kiwilan\Typescriptable\Commands\TypescriptableInertiaCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableZiggyCommand;
@@ -23,6 +24,7 @@ class TypescriptableServiceProvider extends PackageServiceProvider
             ->hasCommands([
                 TypescriptableModelsCommand::class,
                 TypescriptableRoutesCommand::class,
+                TypescriptableInertiaCommand::class,
                 TypescriptableZiggyCommand::class,
             ]);
     }
