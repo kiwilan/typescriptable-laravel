@@ -3,7 +3,6 @@
 namespace Kiwilan\Typescriptable\Services\Types;
 
 use Illuminate\Support\Facades\File;
-use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
 use Kiwilan\Typescriptable\Services\Types\Models\ClassTemplate;
 use Kiwilan\Typescriptable\Services\Types\Utils\LaravelPaginateType;
 use Kiwilan\Typescriptable\Services\Types\Utils\LaravelTeamType;
@@ -17,20 +16,19 @@ class EloquentType
 {
     protected function __construct(
         public string $path,
-        public TypescriptableModelsCommand $command,
         /** @var ClassTemplate[] */
         public array $typeables = [],
     ) {
     }
 
-    public static function make(TypescriptableModelsCommand $command): self
+    public static function make(): self
     {
-        $path = $command->modelsPath;
+        $path = TypescriptableConfig::modelsDirectory();
 
-        $service = new EloquentType($path, $command);
+        $service = new EloquentType($path);
         $service->typeables = $service->setTypescriptables();
 
-        if ($service->command->fakeTeam) {
+        if (TypescriptableConfig::modelsFakeTeam()) {
             $service->typeables['Team'] = ClassTemplate::fake('Team', LaravelTeamType::setFakeTeam());
         }
 
@@ -68,7 +66,7 @@ class EloquentType
         }
         $content[] = '  }';
 
-        if ($this->command->paginate) {
+        if (TypescriptableConfig::modelsPaginate()) {
             $content[] = LaravelPaginateType::make();
         }
         $content[] = '}';
@@ -76,7 +74,7 @@ class EloquentType
         $content = implode(PHP_EOL, $content);
 
         $path = TypescriptableConfig::outputPath();
-        $filename = TypescriptableConfig::filenameModels();
+        $filename = TypescriptableConfig::modelsFilename();
 
         $path = "{$path}/{$filename}";
         File::put($path, $content);
@@ -99,7 +97,6 @@ class EloquentType
                 $model = ClassTemplate::make(
                     path: $file->getPathname(),
                     file: $file,
-                    command: $this->command
                 );
                 $classes[$model->name] = $model;
             }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Kiwilan\Typescriptable\Services\Types\Utils\DatabaseColumn;
 use Kiwilan\Typescriptable\Services\Types\Utils\LaravelTeamType;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 use ReflectionMethod;
 use ReflectionNamedType;
 
@@ -53,7 +54,7 @@ class EloquentModel
         $parser->setRelations();
         $parser->setCounts();
 
-        if ($parser->class->command?->fakeTeam && $parser->class->name === 'User') {
+        if (TypescriptableConfig::modelsFakeTeam() && $parser->class->name === 'User') {
             $parser->setFakeTeam();
         }
         $parser->setProperties();

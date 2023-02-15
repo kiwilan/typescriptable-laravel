@@ -2,42 +2,30 @@
 
 namespace Kiwilan\Typescriptable\Services;
 
-use Kiwilan\Typescriptable\Commands\TypescriptableInertiaCommand;
-use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
-use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
-use Kiwilan\Typescriptable\Commands\TypescriptableZiggyCommand;
 use Kiwilan\Typescriptable\Services\Types\EloquentType;
 use Kiwilan\Typescriptable\Services\Types\InertiaType;
 use Kiwilan\Typescriptable\Services\Types\RouteType;
-use Kiwilan\Typescriptable\Services\Types\ZiggyType;
 
 class TypescriptableService
 {
-    public static function models(TypescriptableModelsCommand $command): EloquentType
+    public static function models(): EloquentType
     {
-        $models = EloquentType::make($command);
+        $models = EloquentType::make();
 
         return $models;
     }
 
-    public static function route(TypescriptableRoutesCommand $command): RouteType
+    public static function route(): RouteType
     {
-        $route = RouteType::make($command);
+        $route = RouteType::make();
 
         return $route;
     }
 
-    public static function inertia(TypescriptableInertiaCommand $command): InertiaType
+    public static function inertia(): InertiaType
     {
-        $inertia = InertiaType::make($command);
+        $inertia = InertiaType::make();
 
         return $inertia;
-    }
-
-    public static function ziggy(TypescriptableZiggyCommand $command): ZiggyType
-    {
-        $ziggy = ZiggyType::make($command);
-
-        return $ziggy;
     }
 }

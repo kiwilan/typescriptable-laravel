@@ -4,7 +4,6 @@ namespace Kiwilan\Typescriptable\Services\Types\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
 use ReflectionClass;
 use SplFileInfo;
 
@@ -30,7 +29,6 @@ class ClassTemplate
     protected function __construct(
         public ?string $path = null,
         public ?SplFileInfo $file = null,
-        public ?TypescriptableModelsCommand $command = null,
         public ?string $namespace = null,
         public ?string $name = null,
         public ?ReflectionClass $reflector = null,
@@ -53,7 +51,7 @@ class ClassTemplate
     ) {
     }
 
-    public static function make(string $path, SplFileInfo $file, TypescriptableModelsCommand $command): self
+    public static function make(string $path, SplFileInfo $file): self
     {
         $namespace = ClassTemplate::getFileNamespace($file);
         $class = new $namespace();
@@ -67,7 +65,6 @@ class ClassTemplate
             name: $reflector->getShortName(),
             reflector: $reflector,
             isModel: $isModel,
-            command: $command,
         );
 
         if ($parser->isModel) {

@@ -11,14 +11,9 @@ class TypescriptableRoutesCommand extends Command
 
     public $description = 'Generate Routes types.';
 
-    public function __construct(
-    ) {
-        parent::__construct();
-    }
-
     public function handle(): int
     {
-        TypescriptableService::route($this);
+        TypescriptableService::route();
 
         $this->info('Generated Routes types.');
 

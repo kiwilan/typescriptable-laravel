@@ -9,29 +9,39 @@ class TypescriptableConfig
         return  config('typescriptable.output_path') ?? resource_path('js');
     }
 
-    public static function filenameModels(): string
+    public static function modelsFilename(): string
     {
-        return  config('typescriptable.filename.models') ?? 'types-models.d.ts';
+        return  config('typescriptable.models.filename') ?? 'types-models.d.ts';
     }
 
-    public static function filenameRoutes(): string
+    public static function modelsDirectory(): string
     {
-        return  config('typescriptable.filename.routes') ?? 'types-routes.d.ts';
+        return  config('typescriptable.models.directory') ?? app_path('Models');
     }
 
-    public static function filenameRoutesList(): string
+    public static function modelsSkip(): array
     {
-        return  config('typescriptable.filename.routes_list') ?? 'routes.ts';
+        return  config('typescriptable.models.skip') ?? [];
     }
 
-    public static function filenameInertia(): string
+    public static function modelsPaginate(): bool
     {
-        return  config('typescriptable.filename.inertia') ?? 'types-inertia.d.ts';
+        return  config('typescriptable.models.paginate') ?? true;
     }
 
-    public static function filenameZiggy(): string
+    public static function modelsFakeTeam(): bool
     {
-        return  config('typescriptable.filename.ziggy') ?? 'types-ziggy.d.ts';
+        return  config('typescriptable.models.fake_team') ?? false;
+    }
+
+    public static function routesFilename(): string
+    {
+        return  config('typescriptable.routes.filename') ?? 'types-routes.d.ts';
+    }
+
+    public static function routesFilenameList(): string
+    {
+        return  config('typescriptable.routes.filename_list') ?? 'routes.ts';
     }
 
     public static function routesSkipName(): array
@@ -42,5 +52,20 @@ class TypescriptableConfig
     public static function routesSkipPath(): array
     {
         return  config('typescriptable.routes.skip.path') ?? [];
+    }
+
+    public static function inertiaFilename(): string
+    {
+        return  config('typescriptable.inertia.filename') ?? 'types-inertia.d.ts';
+    }
+
+    public static function inertiaPage(): bool
+    {
+        return  config('typescriptable.inertia.page') ?? true;
+    }
+
+    public static function inertiaUseEmbed(): bool
+    {
+        return  config('typescriptable.inertia.use_embed') ?? false;
     }
 }

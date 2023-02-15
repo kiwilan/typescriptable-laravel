@@ -3,14 +3,18 @@
 // config for Kiwilan/Typescriptable
 return [
     'output_path' => resource_path('js'),
-    'filename' => [
-        'models' => 'types-models.d.ts',
-        'routes' => 'types-routes.d.ts',
-        'routes_list' => 'routes.ts',
-        'inertia' => 'types-inertia.d.ts',
-        'ziggy' => 'types-ziggy.d.ts',
+    'models' => [
+        'filename' => 'types-models.d.ts',
+        'directory' => app_path('Models'),
+        'skip' => [
+            // 'App\\Models\\User',
+        ],
+        'paginate' => true,
+        'fake_team' => false,
     ],
     'routes' => [
+        'filename' => 'types-routes.d.ts',
+        'filename_list' => 'routes.ts',
         'skip' => [
             'name' => [
                 'debugbar.*',
@@ -26,5 +30,10 @@ return [
                 'api/*',
             ],
         ],
+    ],
+    'inertia' => [
+        'filename' => 'types-inertia.d.ts',
+        'page' => true,
+        'use_embed' => false,
     ],
 ];
