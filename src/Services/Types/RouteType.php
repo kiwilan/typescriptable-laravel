@@ -2,6 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Services\Types;
 
+use Illuminate\Support\Facades\File;
 use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
 use Kiwilan\Typescriptable\Services\Types\Route\TypeRouter;
 use Kiwilan\Typescriptable\TypescriptableConfig;
@@ -17,9 +18,19 @@ class RouteType
     {
         $path = TypescriptableConfig::outputPath();
         $filename = TypescriptableConfig::filenameRoutes();
+        $filenameRoutes = TypescriptableConfig::filenameRoutesList();
 
-        $routes = TypeRouter::make();
-        dump($routes);
+        $type = TypeRouter::make();
+
+        if (! File::isDirectory($path)) {
+            File::makeDirectory($filename);
+        }
+
+        $file = "{$path}/{$filename}";
+        $fileRoutes = "{$path}/{$filenameRoutes}";
+
+        File::put($file, $type->typescript());
+        File::put($fileRoutes, $type->typescriptRoutes());
 
         return new self($command);
     }

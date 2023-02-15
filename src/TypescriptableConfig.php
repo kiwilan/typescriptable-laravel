@@ -19,6 +19,11 @@ class TypescriptableConfig
         return  config('typescriptable.filename.routes') ?? 'types-routes.d.ts';
     }
 
+    public static function filenameRoutesList(): string
+    {
+        return  config('typescriptable.filename.routes_list') ?? 'routes.ts';
+    }
+
     public static function filenameZiggy(): string
     {
         return  config('typescriptable.filename.ziggy') ?? 'types-ziggy.d.ts';

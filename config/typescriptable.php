@@ -6,6 +6,7 @@ return [
     'filename' => [
         'models' => 'types-models.d.ts',
         'routes' => 'types-routes.d.ts',
+        'routes_list' => 'routes.ts',
         'ziggy' => 'types-ziggy.d.ts',
     ],
     'routes' => [
