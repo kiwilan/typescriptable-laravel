@@ -61,6 +61,8 @@ typescript;
 
         return <<<typescript
 {$useEmbed}
+
+export {};
 typescript;
     }
 }
