@@ -9,7 +9,7 @@ class TypescriptableModelsCommand extends Command
 {
     public $signature = 'typescriptable:models
                         {--M|models-path= : The path to the models.}
-                        {--P|paginate : Add paginate type for Laravel pagination.}
+                        {--P|paginate : Add paginate and api paginate type for Laravel pagination.}
                         {--T|fake-team : For Jetstream, add fake Team model if you choose to not install teams to prevent errors in components.}';
 
     public $description = 'Generate model types.';
