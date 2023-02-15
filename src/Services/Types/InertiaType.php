@@ -43,6 +43,8 @@ class InertiaType
 {$page}
 
 {$useEmbed}
+
+export {}
 typescript;
     }
 }
