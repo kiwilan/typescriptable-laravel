@@ -4,8 +4,8 @@ namespace Kiwilan\Typescriptable\Services\Types;
 
 use Illuminate\Support\Facades\File;
 use Kiwilan\Typescriptable\Commands\TypescriptableInertiaCommand;
-use Kiwilan\Typescriptable\Services\Types\Ziggy\InertiaEmbed;
-use Kiwilan\Typescriptable\Services\Types\Ziggy\InertiaPage;
+use Kiwilan\Typescriptable\Services\Types\Inertia\InertiaEmbed;
+use Kiwilan\Typescriptable\Services\Types\Inertia\InertiaPage;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class InertiaType
