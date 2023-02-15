@@ -7,6 +7,7 @@ return [
         'models' => 'types-models.d.ts',
         'routes' => 'types-routes.d.ts',
         'routes_list' => 'routes.ts',
+        'inertia' => 'types-inertia.d.ts',
         'ziggy' => 'types-ziggy.d.ts',
     ],
     'routes' => [

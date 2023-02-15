@@ -20,7 +20,7 @@ class InertiaType
     public static function make(TypescriptableInertiaCommand $command): self
     {
         $path = TypescriptableConfig::outputPath();
-        $filename = TypescriptableConfig::filenameZiggy();
+        $filename = TypescriptableConfig::filenameInertia();
 
         $file = "{$path}/{$filename}";
         $service = new self(

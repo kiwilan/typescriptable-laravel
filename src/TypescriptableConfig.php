@@ -24,6 +24,11 @@ class TypescriptableConfig
         return  config('typescriptable.filename.routes_list') ?? 'routes.ts';
     }
 
+    public static function filenameInertia(): string
+    {
+        return  config('typescriptable.filename.inertia') ?? 'types-inertia.d.ts';
+    }
+
     public static function filenameZiggy(): string
     {
         return  config('typescriptable.filename.ziggy') ?? 'types-ziggy.d.ts';
