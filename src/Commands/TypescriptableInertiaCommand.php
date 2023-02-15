@@ -23,7 +23,6 @@ class TypescriptableInertiaCommand extends Command
 
     public function handle(): int
     {
-        $this->skipRouter = $this->option('skip-router') ?? true;
         $this->skipPage = $this->option('skip-page') ?? true;
         $this->useEmbed = $this->option('embed') ?? false;
 
