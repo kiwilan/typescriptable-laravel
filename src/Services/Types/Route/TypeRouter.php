@@ -125,7 +125,7 @@ class TypeRouter
                 if ($hasParams) {
                     $params = collect($route->parameters())
                         ->map(function (string $param) {
-                            return "'{$param}?': string";
+                            return "'{$param}'?: string";
                         })
                         ->join(",\n");
 
