@@ -13,7 +13,6 @@ class InertiaEmbed
         $route = '$route';
         $isRoute = '$isRoute';
         $currentRoute = '$currentRoute';
-        $ipage = '$ipage';
         $page = self::PAGE;
         $sessions = self::SESSIONS;
 
@@ -23,7 +22,6 @@ declare module 'vue' {
     {$route}: (route: Route.Type) => string;
     {$isRoute}: (name: Route.Type) => boolean;
     {$currentRoute}: () => string;
-    {$ipage}: Inertia.Page
     {$page}
     {$sessions}
   }

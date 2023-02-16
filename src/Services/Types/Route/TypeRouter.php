@@ -179,10 +179,10 @@ class TypeRouter
                 ->join(",\n");
 
             if (empty($params)) {
-                $params = 'undefined';
+                $params = 'params?: undefined';
             } else {
                 $params = <<<typescript
-                {
+                params: {
                       {$params}
                     }
                 typescript;
@@ -192,7 +192,7 @@ class TypeRouter
               '{$route->name()}': {
                 name: '{$route->name()}',
                 path: '{$route->fullUri()}',
-                params: {$params},
+                {$params},
                 method: '{$route->methods()[0]}',
               }
             typescript;

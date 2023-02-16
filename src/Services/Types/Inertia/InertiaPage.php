@@ -33,10 +33,10 @@ type Errors = Record<string, string>;
         canManageTwoFactorAuthentication?: boolean;
         hasAccountDeletionFeatures?: boolean;
         flash?: {
-        bannerStyle?: string;
-        banner?: string;
-        message?: string;
-        style?: string;
+          bannerStyle?: string;
+          banner?: string;
+          message?: string;
+          style?: string;
         };
     };
     [key: string]: unknown
