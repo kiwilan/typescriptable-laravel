@@ -143,7 +143,7 @@ class TypeRouter
                     return "{$param}: string | number | boolean";
                 })->join(",\n");
                 $params = <<<typescript
-                params?: {
+                params: {
                         {$params}
                       },
                       query?: Record<string, string | number | boolean>,
