@@ -8,7 +8,8 @@ class TypescriptableConfig
 {
     public static function outputPath(): string
     {
-        $path = config('typescriptable.output_path') ?? 'node_modules/typescriptable';
+        $path = config('typescriptable.output_path') ?? resource_path('js');
+
         if (! File::isDirectory($path)) {
             File::makeDirectory($path);
         }
@@ -18,7 +19,7 @@ class TypescriptableConfig
 
     public static function setPath(string $filename): string
     {
-        return TypescriptableConfig::outputPath();
+        return TypescriptableConfig::outputPath().DIRECTORY_SEPARATOR.$filename;
     }
 
     public static function modelsFilename(): string
