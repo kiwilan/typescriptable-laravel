@@ -43,12 +43,8 @@ class EloquentType
         foreach ($this->typeables as $name => $typescriptable) {
             unset($typescriptable->reflector);
             $path = app_path('Types');
+            $path = TypescriptableConfig::setPath("{$name}.php");
 
-            if (! File::exists($path)) {
-                File::makeDirectory($path);
-            }
-            $filename = "{$name}.php";
-            $path = "{$path}/{$filename}";
             File::put($path, $typescriptable->typeableModel->phpString);
         }
     }
@@ -73,10 +69,9 @@ class EloquentType
 
         $content = implode(PHP_EOL, $content);
 
-        $path = TypescriptableConfig::outputPath();
         $filename = TypescriptableConfig::modelsFilename();
 
-        $path = "{$path}/{$filename}";
+        $path = TypescriptableConfig::setPath($filename);
         File::put($path, $content);
     }
 

@@ -16,18 +16,13 @@ class RouteType
 
     public static function make(): self
     {
-        $path = TypescriptableConfig::outputPath();
         $filename = TypescriptableConfig::routesFilename();
         $filenameRoutes = TypescriptableConfig::routesFilenameList();
 
         $type = TypeRouter::make();
 
-        if (! File::isDirectory($path)) {
-            File::makeDirectory($filename);
-        }
-
-        $file = "{$path}/{$filename}";
-        $fileRoutes = "{$path}/{$filenameRoutes}";
+        $file = TypescriptableConfig::setPath($filename);
+        $fileRoutes = TypescriptableConfig::setPath($filenameRoutes);
 
         File::put($file, $type->typescript());
         File::put($fileRoutes, $type->typescriptRoutes());

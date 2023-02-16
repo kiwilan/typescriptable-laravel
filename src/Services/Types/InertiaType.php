@@ -17,12 +17,11 @@ class InertiaType
 
     public static function make(): self
     {
-        $path = TypescriptableConfig::outputPath();
         $filename = TypescriptableConfig::inertiaFilename();
         $filenameGlobal = TypescriptableConfig::inertiaFilenameGlobal();
 
-        $file = "{$path}/{$filename}";
-        $fileGlobal = "{$path}/{$filenameGlobal}";
+        $file = TypescriptableConfig::setPath($filename);
+        $fileGlobal = TypescriptableConfig::setPath($filenameGlobal);
 
         $service = new self(
             filePath: $file,
@@ -31,9 +30,6 @@ class InertiaType
         $types = $service->types();
         $global = $service->global();
 
-        if (! File::isDirectory($path)) {
-            File::makeDirectory($filename);
-        }
         File::put($file, $types);
 
         if (TypescriptableConfig::inertiaGlobal()) {

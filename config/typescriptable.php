@@ -2,7 +2,7 @@
 
 // config for Kiwilan/Typescriptable
 return [
-    'output_path' => 'node_modules/@types',
+    'output_path' => 'node_modules/typescriptable',
     'models' => [
         'filename' => 'types-models.d.ts',
         'directory' => app_path('Models'),

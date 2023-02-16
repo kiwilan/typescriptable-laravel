@@ -2,11 +2,23 @@
 
 namespace Kiwilan\Typescriptable;
 
+use Illuminate\Support\Facades\File;
+
 class TypescriptableConfig
 {
     public static function outputPath(): string
     {
-        return  config('typescriptable.output_path') ?? 'node_modules/@types';
+        $path = config('typescriptable.output_path') ?? 'node_modules/typescriptable';
+        if (! File::isDirectory($path)) {
+            File::makeDirectory($path);
+        }
+
+        return  $path;
+    }
+
+    public static function setPath(string $filename): string
+    {
+        return TypescriptableConfig::outputPath();
     }
 
     public static function modelsFilename(): string

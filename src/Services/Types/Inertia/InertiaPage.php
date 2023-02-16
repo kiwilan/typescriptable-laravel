@@ -7,7 +7,7 @@ class InertiaPage
     public static function make(): string
     {
         return <<<'typescript'
-  type Errors = Record<string, string>;
+type Errors = Record<string, string>;
   type ErrorBag = Record<string, Errors>;
   declare interface Page {
     component: string;
