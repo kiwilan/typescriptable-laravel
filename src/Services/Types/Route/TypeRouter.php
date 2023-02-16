@@ -2,7 +2,9 @@
 
 namespace Kiwilan\Typescriptable\Services\Types\Route;
 
+use Closure;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Collection;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class TypeRouter
@@ -17,6 +19,7 @@ class TypeRouter
         protected string $routesParamsTypes = '',
         protected string $routesType = '',
         protected string $routesEntity = '',
+        protected string $tsTypes = '',
         protected ?string $typescript = null,
         protected ?string $typescriptRoutes = null,
     ) {
@@ -34,6 +37,7 @@ class TypeRouter
         $type->routesParamsTypes = $type->setRoutesParamsTypes();
         $type->routesType = $type->setRoutesType();
         $type->routesEntity = $type->setRoutesEntity();
+        $type->tsTypes = $type->setTsTypes();
 
         $type->typescript = $type->setTypescript();
         $type->typescriptRoutes = $type->setTypescriptRoutes();
@@ -71,6 +75,8 @@ class TypeRouter
 
           export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
           export interface Entity { name: Route.Name; path: Route.Uri; params?: Route.Params[Route.Name],  method: Route.Method; }
+
+          {$this->tsTypes}
         }
         typescript;
     }
@@ -88,9 +94,14 @@ class TypeRouter
         {$this->routesEntity},
         }
 
-        if (typeof window !== 'undefined' && typeof window.Routes !== 'undefined') {
-            Object.assign(Routes.routes, window.Routes.routes);
-        }
+        declare global {
+            interface Window {
+              Routes: Record<Route.Name, Route.Entity>
+            }
+          }
+
+        if (typeof window !== undefined && typeof window.Routes !== undefined)
+          window.Routes = Routes
 
         export { Routes }
 
@@ -99,63 +110,53 @@ class TypeRouter
 
     private function setRoutesFull(): string
     {
-        return collect($this->routes)
-            ->map(function (TypeRoute $route, string $key) {
-                $methods = json_encode($route->methods());
+        return $this->collectRoutes(function (TypeRoute $route) {
+            $methods = json_encode($route->methods());
 
-                return "    '{$route->name()}': { name: '{$route->name()}', 'uri': '{$route->uri()}', 'fullUri': '{$route->fullUri()}', 'methods': {$methods} }";
-            })
-            ->join("\n");
+            return "    '{$route->name()}': { name: '{$route->name()}', 'uri': '{$route->uri()}', 'fullUri': '{$route->fullUri()}', 'methods': {$methods} }";
+        }, "\n");
     }
 
     private function setRoutesFullReverse(): string
     {
-        return collect($this->routes)
-            ->map(function (TypeRoute $route, string $key) {
-                $methods = json_encode($route->methods());
+        return $this->collectRoutes(function (TypeRoute $route) {
+            $methods = json_encode($route->methods());
 
-                return "    '{$route->fullUri()}': { name: '{$route->name()}', 'uri': '{$route->uri()}', 'fullUri': '{$route->fullUri()}', 'methods': {$methods} }";
-            })
-            ->join("\n");
+            return "    '{$route->fullUri()}': { name: '{$route->name()}', 'uri': '{$route->uri()}', 'fullUri': '{$route->fullUri()}', 'methods': {$methods} }";
+        }, "\n");
     }
 
     private function setRoutesNameTypes(): string
     {
-        return collect($this->routes)
-            ->map(function (TypeRoute $route, string $key) {
-                return "'{$route->name()}'";
-            })
-            ->join(' | ');
+        return $this->collectRoutes(function (TypeRoute $route) {
+            return "'{$route->name()}'";
+        }, ' | ');
     }
 
     private function setRoutesUriTypes(): string
     {
-        return collect($this->routes)
-            ->map(function (TypeRoute $route, string $key) {
-                return "'{$route->fullUri()}'";
-            })
-            ->join(' | ');
+        return $this->collectRoutes(function (TypeRoute $route) {
+            return "'{$route->uri()}'";
+        }, ' | ');
     }
 
     private function setRoutesParamsTypes(): string
     {
-        return collect($this->routes)
-            ->map(function (TypeRoute $route, string $key) {
-                $hasParams = count($route->parameters()) > 0;
+        return $this->collectRoutes(function (TypeRoute $route) {
+            $hasParams = count($route->parameters()) > 0;
 
-                if ($hasParams) {
-                    $params = collect($route->parameters())
-                        ->map(function (string $param) {
-                            return "'{$param}'?: string | number | boolean";
-                        })
-                        ->join(",\n");
+            if ($hasParams) {
+                $params = collect($route->parameters())
+                    ->map(function (string $param) {
+                        return "'{$param}'?: string | number | boolean";
+                    })
+                    ->join(",\n");
 
-                    return "    '{$route->name()}': {\n      {$params}\n    }";
-                } else {
-                    return "    '{$route->name()}': never";
-                }
-            })
-            ->join(",\n");
+                return "    '{$route->name()}': {\n      {$params}\n    }";
+            } else {
+                return "    '{$route->name()}': never";
+            }
+        }, ",\n");
     }
 
     private function setRoutesType(): string
@@ -170,34 +171,66 @@ class TypeRouter
 
     private function setRoutesEntity(): string
     {
-        return collect($this->routes)
-            ->map(function (TypeRoute $route, string $key) {
-                $params = collect($route->parameters())
-                    ->map(function (string $param) {
-                        return "{$param}: 'string',";
-                    })
-                    ->join(",\n");
+        return $this->collectRoutes(function (TypeRoute $route) {
+            $params = collect($route->parameters())
+                ->map(function (string $param) {
+                    return "{$param}: 'string',";
+                })
+                ->join(",\n");
 
-                if (empty($params)) {
-                    $params = 'undefined';
-                } else {
-                    $params = <<<typescript
-                    {
-                          {$params}
-                        }
-                    typescript;
+            if (empty($params)) {
+                $params = 'undefined';
+            } else {
+                $params = <<<typescript
+                {
+                  {$params}
                 }
-
-                return <<<typescript
-                  '{$route->name()}': {
-                    name: '{$route->name()}',
-                    path: '{$route->fullUri()}',
-                    params: {$params},
-                    method: '{$route->methods()[0]}',
-                  }
                 typescript;
-            })
-            ->join(",\n");
+            }
+
+            return <<<typescript
+            '{$route->name()}': {
+              name: '{$route->name()}',
+              path: '{$route->fullUri()}',
+              params: {$params},
+              method: '{$route->methods()[0]}',
+            }
+            typescript;
+        }, ",\n");
+    }
+
+    private function setTsTypes(): string
+    {
+        return $this->collectRoutes(function (TypeRoute $route) {
+            $params = collect($route->parameters())->map(function (string $param) {
+                return "{$param}: string";
+            })->join(",\n");
+
+            return <<<typescript
+            export type {$route->name()} = {
+                name: '{$route->name()}',
+                params?: {
+                  {$params}
+                },
+                query?: Record<string, string | number | boolean>,
+                hash?: string,
+            }
+            typescript;
+        }, ",\n");
+    }
+
+    private function collectRoutes(Closure $closure, ?string $join = null): string|Collection
+    {
+        $routes = collect($this->routes)
+            ->map(function (TypeRoute $route, string $key) use ($closure) {
+                $closure($route, $key);
+            });
+
+        if ($join) {
+            return $routes->join($join);
+        }
+
+        return $routes;
     }
 
     private function setRoutes(): array
