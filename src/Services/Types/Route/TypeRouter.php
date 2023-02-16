@@ -137,13 +137,13 @@ class TypeRouter
             $params = '';
 
             if (empty($route->parameters())) {
-                $params = 'undefined';
+                $params = 'params?: undefined';
             } else {
                 $params = collect($route->parameters())->map(function (string $param) {
                     return "{$param}: string | number | boolean";
                 })->join(",\n");
                 $params = <<<typescript
-                {
+                params: {
                         {$params}
                       }
                 typescript;
@@ -152,7 +152,7 @@ class TypeRouter
             return <<<typescript
                 type {$route->nameCamel()} = {
                   name: '{$route->name()}',
-                  params: {$params},
+                  {$params},
                   query?: Record<string, string | number | boolean>,
                   hash?: string,
                 }
@@ -179,7 +179,7 @@ class TypeRouter
                 ->join(",\n");
 
             if (empty($params)) {
-                $params = 'params?: undefined';
+                $params = 'params: undefined';
             } else {
                 $params = <<<typescript
                 params: {
