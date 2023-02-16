@@ -3,7 +3,6 @@
 namespace Kiwilan\Typescriptable\Services\Types\Route;
 
 use Illuminate\Routing\Route;
-use Illuminate\Support\Str;
 
 class TypeRoute
 {
@@ -21,6 +20,7 @@ class TypeRoute
     public static function make(Route $route): self
     {
         $name = $route->getName();
+
         if (! $name) {
             $name = $route->uri();
         }
@@ -29,12 +29,12 @@ class TypeRoute
             uri: $route->uri(),
             fullUri: $route->uri() !== '/' ? "/{$route->uri()}" : '/',
             name: $name,
-            nameCamel: Str::camel($name),
             methods: $route->methods(),
             parameters: $route->parameterNames(),
         );
 
         $type->method = $type->setMethod();
+        $type->nameCamel = $type->dashesToCamelCase($type->name);
 
         return $type;
     }
@@ -85,5 +85,18 @@ class TypeRoute
         }
 
         return $method;
+    }
+
+    private function dashesToCamelCase(string $string, bool $capitalizeFirstCharacter = false)
+    {
+        $str = str_replace('-', '', ucwords($string, '.'));
+
+        if (! $capitalizeFirstCharacter) {
+            $str = lcfirst($str);
+        }
+
+        $str = str_replace('.', '', $str);
+
+        return ucfirst($str);
     }
 }

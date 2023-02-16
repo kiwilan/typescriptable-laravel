@@ -6,7 +6,7 @@ class TypescriptableConfig
 {
     public static function outputPath(): string
     {
-        return  config('typescriptable.output_path') ?? resource_path('js');
+        return  config('typescriptable.output_path') ?? 'node_modules/@types';
     }
 
     public static function modelsFilename(): string
