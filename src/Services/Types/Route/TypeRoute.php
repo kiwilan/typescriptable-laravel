@@ -3,6 +3,7 @@
 namespace Kiwilan\Typescriptable\Services\Types\Route;
 
 use Illuminate\Routing\Route;
+use Illuminate\Support\Str;
 
 class TypeRoute
 {
@@ -10,6 +11,7 @@ class TypeRoute
         protected string $uri,
         protected ?string $fullUri = null,
         protected ?string $name = null,
+        protected ?string $nameCamel = null,
         protected array $methods = [],
         protected string $method = 'GET',
         protected array $parameters = [],
@@ -18,10 +20,16 @@ class TypeRoute
 
     public static function make(Route $route): self
     {
+        $name = $route->getName();
+        if (! $name) {
+            $name = $route->uri();
+        }
+
         $type = new self(
             uri: $route->uri(),
             fullUri: $route->uri() !== '/' ? "/{$route->uri()}" : '/',
-            name: $route->getName(),
+            name: $name,
+            nameCamel: Str::camel($name),
             methods: $route->methods(),
             parameters: $route->parameterNames(),
         );
@@ -44,6 +52,11 @@ class TypeRoute
     public function name(): ?string
     {
         return $this->name;
+    }
+
+    public function nameCamel(): ?string
+    {
+        return $this->nameCamel;
     }
 
     public function methods(): array

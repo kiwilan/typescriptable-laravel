@@ -76,7 +76,9 @@ class TypeRouter
           export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
           export interface Entity { name: Route.Name; path: Route.Uri; params?: Route.Params[Route.Name],  method: Route.Method; }
 
+          declare namespace Route {
           {$this->tsTypes}
+          }
         }
         typescript;
     }
@@ -207,7 +209,7 @@ class TypeRouter
             })->join(",\n");
 
             return <<<typescript
-            export type {$route->name()} = {
+            export type {$route->nameCamel()} = {
                 name: '{$route->name()}',
                 params?: {
                   {$params}
