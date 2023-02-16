@@ -20,8 +20,8 @@ class InertiaEmbed
         return <<<typescript
 declare module 'vue' {
   interface ComponentCustomProperties {
-    {$route}: (name: Route.Name, params?: Route.Params[Route.Name]) => string;
-    {$isRoute}: (name: Route.Name, params?: Route.Params[Route.Name]) => boolean;
+    {$route}: (route: Route.Type) => string;
+    {$isRoute}: (name: Route.Type) => boolean;
     {$currentRoute}: () => string;
     {$ipage}: Inertia.Page
     {$page}
