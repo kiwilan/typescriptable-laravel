@@ -25,6 +25,11 @@ declare module 'vue' {
     {$page}
     {$sessions}
   }
+  export interface GlobalComponents {
+    Head: typeof import('@inertiajs/vue3').Head,
+    Link: typeof import('@inertiajs/vue3').Link,
+    TypedLink: typeof import('@kiwilan/vite-plugin-steward-laravel/vue').TypedLink,
+  }
 }
 typescript;
     }
@@ -38,6 +43,10 @@ typescript;
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     {$sessions}
+  }
+  export interface GlobalComponents {
+    Head: typeof import('@inertiajs/vue3').Head,
+    Link: typeof import('@inertiajs/vue3').Link,
   }
 }
 typescript;
