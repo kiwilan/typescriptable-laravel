@@ -9,3 +9,8 @@ phpstan.neon
 testbench.yaml
 vendor
 node_modules
+lib/dist
+lib/vue
+lib/types
+lib/*.d.ts
+.DS_Store

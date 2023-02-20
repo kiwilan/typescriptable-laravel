@@ -51,7 +51,7 @@ php artisan typescriptable:models
 
 -   Router feature (can be disable with `skip-router` option): generate TypeScript interface for Laravel routes as `ZiggyLaravelRoutes`.
 -   Page feature (can be disable with `skip-page` option): generate TypeScript interface for `usePage` Inertia composable as `InertiaPage`.
--   `embed` option (default to `false`): generate some global components methods, you need to install `@kiwilan/vite-plugin-steward-laravel`, `ziggy-js` package and `InertiaTyped` Vue plugin from `@kiwilan/vite-plugin-steward-laravel`.
+-   `embed` option (default to `false`): generate some global components methods, you need to install `@kiwilan/vite-plugin-typescriptable-laravel`, `ziggy-js` package and `InertiaTyped` Vue plugin from `@kiwilan/vite-plugin-typescriptable-laravel`.
     -   `$route`
     -   `$isRoute`
     -   `$currentRoute`
@@ -63,7 +63,7 @@ php artisan typescriptable:models
 
 > -   [tightenco/ziggy](https://github.com/tighten/ziggy) for `composer`: `composer require tightenco/ziggy`
 > -   [ziggy-js](https://www.npmjs.com/package/ziggy-js) for `npm` (optional for `embed` option): `npm install ziggy-js --save-dev`
-> -   [@kiwilan/vite-plugin-steward-laravel](https://www.npmjs.com/package/@kiwilan/vite-plugin-steward-laravel) for `npm` (optional for `embed` option, `kiwilan/steward-laravel` package is not required): `npm install @kiwilan/vite-plugin-steward-laravel --save-dev`
+> -   [@kiwilan/vite-plugin-typescriptable-laravel](https://www.npmjs.com/package/@kiwilan/vite-plugin-typescriptable-laravel) for `npm` (optional for `embed` option, `kiwilan/typescriptable-laravel` package is not required): `npm install @kiwilan/vite-plugin-typescriptable-laravel --save-dev`
 
 ### Command
 

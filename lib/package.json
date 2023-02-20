@@ -1,0 +1,78 @@
+{
+  "name": "@kiwilan/vite-plugin-typescriptable-laravel",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Vite plugin for typescriptable-laravel.",
+  "author": "Ewilan Rivière <ewilan.riviere@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/kiwilan/typescriptable-laravel",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiwilan/typescriptable-laravel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kiwilan/typescriptable-laravel/issues"
+  },
+  "keywords": [
+    "steward",
+    "vite"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    },
+    "./vue": {
+      "require": "./vue/index.cjs",
+      "import": "./vue/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "vue"
+  ],
+  "scripts": {
+    "build": "tsup --clean && vite build",
+    "watch": "tsup --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "clean": "rimraf dist && rimraf vue",
+    "local": "rm -f ~/kiwilan-vite-plugin-typescriptable-laravel-*.tgz || true && mv ./kiwilan-vite-plugin-typescriptable-laravel-*.tgz ~/",
+    "package": "npm run clean && npm run build && npm pack && npm run local",
+    "deploy": "npm run clean && npm run build && npm pack --dry-run && npm publish --access public"
+  },
+  "peerDependencies": {
+    "vite": "^4.x.x",
+    "vue": "^3.x.x"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.35.2",
+    "@inertiajs/core": "^1.0.2",
+    "@inertiajs/vue3": "^1.0.1",
+    "@types/node": "^18.13.0",
+    "@types/ziggy-js": "^1.3.2",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "autoprefixer": "^10.4.13",
+    "eslint": "^8.34.0",
+    "postcss": "^8.4.21",
+    "rimraf": "^4.1.2",
+    "tailwindcss": "^3.2.6",
+    "tsup": "^6.6.2",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.1",
+    "vite-plugin-dts": "^1.4.1",
+    "vue": "^3.2.47"
+  }
+}

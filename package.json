@@ -1,0 +1,15 @@
+{
+  "name": "@kiwilan/vite-plugin-typescriptable-laravel",
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "build": "pnpm recursive run build",
+    "preinstall": "npx only-allow pnpm",
+    "lint": "pnpm recursive run lint",
+    "lint:fix": "pnpm recursive run lint:fix",
+    "test": "pnpm recursive run test",
+    "coverage": "pnpm recursive run coverage",
+    "package": "pnpm recursive run package",
+    "deploy": "pnpm recursive run deploy"
+  },
+  "license": "MIT"
+}

@@ -26,6 +26,17 @@
       }
     },
     {
+      "label": "COMPOSER helper",
+      "type": "shell",
+      "command": "composer helper",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
       "label": "COMPOSER format",
       "type": "shell",
       "command": "composer format",
@@ -121,9 +132,9 @@
       }
     },
     {
-      "label": "NPM pack-local",
+      "label": "NPM package",
       "type": "shell",
-      "command": "pnpm build && rm -f ~/kiwilan-vite-plugin-laravel-steward-*.tgz || true && npm pack && mv kiwilan-vite-plugin-laravel-steward-*.tgz ~/",
+      "command": "pnpm package",
       "problemMatcher": [],
       "presentation": {
         "reveal": "never",
@@ -134,7 +145,7 @@
     {
       "label": "NPM deploy",
       "type": "shell",
-      "command": "npm pack --dry-run && npm publish",
+      "command": "pnpm run deploy",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",

@@ -28,7 +28,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Head: typeof import('@inertiajs/vue3').Head,
     Link: typeof import('@inertiajs/vue3').Link,
-    TypedLink: typeof import('@kiwilan/vite-plugin-steward-laravel/vue').TypedLink,
+    TypedLink: typeof import('@kiwilan/vite-plugin-typescriptable-laravel/vue').TypedLink,
   }
 }
 typescript;
