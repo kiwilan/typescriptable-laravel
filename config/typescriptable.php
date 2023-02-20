@@ -15,6 +15,7 @@ return [
     'routes' => [
         'filename' => 'types-routes.d.ts',
         'filename_list' => 'routes.ts',
+        'use_path' => false,
         'skip' => [
             'name' => [
                 'debugbar.*',

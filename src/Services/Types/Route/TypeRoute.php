@@ -3,6 +3,7 @@
 namespace Kiwilan\Typescriptable\Services\Types\Route;
 
 use Illuminate\Routing\Route;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class TypeRoute
 {
@@ -19,7 +20,9 @@ class TypeRoute
 
     public static function make(Route $route): self
     {
-        $name = $route->getName();
+        $name = TypescriptableConfig::routesUsePath()
+            ? $route->uri()
+            : $route->getName();
 
         if (! $name) {
             $name = $route->uri();

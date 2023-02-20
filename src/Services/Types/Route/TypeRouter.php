@@ -18,6 +18,7 @@ class TypeRouter
 
         protected ?string $tsTypes = null,
         protected ?string $tsGlobalTypes = null,
+        protected ?string $tsGlobalTypesGet = null,
         protected ?string $tsRoutes = null,
 
         protected ?string $typescript = null,
@@ -36,6 +37,7 @@ class TypeRouter
 
         $type->tsTypes = $type->setTsTypes();
         $type->tsGlobalTypes = $type->setTsGlobalTypes();
+        $type->tsGlobalTypesGet = $type->setTsGlobalTypesGet();
         $type->tsRoutes = $type->setTsRoutes();
 
         $type->typescript = $type->setTypescript();
@@ -165,6 +167,15 @@ class TypeRouter
         return $this->collectRoutes(function (TypeRoute $route) {
             return <<<typescript
             Route.Typed.{$route->nameCamel()}
+            typescript;
+        }, ' | ');
+    }
+
+    private function setTsGlobalTypesGet(): string
+    {
+        return $this->collectRoutes(function (TypeRoute $route) {
+            return <<<typescript
+            Route.Typed.{$route->nameCamel()} & { method: 'GET' }
             typescript;
         }, ' | ');
     }

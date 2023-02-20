@@ -57,6 +57,11 @@ class TypescriptableConfig
         return  config('typescriptable.routes.filename_list') ?? 'routes.ts';
     }
 
+    public static function routesUsePath(): bool
+    {
+        return  config('typescriptable.routes.use_path') ?? false;
+    }
+
     public static function routesSkipName(): array
     {
         return  config('typescriptable.routes.skip.name') ?? [];
