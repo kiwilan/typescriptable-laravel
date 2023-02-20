@@ -18,7 +18,13 @@ class TypeRouter
 
         protected ?string $tsTypes = null,
         protected ?string $tsGlobalTypes = null,
+
         protected ?string $tsGlobalTypesGet = null,
+        protected ?string $tsGlobalTypesPost = null,
+        protected ?string $tsGlobalTypesPut = null,
+        protected ?string $tsGlobalTypesPatch = null,
+        protected ?string $tsGlobalTypesDelete = null,
+
         protected ?string $tsRoutes = null,
 
         protected ?string $typescript = null,
@@ -37,7 +43,13 @@ class TypeRouter
 
         $type->tsTypes = $type->setTsTypes();
         $type->tsGlobalTypes = $type->setTsGlobalTypes();
-        $type->tsGlobalTypesGet = $type->setTsGlobalTypesGet();
+
+        $type->tsGlobalTypesGet = $type->setTsGlobalTypesMethod('GET');
+        $type->tsGlobalTypesPost = $type->setTsGlobalTypesMethod('POST');
+        $type->tsGlobalTypesPut = $type->setTsGlobalTypesMethod('PUT');
+        $type->tsGlobalTypesPatch = $type->setTsGlobalTypesMethod('PATCH');
+        $type->tsGlobalTypesDelete = $type->setTsGlobalTypesMethod('DELETE');
+
         $type->tsRoutes = $type->setTsRoutes();
 
         $type->typescript = $type->setTypescript();
@@ -69,6 +81,11 @@ class TypeRouter
         {$this->tsTypes}
           }
           export type Type = {$this->tsGlobalTypes}
+          export type TypeGet = {$this->tsGlobalTypesGet}
+          export type TypePost = {$this->tsGlobalTypesPost}
+          export type TypePut = {$this->tsGlobalTypesPut}
+          export type TypePatch = {$this->tsGlobalTypesPatch}
+          export type TypeDelete = {$this->tsGlobalTypesDelete}
         }
         typescript;
     }
@@ -152,8 +169,8 @@ class TypeRouter
             }
 
             return <<<typescript
-                type {$route->nameCamel()} = {
-                  name: '{$route->name()}',
+                type {$route->nameType()} = {
+                  name: '{$route->pathType()}',
                   {$params},
                   query?: Record<string, string | number | boolean>,
                   hash?: string,
@@ -166,18 +183,21 @@ class TypeRouter
     {
         return $this->collectRoutes(function (TypeRoute $route) {
             return <<<typescript
-            Route.Typed.{$route->nameCamel()}
+            Route.Typed.{$route->nameType()}
             typescript;
         }, ' | ');
     }
 
-    private function setTsGlobalTypesGet(): string
+    private function setTsGlobalTypesMethod(string $method): string
     {
-        return $this->collectRoutes(function (TypeRoute $route) {
-            return <<<typescript
-            Route.Typed.{$route->nameCamel()} & { method: 'GET' }
-            typescript;
-        }, ' | ');
+        $routes = $this->collectRoutesMethod($method);
+
+        return collect($routes)
+            ->map(function (TypeRoute $route) {
+                return <<<typescript
+                Route.Typed.{$route->nameType()}
+                typescript;
+            })->join(' | ');
     }
 
     private function setTsRoutes(): string
@@ -208,6 +228,14 @@ class TypeRouter
               }
             typescript;
         }, ",\n");
+    }
+
+    private function collectRoutesMethod(string $method): Collection
+    {
+        return collect($this->routes)
+            ->filter(function (TypeRoute $route) use ($method) {
+                return $route->method() === $method;
+            });
     }
 
     private function collectRoutes(Closure $closure, ?string $join = null): string|Collection

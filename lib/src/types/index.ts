@@ -1,12 +1,5 @@
 export interface TypescriptableOptions {
   /**
-   * Generate `ziggy.js` file, it's native ziggy feature.
-   * @docs https://github.com/tighten/ziggy#advanced-setup
-   *
-   * @default false
-   */
-  ziggy?: boolean
-  /**
    * Enable types for Eloquent models.
    *
    * @default true

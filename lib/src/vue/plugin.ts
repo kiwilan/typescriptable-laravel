@@ -1,11 +1,11 @@
 import type { Plugin } from 'vue'
 import { Head, Link } from '@inertiajs/vue3'
 import { TypedLink } from './components/index.js'
-import { useInertia } from './index.js'
+import { useInertiaTyped } from './index.js'
 
 const InertiaTyped: Plugin = {
   install: (app) => {
-    const inertia = useInertia()
+    const inertia = useInertiaTyped()
 
     app.config.globalProperties.$route = inertia.route
     app.config.globalProperties.$isRoute = inertia.isRoute

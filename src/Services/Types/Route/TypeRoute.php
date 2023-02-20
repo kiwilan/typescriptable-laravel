@@ -3,6 +3,7 @@
 namespace Kiwilan\Typescriptable\Services\Types\Route;
 
 use Illuminate\Routing\Route;
+use Illuminate\Support\Str;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class TypeRoute
@@ -11,7 +12,9 @@ class TypeRoute
         protected string $uri,
         protected ?string $fullUri = null,
         protected ?string $name = null,
+        protected ?string $namePath = null,
         protected ?string $nameCamel = null,
+        protected ?string $namePathCamel = null,
         protected array $methods = [],
         protected string $method = 'GET',
         protected array $parameters = [],
@@ -20,9 +23,15 @@ class TypeRoute
 
     public static function make(Route $route): self
     {
-        $name = TypescriptableConfig::routesUsePath()
-            ? $route->uri()
-            : $route->getName();
+        $path = $route->uri();
+        $cleanPath = Str::replace('/', '.', $path);
+        $cleanPath = Str::replace('{', ' ', $cleanPath);
+        $cleanPath = Str::replace('}', ' ', $cleanPath);
+        $cleanPath = Str::replace('?', ' ', $cleanPath);
+        $camelPath = Str::camel($cleanPath);
+
+        $name = $route->getName();
+        $namePath = $camelPath;
 
         if (! $name) {
             $name = $route->uri();
@@ -32,12 +41,14 @@ class TypeRoute
             uri: $route->uri(),
             fullUri: $route->uri() !== '/' ? "/{$route->uri()}" : '/',
             name: $name,
+            namePath: $namePath,
             methods: $route->methods(),
             parameters: $route->parameterNames(),
         );
 
         $type->method = $type->setMethod();
         $type->nameCamel = $type->dashesToCamelCase($type->name);
+        $type->namePathCamel = $type->dashesToCamelCase($type->namePath).ucfirst($type->method);
 
         return $type;
     }
@@ -57,9 +68,19 @@ class TypeRoute
         return $this->name;
     }
 
+    public function namePath(): ?string
+    {
+        return $this->namePath;
+    }
+
     public function nameCamel(): ?string
     {
         return $this->nameCamel;
+    }
+
+    public function namePathCamel(): ?string
+    {
+        return $this->namePathCamel;
     }
 
     public function methods(): array
@@ -75,6 +96,20 @@ class TypeRoute
     public function parameters(): array
     {
         return $this->parameters;
+    }
+
+    public function nameType(): string
+    {
+        return TypescriptableConfig::routesUsePath()
+            ? $this->namePathCamel()
+            : $this->nameCamel();
+    }
+
+    public function pathType(): string
+    {
+        return TypescriptableConfig::routesUsePath()
+            ? $this->fullUri()
+            : $this->name();
     }
 
     private function setMethod(): string

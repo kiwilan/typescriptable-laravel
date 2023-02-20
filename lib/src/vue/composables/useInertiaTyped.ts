@@ -1,7 +1,7 @@
 import { router, usePage } from '@inertiajs/vue3'
 
 type RequestPayload = Record<string, any>
-export const useInertia = () => {
+export const useInertiaTyped = () => {
   // @ts-expect-error Routes is window defined
   const allRoutes = window.Routes as Record<Route.Name, Route.Entity>
   const convertURL = (route: Route.Type) => {
@@ -9,12 +9,12 @@ export const useInertia = () => {
     return currentRoute.path
   }
 
-  const ifetch = {
-    get: (route: Route.Type, data?: RequestPayload) => router.get(convertURL(route), data),
-    post: (route: Route.Type, data?: RequestPayload) => router.post(convertURL(route), data),
-    patch: (route: Route.Type, data?: RequestPayload) => router.patch(convertURL(route), data),
-    put: (route: Route.Type, data?: RequestPayload) => router.put(convertURL(route), data),
-    delete: (route: Route.Type) => router.delete(convertURL(route)),
+  const fetchTyped = {
+    get: (route: Route.TypeGet, data?: RequestPayload) => router.get(convertURL(route), data),
+    post: (route: Route.TypePost, data?: RequestPayload) => router.post(convertURL(route), data),
+    patch: (route: Route.TypePatch, data?: RequestPayload) => router.patch(convertURL(route), data),
+    put: (route: Route.TypePut, data?: RequestPayload) => router.put(convertURL(route), data),
+    delete: (route: Route.TypeDelete) => router.delete(convertURL(route)),
   }
 
   const page = usePage<Inertia.PageProps>()
@@ -74,7 +74,7 @@ export const useInertia = () => {
   }
 
   return {
-    ifetch,
+    fetchTyped,
     route,
     isRoute,
     currentRoute,

@@ -2,7 +2,6 @@ import type { Plugin } from 'vite'
 import type { TypescriptableOptions } from '../types/index.js'
 
 const DEFAULT_OPTIONS: TypescriptableOptions = {
-  ziggy: false,
   models: true,
   routes: true,
   inertia: true,
@@ -32,9 +31,6 @@ const Typescriptable = (userOptions: TypescriptableOptions = {}): Plugin => {
     name: 'vite-plugin-typescriptable-laravel',
     async buildStart() {
       const opts: TypescriptableOptions = Object.assign({}, DEFAULT_OPTIONS, userOptions)
-
-      if (opts.ziggy)
-        command('php artisan ziggy:generate')
 
       if (opts.models)
         command('php artisan typescriptable:models')

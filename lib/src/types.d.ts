@@ -37,6 +37,10 @@ declare namespace Route {
   }
   export type Type = Route.Typed.Login | Route.Typed.Logout | Route.Typed.FrontStoriesShow
   export type TypeGet = Route.Typed.Login | Route.Typed.FrontStoriesShow
+  export type TypePost = Route.Typed.Logout
+  export type TypePut = never
+  export type TypePatch = never
+  export type TypeDelete = never
 }
 
 declare namespace Inertia {

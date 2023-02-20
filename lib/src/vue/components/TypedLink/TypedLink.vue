@@ -2,7 +2,7 @@
 import type { PropType } from 'vue'
 import { computed, useAttrs } from 'vue'
 import { mergeDataIntoQueryString, shouldIntercept } from '@inertiajs/core'
-import { useInertia } from '@/vue/index.js'
+import { useInertiaTyped } from '@/vue/index.js'
 
 type RequestPayload = Record<string, any>
 type Method = 'get' | 'post' | 'put' | 'patch' | 'delete'
@@ -54,7 +54,7 @@ const props = defineProps({
   },
 })
 
-const { route, ifetch } = useInertia()
+const { route, ifetch } = useInertiaTyped()
 
 const as = props.as.toLowerCase()
 const method = props.method.toLowerCase() as Method
