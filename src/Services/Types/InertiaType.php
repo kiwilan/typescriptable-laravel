@@ -53,7 +53,7 @@ typescript;
 
     private function global(): string
     {
-        $useEmbed = TypescriptableConfig::inertiaUseEmbed() ? InertiaEmbed::make() : InertiaEmbed::native();
+        $useEmbed = TypescriptableConfig::inertiaNpmTypescriptableLaravel() ? InertiaEmbed::make() : InertiaEmbed::native();
 
         return <<<typescript
 {$useEmbed}

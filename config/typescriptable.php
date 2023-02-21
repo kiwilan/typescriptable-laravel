@@ -1,21 +1,48 @@
 <?php
 
-// config for Kiwilan/Typescriptable
 return [
+    /**
+     * The path to the output directory.
+     */
     'output_path' => resource_path('js'),
+
+    /**
+     * Options for the models.
+     */
     'models' => [
         'filename' => 'types-models.d.ts',
+        /**
+         * The path to the models directory.
+         */
         'directory' => app_path('Models'),
+        /**
+         * Models to skip.
+         */
         'skip' => [
             // 'App\\Models\\User',
         ],
+        /**
+         * Whether to add the LaravelPaginate type (with API type and view type).
+         */
         'paginate' => true,
+        /**
+         * Whether to add the fake Jetstream Team type to avoid errors.
+         */
         'fake_team' => false,
     ],
+    /**
+     * Options for the routes.
+     */
     'routes' => [
         'filename' => 'types-routes.d.ts',
         'filename_list' => 'routes.ts',
+        /**
+         * Use routes `path` instead of `name` for the type name.
+         */
         'use_path' => false,
+        /**
+         * Routes to skip.
+         */
         'skip' => [
             'name' => [
                 'debugbar.*',
@@ -32,11 +59,23 @@ return [
             ],
         ],
     ],
+    /**
+     * Options for the inertia.
+     */
     'inertia' => [
         'filename' => 'types-inertia.d.ts',
         'filename_global' => 'types-inertia-global.d.ts',
+        /**
+         * Whether to add the global Inertia type.
+         */
         'global' => true,
+        /**
+         * Whether to add the InertiaPage type.
+         */
         'page' => true,
-        'use_embed' => false,
+        /**
+         * Whether to add types from `@kiwilan/typescriptable-laravel`.
+         */
+        'npm_typescriptable_laravel' => false,
     ],
 ];

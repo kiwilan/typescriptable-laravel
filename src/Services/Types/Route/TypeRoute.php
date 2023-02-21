@@ -15,6 +15,7 @@ class TypeRoute
         protected ?string $namePath = null,
         protected ?string $nameCamel = null,
         protected ?string $namePathCamel = null,
+        protected ?string $routeName = null,
         protected array $methods = [],
         protected string $method = 'GET',
         /** @var TypeRouteParam[] */
@@ -50,6 +51,7 @@ class TypeRoute
         $type->method = $type->setMethod();
         $type->nameCamel = $type->dashesToCamelCase($type->name);
         $type->namePathCamel = $type->dashesToCamelCase($type->namePath).ucfirst($type->method);
+        $type->routeName = $type->namePathCamel;
 
         return $type;
     }
@@ -82,6 +84,11 @@ class TypeRoute
     public function namePathCamel(): ?string
     {
         return $this->namePathCamel;
+    }
+
+    public function routeName(): ?string
+    {
+        return $this->routeName;
     }
 
     public function methods(): array

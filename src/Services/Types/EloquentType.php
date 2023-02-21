@@ -85,6 +85,7 @@ class EloquentType
         $iterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($this->path, \FilesystemIterator::SKIP_DOTS)
         );
+        $skip = TypescriptableConfig::modelsSkip();
 
         /** @var \SplFileInfo $file */
         foreach ($iterator as $file) {
@@ -93,6 +94,11 @@ class EloquentType
                     path: $file->getPathname(),
                     file: $file,
                 );
+                $namespace = "{$model->namespace}\\{$model->name}";
+
+                if (in_array($namespace, $skip)) {
+                    continue;
+                }
                 $classes[$model->name] = $model;
             }
         }

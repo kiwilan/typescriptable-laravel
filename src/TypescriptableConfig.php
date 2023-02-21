@@ -92,7 +92,7 @@ class TypescriptableConfig
         return  config('typescriptable.inertia.page') ?? true;
     }
 
-    public static function inertiaUseEmbed(): bool
+    public static function inertiaNpmTypescriptableLaravel(): bool
     {
         return  config('typescriptable.inertia.use_embed') ?? false;
     }
