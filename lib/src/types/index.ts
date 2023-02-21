@@ -33,8 +33,8 @@ export interface TypescriptableOptions {
   } | false
 }
 
-export type Route = Route.Name
-export type RouteParam = Route.Params[Route.Name]
+export type Route = App.Route.Name
+export type RouteParam = App.Route.Params[App.Route.Name]
 export type RequestPayload = Record<string, any>
 
 export interface PluginInertiaTyped {
@@ -42,7 +42,7 @@ export interface PluginInertiaTyped {
     name: Route,
     params?: RouteParam,
   ) => string
-  isRoute: (name: Route.Name, params?: Route.Params[Route.Name]) => boolean
+  isRoute: (name: App.Route.Name, params?: App.Route.Params[App.Route.Name]) => boolean
   currentRoute: () => string
   page: Inertia.Page<Inertia.PageProps>
 }

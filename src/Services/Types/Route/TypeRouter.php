@@ -72,14 +72,14 @@ class TypeRouter
             export type Name = {$this->tsNames}
             export type Path = {$this->tsPaths};
             export type Params = {
-          {$this->tsParams}
+        {$this->tsParams}
             };
 
             export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
             export interface Entity { name: Route.Name; path: Route.Path; params?: Route.Params[Route.Name],  method: Route.Method; }
 
             declare namespace Typed {
-          {$this->tsTypes}
+        {$this->tsTypes}
             }
             export type Param = string | number | boolean | undefined
             export type Type = {$this->tsGlobalTypes}
@@ -144,9 +144,9 @@ class TypeRouter
                     ->map(fn (TypeRouteParam $param) => "'{$param->name()}'?: Route.Param")
                     ->join(",\n");
 
-                return "    '{$route->name()}': {\n      {$params}\n    }";
+                return "      '{$route->name()}': {\n      {$params}\n    }";
             } else {
-                return "    '{$route->name()}': never";
+                return "      '{$route->name()}': never";
             }
         }, ",\n");
     }
@@ -174,12 +174,12 @@ class TypeRouter
             }
 
             return <<<typescript
-                type {$route->nameType()} = {
-                  name: '{$route->pathType()}',
-                  {$params},
-                  query?: Record<string, Route.Param>,
-                  hash?: string,
-                }
+                  type {$route->nameType()} = {
+                    name: '{$route->pathType()}',
+                    {$params},
+                    query?: Record<string, Route.Param>,
+                    hash?: string,
+                  }
             typescript;
         }, ";\n");
     }
