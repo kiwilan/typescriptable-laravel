@@ -1,4 +1,4 @@
-# `@kiwilan/typescriptable-laravel`
+# @kiwilan/typescriptable-laravel
 
 [kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel) is required.
 

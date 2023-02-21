@@ -1,7 +1,7 @@
-# `kiwilan/typescriptable-laravel`
+# kiwilan/typescriptable-laravel
 
-[![packagist](https://img.shields.io/packagist/v/kiwilan/typescriptable-laravel.svg?style=flat-square&color=F28D1A&logo=packagist&logoColor=ffffff&label=packagist)](https://packagist.org/packages/kiwilan/steward-laravel)
-[![npm](https://img.shields.io/npm/v/@kiwilan/typescriptable-laravel.svg?style=flat-square&color=CB3837&logo=npm&logoColor=ffffff&label=npm)](https://www.npmjs.com/package/@kiwilan/vite-plugin-steward-laravel)
+[![packagist](https://img.shields.io/packagist/v/kiwilan/typescriptable-laravel.svg?style=flat-square&color=F28D1A&logo=packagist&logoColor=ffffff&label=packagist)](https://packagist.org/packages/kiwilan/typescriptable-laravel)
+[![npm](https://img.shields.io/npm/v/@kiwilan/typescriptable-laravel.svg?style=flat-square&color=CB3837&logo=npm&logoColor=ffffff&label=npm)](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel)
 
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/kiwilan/typescriptable-laravel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/kiwilan/typescriptable-laravel/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/kiwilan/typescriptable-laravel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/kiwilan/typescriptable-laravel/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
@@ -11,8 +11,8 @@ PHP package for Laravel **to type Eloquent models** and **routes** with **autoge
 
 > PHP 8.1 is required and Laravel 9+ is recommended.
 >
-> -   [`kiwilan/typescriptable-laravel`](https://packagist.org/packages/kiwilan/steward-laravel): PHP package for [Laravel](https://laravel.com/).
-> -   [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/vite-plugin-steward-laravel): NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/).
+> -   [`kiwilan/typescriptable-laravel`](https://packagist.org/packages/kiwilan/typescriptable-laravel): PHP package for [Laravel](https://laravel.com/).
+> -   [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel): NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/).
 
 The package [ziggy](https://github.com/tighten/ziggy) is **NOT REQUIRED** to use `kiwilan/typescriptable-laravel`.
 

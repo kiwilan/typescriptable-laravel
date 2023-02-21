@@ -14,8 +14,13 @@
     "url": "https://github.com/kiwilan/typescriptable-laravel/issues"
   },
   "keywords": [
-    "steward",
-    "vite"
+    "typescriptable",
+    "laravel",
+    "inertia",
+    "ts",
+    "vue",
+    "vite",
+    "typescript"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
