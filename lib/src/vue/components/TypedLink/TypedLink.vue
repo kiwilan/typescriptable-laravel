@@ -18,7 +18,7 @@ interface Attrs {
 }
 
 const props = defineProps({
-  to: Object as PropType<Route.TypeGet>,
+  to: Object as PropType<App.Route.TypeGet>,
   data: Object as PropType<RequestPayload>,
   as: {
     type: String,
@@ -59,7 +59,7 @@ const { route, router } = useInertiaTyped()
 const as = props.as.toLowerCase()
 const method = props.method.toLowerCase() as Method
 const routeStr = computed((): string => {
-  const to = props.to as Route.Type
+  const to = props.to as App.Route.Type
   return route(to)
 })
 const dataRaw = computed((): RequestPayload => {
@@ -79,7 +79,7 @@ const pushTo = (event) => {
   if (shouldIntercept(event)) {
     event.preventDefault()
 
-    const route = props.to as Route.TypeGet
+    const route = props.to as App.Route.TypeGet
     router.get(route)
   }
 }

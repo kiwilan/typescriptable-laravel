@@ -1,22 +1,22 @@
 export class RouteModel {
   protected constructor(
-    protected type: Route.Type, // Route.Typed.Login | Route.Typed.Logout | Route.Typed.FrontStoriesShow
-    protected entity: Route.Entity, // { name: Route.Name; path: Route.Path; params?: Route.Params[Route.Name],  method: Route.Method; }
-    protected name: Route.Name, // 'login' | 'logout' | 'front.stories.show'
-    protected uri: Route.Path, // '/login' | '/logout' | '/stories/{story}'
-    protected params: Route.Params[Route.Name] = {}, // { 'story'?: string | number | boolean }
+    protected type: App.Route.Type, // App.Route.Typed.Login | App.Route.Typed.Logout | App.Route.Typed.FrontStoriesShow
+    protected entity: App.Route.Entity, // { name: App.Route.Name; path: App.Route.Path; params?: App.Route.Params[App.Route.Name],  method: App.Route.Method; }
+    protected name: App.Route.Name, // 'login' | 'logout' | 'front.stories.show'
+    protected uri: App.Route.Path, // '/login' | '/logout' | '/stories/{story}'
+    protected params: App.Route.Params[App.Route.Name] = {}, // { 'story'?: string | number | boolean }
     protected query: Record<string, string | number | boolean | undefined> | undefined = {},
     protected hash: string = '',
-    protected method: Route.Method = 'GET', // 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+    protected method: App.Route.Method = 'GET', // 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
     protected path: string = '/',
   ) {}
 
   static allRoutes() {
     // @ts-expect-error window.Routes is defined in the view
-    return window.Routes as Record<Route.Name, Route.Entity>
+    return window.Routes as Record<App.Route.Name, App.Route.Entity>
   }
 
-  static make(type: Route.Type): RouteModel {
+  static make(type: App.Route.Type): RouteModel {
     const entity = RouteModel.allRoutes()[type.name]
     const self = new RouteModel(type, entity, type.name, entity.path, type.params, type.query, type.hash, entity.method)
 
@@ -85,7 +85,7 @@ export class RouteModel {
     return `${url}#${this.type.hash}`
   }
 
-  private static matchRoute(route: Route.Entity, parts: string[], partsRoute: string[]): Route.Entity | undefined {
+  private static matchRoute(route: App.Route.Entity, parts: string[], partsRoute: string[]): App.Route.Entity | undefined {
     let match = true
     partsRoute.forEach((part, index) => {
       if (part.startsWith('{') && part.endsWith('}')) {
@@ -100,21 +100,21 @@ export class RouteModel {
       return route
   }
 
-  public static routeFromUrl(): Route.Entity | undefined {
+  public static routeFromUrl(): App.Route.Entity | undefined {
     const url = location.pathname
     const cleanUrl = url.replace(/\/$/, '')
 
     const parts = cleanUrl.split('/')
     parts.shift()
 
-    const routes: Route.Entity[] = []
+    const routes: App.Route.Entity[] = []
     const all = Object.entries(RouteModel.allRoutes())
 
     all.forEach((r) => {
       routes.push(r[1])
     })
 
-    const candidates: Route.Entity[] = []
+    const candidates: App.Route.Entity[] = []
     routes.forEach((route) => {
       const first = `/${parts[0]}`
       if (route.path.startsWith(first))
@@ -122,7 +122,7 @@ export class RouteModel {
     })
 
     // eslint-disable-next-line no-undef-init
-    let rightRoute: Route.Entity | undefined = undefined
+    let rightRoute: App.Route.Entity | undefined = undefined
     candidates.forEach((route) => {
       const partsRoute = route.path.split('/')
       partsRoute.shift()

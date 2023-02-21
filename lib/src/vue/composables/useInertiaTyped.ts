@@ -3,22 +3,22 @@ import { RouteModel } from '../shared/RouteModel.js'
 
 type RequestPayload = Record<string, any>
 export const useInertiaTyped = () => {
-  const convertURL = (route: Route.Type) => {
+  const convertURL = (route: App.Route.Type) => {
     const current = RouteModel.make(route)
     return current.getPath()
   }
 
   const router = {
-    get: (route: Route.TypeGet, data?: RequestPayload) => irouter.get(convertURL(route), data),
-    post: (route: Route.TypePost, data?: RequestPayload) => irouter.post(convertURL(route), data),
-    patch: (route: Route.TypePatch, data?: RequestPayload) => irouter.patch(convertURL(route), data),
-    put: (route: Route.TypePut, data?: RequestPayload) => irouter.put(convertURL(route), data),
-    delete: (route: Route.TypeDelete) => irouter.delete(convertURL(route)),
+    get: (route: App.Route.TypeGet, data?: RequestPayload) => irouter.get(convertURL(route), data),
+    post: (route: App.Route.TypePost, data?: RequestPayload) => irouter.post(convertURL(route), data),
+    patch: (route: App.Route.TypePatch, data?: RequestPayload) => irouter.patch(convertURL(route), data),
+    put: (route: App.Route.TypePut, data?: RequestPayload) => irouter.put(convertURL(route), data),
+    delete: (route: App.Route.TypeDelete) => irouter.delete(convertURL(route)),
   }
 
   const page = usePage<Inertia.PageProps>()
 
-  const isRoute = (route: Route.Name): boolean => {
+  const isRoute = (route: App.Route.Name): boolean => {
     const currentRoute = RouteModel.routeFromUrl()
     if (currentRoute && currentRoute.name === route)
       return true
@@ -26,11 +26,11 @@ export const useInertiaTyped = () => {
     return false
   }
 
-  const currentRoute = (): Route.Entity | undefined => {
+  const currentRoute = (): App.Route.Entity | undefined => {
     return RouteModel.routeFromUrl()
   }
 
-  const route = (route: Route.Type): string => {
+  const route = (route: App.Route.Type): string => {
     const current = RouteModel.make(route)
 
     return current.getPath()
