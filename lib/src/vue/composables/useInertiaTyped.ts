@@ -1,4 +1,4 @@
-import { router, usePage } from '@inertiajs/vue3'
+import { router as irouter, usePage } from '@inertiajs/vue3'
 
 type RequestPayload = Record<string, any>
 export const useInertiaTyped = () => {
@@ -9,12 +9,12 @@ export const useInertiaTyped = () => {
     return currentRoute.path
   }
 
-  const fetchTyped = {
-    get: (route: Route.TypeGet, data?: RequestPayload) => router.get(convertURL(route), data),
-    post: (route: Route.TypePost, data?: RequestPayload) => router.post(convertURL(route), data),
-    patch: (route: Route.TypePatch, data?: RequestPayload) => router.patch(convertURL(route), data),
-    put: (route: Route.TypePut, data?: RequestPayload) => router.put(convertURL(route), data),
-    delete: (route: Route.TypeDelete) => router.delete(convertURL(route)),
+  const router = {
+    get: (route: Route.TypeGet, data?: RequestPayload) => irouter.get(convertURL(route), data),
+    post: (route: Route.TypePost, data?: RequestPayload) => irouter.post(convertURL(route), data),
+    patch: (route: Route.TypePatch, data?: RequestPayload) => irouter.patch(convertURL(route), data),
+    put: (route: Route.TypePut, data?: RequestPayload) => irouter.put(convertURL(route), data),
+    delete: (route: Route.TypeDelete) => irouter.delete(convertURL(route)),
   }
 
   const page = usePage<Inertia.PageProps>()
@@ -74,7 +74,7 @@ export const useInertiaTyped = () => {
   }
 
   return {
-    fetchTyped,
+    router,
     route,
     isRoute,
     currentRoute,

@@ -139,7 +139,7 @@ class TypeRouter
             if ($hasParams) {
                 $params = collect($route->parameters())
                     ->map(function (string $param) {
-                        return "'{$param}'?: string | number | boolean";
+                        return "'{$param}'?: string | number | boolean | undefined";
                     })
                     ->join(",\n");
 
@@ -159,7 +159,7 @@ class TypeRouter
                 $params = 'params?: undefined';
             } else {
                 $params = collect($route->parameters())->map(function (string $param) {
-                    return "{$param}: string | number | boolean";
+                    return "{$param}: string | number | boolean | undefined";
                 })->join(",\n");
                 $params = <<<typescript
                 params: {
@@ -172,7 +172,7 @@ class TypeRouter
                 type {$route->nameType()} = {
                   name: '{$route->pathType()}',
                   {$params},
-                  query?: Record<string, string | number | boolean>,
+                  query?: Record<string, string | number | boolean | undefined>,
                   hash?: string,
                 }
             typescript;
