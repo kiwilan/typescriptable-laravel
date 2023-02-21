@@ -30,17 +30,7 @@ const appTitle = (title: string, app: string, separator = ' - '): string => {
   return `${title}${separator}${app}`
 }
 
-/**
- * Get current app name from `title` tag.
- * @example
- * createInertiaApp({
- *  title: (title) => appTitle(title, appName())
- * })
- */
-const appName = () => window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
-
 export {
   appResolve,
   appTitle,
-  appName,
 }

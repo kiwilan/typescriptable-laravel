@@ -18,10 +18,19 @@ export const useInertiaTyped = () => {
 
   const page = usePage<Inertia.PageProps>()
 
-  const isRoute = (route: App.Route.Name): boolean => {
+  const isRoute = (route: App.Route.NamePath): boolean => {
     const currentRoute = RouteModel.routeFromUrl()
-    if (currentRoute && currentRoute.name === route)
-      return true
+    const current: string = route
+    if (currentRoute) {
+      const currentRouteName: string = currentRoute.name
+      const currentRoutePath: string = currentRoute.path
+
+      if (currentRouteName === current)
+        return true
+
+      if (currentRoutePath === current)
+        return true
+    }
 
     return false
   }

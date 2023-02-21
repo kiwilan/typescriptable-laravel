@@ -1,6 +1,7 @@
 declare namespace App {
     // @ts-ignore
     declare namespace Route {
+        export type NamePath = "login" | "logout" | "front.stories.show";
         export type Name = "login" | "logout" | "front.stories.show";
         export type Path = "/login" | "/logout" | "/stories/{story}";
         export type Params = {
