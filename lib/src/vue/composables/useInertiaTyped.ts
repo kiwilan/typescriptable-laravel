@@ -3,11 +3,9 @@ import { RouteModel } from '../shared/RouteModel.js'
 
 type RequestPayload = Record<string, any>
 export const useInertiaTyped = () => {
-  const allRoutes = RouteModel.allRoutes()
-
   const convertURL = (route: Route.Type) => {
-    const currentRoute = allRoutes[route.name]
-    return currentRoute.path
+    const current = RouteModel.make(route)
+    return current.getPath()
   }
 
   const router = {

@@ -23,15 +23,11 @@ const appResolve = (name: string, glob: Record<string, unknown>): Page => {
  *
  * @example
  * createInertiaApp({
- *   title: (title) => appTitle(title, 'Override Title')
+ *   title: (title) => appTitle(title, 'App')
  * })
  */
-const appTitle = (title: string, overrideTitle?: string): string => {
-  let appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
-  if (overrideTitle)
-    appName = overrideTitle
-
-  return `${title} - ${appName}`
+const appTitle = (title: string, app: string): string => {
+  return `${title} - ${app}`
 }
 
 export {
