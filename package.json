@@ -1,5 +1,5 @@
 {
-  "name": "@kiwilan/vite-plugin-typescriptable-laravel",
+  "name": "@kiwilan/typescriptable-laravel",
   "scripts": {
     "dev": "pnpm run --parallel dev",
     "build": "pnpm recursive run build",

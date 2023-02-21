@@ -2,6 +2,7 @@ import type { PluginInertiaTyped } from '../types/index.js'
 import InertiaTyped from './plugin.js'
 import { appResolve, appTitle } from './setup.js'
 import { useInertiaTyped } from './composables/useInertiaTyped.js'
+import { RouteModel } from './shared/RouteModel.js'
 
 import { TypedLink } from './components/TypedLink/index.js'
 
@@ -11,5 +12,6 @@ export {
   appResolve,
   appTitle,
   useInertiaTyped,
+  RouteModel,
   TypedLink,
 }

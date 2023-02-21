@@ -80,6 +80,7 @@ class TypeRouter
           declare namespace Typed {
         {$this->tsTypes}
           }
+          export type Param = string | number | boolean | undefined
           export type Type = {$this->tsGlobalTypes}
           export type TypeGet = {$this->tsGlobalTypesGet}
           export type TypePost = {$this->tsGlobalTypesPost}
@@ -138,9 +139,7 @@ class TypeRouter
 
             if ($hasParams) {
                 $params = collect($route->parameters())
-                    ->map(function (string $param) {
-                        return "'{$param}'?: string | number | boolean | undefined";
-                    })
+                    ->map(fn (TypeRouteParam $param) => "'{$param->name()}'?: Route.Param")
                     ->join(",\n");
 
                 return "    '{$route->name()}': {\n      {$params}\n    }";
@@ -158,9 +157,13 @@ class TypeRouter
             if (empty($route->parameters())) {
                 $params = 'params?: undefined';
             } else {
-                $params = collect($route->parameters())->map(function (string $param) {
-                    return "{$param}: string | number | boolean | undefined";
-                })->join(",\n");
+                $params = collect($route->parameters())
+                    ->map(function (TypeRouteParam $param) {
+                        $required = $param->required() ? '' : '?';
+
+                        return "{$param->name()}{$required}: Route.Param,";
+                    })
+                    ->join(' ');
                 $params = <<<typescript
                 params: {
                         {$params}
@@ -172,7 +175,7 @@ class TypeRouter
                 type {$route->nameType()} = {
                   name: '{$route->pathType()}',
                   {$params},
-                  query?: Record<string, string | number | boolean | undefined>,
+                  query?: Record<string, Route.Param>,
                   hash?: string,
                 }
             typescript;
@@ -204,14 +207,12 @@ class TypeRouter
     {
         return $this->collectRoutes(function (TypeRoute $route) {
             $params = collect($route->parameters())
-                ->map(function (string $param) {
-                    return "{$param}: 'string',";
-                })
-                ->join(",\n");
+                ->map(fn (TypeRouteParam $param) => "{$param->name()}: 'string',");
 
-            if (empty($params)) {
+            if ($params->isEmpty()) {
                 $params = 'params: undefined';
             } else {
+                $params = $params->join(' ');
                 $params = <<<typescript
                 params: {
                       {$params}
@@ -233,17 +234,13 @@ class TypeRouter
     private function collectRoutesMethod(string $method): Collection
     {
         return collect($this->routes)
-            ->filter(function (TypeRoute $route) use ($method) {
-                return $route->method() === $method;
-            });
+            ->filter(fn (TypeRoute $route) => $route->method() === $method);
     }
 
     private function collectRoutes(Closure $closure, ?string $join = null): string|Collection
     {
         $routes = collect($this->routes)
-            ->map(function (TypeRoute $route, string $key) use ($closure) {
-                return $closure($route, $key);
-            });
+            ->map(fn (TypeRoute $route, string $key) => $closure($route, $key));
 
         if ($join) {
             return $routes->join($join);
@@ -256,13 +253,9 @@ class TypeRouter
     {
         /** @var TypeRoute[] $routes */
         $routes = collect(app('router')->getRoutes())
-            ->mapWithKeys(function ($route) {
-                return [$route->getName() => $route];
-            })
+            ->mapWithKeys(fn ($route) => [$route->getName() => $route])
             ->filter()
-            ->map(function (Route $route) {
-                return TypeRoute::make($route);
-            })
+            ->map(fn (Route $route) => TypeRoute::make($route))
             ->toArray();
 
         $list = [];

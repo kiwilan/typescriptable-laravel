@@ -32,6 +32,7 @@ type Errors = Record<string, string>;
         canUpdatePassword?: boolean;
         canManageTwoFactorAuthentication?: boolean;
         hasAccountDeletionFeatures?: boolean;
+        hasEmailVerification?: boolean;
         flash?: {
           bannerStyle?: string;
           banner?: string;

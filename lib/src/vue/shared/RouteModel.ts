@@ -12,7 +12,7 @@ export class RouteModel {
   ) {}
 
   static allRoutes() {
-    // @ts-expect-error Routes is window defined
+    // @ts-expect-error window.Routes is defined in the view
     return window.Routes as Record<Route.Name, Route.Entity>
   }
 
@@ -46,8 +46,15 @@ export class RouteModel {
 
     if (matches) {
       matches.forEach((match) => {
-        const key = match.replace('{', '').replace('}', '')
-        url = url.replace(match, params[key])
+        const key = match.replace('{', '')
+          .replace('}', '')
+          .replace('?', '')
+        const value = params[key]
+
+        if (value)
+          url = url.replace(match, value)
+        else
+          url = url.replace(match, '')
       })
     }
 
@@ -78,16 +85,64 @@ export class RouteModel {
     return `${url}#${this.type.hash}`
   }
 
-  private buildRouteFromUrl(url: string) {
-    // const routes = Object.values(RouteModel.allRoutes())
-    // const current = routes.find(r => r.path === url)
+  private static matchRoute(route: Route.Entity, parts: string[], partsRoute: string[]): Route.Entity | undefined {
+    let match = true
+    partsRoute.forEach((part, index) => {
+      if (part.startsWith('{') && part.endsWith('}')) {
+        // todo
+      }
+      else if (part !== parts[index]) {
+        match = false
+      }
+    })
 
-    // if (current) {
-    //   const findRoute = current
-    //   // todo params
-    //   return new RouteModel(findRoute, findRoute, findRoute.name, findRoute.path, {}, {}, '', findRoute.method)
-    // }
+    if (match)
+      return route
+  }
 
-    // return new RouteModel({}, {}, '', '', {}, {}, '', '')
+  public static routeFromUrl(): Route.Entity | undefined {
+    const url = location.pathname
+    const cleanUrl = url.replace(/\/$/, '')
+
+    const parts = cleanUrl.split('/')
+    parts.shift()
+
+    const routes: Route.Entity[] = []
+    const all = Object.entries(RouteModel.allRoutes())
+
+    all.forEach((r) => {
+      routes.push(r[1])
+    })
+
+    const candidates: Route.Entity[] = []
+    routes.forEach((route) => {
+      const first = `/${parts[0]}`
+      if (route.path.startsWith(first))
+        candidates.push(route)
+    })
+
+    // eslint-disable-next-line no-undef-init
+    let rightRoute: Route.Entity | undefined = undefined
+    candidates.forEach((route) => {
+      const partsRoute = route.path.split('/')
+      partsRoute.shift()
+      const partsRouteLength = partsRoute.length
+      const partsLength = parts.length
+
+      const hasParamOptional = partsRoute.find(part => part.startsWith('{') && part.endsWith('?}')) !== undefined
+
+      if (hasParamOptional) {
+        if (partsRouteLength === partsLength)
+          rightRoute = RouteModel.matchRoute(route, parts, partsRoute)
+        else if (partsRouteLength === partsLength + 1)
+          rightRoute = RouteModel.matchRoute(route, parts, partsRoute)
+      }
+      else {
+        if (partsRouteLength === partsLength)
+          rightRoute = RouteModel.matchRoute(route, parts, partsRoute)
+      }
+    })
+
+    return rightRoute
   }
 }

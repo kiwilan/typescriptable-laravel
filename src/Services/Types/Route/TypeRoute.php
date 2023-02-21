@@ -17,6 +17,7 @@ class TypeRoute
         protected ?string $namePathCamel = null,
         protected array $methods = [],
         protected string $method = 'GET',
+        /** @var TypeRouteParam[] */
         protected array $parameters = [],
     ) {
     }
@@ -43,7 +44,7 @@ class TypeRoute
             name: $name,
             namePath: $namePath,
             methods: $route->methods(),
-            parameters: $route->parameterNames(),
+            parameters: TypeRouteParam::make($route),
         );
 
         $type->method = $type->setMethod();
@@ -93,6 +94,9 @@ class TypeRoute
         return $this->method;
     }
 
+    /**
+     * @return TypeRouteParam[]
+     */
     public function parameters(): array
     {
         return $this->parameters;

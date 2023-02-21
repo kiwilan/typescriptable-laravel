@@ -1,11 +1,11 @@
 {
-  "name": "@kiwilan/vite-plugin-typescriptable-laravel",
+  "name": "@kiwilan/typescriptable-laravel",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Vite plugin for typescriptable-laravel.",
   "author": "Ewilan Rivière <ewilan.riviere@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/kiwilan/typescriptable-laravel",
+  "homepage": "https://github.com/kiwilan/typescriptable-laravel/lib",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiwilan/typescriptable-laravel.git"
@@ -41,7 +41,7 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "clean": "rimraf dist && rimraf vue",
-    "local": "rm -f ~/kiwilan-vite-plugin-typescriptable-laravel-*.tgz || true && mv ./kiwilan-vite-plugin-typescriptable-laravel-*.tgz ~/",
+    "local": "rm -f ~/kiwilan-typescriptable-laravel-*.tgz || true && mv ./kiwilan-typescriptable-laravel-*.tgz ~/",
     "package": "npm run clean && npm run build && npm pack && npm run local",
     "deploy": "npm run clean && npm run build && npm pack --dry-run && npm publish --access public"
   },

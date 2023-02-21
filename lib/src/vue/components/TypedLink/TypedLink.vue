@@ -54,7 +54,7 @@ const props = defineProps({
   },
 })
 
-const { route, fetchTyped } = useInertiaTyped()
+const { route } = useInertiaTyped()
 
 const as = props.as.toLowerCase()
 const method = props.method.toLowerCase() as Method
@@ -79,7 +79,7 @@ const pushTo = (event) => {
   if (shouldIntercept(event)) {
     event.preventDefault()
 
-    fetchTyped.get(props.to as Route.TypeGet)
+    route(props.to as Route.TypeGet)
   }
 }
 </script>

@@ -2,7 +2,7 @@ import { router as irouter, usePage } from '@inertiajs/vue3'
 import { RouteModel } from '../shared/RouteModel.js'
 
 type RequestPayload = Record<string, any>
-export const useInertiaTypedDev = () => {
+export const useInertiaTyped = () => {
   const allRoutes = RouteModel.allRoutes()
 
   const convertURL = (route: Route.Type) => {
@@ -20,42 +20,16 @@ export const useInertiaTypedDev = () => {
 
   const page = usePage<Inertia.PageProps>()
 
-  const findRoute = (): Route.Entity | undefined => {
-    const url = location.pathname
-    const routes = Object.entries(allRoutes)
-    const current = routes.find(r => r[1].path === url)
-    if (current) {
-      const findRoute = current[1]
-      // todo params
-      return findRoute
-    }
-
-    return undefined
-  }
-
   const isRoute = (route: Route.Name): boolean => {
-    const routes = Object.entries(allRoutes)
-    const current = routes.find(r => r[1].name === route)
-    if (current)
+    const currentRoute = RouteModel.routeFromUrl()
+    if (currentRoute && currentRoute.name === route)
       return true
 
     return false
   }
 
   const currentRoute = (): Route.Entity | undefined => {
-    const url = location.pathname // url like `/stories`
-    const routes = Object.values(allRoutes)
-    const current = routes.find(r => r.path === url)
-
-    if (current) {
-      const findRoute = current[1]
-      // todo params
-      return findRoute
-    }
-
-    // const current = RouteModel.make(route)
-
-    return findRoute()
+    return RouteModel.routeFromUrl()
   }
 
   const route = (route: Route.Type): string => {
