@@ -2,6 +2,15 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.0.0 - 2023-02-21
+
+- Refactoring of `typescriptable:models` command
+- Add `typescriptable:routes` command to generate route types
+- Add `typescriptable:inertia` command to generate Inertia types
+- Add `typescriptable` command to generate current commands with options
+- All commands options are now into package config
+- Publish `@kiwilan/typescriptable-laravel` with some features for Inertia and typed routes usage
+
 ## 0.2.21 - 2023-02-13
 
 - remove `string[]` for `flash`, only `object` type
