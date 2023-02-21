@@ -1,9 +1,10 @@
 import { router as irouter, usePage } from '@inertiajs/vue3'
+import { RouteModel } from '../shared/RouteModel.js'
 
 type RequestPayload = Record<string, any>
-export const useInertiaTyped = () => {
-  // @ts-expect-error Routes is window defined
-  const allRoutes = window.Routes as Record<Route.Name, Route.Entity>
+export const useInertiaTypedDev = () => {
+  const allRoutes = RouteModel.allRoutes()
+
   const convertURL = (route: Route.Type) => {
     const currentRoute = allRoutes[route.name]
     return currentRoute.path
@@ -32,7 +33,7 @@ export const useInertiaTyped = () => {
     return undefined
   }
 
-  const isRoute = (route: Route.Name) => {
+  const isRoute = (route: Route.Name): boolean => {
     const routes = Object.entries(allRoutes)
     const current = routes.find(r => r[1].name === route)
     if (current)
@@ -40,37 +41,27 @@ export const useInertiaTyped = () => {
 
     return false
   }
-  const currentRoute = () => {
+
+  const currentRoute = (): Route.Entity | undefined => {
+    const url = location.pathname // url like `/stories`
+    const routes = Object.values(allRoutes)
+    const current = routes.find(r => r.path === url)
+
+    if (current) {
+      const findRoute = current[1]
+      // todo params
+      return findRoute
+    }
+
+    // const current = RouteModel.make(route)
+
     return findRoute()
   }
 
   const route = (route: Route.Type): string => {
-    const currentRoute = allRoutes[route.name]
+    const current = RouteModel.make(route)
 
-    if (currentRoute.params) {
-      const params: Record<string, string> = {}
-      Object.entries(currentRoute.params).forEach(([key]) => {
-        if (route.params)
-          params[key] = route.params[key]
-      })
-
-      let url: string = currentRoute.path
-      const matches = currentRoute.path.match(/{(.*?)}/g)
-
-      if (matches) {
-        matches.forEach((match) => {
-          const key = match.replace('{', '').replace('}', '')
-          url = url.replace(match, params[key])
-        })
-      }
-
-      return url
-    }
-
-    if (!currentRoute.params)
-      return currentRoute.path as string
-
-    return '/'
+    return current.getPath()
   }
 
   return {

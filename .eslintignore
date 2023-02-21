@@ -1,0 +1,8 @@
+.nuxt
+build
+dist
+node_modules
+public/build
+public/dist
+vendor
+*.md
