@@ -25,7 +25,7 @@ pnpm add @kiwilan/typescriptable-laravel -D
     -   `isRoute` transform route name or path to `boolean`
     -   `currentRoute` give current route
     -   `page` with `usePage` typed
--   `TypedLink` Vue component with `to` prop typed with selected `GET` routes
+-   `Route` Vue component with `to` prop typed with selected `GET` routes
 -   Vue plugin to use global methods for `template` into Vue components:
     -   `$route` transform route to `string`
     -   `$isRoute` transform route name or path to `boolean`
@@ -33,7 +33,7 @@ pnpm add @kiwilan/typescriptable-laravel -D
 -   Auto import components, you can use it without import
     -   `Head` from `@inertiajs/vue3`
     -   `Link` from `@inertiajs/vue3`
-    -   `TypedLink` from `@kiwilan/typescriptable-laravel/vue`
+    -   `Route` from `@kiwilan/typescriptable-laravel/vue`
 
 ## Usage
 
@@ -128,18 +128,18 @@ const logout = () => {
 
 ### Components
 
-#### `TypedLink`
+#### `Route`
 
 ```vue
 <template>
     <div>
-        <TypedLink
+        <Route
             :to="{
                 name: 'front.stories.index',
             }"
         >
             Stories
-        </TypedLink>
+        </Route>
     </div>
 </template>
 ```
