@@ -16,6 +16,7 @@ pnpm add @kiwilan/typescriptable-laravel -D
 
 ## Features
 
+-   Inertia types for `page` and global properties
 -   `vite` plugin to generate typescript files from Laravel models and routes with [kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel)
 -   Add some methods for setup `appResolve`, `appTitle`, `appName`
 -   `useInertiaTyped` composable with some features:

@@ -145,7 +145,13 @@ php artisan typescriptable:routes
 
 ### Inertia
 
-// todo
+You can use associated NPM package [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/tree/main/lib) to use helpers with `typescriptable:models` and `typescriptable:routes` commands.
+
+-   Execute automatically `typescriptable:models` and `typescriptable:routes` commands with watch mode.
+-   A composable `useInertiaTyped` with typed router, typed `usePage` and some helpers.
+-   A Vue component `Route` with typed `to` prop.
+-   A Vue plugin to inject all new features.
+-   All Inertia types for `page` and global properties.
 
 ## Examples
 
