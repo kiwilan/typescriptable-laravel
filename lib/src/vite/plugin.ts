@@ -1,10 +1,20 @@
 import type { Plugin } from 'vite'
 import type { TypescriptableOptions } from '../types/index.js'
+import { InertiaType } from './inertia-type.js'
 
 const DEFAULT_OPTIONS: TypescriptableOptions = {
   models: true,
   routes: true,
-  inertia: true,
+  inertia: {
+    basePath: 'resources/js',
+    pageType: 'types-inertia.d.ts',
+    globalType: 'types-inertia-global.d.ts',
+  },
+  autoreload: {
+    models: true,
+    controllers: true,
+    routes: true,
+  },
 }
 
 const command = (command: string) => {
@@ -39,7 +49,8 @@ const Typescriptable = (userOptions: TypescriptableOptions = {}): Plugin => {
         command('php artisan typescriptable:routes')
 
       if (opts.inertia)
-        command('php artisan typescriptable:inertia')
+        InertiaType.make(opts)
+        // command('php artisan typescriptable:inertia')
     },
     handleHotUpdate({ file, server }) {
       const opts = Object.assign({}, DEFAULT_OPTIONS, userOptions)

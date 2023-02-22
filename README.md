@@ -99,25 +99,6 @@ return [
             ],
         ],
     ],
-    /**
-     * Options for the inertia.
-     */
-    'inertia' => [
-        'filename' => 'types-inertia.d.ts',
-        'filename_global' => 'types-inertia-global.d.ts',
-        /**
-         * Whether to add the global Inertia type.
-         */
-        'global' => true,
-        /**
-         * Whether to add the InertiaPage type.
-         */
-        'page' => true,
-        /**
-         * Whether to add types from `@kiwilan/typescriptable-laravel`.
-         */
-        'npm_typescriptable_laravel' => false,
-    ],
 ];
 ```
 
@@ -128,7 +109,6 @@ php artisan typescriptable
 ```
 
 -   --`A`|`all`: Generate all types.
--   --`I`|`inertia`: Generate Inertia types.
 -   --`M`|`models`: Generate Models types.
 -   --`R`|`routes`: Generate Routes types.
 
@@ -165,14 +145,7 @@ php artisan typescriptable:routes
 
 ### Inertia
 
-Generate `resources/js/types-inertia.d.ts` file with all Inertia types.
-
-```bash
-php artisan typescriptable:inertia
-```
-
--   Generate extras TS types for [Inertia](https://inertiajs.com/)
--   Add features types included in [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/blob/main/lib/README.md) NPM package.
+// todo
 
 ## Examples
 

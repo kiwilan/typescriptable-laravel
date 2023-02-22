@@ -59,23 +59,4 @@ return [
             ],
         ],
     ],
-    /**
-     * Options for the inertia.
-     */
-    'inertia' => [
-        'filename' => 'types-inertia.d.ts',
-        'filename_global' => 'types-inertia-global.d.ts',
-        /**
-         * Whether to add the global Inertia type.
-         */
-        'global' => true,
-        /**
-         * Whether to add the InertiaPage type.
-         */
-        'page' => true,
-        /**
-         * Whether to add types from `@kiwilan/typescriptable-laravel`.
-         */
-        'npm_typescriptable_laravel' => false,
-    ],
 ];

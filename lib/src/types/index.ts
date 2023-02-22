@@ -14,9 +14,25 @@ export interface TypescriptableOptions {
   /**
    * Enable types for Inertia.
    *
-   * @default true
+   * You have to install Vue plugin to use this.
+   *
+   * ```ts
+   * import { InertiaTyped } from '@kiwilan/typescriptable-laravel/vue'
+   *
+   * app.use(InertiaTyped)
+   * ```
+   *
+   * @default {
+   *   basePath: 'resources/js',
+   *   pageType: 'types-inertia.d.ts',
+   *   globalType: 'types-inertia-global.d.ts',
+   * }
    */
-  inertia?: boolean
+  inertia?: {
+    basePath?: string
+    pageType?: string | false
+    globalType?: string | false
+  }
   /**
    * Enable Vite autoreload on PHP files changes.
    *

@@ -1,6 +1,6 @@
 import type { Plugin } from 'vue'
 import { Head, Link } from '@inertiajs/vue3'
-import { TypedLink } from './components/index.js'
+import { TypedLinkVue as TypedLink } from './components/index.js'
 import { useInertiaTyped } from './index.js'
 
 const InertiaTyped: Plugin = {
@@ -21,7 +21,7 @@ const InertiaTyped: Plugin = {
     app.component('Head', Head)
     // eslint-disable-next-line vue/no-reserved-component-names
     app.component('Link', Link)
-    app.component('TypedLink', TypedLink)
+    app.component('Route', TypedLink)
 
     return app
   },

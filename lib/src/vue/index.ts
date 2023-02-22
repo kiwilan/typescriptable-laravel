@@ -3,7 +3,7 @@ import { appResolve, appTitle } from './setup.js'
 import { useInertiaTyped } from './composables/useInertiaTyped.js'
 import { RouteModel } from './shared/RouteModel.js'
 
-import { TypedLink } from './components/TypedLink/index.js'
+import { TypedLinkVue } from './components/TypedLink/index.js'
 
 export {
   InertiaTyped,
@@ -11,5 +11,5 @@ export {
   appTitle,
   useInertiaTyped,
   RouteModel,
-  TypedLink,
+  TypedLinkVue as TypedLink,
 }

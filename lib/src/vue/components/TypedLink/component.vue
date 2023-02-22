@@ -2,7 +2,7 @@
 import type { PropType } from 'vue'
 import { computed, useAttrs } from 'vue'
 import { mergeDataIntoQueryString, shouldIntercept } from '@inertiajs/core'
-import { useInertiaTyped } from '@/vue/index.js'
+import { useInertiaTyped } from '../../index.js'
 
 type RequestPayload = Record<string, any>
 type Method = 'get' | 'post' | 'put' | 'patch' | 'delete'

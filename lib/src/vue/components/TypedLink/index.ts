@@ -1,3 +1,4 @@
-import TypedLink from './TypedLink.vue'
-// import TypedLink from './TypedLink.tsx'
-export { TypedLink }
+import TypedLinkVue from './component.vue'
+// import TypedLinkTsx from './component.tsx'
+
+export { TypedLinkVue }

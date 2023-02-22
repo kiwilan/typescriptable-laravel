@@ -9,7 +9,6 @@ class TypescriptableCommand extends Command
 {
     public $signature = 'typescriptable
                         {--A|all : Generate all types.}
-                        {--I|inertia : Generate Inertia types.}
                         {--M|models : Generate Models types.}
                         {--R|routes : Generate Routes types.}';
 
@@ -17,7 +16,6 @@ class TypescriptableCommand extends Command
 
     public function __construct(
         public bool $all = false,
-        public bool $inertia = false,
         public bool $models = false,
         public bool $routes = false,
     ) {
@@ -27,21 +25,13 @@ class TypescriptableCommand extends Command
     public function handle(): int
     {
         $this->all = $this->option('all') ?? false;
-        $this->inertia = $this->option('inertia') ?? false;
         $this->models = $this->option('models') ?? false;
         $this->routes = $this->option('routes') ?? false;
 
         if ($this->all) {
             $this->info('Generating all types...');
-            $this->inertia = true;
             $this->models = true;
             $this->routes = true;
-        }
-
-        if ($this->inertia) {
-            $this->info('Generating Inertia types...');
-            Artisan::call('typescriptable:inertia', [
-            ], $this->output);
         }
 
         if ($this->models) {
