@@ -21,6 +21,7 @@ const InertiaTyped: Plugin = {
     app.component('Head', Head)
     // eslint-disable-next-line vue/no-reserved-component-names
     app.component('Link', Link)
+    app.component('TypedLink', TypedLink)
     app.component('Route', TypedLink)
 
     return app
