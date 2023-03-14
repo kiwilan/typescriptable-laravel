@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.1.10 - 2023-03-14
+
+- Fix crash on Laravel 10
+
 ## 1.1.001 - 2023-03-08
 
 - Now compatible with Laravel 10
