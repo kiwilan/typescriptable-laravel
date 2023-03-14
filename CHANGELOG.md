@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.1.12 - 2023-03-14
+
+- Rename Route to App.Route
+
 ## 1.1.11 - 2023-03-14
 
 - Fix routes when method is not exist
