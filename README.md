@@ -11,8 +11,8 @@ PHP package for Laravel **to type Eloquent models** and **routes** with **autoge
 
 > PHP 8.1 is required and Laravel 9+ is recommended.
 >
-> -   [`kiwilan/typescriptable-laravel`](https://packagist.org/packages/kiwilan/typescriptable-laravel): PHP package for [Laravel](https://laravel.com/).
-> -   [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel): NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/). Requires `kiwilan/typescriptable-laravel` to works.
+> -   [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel): PHP package for [Laravel](https://laravel.com/).
+> -   [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/tree/main/lib): NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/). Requires `kiwilan/typescriptable-laravel` to works.
 
 The package [ziggy](https://github.com/tighten/ziggy) is **NOT REQUIRED** to use `kiwilan/typescriptable-laravel`.
 

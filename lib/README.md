@@ -59,15 +59,22 @@ export default defineConfig({
 In your `resources/js/app.ts`:
 
 ```ts
-import "./routes"; // add this line to import routes from `routes.ts` generated with `php artisan typescriptable:routes`
+import "./bootstrap";
+import "../css/app.css";
 
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
+// typescriptable helpers
 import {
     InertiaTyped,
     appResolve,
     appTitle,
 } from "@kiwilan/typescriptable-laravel/vue";
+// Import routes
+import "./routes";
+
+// Keep this line to use `route` helper
+import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 
 createInertiaApp({
     // helper for setup title
@@ -76,12 +83,13 @@ createInertiaApp({
     resolve: (name) =>
         appResolve(name, import.meta.glob("./Pages/**/*.vue", { eager: true })),
     setup({ el, App, props, plugin }) {
-        const app = createApp({ render: () => h(App, props) })
+        createApp({ render: () => h(App, props) })
             .use(plugin)
+            // Keep this line to use `route` helper
+            .use(ZiggyVue)
             // add this line to use `useInertiaTyped` composable
-            .use(InertiaTyped);
-
-        app.mount(el);
+            .use(InertiaTyped)
+            .mount(el);
     },
     progress: {
         delay: 250,

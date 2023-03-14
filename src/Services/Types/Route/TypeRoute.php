@@ -9,6 +9,7 @@ use Kiwilan\Typescriptable\TypescriptableConfig;
 class TypeRoute
 {
     protected function __construct(
+        protected string $id,
         protected string $uri,
         protected ?string $fullUri = null,
         protected ?string $name = null,
@@ -40,6 +41,7 @@ class TypeRoute
         }
 
         $type = new self(
+            id: self::generateId($route),
             uri: $route->uri(),
             fullUri: $route->uri() !== '/' ? "/{$route->uri()}" : '/',
             name: $name,
@@ -54,6 +56,20 @@ class TypeRoute
         $type->routeName = $type->namePathCamel;
 
         return $type;
+    }
+
+    public static function generateId(Route $route): string
+    {
+        $methods = $route->methods();
+        $methods = implode(' ', $methods);
+        $id = "{$methods} {$route->uri()}";
+
+        return Str::slug($id);
+    }
+
+    public function id(): string
+    {
+        return $this->id;
     }
 
     public function uri(): string

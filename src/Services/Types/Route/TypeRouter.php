@@ -6,14 +6,14 @@ use Closure;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route as FacadesRoute;
-use Illuminate\Support\Str;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class TypeRouter
 {
+    /** @var TypeRoute[] */
+    protected array $routes = [];
+
     protected function __construct(
-        /** @var TypeRoute[] */
-        protected array $routes = [],
         protected ?string $tsNamePaths = null,
         protected ?string $tsNames = null,
         protected ?string $tsPaths = null,
@@ -283,9 +283,9 @@ class TypeRouter
         /** @var TypeRoute[] $routes */
         $routes = collect(FacadesRoute::getRoutes())
             ->mapWithKeys(function (Route $route) {
-                $name = Str::slug($route->uri());
+                $id = TypeRoute::generateId($route);
 
-                return [$name => $route];
+                return [$id => $route];
             })
             ->filter()
             ->map(fn (Route $route) => TypeRoute::make($route))
@@ -293,9 +293,9 @@ class TypeRouter
 
         $list = [];
 
-        foreach ($routes as $route) {
+        foreach ($routes as $id => $route) {
             if (! $this->skipRouteName($route)) {
-                $list[$route->name()] = $route;
+                $list[$id] = $route;
             }
         }
 

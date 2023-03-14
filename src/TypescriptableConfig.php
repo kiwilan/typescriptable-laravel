@@ -64,12 +64,24 @@ class TypescriptableConfig
 
     public static function routesSkipName(): array
     {
-        return  config('typescriptable.routes.skip.name') ?? [];
+        return  config('typescriptable.routes.skip.name') ?? [
+            'debugbar.*',
+            'horizon.*',
+            'telescope.*',
+            'nova.*',
+            'lighthouse.*',
+            'livewire.*',
+            'ignition.*',
+            'filament.*',
+            'log-viewer.*',
+        ];
     }
 
     public static function routesSkipPath(): array
     {
-        return  config('typescriptable.routes.skip.path') ?? [];
+        return  config('typescriptable.routes.skip.path') ?? [
+            'api/*',
+        ];
     }
 
     public static function inertiaFilename(): string
