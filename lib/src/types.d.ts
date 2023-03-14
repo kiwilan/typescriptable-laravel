@@ -14,10 +14,10 @@ declare namespace App {
 
         export type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
         export interface Entity {
-            name: Route.Name;
-            path: Route.Path;
-            params?: Route.Params[Route.Name];
-            method: Route.Method;
+            name: App.Route.Name;
+            path: App.Route.Path;
+            params?: App.Route.Params[App.Route.Name];
+            method: App.Route.Method;
         }
 
         // @ts-ignore
@@ -44,11 +44,11 @@ declare namespace App {
             };
         }
         export type Type =
-            | Route.Typed.Login
-            | Route.Typed.Logout
-            | Route.Typed.FrontStoriesShow;
-        export type TypeGet = Route.Typed.Login | Route.Typed.FrontStoriesShow;
-        export type TypePost = Route.Typed.Logout;
+            | App.Route.Typed.Login
+            | App.Route.Typed.Logout
+            | App.Route.Typed.FrontStoriesShow;
+        export type TypeGet = App.Route.Typed.Login | App.Route.Typed.FrontStoriesShow;
+        export type TypePost = App.Route.Typed.Logout;
         export type TypePut = never;
         export type TypePatch = never;
         export type TypeDelete = never;
