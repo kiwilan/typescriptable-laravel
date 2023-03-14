@@ -61,6 +61,7 @@ In your `resources/js/app.ts`:
 ```ts
 import "./routes"; // add this line to import routes from `routes.ts` generated with `php artisan typescriptable:routes`
 
+import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import {
     InertiaTyped,
