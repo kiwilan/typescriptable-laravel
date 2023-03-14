@@ -26,6 +26,24 @@ use SplFileInfo;
  */
 class ClassTemplate
 {
+    /** @var ClassProperty[] */
+    public array $columns = [];
+
+    /** @var string[] */
+    public array $appends = [];
+
+    /** @var string[] */
+    public array $casts = [];
+
+    /** @var string[] */
+    public array $dates = [];
+
+    /** @var string[] */
+    public array $fillable = [];
+
+    /** @var string[] */
+    public array $hidden = [];
+
     protected function __construct(
         public ?string $path = null,
         public ?SplFileInfo $file = null,
@@ -35,18 +53,6 @@ class ClassTemplate
         public bool $isModel = false,
         public ?Model $model = null,
         public ?string $table = null,
-        /** @var ClassProperty[] */
-        public array $columns = [],
-        /** @var string[] */
-        public array $appends = [],
-        /** @var string[] */
-        public array $casts = [],
-        /** @var string[] */
-        public array $dates = [],
-        /** @var string[] */
-        public array $fillable = [],
-        /** @var string[] */
-        public array $hidden = [],
         public ?EloquentModel $typeableModel = null,
     ) {
     }

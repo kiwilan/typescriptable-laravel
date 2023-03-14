@@ -10,28 +10,23 @@ use Kiwilan\Typescriptable\TypescriptableConfig;
 use ReflectionMethod;
 use ReflectionNamedType;
 
-/**
- * @property string $table
- * @property ClassTemplate|null $class
- * @property ClassProperty[] $columns
- * @property ClassRelation[] $relations
- * @property string[] $appends
- * @property ClassProperty[] $properties
- */
 class EloquentModel
 {
+    /** @var ClassRelation[] */
+    public array $relations = [];
+
+    /** @var ClassProperty[] */
+    public array $columns = [];
+
+    /** @var ClassProperty[] */
+    public array $properties = [];
+
     public function __construct(
         public ?string $table = null,
         public ?string $name = null,
         public ?ClassTemplate $class = null,
-        /** @var ClassProperty[] */
-        public array $columns = [],
-        /** @var ClassRelation[] */
-        public array $relations = [],
         public array $appends = [],
         public ?string $mediable = null,
-        /** @var ClassProperty[] */
-        public array $properties = [],
         public array $counts = [],
         public ?string $tsString = null,
         public ?string $phpString = null,
@@ -42,10 +37,7 @@ class EloquentModel
     {
         $parser = new self(table: $class->table, name: $class->name, class: $class);
 
-        /** @var DatabaseColumn[] */
-        $dbColumns = DB::select(DB::raw("SHOW COLUMNS FROM {$class->table}"));
-
-        foreach ($dbColumns as $column) {
+        foreach (DB::select("SHOW COLUMNS FROM $class->table") as $column) {
             $column = DatabaseColumn::make($column);
             $parser->columns[$column->Field] = ClassProperty::make($class->table, $column);
         }
@@ -77,7 +69,8 @@ class EloquentModel
      */
     public static function fake(ClassTemplate $class, array $properties): self
     {
-        $model = new self(table: $class->table, name: $class->name, class: $class, columns: $properties);
+        $model = new self(table: $class->table, name: $class->name, class: $class);
+        $model->columns = $properties;
         $model->setProperties();
 
         foreach ($model->properties as $field => $property) {

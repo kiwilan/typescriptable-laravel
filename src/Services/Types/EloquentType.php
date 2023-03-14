@@ -8,16 +8,13 @@ use Kiwilan\Typescriptable\Services\Types\Utils\LaravelPaginateType;
 use Kiwilan\Typescriptable\Services\Types\Utils\LaravelTeamType;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
-/**
- * @property string $path
- * @property ClassTemplate[] $typeables
- */
 class EloquentType
 {
+    /** @var ClassTemplate[] */
+    public array $typeables = [];
+
     protected function __construct(
         public string $path,
-        /** @var ClassTemplate[] */
-        public array $typeables = [],
     ) {
     }
 
