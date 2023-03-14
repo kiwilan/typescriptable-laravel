@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.1.11 - 2023-03-14
+
+- Fix routes when method is not exist
+
 ## 1.1.10 - 2023-03-14
 
 - Fix crash on Laravel 10
