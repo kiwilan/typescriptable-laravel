@@ -34,9 +34,9 @@ class EloquentType
             $modelsPath = TypescriptableConfig::modelsDirectory();
         }
 
+        $tsFilename = TypescriptableConfig::modelsFilename();
         if (! $outputPath) {
-            $filename = TypescriptableConfig::modelsFilename();
-            $outputPath = TypescriptableConfig::setPath($filename);
+            $outputPath = TypescriptableConfig::setPath();
         }
 
         $self = new EloquentType($modelsPath, $outputPath);
@@ -44,7 +44,7 @@ class EloquentType
         $self->list = $self->setList();
         $self->eloquents = $self->setEloquents();
 
-        $typescript = EloquentTypescript::make($self->eloquents, $outputPath);
+        $typescript = EloquentTypescript::make($self->eloquents, "{$outputPath}/{$tsFilename}");
         $php = EloquentPhp::make($self->eloquents, $outputPath);
 
         $typescript->print();
