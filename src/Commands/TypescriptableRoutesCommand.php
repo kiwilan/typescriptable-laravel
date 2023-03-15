@@ -3,7 +3,7 @@
 namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
-use Kiwilan\Typescriptable\Services\TypescriptableService;
+use Kiwilan\Typescriptable\Typed\RouteType;
 
 class TypescriptableRoutesCommand extends Command
 {
@@ -13,7 +13,7 @@ class TypescriptableRoutesCommand extends Command
 
     public function handle(): int
     {
-        TypescriptableService::route();
+        RouteType::make();
 
         $this->info('Generated Routes types.');
 

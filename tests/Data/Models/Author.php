@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Data\Models;
+namespace Kiwilan\Typescriptable\Tests\Data\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

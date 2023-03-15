@@ -1,4 +1,4 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "lib/node_modules/typescript/lib"
   // "laravel-pint.configPath": "./pint.json"
 }

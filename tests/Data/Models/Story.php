@@ -1,12 +1,14 @@
 <?php
 
-namespace Tests\Data\Models;
+namespace Kiwilan\Typescriptable\Tests\Data\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
 
 class Story extends Model
 {
@@ -17,6 +19,8 @@ class Story extends Model
         'abstract',
         'original_link',
         'picture',
+        'published_at',
+        'status',
     ];
 
     protected $appends = [
@@ -26,6 +30,22 @@ class Story extends Model
     protected $withCount = [
         'chapters',
     ];
+
+    protected $casts = [
+        'published_at' => 'datetime',
+        'status' => PublishStatusEnum::class,
+    ];
+
+    /**
+     * @return Attribute<string>
+     */
+    protected function mainTitle(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => ucfirst($value),
+            set: fn (string $value) => strtolower($value),
+        );
+    }
 
     public function getTimeToReadAttribute(): int
     {
@@ -41,6 +61,22 @@ class Story extends Model
     public function getTimeToReadMinutesAttribute(): int
     {
         return intval($this->time_to_read / 60);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getChaptersListAttribute(): array
+    {
+        return ['chapter 1', 'chapter 2'];
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getChaptersIndexAttribute(): array
+    {
+        return [1, 2];
     }
 
     public function chapters(): HasMany

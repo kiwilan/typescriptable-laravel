@@ -3,22 +3,33 @@
 namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
-use Kiwilan\Typescriptable\Services\TypescriptableService;
+use Kiwilan\Typescriptable\Typed\EloquentType;
 
 class TypescriptableModelsCommand extends Command
 {
-    public $signature = 'typescriptable:models';
+    public $signature = 'typescriptable:models
+                        {--models-path : Path to models directory}
+                        {--output-path : Path to output}';
 
     public $description = 'Generate Models types.';
 
+    public function __construct(
+        public ?string $modelsPath = null,
+        public ?string $outputPath = null,
+    ) {
+        parent::__construct();
+    }
+
     public function handle(): int
     {
-        $service = TypescriptableService::models();
+        $this->modelsPath = $this->option('models-path');
+        $this->outputPath = $this->option('output-path');
+
+        $service = EloquentType::make($this->modelsPath, $this->outputPath);
         $namespaces = [];
 
-        foreach ($service->typeables as $typescriptable) {
-            $namespace = "{$typescriptable->namespace}\\{$typescriptable->name}";
-            $namespaces[] = [$namespace];
+        foreach ($service->items as $item) {
+            $namespaces[] = [$item->namespace];
         }
         $this->table(['Models'], $namespaces);
 
