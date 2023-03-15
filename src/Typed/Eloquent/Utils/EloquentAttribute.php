@@ -115,7 +115,36 @@ class EloquentAttribute
             $item->type = 'bool';
         }
 
+        $advanced = $this->isAdvancedArray($item->type);
+
+        if ($advanced) {
+            $item->type = "{$advanced}[]";
+            $item->typeTs = EloquentItem::phpToTs($advanced).'[]';
+        }
+
         return $item;
+    }
+
+    private function isAdvancedArray(string $type): string|false
+    {
+        $regex = '/array<(.*?)\>/';
+
+        if (preg_match($regex, $type, $matches)) {
+            if ($matches) {
+                $matches = $matches[1];
+                $matches = explode(',', $matches);
+
+                return $matches[0];
+            }
+        }
+
+        $regex = '/(.*?)\[]/';
+
+        if (preg_match($regex, $type, $matches)) {
+            return $matches ? $matches[1] : false;
+        }
+
+        return false;
     }
 
     public static function mediable(EloquentItem $eloquent): ?EloquentAttribute
@@ -126,13 +155,11 @@ class EloquentAttribute
             $name = $method->getName();
 
             if ($name === 'getMediableAttribute') {
-                $append = new EloquentAttribute(
+                return new EloquentAttribute(
                     field: 'mediable',
                     type: 'array',
                     typeTs: self::mediableTs($eloquent),
                 );
-
-                return $append;
             }
         }
 

@@ -17,7 +17,7 @@ class EloquentProperty
         public bool $isEnum = false,
         public bool $isRelation = false,
         public bool $isArray = false,
-        public bool $isAppend = false,
+        public bool $isAttribute = false,
         public bool $isCount = false,
         public bool $isCast = false,
         public ?string $typeTs = null,

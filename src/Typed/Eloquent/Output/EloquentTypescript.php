@@ -31,6 +31,7 @@ class EloquentTypescript
 
         foreach ($eloquents as $model => $eloquent) {
             $content[] = "    export type {$model} = {";
+
             foreach ($eloquent as $field => $property) {
                 $field = $property->isNullable ? "{$field}?" : $field;
                 $content[] = "      {$field}: {$property->typeTs}";
@@ -51,9 +52,6 @@ class EloquentTypescript
 
     public function print(): void
     {
-        $filename = TypescriptableConfig::modelsFilename();
-        $path = "{$this->path}/{$filename}";
-
-        File::put($path, $this->content);
+        File::put($this->path, $this->content);
     }
 }

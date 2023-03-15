@@ -134,7 +134,7 @@ class EloquentItem
                 table: $this->tableName,
                 name: $type->field,
                 type: $type->type,
-                isAppend: true,
+                isAttribute: true,
                 isNullable: true,
                 isArray: $type->isArray,
                 typeTs: $type->typeTs,

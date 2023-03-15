@@ -64,6 +64,7 @@ class EloquentType
         foreach ($this->items as $key => $item) {
             $modelName = $item->name;
             $eloquents[$modelName] = [];
+
             foreach ($item->eloquent->properties as $field => $property) {
                 $field = Str::snake($field);
                 $eloquents[$modelName][$field] = $property;
@@ -83,6 +84,7 @@ class EloquentType
         foreach ($this->items as $key => $item) {
             $modelName = Str::slug($key);
             $list[$modelName] = [];
+
             foreach ($item->eloquent->properties as $field => $property) {
                 $field = Str::snake($field);
                 $list[$modelName][$field] = [
