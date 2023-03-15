@@ -16,6 +16,13 @@ PHP package for Laravel **to type Eloquent models** and **routes** with **autoge
 
 The package [ziggy](https://github.com/tighten/ziggy) is **NOT REQUIRED** to use `kiwilan/typescriptable-laravel`.
 
+## Databases supported
+
+-   [x] MySQL
+-   [x] PostgreSQL
+-   [x] SQLite
+-   [ ] SQL Server
+
 ## Installation
 
 [![php](https://img.shields.io/static/v1?label=PHP&message=min.%20v8.1&color=777BB4&style=flat-square&logo=php&logoColor=ffffff)](https://www.php.net/)
