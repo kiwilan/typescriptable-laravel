@@ -29,21 +29,6 @@ class EloquentItem
     /** @var string[] */
     public array $counts = [];
 
-    /** @var string[] */
-    public array $modelAppends = [];
-
-    /** @var string[] */
-    public array $modelCasts = [];
-
-    /** @var string[] */
-    public array $modelDates = [];
-
-    /** @var string[] */
-    public array $modelFillable = [];
-
-    /** @var string[] */
-    public array $modelHidden = [];
-
     protected function __construct(
         public ClassItem $class,
         public Model $model,
@@ -65,19 +50,19 @@ class EloquentItem
             name: $class->name,
         );
 
-        $self->modelAppends = $self->model->getAppends();
-        $self->modelCasts = $self->model->getCasts();
-        $self->modelDates = $self->model->getDates();
-        $self->modelFillable = $self->model->getFillable();
-        $self->modelHidden = $self->model->getHidden();
+        // $self->modelAppends = $self->model->getAppends();
+        // $self->modelCasts = $self->model->getCasts();
+        // $self->modelDates = $self->model->getDates();
+        // $self->modelFillable = $self->model->getFillable();
+        // $self->modelHidden = $self->model->getHidden();
 
-        $self->table = Table::parse($self->tableName);
+        $self->table = Table::make($self->tableName);
         $self->columns = $self->setColumns();
         $self->relations = EloquentRelation::toArray($self);
         $self->counts = $self->setCounts();
 
-        $self->attributes = EloquentAttribute::make($self);
-        $self->casts = EloquentCast::make($self);
+        $self->attributes = EloquentAttribute::toArray($self);
+        $self->casts = EloquentCast::toArray($self);
 
         $self->properties = $self->setProperties();
 
@@ -123,7 +108,7 @@ class EloquentItem
 
         // Add if not hidden
         foreach ($this->columns as $column) {
-            if (! in_array($column->name, $this->modelHidden)) {
+            if (! in_array($column->name, $this->model->getHidden())) {
                 $properties[$column->name] = $column;
             }
         }

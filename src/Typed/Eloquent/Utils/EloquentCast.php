@@ -21,7 +21,7 @@ class EloquentCast
     /**
      * @return array<string,EloquentCast>
      */
-    public static function make(EloquentItem $eloquent): array
+    public static function toArray(EloquentItem $eloquent): array
     {
         $casts = $eloquent->model->getCasts();
 
@@ -33,7 +33,7 @@ class EloquentCast
                 field: $field,
                 type: $type,
             );
-            $cast = $cast->parseType($cast);
+            $cast = $cast->make($cast);
 
             $list[$field] = $cast;
         }
@@ -41,7 +41,7 @@ class EloquentCast
         return $list;
     }
 
-    private function parseType(EloquentCast $cast): EloquentCast
+    private function make(EloquentCast $cast): EloquentCast
     {
         $type = $cast->type;
 

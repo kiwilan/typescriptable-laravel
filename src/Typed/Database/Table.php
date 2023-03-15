@@ -16,7 +16,7 @@ class Table
     ) {
     }
 
-    public static function parse(string $table): self
+    public static function make(string $table): self
     {
         $self = new self(
             driver: config('database.default'),

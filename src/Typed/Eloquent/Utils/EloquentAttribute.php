@@ -21,7 +21,7 @@ class EloquentAttribute
     /**
      * @return array<string,EloquentAttribute>
      */
-    public static function make(EloquentItem $eloquent): array
+    public static function toArray(EloquentItem $eloquent): array
     {
         $reflect = $eloquent->class->reflect;
 
@@ -48,7 +48,7 @@ class EloquentAttribute
 
             // New attributes
             if ($type === 'Illuminate\Database\Eloquent\Casts\Attribute') {
-                $item = $item->setAttributeMethod($item, $method);
+                $item = $item->make($item, $method);
                 $list[$item->field] = $item;
 
                 continue;
@@ -57,7 +57,7 @@ class EloquentAttribute
             // Legacy attributes
             if (str_starts_with($name, 'get') && str_ends_with($name, 'Attribute') && $name !== 'getAttribute') {
                 $item->isLegacy = true;
-                $item = $item->setAttributeMethod($item, $method);
+                $item = $item->make($item, $method);
                 $list[$item->field] = $item;
             }
         }
@@ -71,7 +71,7 @@ class EloquentAttribute
         return $list;
     }
 
-    private function setAttributeMethod(EloquentAttribute $item, ReflectionMethod $method): EloquentAttribute
+    private function make(EloquentAttribute $item, ReflectionMethod $method): EloquentAttribute
     {
         $field = str_replace('Attribute', '', str_replace('get', '', $item->field));
         $field = Str::snake($field);
