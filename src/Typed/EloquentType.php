@@ -5,9 +5,9 @@ namespace Kiwilan\Typescriptable\Typed;
 use Illuminate\Support\Str;
 use Kiwilan\Typescriptable\Typed\Eloquent\ClassItem;
 use Kiwilan\Typescriptable\Typed\Eloquent\ClassTemplate;
-use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentPhp;
+use Kiwilan\Typescriptable\Typed\Eloquent\Output\EloquentPhp;
+use Kiwilan\Typescriptable\Typed\Eloquent\Output\EloquentTypescript;
 use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentProperty;
-use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentTypescript;
 use Kiwilan\Typescriptable\Typed\Utils\LaravelTeamType;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
@@ -44,11 +44,8 @@ class EloquentType
         $self->list = $self->setList();
         $self->eloquents = $self->setEloquents();
 
-        $paths = [getcwd(), 'tests', 'Print'];
-        $path = implode(DIRECTORY_SEPARATOR, $paths);
-
-        $typescript = EloquentTypescript::make($self->eloquents, $path);
-        $php = EloquentPhp::make($self->eloquents, $path);
+        $typescript = EloquentTypescript::make($self->eloquents, $outputPath);
+        $php = EloquentPhp::make($self->eloquents, $outputPath);
 
         $typescript->print();
         // $php->print();

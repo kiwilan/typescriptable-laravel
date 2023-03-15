@@ -1,8 +1,9 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent\Utils;
+namespace Kiwilan\Typescriptable\Typed\Eloquent\Output;
 
 use Illuminate\Support\Facades\File;
+use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentProperty;
 
 class EloquentPhp
 {
