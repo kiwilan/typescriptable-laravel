@@ -29,7 +29,7 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        $type = 'mysql'; // sqlite / mysql / pgsql / sqlsrv
+        $type = 'sqlite'; // sqlite / mysql / pgsql / sqlsrv
         $this->setDatabase($type);
 
         $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
