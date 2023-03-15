@@ -169,8 +169,7 @@ class TypeRouter
             if ($hasParams) {
                 $params = collect($route->parameters())
                     ->map(fn (TypeRouteParam $param) => "'{$param->name()}'?: App.Route.Param")
-                    ->join(",\n")
-                ;
+                    ->join(",\n");
 
                 return "      '{$route->name()}': {\n        {$params}\n      }";
             } else {
@@ -193,8 +192,7 @@ class TypeRouter
 
                         return "{$param->name()}{$required}: App.Route.Param,";
                     })
-                    ->join(' ')
-                ;
+                    ->join(' ');
                 $params = <<<typescript
                 params: {
                           {$params}
@@ -238,8 +236,7 @@ class TypeRouter
     {
         return $this->collectRoutes(function (TypeRoute $route) {
             $params = collect($route->parameters())
-                ->map(fn (TypeRouteParam $param) => "{$param->name()}: 'string',")
-            ;
+                ->map(fn (TypeRouteParam $param) => "{$param->name()}: 'string',");
 
             if ($params->isEmpty()) {
                 $params = 'params: undefined';
@@ -266,15 +263,13 @@ class TypeRouter
     private function collectRoutesMethod(string $method): Collection
     {
         return collect($this->routes)
-            ->filter(fn (TypeRoute $route) => $route->method() === $method)
-        ;
+            ->filter(fn (TypeRoute $route) => $route->method() === $method);
     }
 
     private function collectRoutes(Closure $closure, ?string $join = null): string|Collection
     {
         $routes = collect($this->routes)
-            ->map(fn (TypeRoute $route, string $key) => $closure($route, $key))
-        ;
+            ->map(fn (TypeRoute $route, string $key) => $closure($route, $key));
 
         if ($join) {
             return $routes->join($join);
@@ -294,8 +289,7 @@ class TypeRouter
             })
             ->filter()
             ->map(fn (Route $route) => TypeRoute::make($route))
-            ->toArray()
-        ;
+            ->toArray();
 
         $list = [];
 
