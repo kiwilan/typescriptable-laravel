@@ -20,7 +20,9 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testings
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -42,10 +44,11 @@ jobs:
         run: |
           sudo apt-get install -y mysql-client
           mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "SHOW DATABASES"
-      # - name: Set up MySQL
-      #   run: |
-      #     sudo /etc/init.d/mysql start
-      #     mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+
+      - name: Verify PostgreSQL connection from host
+        run: |
+          sudo apt-get install -y postgresql-client
+          psql -h
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
