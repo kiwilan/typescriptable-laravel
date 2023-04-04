@@ -2,11 +2,6 @@ name: Tests on unix
 
 on: [push, pull_request]
 
-env:
-  DB_DATABASE: testing
-  DB_USER: root
-  DB_PASSWORD:
-
 jobs:
   test:
     runs-on: ${{ matrix.os }}
