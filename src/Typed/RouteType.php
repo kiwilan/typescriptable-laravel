@@ -29,7 +29,6 @@ class RouteType
             $fileRoutes = TypescriptableConfig::setPath($filenameRoutes);
         }
 
-        dump($file);
         File::put($file, $type->tsTypeRoute());
         File::put($fileRoutes, $type->tsRoute());
 

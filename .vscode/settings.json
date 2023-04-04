@@ -1,4 +1,5 @@
 {
-  "typescript.tsdk": "lib/node_modules/typescript/lib"
+  "typescript.tsdk": "lib/node_modules/typescript/lib",
+  "dotenv.enableAutocloaking": false
   // "laravel-pint.configPath": "./pint.json"
 }

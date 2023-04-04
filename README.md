@@ -289,6 +289,10 @@ defineProps<{
 ## Testing
 
 ```bash
+cp .env.example .env
+```
+
+```bash
 composer test
 ```
 
