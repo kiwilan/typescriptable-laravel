@@ -2,6 +2,11 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.2.0 - 2023-04-04
+
+- Add tests
+- Multiple database support (`sqlserver` soon) for issue #4
+
 ## 1.1.13 - 2023-03-14
 
 - Fix same name routes
