@@ -11,6 +11,9 @@ class TypeRoute
     /** @var TypeRouteParam[] */
     protected array $parameters = [];
 
+    /** @var string[] */
+    protected array $methods = [];
+
     protected function __construct(
         protected string $id,
         protected string $uri,
@@ -20,7 +23,6 @@ class TypeRoute
         protected ?string $nameCamel = null,
         protected ?string $namePathCamel = null,
         protected ?string $routeName = null,
-        protected array $methods = [],
         protected string $method = 'GET',
     ) {
     }
@@ -47,8 +49,10 @@ class TypeRoute
             fullUri: $route->uri() !== '/' ? "/{$route->uri()}" : '/',
             name: $name,
             namePath: $namePath,
-            methods: $route->methods(),
+
         );
+
+        $type->methods = $route->methods();
         $type->parameters = TypeRouteParam::make($route);
         $type->method = $type->setMethod();
         $type->nameCamel = $type->dashesToCamelCase($type->name);

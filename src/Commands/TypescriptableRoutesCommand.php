@@ -7,13 +7,25 @@ use Kiwilan\Typescriptable\Typed\RouteType;
 
 class TypescriptableRoutesCommand extends Command
 {
-    public $signature = 'typescriptable:routes';
+    public $signature = 'typescriptable:routes
+                        {--route-list : Path to JSON route list}
+                        {--output-path : Path to output}';
 
     public $description = 'Generate Routes types.';
 
+    public function __construct(
+        public ?string $routeList = null,
+        public ?string $outputPath = null,
+    ) {
+        parent::__construct();
+    }
+
     public function handle(): int
     {
-        RouteType::make();
+        $this->routeList = $this->option('route-list');
+        $this->outputPath = $this->option('output-path');
+
+        RouteType::make($this->routeList, $this->outputPath);
 
         $this->info('Generated Routes types.');
 

@@ -14,15 +14,20 @@ class RouteType
     ) {
     }
 
-    public static function make(): self
+    public static function make(?string $routeList = null, ?string $outputPath = null): self
     {
         $filename = TypescriptableConfig::routesFilename();
         $filenameRoutes = TypescriptableConfig::routesFilenameList();
 
-        $type = TypeRouter::make();
+        $type = TypeRouter::make($routeList);
 
-        $file = TypescriptableConfig::setPath($filename);
-        $fileRoutes = TypescriptableConfig::setPath($filenameRoutes);
+        if ($outputPath) {
+            $file = $outputPath.DIRECTORY_SEPARATOR.$filename;
+            $fileRoutes = $outputPath.DIRECTORY_SEPARATOR.$filenameRoutes;
+        } else {
+            $file = TypescriptableConfig::setPath($filename);
+            $fileRoutes = TypescriptableConfig::setPath($filenameRoutes);
+        }
 
         File::put($file, $type->typescript());
         File::put($fileRoutes, $type->typescriptRoutes());

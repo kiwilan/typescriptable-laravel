@@ -35,10 +35,10 @@ class TypeRouter
     ) {
     }
 
-    public static function make(): self
+    public static function make(?string $routeList = null): self
     {
         $type = new self();
-        $type->routes = $type->setRoutes();
+        $type->routes = $type->fetchRoutes($routeList);
 
         $type->tsNamePaths = $type->setTsNamePaths();
         $type->tsNames = $type->setTsNames();
@@ -278,19 +278,42 @@ class TypeRouter
         return $routes;
     }
 
-    private function setRoutes(): array
+    private function fetchRoutes(?string $routeList = null): array
     {
+        $items = collect([]);
+        if ($routeList) {
+            $content = file_get_contents($routeList);
+            $content = json_decode($content);
+            /** @var Collection<int, Route> $items */
+            $items = collect($content);
+        } else {
+            /** @var Collection<int, Route> $items */
+            $items = collect(FacadesRoute::getRoutes());
+        }
+
+        foreach ($items as $key => $item) {
+            dump($item->uri());
+        }
         /** @var TypeRoute[] $routes */
-        $routes = collect(FacadesRoute::getRoutes())
-            ->mapWithKeys(function (Route $route) {
-                $id = TypeRoute::generateId($route);
+        $routes = $items->mapWithKeys(function (Route $route) {
+            dump($route->uri());
+            /** @var Route $id */
+            $route = $route;
+            $id = TypeRoute::generateId($route);
 
-                return [$id => $route];
-            })
-            ->filter()
-            ->map(fn (Route $route) => TypeRoute::make($route))
-            ->toArray();
+            return [$id => $route];
+        })
+        ->filter()
+        ->map(fn (Route $route) => TypeRoute::make($route))
+        ->toArray();
 
+        dd($routes);
+
+        // for testing
+        // file_put_contents(
+        //     database_path('routes.json'),
+        //     json_encode(collect(FacadesRoute::getRoutes())->toArray(), JSON_PRETTY_PRINT)
+        // );
         $list = [];
 
         foreach ($routes as $id => $route) {
