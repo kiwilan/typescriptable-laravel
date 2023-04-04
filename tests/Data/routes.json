@@ -2326,32 +2326,7 @@
     "computedMiddleware": null,
     "compiled": null
   },
-  {
-    "uri": "stories/{story}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "uses": "App\\Http\\Controllers\\StoryController@show",
-      "controller": "App\\Http\\Controllers\\StoryController@show",
-      "as": "front.stories.show",
-      "namespace": null,
-      "prefix": "/stories",
-      "where": [],
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession",
-        "verified"
-      ]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
+
   {
     "uri": "users",
     "methods": ["GET", "HEAD"],

@@ -20,12 +20,12 @@ PHP package for Laravel **to type Eloquent models** and **routes** with **autoge
 
 The package [ziggy](https://github.com/tighten/ziggy) is **NOT REQUIRED** to use `kiwilan/typescriptable-laravel`.
 
-## Databases supported
-
--   [x] MySQL
--   [x] PostgreSQL
--   [x] SQLite
--   [ ] SQL Server
+|  Database  | Supported |
+| :--------: | :-------: |
+|   MySQL    |    ✅     |
+| PostgreSQL |    ✅     |
+|   SQLite   |    ✅     |
+| SQL Server |    ❌     |
 
 ## Installation
 
@@ -130,11 +130,9 @@ php artisan typescriptable:models
 
 -   Generate TS types for [Eloquent models](https://laravel.com/docs/9.x/eloquent)
 -   Generate TS types for [Eloquent relations](https://laravel.com/docs/9.x/eloquent-relationships) (except `morphTo`)
-    -   [ ] Generate TS types for `morphTo`
 -   Generate TS types for `casts` (include native `enum` support)
 -   Generate TS types for `dates`
 -   Generate TS types for `appends` (partial for [`Casts\Attribute`](https://laravel.com/docs/9.x/eloquent-mutators#defining-an-accessor), you can use old way to define `get*Attribute` methods)
-    -   [ ] Use `appends` to define type for `Casts\Attribute` methods
 -   Generate TS types `counts`
 -   Generate pagination TS types for [Laravel pagination](https://laravel.com/docs/9.x/pagination) with option `paginate`
 
@@ -293,6 +291,12 @@ defineProps<{
 ```bash
 composer test
 ```
+
+## Roadmap
+
+-   [ ] 90% coverage
+-   [ ] Generate TS types for `morphTo`
+-   [ ] Use `appends` to define type for `Casts\Attribute` methods
 
 ## Changelog
 
