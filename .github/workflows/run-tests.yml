@@ -18,6 +18,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
+
+      - name: Set up MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql database: "testing"
+          mysql user: "root"
+          mysql password: ""
+
+      - name: Set up PostgreSQL
+        uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: "11" # See https://hub.docker.com/_/postgres for available versions
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
