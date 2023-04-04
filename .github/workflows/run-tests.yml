@@ -41,19 +41,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: npm ci
-
       - name: Verify MySQL connection from host
         run: |
           sudo apt-get install -y mysql-client
           mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "SHOW DATABASES"
-
-      - name: Connect to PostgreSQL
-        run: node client.js
-        env:
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
