@@ -23,9 +23,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Shutdown Ubuntu MySQL (SUDO)
-        run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
-
       - name: Set up MySQL
         run: |
           sudo /etc/init.d/mysql start
