@@ -50,12 +50,6 @@ class EloquentItem
             name: $class->name,
         );
 
-        // $self->modelAppends = $self->model->getAppends();
-        // $self->modelCasts = $self->model->getCasts();
-        // $self->modelDates = $self->model->getDates();
-        // $self->modelFillable = $self->model->getFillable();
-        // $self->modelHidden = $self->model->getHidden();
-
         $self->table = Table::make($self->tableName);
         $self->columns = $self->setColumns();
         $self->relations = EloquentRelation::toArray($self);
