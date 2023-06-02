@@ -25,8 +25,8 @@ class TypescriptableCommand extends Command
         $this->newLine();
         $this->info('Generating types...');
 
-        $this->models = $this->option('models') ?? false;
-        $this->routes = $this->option('routes') ?? false;
+        $this->models = $this->option('models') ?: false;
+        $this->routes = $this->option('routes') ?: false;
 
         if (! $this->models && ! $this->routes) {
             $this->models = true;

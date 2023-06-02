@@ -22,8 +22,8 @@ class TypescriptableRoutesCommand extends Command
 
     public function handle(): int
     {
-        $this->routeList = $this->option('route-list');
-        $this->outputPath = $this->option('output-path');
+        $this->routeList = (string) $this->option('route-list');
+        $this->outputPath = (string) $this->option('output-path');
 
         RouteType::make($this->routeList, $this->outputPath);
 

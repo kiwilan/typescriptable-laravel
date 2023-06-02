@@ -196,7 +196,7 @@ class EloquentItem
             'DateTimeInterface' => 'Date',
             'Carbon' => 'Date',
             'Model' => 'any',
-            default => $type,
+            default => 'any', // skip `Illuminate\Database\Eloquent\Casts\Attribute`
         };
 
         if ($isArray) {

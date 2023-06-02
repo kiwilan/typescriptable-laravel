@@ -17,11 +17,11 @@ const DEFAULT_OPTIONS: TypescriptableOptions = {
   },
 }
 
-const command = (command: string) => {
+const command = async (command: string) => {
   let exec = (_command: string, _callback: (error: any, stdout: any) => void) => {}
   if (process.env.NODE_ENV !== 'production') {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    exec = require('child_process').exec
+    const cp = await import('child_process')
+    exec = cp.exec
   }
   exec(
     command,

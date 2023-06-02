@@ -16,3 +16,4 @@ lib/*.d.ts
 .DS_Store
 .env
 .env.testing
+*.tgz

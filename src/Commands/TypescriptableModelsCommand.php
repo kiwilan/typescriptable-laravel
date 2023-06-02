@@ -22,8 +22,8 @@ class TypescriptableModelsCommand extends Command
 
     public function handle(): int
     {
-        $this->modelsPath = $this->option('models-path');
-        $this->outputPath = $this->option('output-path');
+        $this->modelsPath = (string) $this->option('models-path');
+        $this->outputPath = (string) $this->option('output-path');
 
         $service = EloquentType::make($this->modelsPath, $this->outputPath);
         $namespaces = [];
