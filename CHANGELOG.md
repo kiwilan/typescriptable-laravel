@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.3.0 - 2023-06-02
+
+- Fix `Illuminate\Database\Eloquent\Casts\Attribute` bug
+
 ## 1.2.0 - 2023-04-04
 
 - Add tests
