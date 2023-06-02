@@ -48,9 +48,9 @@ class TypeRouteGenerator
 
             return [$id => $route];
         })
-        ->filter()
-        ->map(fn (Route $route) => TypeRoute::make($route))
-        ->toArray();
+            ->filter()
+            ->map(fn (Route $route) => TypeRoute::make($route))
+            ->toArray();
 
         // for testing
         // file_put_contents(
