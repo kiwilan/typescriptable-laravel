@@ -41,6 +41,7 @@ class EloquentPhp
                 $type = $property->isNullable ? "?{$type}" : $type;
 
                 $arrayType = $property->isArray ? '[]' : '';
+
                 if (str_contains($type, '[]')) {
                     $type = str_replace('[]', '', $type);
                 }
@@ -97,6 +98,7 @@ class EloquentPhp
             'iterable',
             'void',
             'null',
+            'mixed',
         ]);
     }
 }
