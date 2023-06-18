@@ -16,6 +16,7 @@ class EloquentProperty
         public bool $isHidden = false,
         public bool $isEnum = false,
         public bool $isRelation = false,
+        public bool $isRelationMorph = false,
         public bool $isArray = false,
         public bool $isAttribute = false,
         public bool $isCount = false,

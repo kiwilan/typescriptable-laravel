@@ -298,8 +298,8 @@ composer test
 
 ## Roadmap
 
--   [ ] 90% coverage
--   [ ] Generate TS types for `morphTo`
+-   [x] 90% coverage
+-   [x] Generate TS types for `morphTo`
 -   [ ] Use `appends` to define type for `Casts\Attribute` methods
 
 ## Changelog

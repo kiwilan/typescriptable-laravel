@@ -11,6 +11,7 @@ class EloquentRelation
         public string $model,
         public string $field,
         public bool $isArray = false,
+        public bool $isMorph = false,
         public ?string $type = null,
         public ?string $typeTs = null,
     ) {
@@ -44,6 +45,7 @@ class EloquentRelation
             model: $method->getDeclaringClass()->getName(),
             field: $method->getName(),
             isArray: str_contains($method->getReturnType(), 'Many'),
+            isMorph: str_contains($method->getReturnType(), 'Morph'),
         );
         $return_line = $method->getEndLine() - 2;
 
@@ -61,6 +63,11 @@ class EloquentRelation
         $relation->typeTs = $relation->isArray
             ? "{$relation->type}[]"
             : $relation->type;
+
+        if ($relation->isMorph && ! $relation->type) {
+            $relation->type = 'mixed';
+            $relation->typeTs = 'any';
+        }
 
         return $relation;
     }

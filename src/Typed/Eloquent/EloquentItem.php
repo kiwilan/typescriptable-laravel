@@ -128,6 +128,7 @@ class EloquentItem
                 type: $relation->type,
                 typeTs: $relation->typeTs,
                 isRelation: true,
+                isRelationMorph: $relation->isMorph,
                 isNullable: true,
                 isArray: $relation->isArray,
             );
