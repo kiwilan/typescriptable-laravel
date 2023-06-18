@@ -92,5 +92,27 @@ return new class extends Migration
             $table->foreignId('tag_id')->constrained();
             $table->foreignId('story_id')->constrained();
         });
+
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('url')->nullable();
+            $table->text('content')->nullable();
+
+            $table->boolean('is_approved')->default(false);
+            $table->timestamp('approved_at')->nullable();
+            $table->timestamp('rejected_at')->nullable();
+
+            $table->foreignId('comment_id')
+                ->nullable()
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->morphs('commentable');
+
+            $table->timestamps();
+        });
     }
 };
