@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.4.0 - 2023-06-18
+
+- add support for `Morph` relations
+
 ## 1.3.0 - 2023-06-02
 
 - Fix `Illuminate\Database\Eloquent\Casts\Attribute` bug
