@@ -1,13 +1,13 @@
-# kiwilan/typescriptable-laravel
+# Typescriptable for Laravel
+
+![Banner with printer shop picture in background and Typescriptable Laravel title](docs/banner.jpg)
 
 [![php][php-version-src]][php-version-href]
 [![laravel][laravel-src]][laravel-href]
-
 [![version][version-src]][version-href]
 [![npm][npm-version-src]][npm-version-href]
 [![downloads][downloads-src]][downloads-href]
 [![license][license-src]][license-href]
-
 [![tests][tests-src]][tests-href]
 [![codecov][codecov-src]][codecov-href]
 
