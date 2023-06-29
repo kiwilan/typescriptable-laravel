@@ -2,20 +2,15 @@
 
 namespace Kiwilan\Typescriptable\Typed;
 
-use Kiwilan\Typescriptable\Typed\Eloquent\ClassItem;
-use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentProperty;
+use Kiwilan\Typescriptable\Typed\Setting\SettingItem;
+use Kiwilan\Typescriptable\Typed\Setting\SettingTypescript;
+use Kiwilan\Typescriptable\Typed\Utils\ClassItem;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class SettingType
 {
-    /** @var ClassItem[] */
+    /** @var SettingItem[] */
     public array $items = [];
-
-    /** @var array<string, EloquentProperty[]> */
-    public array $eloquents = [];
-
-    /** @var array<string, array<string, array<string, string>>> */
-    public array $list = [];
 
     protected function __construct(
         public string $settingsPath,
@@ -23,18 +18,29 @@ class SettingType
     ) {
     }
 
-    public static function make(?string $settingsPath, ?string $outputPath): self
+    public static function make(?string $settingsPath, ?string $outputPath, string $extends = 'Spatie\LaravelSettings\Settings'): self
     {
-        // if (! $modelsPath) {
-        //     $modelsPath = TypescriptableConfig::modelsDirectory();
-        // }
+        if (! $settingsPath) {
+            $settingsPath = TypescriptableConfig::settingsDirectory();
+        }
 
-        // $tsFilename = TypescriptableConfig::modelsFilename();
-        // if (! $outputPath) {
-        //     $outputPath = TypescriptableConfig::setPath();
-        // }
+        $tsFilename = TypescriptableConfig::settingsFilename();
+        if (! $outputPath) {
+            $outputPath = TypescriptableConfig::setPath();
+        }
+
+        $items = ClassItem::list($settingsPath, TypescriptableConfig::settingsSkip());
+        $items = array_filter($items, fn (ClassItem $item) => $item->extends === $extends);
 
         $self = new self($settingsPath, $outputPath);
+
+        foreach ($items as $item) {
+            $item = SettingItem::make($item);
+            $self->items[$item->name] = $item;
+        }
+
+        $typescript = SettingTypescript::make($self->items, "{$outputPath}/{$tsFilename}");
+        $typescript->print();
 
         return $self;
     }

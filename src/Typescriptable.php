@@ -18,8 +18,8 @@ class Typescriptable
         return RouteType::make($routeList, $outputPath);
     }
 
-    public static function settings(string $settingsPath, string $outputPath): SettingType
+    public static function settings(string $settingsPath, string $outputPath, string $extends): SettingType
     {
-        return SettingType::make($settingsPath, $outputPath);
+        return SettingType::make($settingsPath, $outputPath, $extends);
     }
 }

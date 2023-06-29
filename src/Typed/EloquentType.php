@@ -3,11 +3,11 @@
 namespace Kiwilan\Typescriptable\Typed;
 
 use Illuminate\Support\Str;
-use Kiwilan\Typescriptable\Typed\Eloquent\ClassItem;
 use Kiwilan\Typescriptable\Typed\Eloquent\ClassTemplate;
 use Kiwilan\Typescriptable\Typed\Eloquent\Output\EloquentPhp;
 use Kiwilan\Typescriptable\Typed\Eloquent\Output\EloquentTypescript;
 use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentProperty;
+use Kiwilan\Typescriptable\Typed\Utils\ClassItem;
 use Kiwilan\Typescriptable\Typed\Utils\LaravelTeamType;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
@@ -40,12 +40,13 @@ class EloquentType
         }
 
         $self = new EloquentType($modelsPath, $outputPath);
-        $self->items = $self->setItems();
+        // $self->items = $self->setItems();
+        $self->items = ClassItem::list($self->modelsPath, TypescriptableConfig::modelsSkip());
         $self->list = $self->setList();
         $self->eloquents = $self->setEloquents();
 
         $typescript = EloquentTypescript::make($self->eloquents, "{$outputPath}/{$tsFilename}");
-        $php = EloquentPhp::make($self->eloquents, $outputPath);
+        // $php = EloquentPhp::make($self->eloquents, $outputPath);
 
         $typescript->print();
         // $php->print();
@@ -97,36 +98,5 @@ class EloquentType
         }
 
         return $list;
-    }
-
-    /**
-     * @return ClassItem[]
-     */
-    private function setItems(): array
-    {
-        /** @var ClassItem[] */
-        $classes = [];
-
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($this->modelsPath, \FilesystemIterator::SKIP_DOTS)
-        );
-        $skip = TypescriptableConfig::modelsSkip();
-
-        /** @var \SplFileInfo $file */
-        foreach ($iterator as $file) {
-            if (! $file->isDir()) {
-                $model = ClassItem::make(
-                    path: $file->getPathname(),
-                    file: $file,
-                );
-
-                if (in_array($model->namespace, $skip)) {
-                    continue;
-                }
-                $classes[$model->name] = $model;
-            }
-        }
-
-        return $classes;
     }
 }

@@ -5,6 +5,7 @@ namespace Kiwilan\Typescriptable;
 use Kiwilan\Typescriptable\Commands\TypescriptableCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
+use Kiwilan\Typescriptable\Commands\TypescriptableSettingsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -24,6 +25,7 @@ class TypescriptableServiceProvider extends PackageServiceProvider
                 TypescriptableCommand::class,
                 TypescriptableModelsCommand::class,
                 TypescriptableRoutesCommand::class,
+                TypescriptableSettingsCommand::class,
             ]);
     }
 }

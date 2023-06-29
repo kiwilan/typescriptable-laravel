@@ -51,6 +51,21 @@ class TypescriptableConfig
         return config('typescriptable.models.fake_team') ?? false;
     }
 
+    public static function settingsFilename(): string
+    {
+        return config('typescriptable.settings.filename') ?? 'types-settings.d.ts';
+    }
+
+    public static function settingsDirectory(): string
+    {
+        return config('typescriptable.settings.directory') ?? app_path('Settings');
+    }
+
+    public static function settingsSkip(): array
+    {
+        return config('typescriptable.settings.skip') ?? [];
+    }
+
     public static function routesFilename(): string
     {
         return config('typescriptable.routes.filename') ?? 'types-routes.d.ts';

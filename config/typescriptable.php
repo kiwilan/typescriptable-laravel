@@ -31,6 +31,22 @@ return [
         'fake_team' => false,
     ],
     /**
+     * Options for the Spatie settings.
+     */
+    'settings' => [
+        'filename' => 'types-settings.d.ts',
+        /**
+         * The path to the settings directory.
+         */
+        'directory' => app_path('Settings'),
+        /**
+         * Settings to skip.
+         */
+        'skip' => [
+            // 'App\\Settings\\Home',
+        ],
+    ],
+    /**
      * Options for the routes.
      */
     'routes' => [

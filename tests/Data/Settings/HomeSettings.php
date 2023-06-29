@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Settings;
+namespace Kiwilan\Typescriptable\Tests\Data\Settings;
 
-// use Spatie\LaravelSettings\Settings;
-
-class HomeSettings
+class HomeSettings extends Settings
 {
     public ?string $hero_title_main = null;
 

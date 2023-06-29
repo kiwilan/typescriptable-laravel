@@ -8,6 +8,7 @@ use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentAttribute;
 use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentCast;
 use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentProperty;
 use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentRelation;
+use Kiwilan\Typescriptable\Typed\Utils\ClassItem;
 
 class EloquentItem
 {

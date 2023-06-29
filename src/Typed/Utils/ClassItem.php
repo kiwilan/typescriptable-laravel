@@ -1,8 +1,9 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent;
+namespace Kiwilan\Typescriptable\Typed\Utils;
 
 use Illuminate\Support\Str;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentItem;
 use ReflectionClass;
 use SplFileInfo;
 
@@ -15,6 +16,7 @@ class ClassItem
         public string $name,
         public ReflectionClass $reflect,
         public bool $isModel = false,
+        public ?string $extends = null,
         public ?EloquentItem $eloquent = null,
     ) {
     }
@@ -24,6 +26,7 @@ class ClassItem
         $namespace = ClassItem::getFileNamespace($file);
         $instance = new $namespace();
         $reflect = new ReflectionClass($instance);
+        $parent = $reflect->getParentClass();
 
         $parser = new self(
             path: $path,
@@ -31,6 +34,7 @@ class ClassItem
             namespace: $namespace,
             name: $reflect->getShortName(),
             reflect: $reflect,
+            extends: $parent ? $parent->getName() : null,
             isModel: $instance instanceof \Illuminate\Database\Eloquent\Model,
         );
 
@@ -42,6 +46,36 @@ class ClassItem
         // $parser->columns = $parser->typeableModel->columns;
 
         return $parser;
+    }
+
+    /**
+     * @return ClassItem[]
+     */
+    public static function list(string $path, array $skip = []): array
+    {
+        /** @var ClassItem[] */
+        $classes = [];
+
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS)
+        );
+
+        /** @var \SplFileInfo $file */
+        foreach ($iterator as $file) {
+            if (! $file->isDir()) {
+                $model = ClassItem::make(
+                    path: $file->getPathname(),
+                    file: $file,
+                );
+
+                if (in_array($model->namespace, $skip)) {
+                    continue;
+                }
+                $classes[$model->name] = $model;
+            }
+        }
+
+        return $classes;
     }
 
     // /**

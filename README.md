@@ -79,6 +79,22 @@ return [
         'fake_team' => false,
     ],
     /**
+     * Options for the Spatie settings.
+     */
+    'settings' => [
+        'filename' => 'types-settings.d.ts',
+        /**
+         * The path to the settings directory.
+         */
+        'directory' => app_path('Settings'),
+        /**
+         * Settings to skip.
+         */
+        'skip' => [
+            // 'App\\Settings\\Home',
+        ],
+    ],
+    /**
      * Options for the routes.
      */
     'routes' => [
@@ -128,13 +144,23 @@ Generate `resources/js/types-models.d.ts` file with all models types.
 php artisan typescriptable:models
 ```
 
--   Generate TS types for [Eloquent models](https://laravel.com/docs/9.x/eloquent)
--   Generate TS types for [Eloquent relations](https://laravel.com/docs/9.x/eloquent-relationships) (except `morphTo`)
+-   Generate TS types for [Eloquent models](https://laravel.com/docs/10.x/eloquent)
+-   Generate TS types for [Eloquent relations](https://laravel.com/docs/10.x/eloquent-relationships) (except `morphTo`)
 -   Generate TS types for `casts` (include native `enum` support)
 -   Generate TS types for `dates`
--   Generate TS types for `appends` (partial for [`Casts\Attribute`](https://laravel.com/docs/9.x/eloquent-mutators#defining-an-accessor), you can use old way to define `get*Attribute` methods)
+-   Generate TS types for `appends` (partial for [`Casts\Attribute`](https://laravel.com/docs/10.x/eloquent-mutators#defining-an-accessor), you can use old way to define `get*Attribute` methods)
 -   Generate TS types `counts`
--   Generate pagination TS types for [Laravel pagination](https://laravel.com/docs/9.x/pagination) with option `paginate`
+-   Generate pagination TS types for [Laravel pagination](https://laravel.com/docs/10.x/pagination) with option `paginate`
+
+### Spatie Settings
+
+If you use [`spatie/laravel-settings`](https://github.com/spatie/laravel-settings), you can generate `resources/js/types-settings.d.ts` file with all settings types.
+
+-   Generate TS types for Settings from PHP classes
+
+```bash
+php artisan typescriptable:settings
+```
 
 ### Routes
 
