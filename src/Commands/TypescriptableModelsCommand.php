@@ -3,7 +3,7 @@
 namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
-use Kiwilan\Typescriptable\Typed\EloquentType;
+use Kiwilan\Typescriptable\Typescriptable;
 
 class TypescriptableModelsCommand extends Command
 {
@@ -25,7 +25,7 @@ class TypescriptableModelsCommand extends Command
         $this->modelsPath = (string) $this->option('models-path');
         $this->outputPath = (string) $this->option('output-path');
 
-        $service = EloquentType::make($this->modelsPath, $this->outputPath);
+        $service = Typescriptable::models($this->modelsPath, $this->outputPath);
         $namespaces = [];
 
         foreach ($service->items as $item) {

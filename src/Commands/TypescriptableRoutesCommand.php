@@ -3,7 +3,7 @@
 namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
-use Kiwilan\Typescriptable\Typed\RouteType;
+use Kiwilan\Typescriptable\Typescriptable;
 
 class TypescriptableRoutesCommand extends Command
 {
@@ -25,7 +25,7 @@ class TypescriptableRoutesCommand extends Command
         $this->routeList = (string) $this->option('route-list');
         $this->outputPath = (string) $this->option('output-path');
 
-        RouteType::make($this->routeList, $this->outputPath);
+        Typescriptable::routes($this->routeList, $this->outputPath);
 
         $this->info('Generated Routes types.');
 
