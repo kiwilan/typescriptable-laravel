@@ -13,7 +13,7 @@ type Page = Promise<DefineComponent>
  *   resolve: name => appResolve(name, import.meta.globEager('./Pages/*.vue'))
  * })
  */
-const appResolve = (name: string, glob: Record<string, unknown>): Page => {
+function appResolve(name: string, glob: Record<string, unknown>): Page {
   const pages = glob as Pages
   return pages[`./Pages/${name}.vue`] as Page
 }
@@ -26,7 +26,7 @@ const appResolve = (name: string, glob: Record<string, unknown>): Page => {
  *   title: (title) => appTitle(title, 'App')
  * })
  */
-const appTitle = (title: string, app: string, separator = ' - '): string => {
+function appTitle(title: string, app: string, separator = ' - '): string {
   return `${title}${separator}${app}`
 }
 

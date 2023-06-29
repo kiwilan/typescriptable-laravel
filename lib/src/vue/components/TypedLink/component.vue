@@ -75,7 +75,7 @@ if (as === 'a' && method !== 'get') {
   )
 }
 
-const pushTo = (event) => {
+function pushTo(event) {
   if (shouldIntercept(event)) {
     event.preventDefault()
 

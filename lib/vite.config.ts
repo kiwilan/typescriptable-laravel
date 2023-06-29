@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
@@ -30,7 +30,7 @@ export default defineConfig({
     vue(),
     dts({
       entryRoot: resolve(__dirname, 'src/vue'),
-      outputDir: resolve(__dirname, 'vue'),
+      outDir: resolve(__dirname, 'vue'),
     }),
   ],
 })

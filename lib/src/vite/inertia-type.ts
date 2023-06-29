@@ -1,4 +1,4 @@
-import { writeFile } from 'fs'
+import { writeFile } from 'node:fs'
 import type { TypescriptableOptions } from './plugin.js'
 
 export class InertiaType {

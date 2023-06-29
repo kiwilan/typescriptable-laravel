@@ -4,7 +4,8 @@ import { InertiaType } from './inertia-type.js'
 
 const DEFAULT_OPTIONS: TypescriptableOptions = {
   models: true,
-  routes: true,
+  settings: false,
+  routes: false,
   inertia: {
     basePath: 'resources/js',
     pageType: 'types-inertia.d.ts',
@@ -12,15 +13,16 @@ const DEFAULT_OPTIONS: TypescriptableOptions = {
   },
   autoreload: {
     models: true,
+    settings: false,
     controllers: true,
     routes: true,
   },
 }
 
-const command = async (command: string) => {
+async function command(command: string) {
   let exec = (_command: string, _callback: (error: any, stdout: any) => void) => {}
   if (process.env.NODE_ENV !== 'production') {
-    const cp = await import('child_process')
+    const cp = await import('node:child_process')
     exec = cp.exec
   }
   exec(
@@ -36,7 +38,7 @@ const command = async (command: string) => {
   )
 }
 
-const Typescriptable = (userOptions: TypescriptableOptions = {}): Plugin => {
+function Typescriptable(userOptions: TypescriptableOptions = {}): Plugin {
   return {
     name: 'vite-plugin-typescriptable-laravel',
     async buildStart() {
@@ -44,6 +46,9 @@ const Typescriptable = (userOptions: TypescriptableOptions = {}): Plugin => {
 
       if (opts.models)
         command('php artisan typescriptable:models')
+
+      if (opts.settings)
+        command('php artisan typescriptable:settings')
 
       if (opts.routes)
         command('php artisan typescriptable:routes')
@@ -55,7 +60,9 @@ const Typescriptable = (userOptions: TypescriptableOptions = {}): Plugin => {
     handleHotUpdate({ file, server }) {
       const opts = Object.assign({}, DEFAULT_OPTIONS, userOptions)
       if (opts.autoreload) {
-        if (opts.autoreload.models && file.endsWith('app/Models/**/*.php'))
+        if (opts.autoreload.models && file.endsWith('app/Models/*.php'))
+          server.restart()
+        if (opts.autoreload.settings && file.endsWith('app/Settings/*.php'))
           server.restart()
         if (opts.autoreload.controllers && file.endsWith('app/Http/Controllers/**/*.php'))
           server.restart()

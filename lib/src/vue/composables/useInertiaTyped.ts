@@ -2,7 +2,7 @@ import { router as irouter, usePage } from '@inertiajs/vue3'
 import { RouteModel } from '../shared/RouteModel.js'
 
 type RequestPayload = Record<string, any>
-export const useInertiaTyped = () => {
+export function useInertiaTyped() {
   const convertURL = (route: App.Route.Type) => {
     const current = RouteModel.make(route)
     return current.getPath()

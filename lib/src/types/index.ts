@@ -6,9 +6,15 @@ export interface TypescriptableOptions {
    */
   models?: boolean
   /**
+   * Enable types for Spatie
+   *
+   * @default false
+   */
+  settings?: boolean
+  /**
    * Enable types for Laravel Routes.
    *
-   * @default true
+   * @default false
    */
   routes?: boolean
   /**
@@ -38,12 +44,14 @@ export interface TypescriptableOptions {
    *
    * @default {
    *  models: true,
+   *  settings: false,
    *  controllers: true,
    *  routes: true,
    * }
    */
   autoreload?: {
     models?: boolean
+    settings?: boolean
     controllers?: boolean
     routes?: boolean
   } | false
