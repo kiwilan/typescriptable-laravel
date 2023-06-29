@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.5.0 - 2023-06-29
+
+- Add partial support for `spatie/laravel-settings` package
+
 ## 1.4.0 - 2023-06-18
 
 - add support for `Morph` relations
