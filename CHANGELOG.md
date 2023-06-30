@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.5.20 - 2023-06-30
+
+- Add advanced array support to the for PHPDoc tag.
+
 ## 1.5.10 - 2023-06-29
 
 - `SettingType` fix `extends` param if `null`
