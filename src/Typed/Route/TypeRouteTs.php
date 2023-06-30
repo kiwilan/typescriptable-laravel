@@ -51,7 +51,7 @@ class TypeRouteTs
         return $self;
     }
 
-    public function content(): string
+    public function get(): string
     {
         $this->tsNamePaths = empty($this->tsNames) ? 'never' : $this->tsNamePaths;
         $this->tsNames = empty($this->tsNames) ? 'never' : $this->tsNames;
