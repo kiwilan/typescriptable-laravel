@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.5.10 - 2023-06-29
+
+- `SettingType` fix `extends` param if `null`
+
 ## 1.5.0 - 2023-06-29
 
 - Add partial support for `spatie/laravel-settings` package
