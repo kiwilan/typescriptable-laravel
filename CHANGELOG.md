@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.11.0 - 2023-06-30
+
+- fix version
+
 ## 1.5.20 - 2023-06-30
 
 - Add advanced array support to the for PHPDoc tag.
