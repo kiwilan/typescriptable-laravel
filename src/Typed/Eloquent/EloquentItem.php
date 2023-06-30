@@ -164,9 +164,34 @@ class EloquentItem
     public static function phpToTs(string $type): string
     {
         $isArray = false;
+        $isAdvanced = false;
 
         if (str_contains($type, 'date')) {
             $type = 'DateTime';
+        }
+
+        if (str_contains($type, 'array<')) {
+            $regex = '/array<[^,]+,[^>]+>/';
+            preg_match($regex, $type, $matches);
+
+            if (count($matches) > 0) {
+                $isAdvanced = true;
+                $type = str_replace('array<', '', $type);
+                $type = str_replace('>', '', $type);
+
+                $types = explode(',', $type);
+                $type = '';
+
+                $keyType = $types[0];
+                $valueType = $types[1];
+
+                $keyType = self::primitivesPhpToTs($keyType);
+                $valueType = self::primitivesPhpToTs($valueType);
+
+                $type = "{[key: {$keyType}]: {$valueType}}";
+
+                return $type;
+            }
         }
 
         if (str_contains($type, '[]')) {
@@ -180,6 +205,17 @@ class EloquentItem
             $type = str_replace('>', '', $type);
         }
 
+        $type = self::primitivesPhpToTs($type);
+
+        if ($isArray) {
+            $type .= '[]';
+        }
+
+        return $type;
+    }
+
+    private static function primitivesPhpToTs(string $type): string
+    {
         $type = match ($type) {
             'int' => 'number',
             'float' => 'number',
@@ -200,10 +236,6 @@ class EloquentItem
             'Model' => 'any',
             default => 'any', // skip `Illuminate\Database\Eloquent\Casts\Attribute`
         };
-
-        if ($isArray) {
-            $type .= '[]';
-        }
 
         return $type;
     }

@@ -28,6 +28,11 @@ class HomeSettings extends Settings
 
     public ?string $social_youtube = null;
 
+    /**
+     * @var array<string, string>
+     */
+    public ?array $socials = null;
+
     public static function group(): string
     {
         return 'home';

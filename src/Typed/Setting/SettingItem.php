@@ -53,9 +53,23 @@ class SettingItemProperty
     public static function make(ReflectionProperty $property): self
     {
         $type = $property->getType();
+        $extra = $property->getDocComment();
+        $typeDoc = null;
+        if ($extra) {
+            $phpDoc = "/**\n* @var array<string, string>\n*/";
+            $regex = '/@var\s+(.*)/';
+            preg_match($regex, $phpDoc, $matches);
+            $typeDoc = $matches[1];
+        }
+
+        $phpType = $type instanceof ReflectionNamedType ? $type->getName() : 'mixed';
+        if ($typeDoc) {
+            $phpType = $typeDoc;
+        }
+
         $self = new self(
             name: $property->getName(),
-            type: $type instanceof ReflectionNamedType ? $type->getName() : 'mixed',
+            type: $phpType,
             isNullable: $type->allowsNull(),
             isBuiltin: $type instanceof ReflectionNamedType ? $type->isBuiltin() : false,
         );
