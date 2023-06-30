@@ -1,8 +1,8 @@
 import type { Plugin } from 'vite'
-import type { TypescriptableOptions } from '../types/index.js'
-import { InertiaType } from './inertia-type.js'
+import type { ViteTypescriptableOptions } from './types/index'
+import { InertiaType } from './inertia-type'
 
-const DEFAULT_OPTIONS: TypescriptableOptions = {
+const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
   models: true,
   settings: false,
   routes: false,
@@ -38,11 +38,11 @@ async function command(command: string) {
   )
 }
 
-function Typescriptable(userOptions: TypescriptableOptions = {}): Plugin {
+function ViteTypescriptable(userOptions: ViteTypescriptableOptions = {}): Plugin {
   return {
     name: 'vite-plugin-typescriptable-laravel',
     async buildStart() {
-      const opts: TypescriptableOptions = Object.assign({}, DEFAULT_OPTIONS, userOptions)
+      const opts: ViteTypescriptableOptions = Object.assign({}, DEFAULT_OPTIONS, userOptions)
 
       if (opts.models)
         command('php artisan typescriptable:models')
@@ -73,7 +73,7 @@ function Typescriptable(userOptions: TypescriptableOptions = {}): Plugin {
   }
 }
 
-export type { TypescriptableOptions }
+export type { ViteTypescriptableOptions }
 export {
-  Typescriptable,
+  ViteTypescriptable,
 }

@@ -7,7 +7,7 @@
     "strict": true,
     "noImplicitAny": false,
     "strictNullChecks": true,
-    "moduleResolution": "nodenext",
+    "moduleResolution": "Node",
     "jsx": "preserve",
     "resolveJsonModule": true,
     "emitDeclarationOnly": true,

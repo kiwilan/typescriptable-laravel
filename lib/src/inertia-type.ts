@@ -1,8 +1,8 @@
 import { writeFile } from 'node:fs'
-import type { TypescriptableOptions } from './plugin.js'
+import type { ViteTypescriptableOptions } from './vite-plugin'
 
 export class InertiaType {
-  static make(opts: TypescriptableOptions) {
+  static make(opts: ViteTypescriptableOptions) {
     const self = new InertiaType()
     const basePath = opts.inertia?.basePath || 'resources/js'
     const inertiaTypeFile = opts.inertia?.pageType || 'types-inertia.d.ts'

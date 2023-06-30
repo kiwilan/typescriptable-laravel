@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup'
 export default defineConfig({
   name: 'vite-plugin-typescriptable-laravel',
   entry: {
-    index: 'src/vite/index.ts',
+    index: 'src/index.ts',
   },
   format: ['cjs', 'esm'],
   external: ['vue', '@inertiajs/vue3'],

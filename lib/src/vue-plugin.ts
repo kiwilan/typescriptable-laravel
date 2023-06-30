@@ -1,11 +1,10 @@
 import type { Plugin } from 'vue'
 import { Head, Link } from '@inertiajs/vue3'
-import { TypedLinkVue as TypedLink } from './components/index.js'
-import { useInertiaTyped } from './index.js'
+import { useTypescriptable } from './composables/useTypescriptable'
 
-const InertiaTyped: Plugin = {
+export const VueTypescriptable: Plugin = {
   install: (app) => {
-    const inertia = useInertiaTyped()
+    const inertia = useTypescriptable()
 
     app.config.globalProperties.$route = inertia.route
     app.config.globalProperties.$isRoute = inertia.isRoute
@@ -21,11 +20,7 @@ const InertiaTyped: Plugin = {
     app.component('Head', Head)
     // eslint-disable-next-line vue/no-reserved-component-names
     app.component('Link', Link)
-    app.component('TypedLink', TypedLink)
-    app.component('Route', TypedLink)
 
     return app
   },
 }
-
-export default InertiaTyped

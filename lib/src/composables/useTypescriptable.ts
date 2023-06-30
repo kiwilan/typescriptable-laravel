@@ -1,11 +1,12 @@
 import { router as irouter, usePage } from '@inertiajs/vue3'
-import { RouteModel } from '../shared/RouteModel.js'
+import { RouteModel } from './shared/RouteModel'
 
 type RequestPayload = Record<string, any>
-export function useInertiaTyped() {
+export function useTypescriptable() {
   const convertURL = (route: App.Route.Type) => {
-    const current = RouteModel.make(route)
-    return current.getPath()
+    // const current = RouteModel.make(route)
+    // return current.getPath()
+    return ''
   }
 
   const router = {
@@ -39,10 +40,9 @@ export function useInertiaTyped() {
     return RouteModel.routeFromUrl()
   }
 
-  const route = (route: App.Route.Type): string => {
+  const route = (route: App.Route.Name): string => {
     const current = RouteModel.make(route)
-
-    return current.getPath()
+    return current.path
   }
 
   return {

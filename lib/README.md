@@ -19,7 +19,7 @@ pnpm add @kiwilan/typescriptable-laravel -D
 -   Inertia types for `page` and global properties
 -   `vite` plugin to generate typescript files from Laravel models and routes with [kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel)
 -   Add some methods for setup `appResolve`, `appTitle`, `appName`
--   `useInertiaTyped` composable with some features:
+-   `useTypescriptable` composable with some features:
     -   `router` with `get`, `post`, `put`, `patch`, `delete` methods typed with selected routes
     -   `route` transform route to `string`
     -   `isRoute` transform route name or path to `boolean`
@@ -63,37 +63,39 @@ import "./bootstrap";
 import "../css/app.css";
 
 import { createApp, h } from "vue";
-import { createInertiaApp } from "@inertiajs/vue3";
-// typescriptable helpers
-import {
-    InertiaTyped,
-    appResolve,
-    appTitle,
-} from "@kiwilan/typescriptable-laravel/vue";
-// Import routes
+import { createInertiaApp, router } from "@inertiajs/vue3";
+import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
+import { createPinia } from "pinia";
+import { InertiaTyped, appTitle } from "@kiwilan/typescriptable-laravel/vue";
+import NProgress from "nprogress";
+import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import "./routes";
 
-// Keep this line to use `route` helper
-import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
-
 createInertiaApp({
-    // helper for setup title
-    title: (title) => appTitle(title, "App"),
-    // helper for setup resolve
+    title: (title) => appTitle(title, "Laravel"),
+    // @ts-expect-error resolvePageComponent ts error
     resolve: (name) =>
-        appResolve(name, import.meta.glob("./Pages/**/*.vue", { eager: true })),
+        resolvePageComponent(
+            `./Pages/${name}.vue`,
+            import.meta.glob("./Pages/**/*.vue")
+        ),
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
+        const pinia = createPinia();
+        const app = createApp({ render: () => h(App, props) })
             .use(plugin)
-            // Keep this line to use `route` helper
             .use(ZiggyVue)
-            // add this line to use `useInertiaTyped` composable
             .use(InertiaTyped)
-            .mount(el);
+            .use(pinia);
+
+        // `pnpm add nprogress -D`
+        router.on("start", () => NProgress.start());
+        router.on("finish", () => NProgress.done());
+
+        app.mount(el);
     },
     progress: {
         delay: 250,
-        color: "#4B5563",
+        color: "#18ba82",
         includeCSS: true,
         showSpinner: false,
     },
@@ -102,13 +104,13 @@ createInertiaApp({
 
 ### Composables
 
-#### `useInertiaTyped`
+#### `useTypescriptable`
 
 ```vue
 <script lang="ts" setup>
-import { useInertiaTyped } from "@kiwilan/typescriptable-laravel/vue";
+import { useTypescriptable } from "@kiwilan/typescriptable-laravel/vue";
 
-const { router, route, isRoute, currentRoute, page } = useInertiaTyped();
+const { router, route, isRoute, currentRoute, page } = useTypescriptable();
 
 console.log(currentRoute());
 
@@ -151,4 +153,20 @@ const logout = () => {
         </Route>
     </div>
 </template>
+```
+
+## Local test
+
+```bash
+pnpm package
+```
+
+In `package.json`
+
+```json
+{
+    "devDependencies": {
+        "@kiwilan/typescriptable-laravel": "file:~/kiwilan-typescriptable-laravel.tgz"
+    }
+}
 ```

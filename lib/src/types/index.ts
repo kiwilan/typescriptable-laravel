@@ -1,4 +1,4 @@
-export interface TypescriptableOptions {
+export interface ViteTypescriptableOptions {
   /**
    * Enable types for Eloquent models.
    *

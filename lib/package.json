@@ -1,7 +1,7 @@
 {
   "name": "@kiwilan/typescriptable-laravel",
   "type": "module",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Vite plugin for typescriptable-laravel.",
   "author": "Ewilan Rivière <ewilan.riviere@gmail.com>",
   "license": "MIT",
@@ -28,18 +28,13 @@
     ".": {
       "require": "./dist/index.cjs",
       "import": "./dist/index.js"
-    },
-    "./vue": {
-      "require": "./vue/index.cjs",
-      "import": "./vue/index.js"
     }
   },
   "files": [
-    "dist",
-    "vue"
+    "dist"
   ],
   "scripts": {
-    "build": "tsup --clean && vite build",
+    "build": "tsup --clean",
     "watch": "tsup --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

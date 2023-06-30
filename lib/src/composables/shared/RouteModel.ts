@@ -16,15 +16,16 @@ export class RouteModel {
     return window.Routes as Record<App.Route.Name, App.Route.Entity>
   }
 
-  static make(type: App.Route.Type): RouteModel {
-    const entity = RouteModel.allRoutes()[type.name]
-    const self = new RouteModel(type, entity, type.name, entity.path, type.params, type.query, type.hash, entity.method)
+  static make(name: App.Route.Name) {
+    const entity = RouteModel.allRoutes()[name]
+    // const self = new RouteModel(type, entity, type.name, entity.path, type.params, type.query, type.hash, entity.method)
 
-    self.path = self.setParams()
-    self.path = self.setQuery()
-    self.path = self.setHash()
+    // self.path = self.setParams()
+    // self.path = self.setQuery()
+    // self.path = self.setHash()
 
-    return self
+    // return self
+    return entity
   }
 
   public getPath() {
