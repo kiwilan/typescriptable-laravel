@@ -9,13 +9,15 @@ class TypescriptableCommand extends Command
 {
     public $signature = 'typescriptable
                         {--M|models : Generate Models types.}
-                        {--R|routes : Generate Routes types.}';
+                        {--R|routes : Generate Routes types.}
+                        {--S|settings : Generate Settings types.}';
 
     public $description = 'Generate types.';
 
     public function __construct(
         public bool $models = false,
         public bool $routes = false,
+        public bool $settings = false,
     ) {
         parent::__construct();
     }
@@ -27,10 +29,12 @@ class TypescriptableCommand extends Command
 
         $this->models = $this->option('models') ?: false;
         $this->routes = $this->option('routes') ?: false;
+        $this->settings = $this->option('settings') ?: false;
 
-        if (! $this->models && ! $this->routes) {
+        if (! $this->models && ! $this->routes && ! $this->settings) {
             $this->models = true;
             $this->routes = true;
+            $this->settings = true;
         }
 
         if ($this->models) {
@@ -42,6 +46,12 @@ class TypescriptableCommand extends Command
         if ($this->routes) {
             $this->info('Generating types for Routes...');
             Artisan::call('typescriptable:routes', [
+            ], $this->output);
+        }
+
+        if ($this->settings) {
+            $this->info('Generating types for Settings...');
+            Artisan::call('typescriptable:settings', [
             ], $this->output);
         }
 
