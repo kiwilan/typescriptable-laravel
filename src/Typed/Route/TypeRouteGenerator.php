@@ -16,11 +16,12 @@ class TypeRouteGenerator
     {
         $self = new self();
         $self->routes = $self->parse($routeList);
+        $self->routes = $self->routes->unique(fn (TypeRoute $route) => $route->fullUri());
 
         return $self;
     }
 
-    public function routes(): Collection
+    public function get(): Collection
     {
         return $this->routes;
     }
