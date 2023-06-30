@@ -182,8 +182,8 @@ class EloquentItem
                 $types = explode(',', $type);
                 $type = '';
 
-                $keyType = $types[0];
-                $valueType = $types[1];
+                $keyType = trim($types[0]);
+                $valueType = trim($types[1]);
 
                 $keyType = self::primitivesPhpToTs($keyType);
                 $valueType = self::primitivesPhpToTs($valueType);
