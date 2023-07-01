@@ -8,7 +8,7 @@ it('can be run', function (string $type) {
 
     $currentDir = getcwd();
     $modelsDir = "{$currentDir}/tests/Data/Models";
-    $outputDir = "{$currentDir}/tests/Print";
+    $outputDir = "{$currentDir}/tests/output";
 
     Artisan::call('typescriptable:models', [
         '--models-path' => $modelsDir,

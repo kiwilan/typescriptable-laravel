@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Artisan;
 it('can be run', function () {
     $currentDir = getcwd();
     $settingsDir = "{$currentDir}/tests/Data/Settings";
-    $outputDir = "{$currentDir}/tests/Print";
+    $outputDir = "{$currentDir}/tests/output";
 
     Artisan::call('typescriptable:settings', [
         '--settings-path' => $settingsDir,

@@ -11,18 +11,19 @@
     "jsx": "preserve",
     "resolveJsonModule": true,
     "emitDeclarationOnly": true,
+    "typeRoots": ["./node_modules/@types", "./*.d.ts"],
     "paths": {
       "@": ["./src"],
       "@/*": ["./src/*"],
       "~": ["./"],
       "~/*": ["./*"]
-    },
-    "types": ["vite/client", "vue"]
+    }
   },
   "include": [
     "src",
-    "../global.d.ts",
-    "./src/**/*.ts",
+    "tests",
+    "./*.d.ts",
+    "./*.ts",
     "./src/**/*.vue",
     "./node_modules/@inertiajs/vue3"
   ],
