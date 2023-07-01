@@ -67,10 +67,4 @@ jobs:
         run: cp .env.example .env
 
       - name: Execute tests
-        run: vendor/bin/pest --coverage
-
-      - name: Send code coverage
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: false
+        run: vendor/bin/pest
