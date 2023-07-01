@@ -17,10 +17,8 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 
 > **Note**
 >
-> PHP 8.1+ is required and Laravel 9+ is recommended.
->
 > -   [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel): PHP package for [Laravel](https://laravel.com/).
-> -   [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/tree/main/lib): NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/). Requires `kiwilan/typescriptable-laravel` to works.
+> -   [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/tree/main/lib): optional NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/) to have some helpers.
 
 The package [ziggy](https://github.com/tighten/ziggy) is **NOT REQUIRED** to use `kiwilan/typescriptable-laravel`.
 
@@ -38,6 +36,8 @@ The package [ziggy](https://github.com/tighten/ziggy) is **NOT REQUIRED** to use
 -   [ ] Use `appends` to define type for `Casts\Attribute` methods
 
 ## Installation
+
+> PHP 8.1+ is required and Laravel 9+ is recommended.
 
 You can install the package via composer:
 
