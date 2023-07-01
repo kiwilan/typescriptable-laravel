@@ -75,8 +75,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Install node dependencies in `lib/`
-        run: npm install --prefix lib
+      - name: Install pnpm
+        run: npm install -g pnpm
 
-      - name: Run npm tests in `lib/`
-        run: npm test --prefix lib
+      - name: Install node dependencies
+        run: pnpm install
+
+      - name: Run npm tests
+        run: pnpm test
