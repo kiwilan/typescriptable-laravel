@@ -36,7 +36,6 @@ jobs:
           MSSQL_SA_PASSWORD: 12345OHdf%e
         ports:
           - 1433:1433
-        options: --health-cmd="sqlcmd -U sa -P 12345OHdf%e -Q \"SELECT 1\"" --health-interval=10s --health-timeout=5s --health-retries=3
 
     name: P${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
