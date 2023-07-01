@@ -29,6 +29,16 @@ jobs:
         ports:
           - 5432:5432
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          ACCEPT_EULA: Y
+          MSSQL_PID: Developer
+          MSSQL_SA_PASSWORD: root
+          MSSQL_TCP_PORT: 1433
+        ports:
+          - 1433:1433
+        options: --health-cmd="/opt/mssql-tools/bin/sqlcmd -U sa -P root -Q 'SELECT 1'" --health-interval=10s --health-timeout=5s --health-retries=3
 
     name: P${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
