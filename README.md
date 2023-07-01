@@ -27,6 +27,12 @@ The package [ziggy](https://github.com/tighten/ziggy) is **NOT REQUIRED** to use
 |   SQLite   |    ✅     |
 | SQL Server |    ✅     |
 
+### Roadmap
+
+-   [x] 90% coverage
+-   [x] Generate TS types for `morphTo`
+-   [ ] Use `appends` to define type for `Casts\Attribute` methods
+
 ## Installation
 
 You can install the package via composer:
@@ -321,12 +327,6 @@ cp .env.example .env
 ```bash
 composer test
 ```
-
-## Roadmap
-
--   [x] 90% coverage
--   [x] Generate TS types for `morphTo`
--   [ ] Use `appends` to define type for `Casts\Attribute` methods
 
 ## Changelog
 
