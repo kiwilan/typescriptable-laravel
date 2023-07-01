@@ -49,7 +49,7 @@ export function useTypescriptable() {
     return process.env.NODE_ENV === 'development'
   }
 
-  function currentRoute(): App.Route.Entity | undefined {
+  function currentRoute(): App.Route.Link | undefined {
     const url = list.getCurrentUrl()
     return list.getRouteFromUrl(url)
   }

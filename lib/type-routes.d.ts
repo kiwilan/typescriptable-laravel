@@ -129,7 +129,7 @@ declare namespace App.Route {
     };
 
     export type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
-    export interface Entity {
+    export interface Link {
         name: App.Route.Name;
         path: App.Route.Path;
         params?: App.Route.Params[Route.Name];

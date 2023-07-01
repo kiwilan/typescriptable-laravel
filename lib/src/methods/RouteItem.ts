@@ -4,7 +4,7 @@ import type { RoutesType } from '.'
 export class RouteItem {
   protected constructor(
     // protected type: App.Route.Type, // App.Route.Typed.Login | App.Route.Typed.Logout | App.Route.Typed.FrontStoriesShow
-    // protected entity: App.Route.Entity, // { name: App.Route.Name; path: App.Route.Path; params?: App.Route.Params[App.Route.Name],  method: App.Route.Method; }
+    // protected entity: App.Route.Link, // { name: App.Route.Name; path: App.Route.Path; params?: App.Route.Params[App.Route.Name],  method: App.Route.Method; }
     protected name: App.Route.Name, // 'login' | 'logout' | 'front.stories.show'
     // protected uri: App.Route.Path, // '/login' | '/logout' | '/stories/{story}'
     protected params: App.Route.Params[App.Route.Name] = {}, // { 'story'?: string | number | boolean }

@@ -71,6 +71,13 @@ class TypeRoute
         return Str::slug($id);
     }
 
+    public function addMethods(array $methods): self
+    {
+        $this->methods = array_merge($this->methods, $methods);
+
+        return $this;
+    }
+
     public function id(): string
     {
         return $this->id;
