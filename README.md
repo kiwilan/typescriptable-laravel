@@ -36,6 +36,8 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 
 ## Installation
 
+> **Warning**
+>
 > PHP 8.1+ is required and Laravel 9+ is recommended.
 
 You can install the package via composer:
