@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    Routes: Record<App.Route.Name, App.Route.Entity>
+    Routes: Record<App.Route.Name, App.Route.Link>
   }
 }
 

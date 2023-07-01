@@ -2,21 +2,21 @@ import type { RoutesType } from '.'
 
 export class RouteList {
   protected constructor(
-    protected routes: Record<App.Route.Name, App.Route.Entity>,
+    protected routes: Record<App.Route.Name, App.Route.Link>,
   ) {}
 
   public static make(routes?: RoutesType): RouteList {
     if (!routes && typeof window !== undefined && typeof window.Routes !== undefined)
       routes = window.Routes
 
-    return new RouteList(routes as Record<App.Route.Name, App.Route.Entity>)
+    return new RouteList(routes as Record<App.Route.Name, App.Route.Link>)
   }
 
-  public getRoute(name: App.Route.Name): App.Route.Entity {
+  public getRoute(name: App.Route.Name): App.Route.Link {
     return this.routes[name]
   }
 
-  public getAllRoutes(): Record<App.Route.Name, App.Route.Entity> {
+  public getAllRoutes(): Record<App.Route.Name, App.Route.Link> {
     return this.routes
   }
 
@@ -24,7 +24,7 @@ export class RouteList {
     return window.location.pathname
   }
 
-  public matchRoute(route: App.Route.Entity, parts: string[], partsRoute: string[]): App.Route.Entity | undefined {
+  public matchRoute(route: App.Route.Link, parts: string[], partsRoute: string[]): App.Route.Link | undefined {
     let match = true
 
     for (let i = 0; i < partsRoute.length; i++) {
@@ -50,9 +50,9 @@ export class RouteList {
     return parts
   }
 
-  private getCandidatesFromUrl(url: string): App.Route.Entity[] {
+  private getCandidatesFromUrl(url: string): App.Route.Link[] {
     const parts = this.parseURL(url)
-    const items: App.Route.Entity[] = []
+    const items: App.Route.Link[] = []
 
     for (const route of Object.entries(this.routes)) {
       const key = route[0]
@@ -60,7 +60,7 @@ export class RouteList {
       items.push(value)
     }
 
-    const candidates: App.Route.Entity[] = []
+    const candidates: App.Route.Link[] = []
     if (parts.length === 0) {
       const item = items.find(item => item.path === url)
       if (item)
@@ -79,11 +79,11 @@ export class RouteList {
     return candidates
   }
 
-  public getRouteFromUrl(url: string): App.Route.Entity | undefined {
+  public getRouteFromUrl(url: string): App.Route.Link | undefined {
     const parts = this.parseURL(url)
     const candidates = this.getCandidatesFromUrl(url)
 
-    let rightRoute: App.Route.Entity | undefined
+    let rightRoute: App.Route.Link | undefined
     for (const candidate of candidates) {
       const partsRoute = candidate.path.split('/')
       partsRoute.shift()
