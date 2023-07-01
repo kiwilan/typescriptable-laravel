@@ -12,11 +12,10 @@ class TypeRouteGenerator
     /** @var Collection<string, TypeRoute> */
     protected Collection $routes;
 
-    public static function make(?string $routeList = null): self
+    public static function make(?string $list = null): self
     {
         $self = new self();
-        $self->routes = $self->parse($routeList);
-        $self->routes = $self->routes->unique(fn (TypeRoute $route) => $route->fullUri());
+        $self->routes = $self->parse($list);
 
         return $self;
     }
@@ -29,15 +28,24 @@ class TypeRouteGenerator
     /**
      * @return Collection<string, TypeRoute>
      */
-    private function parse(?string $routeList = null): Collection
+    private function parse(?string $list = null): Collection
     {
+        /** @var Collection<int, Route> $items */
         $items = collect([]);
-        if ($routeList) {
-            $content = file_get_contents($routeList);
-            $content = json_decode($content);
+        if ($list) {
+            $content = file_get_contents($list);
+            $content = json_decode($content, true);
             $content = collect($content);
-            /** @var Collection<int, Route> $items */
-            $items = $content->map(fn ($route) => new Route($route->methods, $route->uri, (array) $route->action));
+
+            $content->each(function (array $route) use (&$items) {
+                $methods = $route['methods'];
+                $uri = $route['uri'];
+                $action = $route['action'];
+                $route = new Route($methods, '', $action);
+                $route->uri = $uri;
+
+                $items->push($route);
+            });
         } else {
             /** @var Collection<int, Route> $items */
             $items = collect(FacadesRoute::getRoutes());

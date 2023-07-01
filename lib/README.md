@@ -144,24 +144,6 @@ const logout = () => {
 </script>
 ```
 
-### Components
-
-#### `Route`
-
-```vue
-<template>
-    <div>
-        <Route
-            :to="{
-                name: 'front.stories.index',
-            }"
-        >
-            Stories
-        </Route>
-    </div>
-</template>
-```
-
 ## Local test
 
 ```bash
