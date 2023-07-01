@@ -1,26 +1,35 @@
-import { router as irouter, usePage } from '@inertiajs/vue3'
-import { RouteModel } from './shared/RouteModel'
+import { usePage } from '@inertiajs/vue3'
+import { RouteList, Router } from '@/methods'
+import type { RequestPayload } from '@/types'
 
-type RequestPayload = Record<string, any>
 export function useTypescriptable() {
-  const convertURL = (route: App.Route.Type) => {
-    // const current = RouteModel.make(route)
-    // return current.getPath()
-    return ''
-  }
+  const list = RouteList.make()
 
   const router = {
-    get: (route: App.Route.TypeGet, data?: RequestPayload) => irouter.get(convertURL(route), data),
-    post: (route: App.Route.TypePost, data?: RequestPayload) => irouter.post(convertURL(route), data),
-    patch: (route: App.Route.TypePatch, data?: RequestPayload) => irouter.patch(convertURL(route), data),
-    put: (route: App.Route.TypePut, data?: RequestPayload) => irouter.put(convertURL(route), data),
-    delete: (route: App.Route.TypeDelete) => irouter.delete(convertURL(route)),
+    get(name: App.Route.Name): Promise<void> {
+      return Router.make().get(name)
+    },
+    post(name: App.Route.Name, data?: RequestPayload): Promise<void> {
+      return Router.make().post(name, data)
+    },
+    put(name: App.Route.Name, data?: RequestPayload): Promise<void> {
+      return Router.make().put(name, data)
+    },
+    patch(name: App.Route.Name, data?: RequestPayload): Promise<void> {
+      return Router.make().patch(name, data)
+    },
+    delete(name: App.Route.Name): Promise<void> {
+      return Router.make().delete(name)
+    },
   }
 
   const page = usePage<Inertia.PageProps>()
 
-  const isRoute = (route: App.Route.NamePath): boolean => {
-    const currentRoute = RouteModel.routeFromUrl()
+  const isRoute = (route: App.Route.Path): boolean => {
+    const list = RouteList.make()
+    const url = list.getCurrentUrl()
+    const currentRoute = list.getRouteFromUrl(url)
+
     const current: string = route
     if (currentRoute) {
       const currentRouteName: string = currentRoute.name
@@ -36,20 +45,31 @@ export function useTypescriptable() {
     return false
   }
 
-  const currentRoute = (): App.Route.Entity | undefined => {
-    return RouteModel.routeFromUrl()
+  function isDev(): boolean {
+    return process.env.NODE_ENV === 'development'
   }
 
-  const route = (route: App.Route.Name): string => {
-    const current = RouteModel.make(route)
+  function currentRoute(): App.Route.Entity | undefined {
+    const url = list.getCurrentUrl()
+    return list.getRouteFromUrl(url)
+  }
+
+  function route(route: App.Route.Name): string | undefined {
+    const current = list.getRoute(route)
+    if (!current) {
+      console.error(`Route ${route} not found`)
+      return undefined
+    }
+
     return current.path
   }
 
   return {
     router,
-    route,
     isRoute,
-    currentRoute,
     page,
+    isDev,
+    currentRoute,
+    route,
   }
 }

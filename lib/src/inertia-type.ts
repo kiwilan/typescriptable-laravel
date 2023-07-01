@@ -4,17 +4,17 @@ import type { ViteTypescriptableOptions } from './vite-plugin'
 export class InertiaType {
   static make(opts: ViteTypescriptableOptions) {
     const self = new InertiaType()
-    const basePath = opts.inertia?.basePath || 'resources/js'
-    const inertiaTypeFile = opts.inertia?.pageType || 'types-inertia.d.ts'
-    const inertiaGlobalTypeFile = opts.inertia?.globalType || 'types-inertia-global.d.ts'
+    const basePath = opts.inertiaPaths?.base || 'resources/js'
+    const inertiaTypeFile = opts.inertiaPaths?.pageType || 'types-inertia.d.ts'
+    const inertiaGlobalTypeFile = opts.inertiaPaths?.globalType || 'types-inertia-global.d.ts'
 
-    if (opts.inertia?.pageType) {
+    if (inertiaTypeFile) {
       self.setFile(`${basePath}/${inertiaTypeFile}`, self.setPageType())
       // eslint-disable-next-line no-console
       console.log('Inertia types ready!')
     }
 
-    if (opts.inertia?.globalType) {
+    if (inertiaGlobalTypeFile) {
       self.setFile(`${basePath}/${inertiaGlobalTypeFile}`, self.setGlobalType())
       // eslint-disable-next-line no-console
       console.log('Inertia global types ready!')

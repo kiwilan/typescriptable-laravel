@@ -6,17 +6,13 @@ const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
   models: true,
   settings: false,
   routes: false,
-  inertia: {
-    basePath: 'resources/js',
+  inertia: true,
+  inertiaPaths: {
+    base: 'resources/js',
     pageType: 'types-inertia.d.ts',
     globalType: 'types-inertia-global.d.ts',
   },
-  autoreload: {
-    models: true,
-    settings: false,
-    controllers: true,
-    routes: true,
-  },
+  autoreload: true,
 }
 
 async function command(command: string) {
@@ -55,19 +51,26 @@ function ViteTypescriptable(userOptions: ViteTypescriptableOptions = {}): Plugin
 
       if (opts.inertia)
         InertiaType.make(opts)
-        // command('php artisan typescriptable:inertia')
     },
-    handleHotUpdate({ file, server }) {
+    async handleHotUpdate({ file, server }) {
       const opts = Object.assign({}, DEFAULT_OPTIONS, userOptions)
+
       if (opts.autoreload) {
-        if (opts.autoreload.models && file.endsWith('app/Models/*.php'))
-          server.restart()
-        if (opts.autoreload.settings && file.endsWith('app/Settings/*.php'))
-          server.restart()
-        if (opts.autoreload.controllers && file.endsWith('app/Http/Controllers/**/*.php'))
-          server.restart()
-        if (opts.autoreload.routes && file.endsWith('routes/**/*.php'))
-          server.restart()
+        const patterns = [
+          /^app\/Models\/[^\/]+\.php$/,
+          /^app\/Settings\/[^\/]+\.php$/,
+          /^app\/Http\/Controllers\/[^\/]+\.php$/,
+          /^routes\/[^\/]+\.php$/,
+        ]
+
+        const root = process.cwd()
+        file = file.replace(root, '')
+        file = file.substring(1)
+
+        for (const pattern of patterns) {
+          if (pattern.test(file))
+            server.restart()
+        }
       }
     },
   }

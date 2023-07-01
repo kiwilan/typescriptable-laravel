@@ -20,12 +20,18 @@ export interface ViteTypescriptableOptions {
   /**
    * Enable types for Inertia.
    *
+   * @default true
+   */
+  inertia?: boolean
+  /**
+   * Update paths for Inertia's types.
+   *
    * You have to install Vue plugin to use this.
    *
    * ```ts
-   * import { InertiaTyped } from '@kiwilan/typescriptable-laravel'
+   * import { VueTypescriptable } from '@kiwilan/typescriptable-laravel'
    *
-   * app.use(InertiaTyped)
+   * app.use(VueTypescriptable)
    * ```
    *
    * @default {
@@ -34,27 +40,17 @@ export interface ViteTypescriptableOptions {
    *   globalType: 'types-inertia-global.d.ts',
    * }
    */
-  inertia?: {
-    basePath?: string
-    pageType?: string | false
-    globalType?: string | false
+  inertiaPaths?: {
+    base?: string
+    pageType?: string
+    globalType?: string
   }
   /**
    * Enable Vite autoreload on PHP files changes.
    *
-   * @default {
-   *  models: true,
-   *  settings: false,
-   *  controllers: true,
-   *  routes: true,
-   * }
+   * @default true
    */
-  autoreload?: {
-    models?: boolean
-    settings?: boolean
-    controllers?: boolean
-    routes?: boolean
-  } | false
+  autoreload?: boolean
 }
 
 export type Route = App.Route.Name

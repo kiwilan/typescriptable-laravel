@@ -6,9 +6,9 @@ export const VueTypescriptable: Plugin = {
   install: (app) => {
     const inertia = useTypescriptable()
 
-    app.config.globalProperties.$route = inertia.route
-    app.config.globalProperties.$isRoute = inertia.isRoute
-    app.config.globalProperties.$currentRoute = inertia.currentRoute
+    app.config.globalProperties.$route = inertia.route as any
+    app.config.globalProperties.$isRoute = inertia.isRoute as any
+    app.config.globalProperties.$currentRoute = inertia.currentRoute as any
 
     app.provide('inertia', {
       route: app.config.globalProperties.$route,
