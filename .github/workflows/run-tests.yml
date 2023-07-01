@@ -29,14 +29,13 @@ jobs:
         ports:
           - 5432:5432
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
-      sqlserver:
+      mssql:
         image: mcr.microsoft.com/mssql/server:2022-latest
         env:
           ACCEPT_EULA: Y
           MSSQL_SA_PASSWORD: 12345OHdf%e
         ports:
           - 1433:1433
-        options: --health-cmd="/opt/mssql-tools/bin/sqlcmd -U sa -P root -Q 'SELECT 1'" --health-interval=10s --health-timeout=5s --health-retries=3
 
     name: P${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
