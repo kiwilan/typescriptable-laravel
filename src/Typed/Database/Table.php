@@ -42,7 +42,7 @@ class Table
             'mysql' => fn ($column) => MysqlColumn::make($column, $this->name, $this->driver),
             'pgsql' => fn ($column) => PostgreColumn::make($column, $this->name, $this->driver),
             'sqlite' => fn ($column) => SqliteColumn::make($column, $this->name, $this->driver),
-            'sqlsrv' => fn ($column) => null,
+            'sqlsrv' => fn ($column) => SqlServerColumn::make($column, $this->name, $this->driver),
             default => null,
         };
 

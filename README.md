@@ -25,7 +25,7 @@ The package [ziggy](https://github.com/tighten/ziggy) is **NOT REQUIRED** to use
 |   MySQL    |    ✅     |
 | PostgreSQL |    ✅     |
 |   SQLite   |    ✅     |
-| SQL Server |    ❌     |
+| SQL Server |    ✅     |
 
 ## Installation
 

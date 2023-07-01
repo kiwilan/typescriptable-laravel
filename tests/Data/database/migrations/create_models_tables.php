@@ -108,7 +108,7 @@ return new class extends Migration
             $table->foreignId('comment_id')
                 ->nullable()
                 ->constrained()
-                ->cascadeOnDelete();
+                ->onDelete('no action');
 
             $table->morphs('commentable');
 

@@ -9,12 +9,9 @@ use Illuminate\Support\Facades\Schema;
 use Kiwilan\Typescriptable\TypescriptableServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use PDO;
-use stdClass;
 
 class TestCase extends Orchestra
 {
-    // protected static PDO $pdo;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -24,50 +21,67 @@ class TestCase extends Orchestra
         );
     }
 
-    // public static function setUpBeforeClass(): void
-    // {
-    //     $database = self::getDatabase();
+    public static function pdo(Driver $driver): PDO
+    {
+        if (! $driver->name) {
+            throw new \Exception('No database driver specified.');
+        }
 
-    //     $dsn = "{$database['driver']}:host={$database['host']};port={$database['port']};dbname={$database['database']}";
+        $dsn = "{$driver->name}:host={$driver->host};port={$driver->port};dbname={$driver->database}";
 
-    //     self::$pdo = new PDO($dsn, $database['user'], $database['password']);
-    // }
+        if ($driver->name === 'sqlsrv') {
+            $pdo = new PDO("sqlsrv:Server={$driver->host},{$driver->port};Database={$driver->database}", $driver->user, $driver->password);
+        } else {
+            $pdo = new PDO($dsn, $driver->user, $driver->password);
+        }
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        return $pdo;
+    }
 
     /**
      * Get the database connection.
-     *
-     * @return object `{ driver: string, host: string, port: string, url: string, database: string, user: string, password: string }`
      */
-    private static function getDatabase(?string $driver = null): object
+    private static function getDriver(?string $type = null): Driver
     {
-        $database = new stdClass();
+        $driver = new Driver();
 
         $dotenv = Dotenv::createMutable(getcwd());
         $data = $dotenv->load();
 
-        if ($driver) {
-            $database->driver = strtolower($driver);
+        if ($type) {
+            $driver->name = strtolower($type);
         } else {
-            $database->driver = $data['DB_CONNECTION'] ? $data['DB_CONNECTION'] : getenv('DB_CONNECTION');
+            $driver->name = $data['DB_CONNECTION'] ? $data['DB_CONNECTION'] : getenv('DB_CONNECTION');
         }
 
-        if (! $database->driver) {
+        if (! $driver->name) {
             throw new \Exception('No database driver specified.');
         }
-        $connection = strtoupper($database->driver);
+        $connection = strtoupper($driver->name);
 
-        $database->host = $data["DB_{$connection}_HOST"] ? $data["DB_{$connection}_HOST"] : getenv("DB_{$connection}_HOST");
-        $database->port = $data["DB_{$connection}_PORT"] ? $data["DB_{$connection}_PORT"] : getenv("DB_{$connection}_PORT");
-        $database->user = $data["DB_{$connection}_USER"] ? $data["DB_{$connection}_USER"] : getenv("DB_{$connection}_USER");
-        $database->password = $data["DB_{$connection}_PASSWORD"] ? $data["DB_{$connection}_PASSWORD"] : getenv("DB_{$connection}_PASSWORD");
-        $database->database = $data["DB_{$connection}_DATABASE"] ? $data["DB_{$connection}_DATABASE"] : getenv("DB_{$connection}_DATABASE");
+        $host = "DB_{$connection}_HOST";
+        $port = "DB_{$connection}_PORT";
+        $user = "DB_{$connection}_USER";
+        $password = "DB_{$connection}_PASSWORD";
+        $databaseName = "DB_{$connection}_DATABASE";
 
-        $database->url = null;
-        if ($database->host && $database->user && $database->port) {
-            $database->url = "{$database->driver}://{$database->user}:{$database->password}@{$database->host}:{$database->port}/";
+        $driver->host = $data[$host] ? $data[$host] : getenv($host);
+        $driver->port = $data[$port] ? $data[$port] : getenv($port);
+        $driver->user = $data[$user] ? $data[$user] : getenv($user);
+        $driver->password = $data[$password] ? $data[$password] : getenv($password);
+        $driver->database = $data[$databaseName] ? $data[$databaseName] : getenv($databaseName);
+
+        $driver->url = null;
+        if ($driver->host && $driver->user && $driver->port) {
+            if ($driver->name === 'sqlsrv') {
+                $driver->url = "sqlsrv:Server={$driver->host},{$driver->port};Database={$driver->database}";
+            } else {
+                $driver->url = "{$driver->name}://{$driver->user}:{$driver->password}@{$driver->host}:{$driver->port}/";
+            }
         }
 
-        return $database;
+        return $driver;
     }
 
     protected function getPackageProviders($app)
@@ -82,9 +96,13 @@ class TestCase extends Orchestra
         self::setupDatabase();
     }
 
-    public static function setupDatabase(?string $driver = null): void
+    public static function setupDatabase(?string $type = null): void
     {
-        $database = self::getDatabase($driver);
+        if (! $type) {
+            return;
+        }
+
+        $driver = self::getDriver($type);
 
         $configs = [
             'sqlite' => [
@@ -118,23 +136,62 @@ class TestCase extends Orchestra
             ],
         ];
 
-        config()->set('database.default', $database->driver);
-        config()->set("database.connections.{$database->driver}", [
-            'driver' => $database->driver,
-            'database' => $database->database,
-            'url' => $database->url,
-            'host' => $database->host,
-            'port' => $database->port,
-            'database' => $database->database,
-            'username' => $database->user,
-            'password' => $database->password,
-            ...$configs[$database->driver],
+        config()->set('database.default', $driver->name);
+        config()->set("database.connections.{$driver->name}", [
+            'driver' => $driver->name,
+            'database' => $driver->database,
+            'url' => $driver->url,
+            'host' => $driver->host,
+            'port' => $driver->port,
+            'database' => $driver->database,
+            'username' => $driver->user,
+            'password' => $driver->password,
+            ...$configs[$driver->name],
         ]);
 
-        Schema::dropIfExists($database->database);
-        Schema::dropAllTables($database->database);
+        if ($driver->name === 'sqlsrv') {
+            $pdo = new PDO("sqlsrv:Server=$driver->host,$driver->port", $driver->user, $driver->password);
+            $database = $driver->database;
+            $pdo->exec("IF EXISTS(SELECT * FROM sys.databases WHERE name='$database') DROP DATABASE $database");
+            $pdo->exec("CREATE DATABASE $database");
+        } else {
+            Schema::dropIfExists($driver->database);
+            Schema::dropAllTables($driver->database);
+        }
 
         $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
         $migration->up();
+    }
+}
+
+class Driver
+{
+    public const SQLITE = 'sqlite';
+
+    public const MYSQL = 'mysql';
+
+    public const PGSQL = 'pgsql';
+
+    public const SQLSRV = 'sqlsrv';
+
+    public function __construct(
+        public ?string $name = null,
+        public ?string $host = null,
+        public ?string $port = null,
+        public ?string $url = null,
+        public ?string $database = null,
+        public ?string $user = null,
+        public ?string $password = null,
+    ) {
+    }
+
+    public static function all(): array
+    {
+        return [
+            self::SQLITE,
+            self::MYSQL,
+            self::PGSQL,
+            self::SQLSRV,
+        ];
     }
 }

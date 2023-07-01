@@ -42,7 +42,7 @@ class Column
             'mysql' => MysqlColumn::typeToPhp($self->typeFormat),
             'pgsql' => PostgreColumn::typeToPhp($self->typeFormat),
             'sqlite' => SqliteColumn::typeToPhp($self->typeFormat),
-            'sqlsrv' => null,
+            'sqlsrv' => SqlServerColumn::typeToPhp($self->typeFormat),
             default => null,
         };
 

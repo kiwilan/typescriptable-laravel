@@ -6,7 +6,7 @@ define('DATABASE_TYPES', [
     'mysql',
     'pgsql',
     'sqlite',
-    // 'sqlsrv',
+    'sqlsrv',
 ]);
 
 uses(TestCase::class)->in(__DIR__);
