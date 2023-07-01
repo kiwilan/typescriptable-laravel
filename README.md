@@ -18,7 +18,7 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 > **Note**
 >
 > -   [`kiwilan/typescriptable-laravel`](https://packagist.org/packages/kiwilan/typescriptable-laravel): PHP package for [Laravel](https://laravel.com/).
-> -   [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel): optional NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/) to have some helpers.
+> -   [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel): optional NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/) to have some helpers, if you want to know more about, [check documentation](https://github.com/kiwilan/typescriptable-laravel/blob/main/lib/README.md).
 
 The package [ziggy](https://github.com/tighten/ziggy) is **NOT REQUIRED** to use `kiwilan/typescriptable-laravel`.
 
@@ -185,16 +185,6 @@ php artisan typescriptable:routes
 -   Generate TS types for [Laravel route parameters](https://laravel.com/docs/9.x/routing#route-parameters)
 -   Generate TS types seperated by `methods`
 -   Helpers to use these types are included in [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/blob/main/lib/README.md) NPM package.
-
-### Inertia
-
-You can use associated NPM package [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/tree/main/lib) to use helpers with `typescriptable:models` and `typescriptable:routes` commands.
-
--   Execute automatically `typescriptable:models` and `typescriptable:routes` commands with watch mode.
--   A composable `useTypescriptable` with typed router, typed `usePage` and some helpers.
--   A Vue component `Route` with typed `to` prop.
--   A Vue plugin to inject all new features.
--   All Inertia types for `page` and global properties.
 
 ## Examples
 

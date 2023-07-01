@@ -89,7 +89,6 @@ declare namespace Inertia {
   export interface GlobalComponents {
     Head: typeof import('@inertiajs/vue3').Head,
     Link: typeof import('@inertiajs/vue3').Link,
-    Route: typeof import('@kiwilan/typescriptable-laravel/vue').TypedLink,
   }
 }
 

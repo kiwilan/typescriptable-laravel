@@ -23,7 +23,7 @@ export interface ViteTypescriptableOptions {
    * You have to install Vue plugin to use this.
    *
    * ```ts
-   * import { InertiaTyped } from '@kiwilan/typescriptable-laravel/vue'
+   * import { InertiaTyped } from '@kiwilan/typescriptable-laravel'
    *
    * app.use(InertiaTyped)
    * ```
