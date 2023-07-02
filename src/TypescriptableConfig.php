@@ -36,6 +36,11 @@ class TypescriptableConfig
         return config('typescriptable.models.directory') ?? app_path('Models');
     }
 
+    public static function modelsPhpPath(): ?string
+    {
+        return config('typescriptable.models.php_path') ?? null;
+    }
+
     public static function modelsSkip(): array
     {
         return config('typescriptable.models.skip') ?? [];

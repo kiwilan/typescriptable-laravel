@@ -8,9 +8,9 @@ use Kiwilan\Typescriptable\Typed\SettingType;
 
 class Typescriptable
 {
-    public static function models(string $modelsPath, string $outputPath): EloquentType
+    public static function models(string $modelsPath, string $outputPath, ?string $phpPath = null): EloquentType
     {
-        return EloquentType::make($modelsPath, $outputPath);
+        return EloquentType::make($modelsPath, $outputPath, $phpPath);
     }
 
     public static function routes(string $routeList, string $outputPath): RouteType

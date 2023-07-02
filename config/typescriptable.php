@@ -16,6 +16,11 @@ return [
          */
         'directory' => app_path('Models'),
         /**
+         * The path to print PHP classes if you want to convert Models to simple classes.
+         * If null will not print PHP classes.
+         */
+        'php_path' => null,
+        /**
          * Models to skip.
          */
         'skip' => [
