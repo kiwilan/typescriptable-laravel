@@ -21,18 +21,34 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 > -   [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel): optional NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/) to have some helpers, if you want to know more about, [check documentation](https://github.com/kiwilan/typescriptable-laravel/blob/main/lib/README.md).
 > -   [`ziggy`](https://github.com/tighten/ziggy) is **NOT REQUIRED**
 
-|  Database  | Supported |
-| :--------: | :-------: |
-|   MySQL    |    ✅     |
-| PostgreSQL |    ✅     |
-|   SQLite   |    ✅     |
-| SQL Server |    ✅     |
+## Features
+
+-   💽 All Laravel databases are supported: MySQL, PostgreSQL, SQLite, SQL Server
+-   💬 Generate TS types for [Eloquent models](https://laravel.com/docs/10.x/eloquent)
+-   👭 Generate TS types for [Eloquent relations](https://laravel.com/docs/10.x/eloquent-relationships)
+-   🪄 Generate TS types for `casts` (include native `enum` support)
+-   📅 Generate TS types for `dates`
+-   📝 Generate TS types for `appends` with [`accessors`](https://laravel.com/docs/10.x/eloquent-mutators#accessors-and-mutators)
+    -   Partial for `Illuminate\Database\Eloquent\Casts\Attribute`
+    -   Old way [`get*Attribute` methods](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor) are totally supported
+-   #️⃣ Generate TS types for `counts`
+-   📖 Can generate pagination TS types for [Laravel pagination](https://laravel.com/docs/10.x/pagination)
+-   💾 Can generate simple PHP classes from Eloquent models
+-   ⚙️ Generate TS types for [`spatie/laravel-settings`](https://github.com/spatie/laravel-settings)
+-   🛣 Generate TS types for [Laravel routes](https://laravel.com/docs/10.x/routing)
+    -   Scan route parameters
+    -   For Inertia, you can install [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel) NPM package to use some helpers
+-   ✅ Multiple commands to generate types
+    -   `php artisan typescriptable` for all
+    -   `php artisan typescriptable:models` for Eloquent models
+    -   `php artisan typescriptable:settings` for `spatie/laravel-settings`
+    -   `php artisan typescriptable:routes` for Laravel routes
 
 ### Roadmap
 
 -   [ ] 90% coverage
 -   [x] Generate TS types for `morphTo`
--   [ ] Use `appends` to define type for `Casts\Attribute` methods
+-   [ ] Improve `Casts\Attribute` methods
 
 ## Installation
 
@@ -54,101 +70,14 @@ You can publish the config file
 php artisan vendor:publish --tag="typescriptable-config"
 ```
 
-Update config file `config/typescriptable.php`
-
-```php
-<?php
-
-return [
-    /**
-     * The path to the output directory.
-     */
-    'output_path' => resource_path('js'),
-
-    /**
-     * Options for the models.
-     */
-    'models' => [
-        'filename' => 'types-models.d.ts',
-        /**
-         * The path to the models directory.
-         */
-        'directory' => app_path('Models'),
-        /**
-         * The path to print PHP classes if you want to convert Models to simple classes.
-         * If null will not print PHP classes.
-         */
-        'php_path' => null,
-        /**
-         * Models to skip.
-         */
-        'skip' => [
-            // 'App\\Models\\User',
-        ],
-        /**
-         * Whether to add the LaravelPaginate type (with API type and view type).
-         */
-        'paginate' => true,
-        /**
-         * Whether to add the fake Jetstream Team type to avoid errors.
-         */
-        'fake_team' => false,
-    ],
-    /**
-     * Options for the Spatie settings.
-     */
-    'settings' => [
-        'filename' => 'types-settings.d.ts',
-        /**
-         * The path to the settings directory.
-         */
-        'directory' => app_path('Settings'),
-        /**
-         * Settings to skip.
-         */
-        'skip' => [
-            // 'App\\Settings\\Home',
-        ],
-    ],
-    /**
-     * Options for the routes.
-     */
-    'routes' => [
-        'filename' => 'types-routes.d.ts',
-        'filename_list' => 'routes.ts',
-        /**
-         * Use routes `path` instead of `name` for the type name.
-         */
-        'use_path' => false,
-        /**
-         * Routes to skip.
-         */
-        'skip' => [
-            'name' => [
-                'debugbar.*',
-                'horizon.*',
-                'telescope.*',
-                'nova.*',
-                'lighthouse.*',
-                'livewire.*',
-                'ignition.*',
-                'filament.*',
-            ],
-            'path' => [
-                'api/*',
-            ],
-        ],
-    ],
-];
-```
-
 ## Usage
 
 ```bash
 php artisan typescriptable
 ```
 
--   --`A`|`all`: Generate all types.
+With options:
+
 -   --`M`|`models`: Generate Models types.
 -   --`R`|`routes`: Generate Routes types.
 -   --`S`|`settings`: Generate Settings types.
@@ -161,23 +90,24 @@ Generate `resources/js/types-models.d.ts` file with all models types.
 php artisan typescriptable:models
 ```
 
--   Generate TS types for [Eloquent models](https://laravel.com/docs/10.x/eloquent)
--   Generate TS types for [Eloquent relations](https://laravel.com/docs/10.x/eloquent-relationships) (except `morphTo`)
--   Generate TS types for `casts` (include native `enum` support)
--   Generate TS types for `dates`
--   Generate TS types for `appends` (partial for [`Casts\Attribute`](https://laravel.com/docs/10.x/eloquent-mutators#defining-an-accessor), you can use old way to define `get*Attribute` methods)
--   Generate TS types `counts`
--   Generate pagination TS types for [Laravel pagination](https://laravel.com/docs/10.x/pagination) with option `paginate`
+With options:
+
+-   --`M`|`models-path`: Path to models directory.
+-   --`O`|`output-path`: Path to output.
+-   --`P`|`php-path`: Path to output PHP classes, if null wll not print PHP classes.
 
 ### Spatie Settings
 
 If you use [`spatie/laravel-settings`](https://github.com/spatie/laravel-settings), you can generate `resources/js/types-settings.d.ts` file with all settings types.
 
--   Generate TS types for Settings from PHP classes
-
 ```bash
 php artisan typescriptable:settings
 ```
+
+With options:
+
+-   --`S`|`settings-path`: Path to settings directory.
+-   --`O`|`output-path`: Path to output.
 
 ### Routes
 
@@ -187,137 +117,12 @@ Generate `resources/js/types-routes.d.ts` file with all routes types and `resour
 php artisan typescriptable:routes
 ```
 
--   Generate TS types for [Laravel routes](https://laravel.com/docs/9.x/routing)
--   Generate TS types for [Laravel route parameters](https://laravel.com/docs/9.x/routing#route-parameters)
--   Generate TS types seperated by `methods`
--   Helpers to use these types are included in [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/blob/main/lib/README.md) NPM package.
+With options:
+
+-   --`R`|`routes-path`: Path to routes directory.
+-   --`O`|`output-path`: Path to output.
 
 ## Examples
-
-### Eloquent Models
-
-An example of Eloquent model.
-
-```php
-<?php
-
-namespace App\Models;
-
-use Kiwilan\Steward\Enums\PublishStatusEnum;
-
-class Story extends Model
-{
-    use HasFactory;
-
-    protected $fillable = [
-        'title',
-        'slug',
-        'abstract',
-        'original_link',
-        'picture',
-        'status',
-        'published_at',
-        'meta_title',
-        'meta_description',
-    ];
-
-    protected $appends = [
-        'time_to_read',
-    ];
-
-    protected $withCount = [
-        'chapters',
-    ];
-
-    protected $casts = [
-        'status' => PublishStatusEnum::class,
-        'published_at' => 'datetime:Y-m-d',
-    ];
-
-    public function getTimeToReadAttribute(): int
-
-    public function chapters(): HasMany
-
-    public function category(): BelongsTo
-
-    public function author(): BelongsTo
-
-    public function tags(): BelongsToMany
-}
-```
-
-TS file generated at `resources/js/types-models.d.ts`
-
-```typescript
-declare namespace App {
-    declare namespace Models {
-        export type Story = {
-            id: number;
-            title: string;
-            slug?: string;
-            abstract?: string;
-            original_link?: string;
-            picture?: string;
-            status: "draft" | "scheduled" | "published";
-            published_at?: Date;
-            meta_title?: string;
-            meta_description?: string;
-            created_at?: Date;
-            updated_at?: Date;
-            author_id?: number;
-            category_id?: number;
-            time_to_read?: number;
-            chapters?: Chapter[];
-            category?: Category;
-            author?: Author;
-            tags?: Tag[];
-            chapters_count?: number;
-            tags_count?: number;
-        };
-    }
-    // With `paginate` option.
-    export type PaginateLink = {
-        url: string;
-        label: string;
-        active: boolean;
-    };
-    export type Paginate<T = any> = {
-        data: T[];
-        current_page: number;
-        first_page_url: string;
-        from: number;
-        last_page: number;
-        last_page_url: string;
-        links: App.PaginateLink[];
-        next_page_url: string;
-        path: string;
-        per_page: number;
-        prev_page_url: string;
-        to: number;
-        total: number;
-    };
-}
-```
-
-Usage in Vue component.
-
-```vue
-<script lang="ts" setup>
-defineProps<{
-    story?: App.Models.Story;
-}>();
-</script>
-```
-
-Or with paginate option.
-
-```vue
-<script lang="ts" setup>
-defineProps<{
-    stories?: App.Paginate<App.Models.Story>;
-}>();
-</script>
-```
 
 ## Testing
 
