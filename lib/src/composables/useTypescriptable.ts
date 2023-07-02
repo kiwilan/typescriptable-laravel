@@ -6,19 +6,19 @@ export function useTypescriptable() {
   const list = RouteList.make()
 
   const router = {
-    get(name: App.Route.Name): Promise<void> {
+    get(name: App.Route.Name): void {
       return Router.make().get(name)
     },
-    post(name: App.Route.Name, data?: RequestPayload): Promise<void> {
+    post(name: App.Route.Name, data?: RequestPayload): void {
       return Router.make().post(name, data)
     },
-    put(name: App.Route.Name, data?: RequestPayload): Promise<void> {
+    put(name: App.Route.Name, data?: RequestPayload): void {
       return Router.make().put(name, data)
     },
-    patch(name: App.Route.Name, data?: RequestPayload): Promise<void> {
+    patch(name: App.Route.Name, data?: RequestPayload): void {
       return Router.make().patch(name, data)
     },
-    delete(name: App.Route.Name): Promise<void> {
+    delete(name: App.Route.Name): void {
       return Router.make().delete(name)
     },
   }
@@ -54,12 +54,10 @@ export function useTypescriptable() {
     return list.getRouteFromUrl(url)
   }
 
-  function route(route: App.Route.Name): string | undefined {
+  function route(route: App.Route.Name): string {
     const current = list.getRoute(route)
-    if (!current) {
-      console.error(`Route ${route} not found`)
-      return undefined
-    }
+    if (!current)
+      throw new Error(`Route ${route} not found`)
 
     return current.path
   }
