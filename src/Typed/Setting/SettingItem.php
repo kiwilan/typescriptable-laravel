@@ -10,7 +10,7 @@ use ReflectionProperty;
 class SettingItem
 {
     /**
-     * @property SettingItemProperty[] $properties
+     * @param  SettingItemProperty[]  $properties
      */
     protected function __construct(
         public ClassItem $class,

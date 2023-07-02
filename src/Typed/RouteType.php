@@ -33,9 +33,21 @@ class RouteType
             $fileRoutes = TypescriptableConfig::setPath($filenameRoutes);
         }
 
-        File::put($file, $tsTypeRoute);
-        File::put($fileRoutes, $tsRoute);
+        $self = new self($file, $fileRoutes);
+        $self->print($file, $tsTypeRoute);
+        $self->print($fileRoutes, $tsRoute);
 
-        return new self($file, $fileRoutes);
+        return $self;
+    }
+
+    private function print(string $path, string $content): void
+    {
+        if (! File::exists(dirname($path))) {
+            File::makeDirectory(dirname($path));
+        }
+
+        File::delete($path);
+
+        File::put($path, $content);
     }
 }

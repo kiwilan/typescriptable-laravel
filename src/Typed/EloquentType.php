@@ -11,17 +11,12 @@ use Kiwilan\Typescriptable\Typed\Utils\ClassItem;
 use Kiwilan\Typescriptable\Typed\Utils\LaravelTeamType;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
-/**
- * @property ClassItem[] $items
- * @property array<string, EloquentProperty[]> $eloquents
- * @property array<string, array<string, array<string, string>>> $list
- */
 class EloquentType
 {
     /**
-     * @property ClassItem[] $items
-     * @property array<string, EloquentProperty[]> $eloquents
-     * @property array<string, array<string, array<string, string>>> $list
+     * @param  ClassItem[]  $items
+     * @param  array<string, EloquentProperty[]>  $eloquents
+     * @param  array<string, array<string, array<string, string>>>  $list
      */
     protected function __construct(
         protected string $modelsPath,
@@ -32,7 +27,7 @@ class EloquentType
     ) {
     }
 
-    public static function make(?string $modelsPath, ?string $outputPath, ?string $phpPath = null): self
+    public static function make(?string $modelsPath, ?string $outputPath, ?string $phpPath = null, bool $delete = true): self
     {
         if (! $modelsPath) {
             $modelsPath = TypescriptableConfig::modelsDirectory();
@@ -53,11 +48,11 @@ class EloquentType
         $self->eloquents = $self->setEloquents();
 
         $typescript = EloquentTypescript::make($self->eloquents, "{$outputPath}/{$tsFilename}");
-        $typescript->print();
+        $typescript->print($delete);
 
         if ($phpPath) {
             $php = EloquentPhp::make($self->eloquents, $phpPath);
-            $php->print();
+            $php->print($delete);
         }
 
         // if (TypescriptableConfig::modelsFakeTeam()) {

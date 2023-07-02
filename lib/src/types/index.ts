@@ -1,3 +1,5 @@
+import type { InertiaForm } from '@inertiajs/vue3'
+
 export interface ViteTypescriptableOptions {
   /**
    * Enable types for Eloquent models.
@@ -55,4 +57,4 @@ export interface ViteTypescriptableOptions {
 
 export type Route = App.Route.Name
 export type RouteParam = App.Route.Params[App.Route.Name]
-export type RequestPayload = Record<string, any>
+export type RequestPayload = Record<string, any> | InertiaForm<any>

@@ -1,2457 +1,1241 @@
-[
-  {
-    "uri": "filament/assets/{file}",
+{
+  "api/user": {
+    "name": null,
     "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages"
-      ],
-      "uses": "Filament\\Http\\Controllers\\AssetController@__invoke",
-      "controller": "Filament\\Http\\Controllers\\AssetController",
-      "as": "filament.asset",
-      "namespace": null,
-      "prefix": "/filament",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": {
-      "file": ".*"
-    },
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "filament/logout",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages"
-      ],
-      "uses": {},
-      "as": "filament.auth.logout",
-      "namespace": null,
-      "prefix": "/filament",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/login",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages"
-      ],
-      "uses": "App\\Filament\\Pages\\Auth\\Login@__invoke",
-      "controller": "App\\Filament\\Pages\\Auth\\Login",
-      "as": "filament.auth.login",
-      "namespace": null,
-      "prefix": "/admin",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "Filament\\Pages\\Dashboard@__invoke",
-      "controller": "Filament\\Pages\\Dashboard",
-      "as": "filament.pages.dashboard",
-      "namespace": null,
-      "prefix": "/admin",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/authors",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\AuthorResource\\Pages\\ListAuthors@__invoke",
-      "controller": "App\\Filament\\Resources\\AuthorResource\\Pages\\ListAuthors",
-      "as": "filament.resources.authors.index",
-      "namespace": null,
-      "prefix": "admin/authors",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/authors/create",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\AuthorResource\\Pages\\CreateAuthor@__invoke",
-      "controller": "App\\Filament\\Resources\\AuthorResource\\Pages\\CreateAuthor",
-      "as": "filament.resources.authors.create",
-      "namespace": null,
-      "prefix": "admin/authors",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/authors/{record}/edit",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\AuthorResource\\Pages\\EditAuthor@__invoke",
-      "controller": "App\\Filament\\Resources\\AuthorResource\\Pages\\EditAuthor",
-      "as": "filament.resources.authors.edit",
-      "namespace": null,
-      "prefix": "admin/authors",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/categories",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\CategoryResource\\Pages\\ListCategories@__invoke",
-      "controller": "App\\Filament\\Resources\\CategoryResource\\Pages\\ListCategories",
-      "as": "filament.resources.categories.index",
-      "namespace": null,
-      "prefix": "admin/categories",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/categories/create",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\CategoryResource\\Pages\\CreateCategory@__invoke",
-      "controller": "App\\Filament\\Resources\\CategoryResource\\Pages\\CreateCategory",
-      "as": "filament.resources.categories.create",
-      "namespace": null,
-      "prefix": "admin/categories",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/categories/{record}/edit",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\CategoryResource\\Pages\\EditCategory@__invoke",
-      "controller": "App\\Filament\\Resources\\CategoryResource\\Pages\\EditCategory",
-      "as": "filament.resources.categories.edit",
-      "namespace": null,
-      "prefix": "admin/categories",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/stories",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\StoryResource\\Pages\\ListStories@__invoke",
-      "controller": "App\\Filament\\Resources\\StoryResource\\Pages\\ListStories",
-      "as": "filament.resources.stories.index",
-      "namespace": null,
-      "prefix": "admin/stories",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/stories/create",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\StoryResource\\Pages\\CreateStory@__invoke",
-      "controller": "App\\Filament\\Resources\\StoryResource\\Pages\\CreateStory",
-      "as": "filament.resources.stories.create",
-      "namespace": null,
-      "prefix": "admin/stories",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/stories/{record}/edit",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\StoryResource\\Pages\\EditStory@__invoke",
-      "controller": "App\\Filament\\Resources\\StoryResource\\Pages\\EditStory",
-      "as": "filament.resources.stories.edit",
-      "namespace": null,
-      "prefix": "admin/stories",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/tags",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\TagResource\\Pages\\ListTags@__invoke",
-      "controller": "App\\Filament\\Resources\\TagResource\\Pages\\ListTags",
-      "as": "filament.resources.tags.index",
-      "namespace": null,
-      "prefix": "admin/tags",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/tags/create",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\TagResource\\Pages\\CreateTag@__invoke",
-      "controller": "App\\Filament\\Resources\\TagResource\\Pages\\CreateTag",
-      "as": "filament.resources.tags.create",
-      "namespace": null,
-      "prefix": "admin/tags",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "admin/tags/{record}/edit",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-        "Illuminate\\Session\\Middleware\\StartSession",
-        "Illuminate\\Session\\Middleware\\AuthenticateSession",
-        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-        "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-        "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-        "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-        "Filament\\Http\\Middleware\\Authenticate"
-      ],
-      "uses": "App\\Filament\\Resources\\TagResource\\Pages\\EditTag@__invoke",
-      "controller": "App\\Filament\\Resources\\TagResource\\Pages\\EditTag",
-      "as": "filament.resources.tags.edit",
-      "namespace": null,
-      "prefix": "admin/tags",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "_tt/assets/base.js",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "middleware": ["web"],
-      "uses": "Fruitcake\\TelescopeToolbar\\Http\\Controllers\\ToolbarController@baseJs",
-      "controller": "Fruitcake\\TelescopeToolbar\\Http\\Controllers\\ToolbarController@baseJs",
-      "namespace": "Fruitcake\\TelescopeToolbar\\Http\\Controllers",
-      "prefix": "_tt/assets",
-      "where": [],
-      "as": "telescope-toolbar.baseJs"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "_tt/assets/styling.css",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "middleware": ["web"],
-      "uses": "Fruitcake\\TelescopeToolbar\\Http\\Controllers\\ToolbarController@styling",
-      "controller": "Fruitcake\\TelescopeToolbar\\Http\\Controllers\\ToolbarController@styling",
-      "namespace": "Fruitcake\\TelescopeToolbar\\Http\\Controllers",
-      "prefix": "_tt/assets",
-      "where": [],
-      "as": "telescope-toolbar.styling"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "_tt/render/{token}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "middleware": ["telescope"],
-      "uses": "Fruitcake\\TelescopeToolbar\\Http\\Controllers\\ToolbarController@render",
-      "controller": "Fruitcake\\TelescopeToolbar\\Http\\Controllers\\ToolbarController@render",
-      "namespace": "Fruitcake\\TelescopeToolbar\\Http\\Controllers",
-      "prefix": "_tt",
-      "where": [],
-      "as": "telescope-toolbar.render"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "_tt/show/{token}/{tab?}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "middleware": ["telescope"],
-      "uses": "Fruitcake\\TelescopeToolbar\\Http\\Controllers\\ToolbarController@show",
-      "controller": "Fruitcake\\TelescopeToolbar\\Http\\Controllers\\ToolbarController@show",
-      "namespace": "Fruitcake\\TelescopeToolbar\\Http\\Controllers",
-      "prefix": "_tt",
-      "where": [],
-      "as": "telescope-toolbar.show"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "login",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "guest:web"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@create",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@create",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "login"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "login",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "guest:web", "throttle:login"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@store",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@store",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "logout",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": ["web"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@destroy",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@destroy",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "logout"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/profile-information",
-    "methods": ["PUT"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\ProfileInformationController@update",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\ProfileInformationController@update",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "user-profile-information.update"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/password",
-    "methods": ["PUT"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\PasswordController@update",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\PasswordController@update",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "user-password.update"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/confirm-password",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\ConfirmablePasswordController@show",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\ConfirmablePasswordController@show",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/confirmed-password-status",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\ConfirmedPasswordStatusController@show",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\ConfirmedPasswordStatusController@show",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "password.confirmation"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/confirm-password",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\ConfirmablePasswordController@store",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\ConfirmablePasswordController@store",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "password.confirm"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "two-factor-challenge",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "guest:web"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticatedSessionController@create",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticatedSessionController@create",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "two-factor.login"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "two-factor-challenge",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "guest:web", "throttle:two-factor"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticatedSessionController@store",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticatedSessionController@store",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/two-factor-authentication",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web", "password.confirm"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticationController@store",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticationController@store",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "two-factor.enable"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/confirmed-two-factor-authentication",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web", "password.confirm"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\ConfirmedTwoFactorAuthenticationController@store",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\ConfirmedTwoFactorAuthenticationController@store",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "two-factor.confirm"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/two-factor-authentication",
-    "methods": ["DELETE"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web", "password.confirm"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticationController@destroy",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticationController@destroy",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "two-factor.disable"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/two-factor-qr-code",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web", "password.confirm"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorQrCodeController@show",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorQrCodeController@show",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "two-factor.qr-code"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/two-factor-secret-key",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web", "password.confirm"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorSecretKeyController@show",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorSecretKeyController@show",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "two-factor.secret-key"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/two-factor-recovery-codes",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web", "password.confirm"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\RecoveryCodeController@index",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\RecoveryCodeController@index",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "two-factor.recovery-codes"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/two-factor-recovery-codes",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": ["web", "auth:web", "password.confirm"],
-      "uses": "Laravel\\Fortify\\Http\\Controllers\\RecoveryCodeController@store",
-      "controller": "Laravel\\Fortify\\Http\\Controllers\\RecoveryCodeController@store",
-      "namespace": "Laravel\\Fortify\\Http\\Controllers",
-      "prefix": "",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "terms-of-service",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": ["web"],
-      "uses": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\TermsOfServiceController@show",
-      "controller": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\TermsOfServiceController@show",
-      "namespace": "Laravel\\Jetstream\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "terms.show"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "privacy-policy",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": ["web"],
-      "uses": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\PrivacyPolicyController@show",
-      "controller": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\PrivacyPolicyController@show",
-      "namespace": "Laravel\\Jetstream\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "policy.show"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/profile",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
-      ],
-      "uses": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\UserProfileController@show",
-      "controller": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\UserProfileController@show",
-      "namespace": "Laravel\\Jetstream\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "profile.show"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/other-browser-sessions",
-    "methods": ["DELETE"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
-      ],
-      "uses": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\OtherBrowserSessionsController@destroy",
-      "controller": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\OtherBrowserSessionsController@destroy",
-      "namespace": "Laravel\\Jetstream\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "other-browser-sessions.destroy"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user/profile-photo",
-    "methods": ["DELETE"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
-      ],
-      "uses": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\ProfilePhotoController@destroy",
-      "controller": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\ProfilePhotoController@destroy",
-      "namespace": "Laravel\\Jetstream\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "current-user-photo.destroy"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "user",
-    "methods": ["DELETE"],
-    "action": {
-      "domain": null,
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
-      ],
-      "uses": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\CurrentUserController@destroy",
-      "controller": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\CurrentUserController@destroy",
-      "namespace": "Laravel\\Jetstream\\Http\\Controllers",
-      "prefix": "",
-      "where": [],
-      "as": "current-user.destroy"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "sanctum/csrf-cookie",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "uses": "Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController@show",
-      "controller": "Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController@show",
-      "namespace": null,
-      "prefix": "sanctum",
-      "where": [],
-      "middleware": ["web"],
-      "as": "sanctum.csrf-cookie"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "livewire/message/{name}",
-    "methods": ["POST"],
-    "action": {
-      "uses": "Livewire\\Controllers\\HttpConnectionHandler@__invoke",
-      "controller": "Livewire\\Controllers\\HttpConnectionHandler",
-      "as": "livewire.message",
-      "middleware": ["web"]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "{locale}/livewire/message/{name}",
-    "methods": ["POST"],
-    "action": {
-      "uses": "Livewire\\Controllers\\HttpConnectionHandler@__invoke",
-      "controller": "Livewire\\Controllers\\HttpConnectionHandler",
-      "as": "livewire.message-localized",
-      "middleware": ["web"]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "livewire/upload-file",
-    "methods": ["POST"],
-    "action": {
-      "uses": "Livewire\\Controllers\\FileUploadHandler@handle",
-      "controller": "Livewire\\Controllers\\FileUploadHandler@handle",
-      "as": "livewire.upload-file",
-      "middleware": ["web"]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "livewire/preview-file/{filename}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "uses": "Livewire\\Controllers\\FilePreviewHandler@handle",
-      "controller": "Livewire\\Controllers\\FilePreviewHandler@handle",
-      "as": "livewire.preview-file",
-      "middleware": ["web"]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "livewire/livewire.js",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "uses": "Livewire\\Controllers\\LivewireJavaScriptAssets@source",
-      "controller": "Livewire\\Controllers\\LivewireJavaScriptAssets@source"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "livewire/livewire.js.map",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "uses": "Livewire\\Controllers\\LivewireJavaScriptAssets@maps",
-      "controller": "Livewire\\Controllers\\LivewireJavaScriptAssets@maps"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "_ignition/health-check",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "middleware": [
-        "Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"
-      ],
-      "uses": "Spatie\\LaravelIgnition\\Http\\Controllers\\HealthCheckController@__invoke",
-      "controller": "Spatie\\LaravelIgnition\\Http\\Controllers\\HealthCheckController",
-      "as": "ignition.healthCheck",
-      "namespace": null,
-      "prefix": "_ignition",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "_ignition/execute-solution",
-    "methods": ["POST"],
-    "action": {
-      "middleware": [
-        "Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"
-      ],
-      "uses": "Spatie\\LaravelIgnition\\Http\\Controllers\\ExecuteSolutionController@__invoke",
-      "controller": "Spatie\\LaravelIgnition\\Http\\Controllers\\ExecuteSolutionController",
-      "as": "ignition.executeSolution",
-      "namespace": null,
-      "prefix": "_ignition",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "_ignition/update-config",
-    "methods": ["POST"],
-    "action": {
-      "middleware": [
-        "Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"
-      ],
-      "uses": "Spatie\\LaravelIgnition\\Http\\Controllers\\UpdateConfigController@__invoke",
-      "controller": "Spatie\\LaravelIgnition\\Http\\Controllers\\UpdateConfigController",
-      "as": "ignition.updateConfig",
-      "namespace": null,
-      "prefix": "_ignition",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/mail",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\MailController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\MailController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/mail/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\MailController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\MailController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/mail/{telescopeEntryId}/preview",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\MailHtmlController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\MailHtmlController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/mail/{telescopeEntryId}/download",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\MailEmlController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\MailEmlController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/exceptions",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ExceptionController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ExceptionController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/exceptions/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ExceptionController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ExceptionController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/exceptions/{telescopeEntryId}",
-    "methods": ["PUT"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ExceptionController@update",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ExceptionController@update",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/dumps",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\DumpController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\DumpController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/logs",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\LogController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\LogController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/logs/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\LogController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\LogController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/notifications",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\NotificationsController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\NotificationsController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/notifications/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\NotificationsController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\NotificationsController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/jobs",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\QueueController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\QueueController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/jobs/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\QueueController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\QueueController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/batches",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\QueueBatchesController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\QueueBatchesController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/batches/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\QueueBatchesController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\QueueBatchesController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/events",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\EventsController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\EventsController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/events/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\EventsController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\EventsController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/gates",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\GatesController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\GatesController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/gates/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\GatesController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\GatesController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/cache",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\CacheController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\CacheController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/cache/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\CacheController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\CacheController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/queries",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\QueriesController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\QueriesController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/queries/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\QueriesController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\QueriesController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/models",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ModelsController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ModelsController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/models/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ModelsController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ModelsController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/requests",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\RequestsController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\RequestsController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/requests/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\RequestsController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\RequestsController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/views",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ViewsController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ViewsController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/views/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ViewsController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ViewsController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/commands",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\CommandsController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\CommandsController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/commands/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\CommandsController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\CommandsController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/schedule",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ScheduleController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ScheduleController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/schedule/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ScheduleController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ScheduleController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/redis",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\RedisController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\RedisController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/redis/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\RedisController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\RedisController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/client-requests",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ClientRequestController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ClientRequestController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/client-requests/{telescopeEntryId}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\ClientRequestController@show",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\ClientRequestController@show",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/monitored-tags",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\MonitoredTagController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\MonitoredTagController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/monitored-tags",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\MonitoredTagController@store",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\MonitoredTagController@store",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/monitored-tags/delete",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\MonitoredTagController@destroy",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\MonitoredTagController@destroy",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/toggle-recording",
-    "methods": ["POST"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\RecordingController@toggle",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\RecordingController@toggle",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/telescope-api/entries",
-    "methods": ["DELETE"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\EntriesController@destroy",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\EntriesController@destroy",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "telescope/{view?}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "domain": null,
-      "middleware": "telescope",
-      "uses": "Laravel\\Telescope\\Http\\Controllers\\HomeController@index",
-      "controller": "Laravel\\Telescope\\Http\\Controllers\\HomeController@index",
-      "namespace": "Laravel\\Telescope\\Http\\Controllers",
-      "prefix": "telescope",
-      "where": [],
-      "as": "telescope"
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": {
-      "view": "(.*)"
-    },
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "api/search",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "uses": "App\\Http\\Controllers\\Api\\SearchController@index",
-      "controller": "App\\Http\\Controllers\\Api\\SearchController@index",
-      "as": "front.api.search",
-      "namespace": null,
-      "prefix": "/api/search",
-      "where": [],
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession",
-        "verified"
-      ]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "/",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "uses": "App\\Http\\Controllers\\HomeController@index",
-      "controller": "App\\Http\\Controllers\\HomeController@index",
-      "as": "front.home.index",
-      "namespace": null,
-      "prefix": "",
-      "where": [],
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession",
-        "verified"
-      ]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "stories",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "uses": "App\\Http\\Controllers\\StoryController@stories",
-      "controller": "App\\Http\\Controllers\\StoryController@stories",
-      "as": "front.stories.index",
-      "namespace": null,
-      "prefix": "/stories",
-      "where": [],
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession",
-        "verified"
-      ]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-
-  {
-    "uri": "users",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "uses": "App\\Http\\Controllers\\UserController@index",
-      "controller": "App\\Http\\Controllers\\UserController@index",
-      "as": "front.users.index",
-      "namespace": null,
-      "prefix": "/users",
-      "where": [],
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession",
-        "verified",
-        "auth"
-      ]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "users/{user_id}",
-    "methods": ["GET", "HEAD"],
-    "action": {
-      "uses": "App\\Http\\Controllers\\UserController@show",
-      "controller": "App\\Http\\Controllers\\UserController@show",
-      "as": "front.users.show",
-      "namespace": null,
-      "prefix": "/users",
-      "where": [],
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession",
-        "verified",
-        "auth"
-      ]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "users",
-    "methods": ["POST"],
-    "action": {
-      "uses": "App\\Http\\Controllers\\UserController@store",
-      "controller": "App\\Http\\Controllers\\UserController@store",
-      "as": "front.users.store",
-      "namespace": null,
-      "prefix": "/users",
-      "where": [],
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession",
-        "verified",
-        "auth"
-      ]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
-    "uri": "users",
-    "methods": ["PATCH"],
-    "action": {
-      "uses": "App\\Http\\Controllers\\UserController@update",
-      "controller": "App\\Http\\Controllers\\UserController@update",
-      "as": "front.users.update",
-      "namespace": null,
-      "prefix": "/users",
-      "where": [],
-      "middleware": [
-        "web",
-        "auth:sanctum",
-        "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession",
-        "verified",
-        "auth"
-      ]
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
-  },
-  {
     "uri": "api/user",
+    "action": "Closure",
+    "middleware": ["api", "auth:sanctum"],
+    "example": "http://app.p1pdd.test/api/user",
+    "parameters": []
+  },
+  "current-user-photo.destroy": {
+    "name": "current-user-photo.destroy",
+    "methods": ["DELETE"],
+    "uri": "user/profile-photo",
+    "action": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\ProfilePhotoController@destroy",
+    "middleware": [
+      "web",
+      "auth:sanctum",
+      "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
+    ],
+    "example": "http://app.p1pdd.test/user/profile-photo",
+    "parameters": []
+  },
+  "current-user.destroy": {
+    "name": "current-user.destroy",
+    "methods": ["DELETE"],
+    "uri": "user",
+    "action": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\CurrentUserController@destroy",
+    "middleware": [
+      "web",
+      "auth:sanctum",
+      "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
+    ],
+    "example": "http://app.p1pdd.test/user",
+    "parameters": []
+  },
+  "dashboard": {
+    "name": "dashboard",
     "methods": ["GET", "HEAD"],
-    "action": {
-      "middleware": ["api", "auth:sanctum"],
-      "uses": {},
-      "namespace": null,
-      "prefix": "api",
-      "where": []
-    },
-    "isFallback": false,
-    "controller": null,
-    "defaults": [],
-    "wheres": [],
-    "parameters": null,
-    "parameterNames": null,
-    "computedMiddleware": null,
-    "compiled": null
+    "uri": "dashboard",
+    "action": "Closure",
+    "middleware": [
+      "web",
+      "auth:sanctum",
+      "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession",
+      "verified"
+    ],
+    "example": "http://app.p1pdd.test/dashboard",
+    "parameters": []
+  },
+  "download.show": {
+    "name": "download.show",
+    "methods": ["GET", "HEAD"],
+    "uri": "download/{podcast_slug}",
+    "action": "App\\Http\\Controllers\\DownloadController@show",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/download/{podcast_slug}",
+    "parameters": ["podcast_slug"]
+  },
+  "feeds": {
+    "name": null,
+    "methods": ["GET", "HEAD"],
+    "uri": "feeds",
+    "action": "App\\Http\\Controllers\\FeedController@index",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/feeds",
+    "parameters": []
+  },
+  "feeds/{feed_slug}": {
+    "name": null,
+    "methods": ["GET", "HEAD"],
+    "uri": "feeds/{feed_slug}",
+    "action": "App\\Http\\Controllers\\FeedController@show",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/feeds/{feed_slug}",
+    "parameters": ["feed_slug"]
+  },
+  "filament.asset": {
+    "name": "filament.asset",
+    "methods": ["GET", "HEAD"],
+    "uri": "filament/assets/{file}",
+    "action": "Filament\\Http\\Controllers\\AssetController",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages"
+    ],
+    "example": "http://app.p1pdd.test/filament/assets/{file}",
+    "parameters": ["file"]
+  },
+  "filament.auth.login": {
+    "name": "filament.auth.login",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/login",
+    "action": "App\\Filament\\Pages\\Auth\\Login",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages"
+    ],
+    "example": "http://app.p1pdd.test/admin/login",
+    "parameters": []
+  },
+  "filament.auth.logout": {
+    "name": "filament.auth.logout",
+    "methods": ["POST"],
+    "uri": "filament/logout",
+    "action": "Closure",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages"
+    ],
+    "example": "http://app.p1pdd.test/filament/logout",
+    "parameters": []
+  },
+  "filament.pages.dashboard": {
+    "name": "filament.pages.dashboard",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin",
+    "action": "Filament\\Pages\\Dashboard",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin",
+    "parameters": []
+  },
+  "filament.pages.page/home": {
+    "name": "filament.pages.page/home",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/page/home",
+    "action": "App\\Filament\\Pages\\ManageHome",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/page/home",
+    "parameters": []
+  },
+  "filament.resources.blog/categories.create": {
+    "name": "filament.resources.blog/categories.create",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/categories/create",
+    "action": "App\\Filament\\Resources\\CategoryResource\\Pages\\CreateCategory",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/categories/create",
+    "parameters": []
+  },
+  "filament.resources.blog/categories.edit": {
+    "name": "filament.resources.blog/categories.edit",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/categories/{record}/edit",
+    "action": "App\\Filament\\Resources\\CategoryResource\\Pages\\EditCategory",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/categories/{record}/edit",
+    "parameters": ["record"]
+  },
+  "filament.resources.blog/categories.index": {
+    "name": "filament.resources.blog/categories.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/categories",
+    "action": "App\\Filament\\Resources\\CategoryResource\\Pages\\ListCategories",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/categories",
+    "parameters": []
+  },
+  "filament.resources.blog/comments.create": {
+    "name": "filament.resources.blog/comments.create",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/comments/create",
+    "action": "App\\Filament\\Resources\\CommentResource\\Pages\\CreateComment",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/comments/create",
+    "parameters": []
+  },
+  "filament.resources.blog/comments.edit": {
+    "name": "filament.resources.blog/comments.edit",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/comments/{record}/edit",
+    "action": "App\\Filament\\Resources\\CommentResource\\Pages\\EditComment",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/comments/{record}/edit",
+    "parameters": ["record"]
+  },
+  "filament.resources.blog/comments.index": {
+    "name": "filament.resources.blog/comments.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/comments",
+    "action": "App\\Filament\\Resources\\CommentResource\\Pages\\ListComments",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/comments",
+    "parameters": []
+  },
+  "filament.resources.blog/posts.create": {
+    "name": "filament.resources.blog/posts.create",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/posts/create",
+    "action": "App\\Filament\\Resources\\PostResource\\Pages\\CreatePost",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/posts/create",
+    "parameters": []
+  },
+  "filament.resources.blog/posts.edit": {
+    "name": "filament.resources.blog/posts.edit",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/posts/{record}/edit",
+    "action": "App\\Filament\\Resources\\PostResource\\Pages\\EditPost",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/posts/{record}/edit",
+    "parameters": ["record"]
+  },
+  "filament.resources.blog/posts.index": {
+    "name": "filament.resources.blog/posts.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/posts",
+    "action": "App\\Filament\\Resources\\PostResource\\Pages\\ListPosts",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/posts",
+    "parameters": []
+  },
+  "filament.resources.blog/users.create": {
+    "name": "filament.resources.blog/users.create",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/users/create",
+    "action": "App\\Filament\\Resources\\UserResource\\Pages\\CreateUser",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/users/create",
+    "parameters": []
+  },
+  "filament.resources.blog/users.edit": {
+    "name": "filament.resources.blog/users.edit",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/users/{record}/edit",
+    "action": "App\\Filament\\Resources\\UserResource\\Pages\\EditUser",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/users/{record}/edit",
+    "parameters": ["record"]
+  },
+  "filament.resources.blog/users.index": {
+    "name": "filament.resources.blog/users.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/blog/users",
+    "action": "App\\Filament\\Resources\\UserResource\\Pages\\ListUsers",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/blog/users",
+    "parameters": []
+  },
+  "filament.resources.page/pages.create": {
+    "name": "filament.resources.page/pages.create",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/page/pages/create",
+    "action": "App\\Filament\\Resources\\PageResource\\Pages\\CreatePage",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/page/pages/create",
+    "parameters": []
+  },
+  "filament.resources.page/pages.edit": {
+    "name": "filament.resources.page/pages.edit",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/page/pages/{record}/edit",
+    "action": "App\\Filament\\Resources\\PageResource\\Pages\\EditPage",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/page/pages/{record}/edit",
+    "parameters": ["record"]
+  },
+  "filament.resources.page/pages.index": {
+    "name": "filament.resources.page/pages.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/page/pages",
+    "action": "App\\Filament\\Resources\\PageResource\\Pages\\ListPages",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/page/pages",
+    "parameters": []
+  },
+  "filament.resources.podcast/feeds.create": {
+    "name": "filament.resources.podcast/feeds.create",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/podcast/feeds/create",
+    "action": "App\\Filament\\Resources\\FeedResource\\Pages\\CreateFeed",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/podcast/feeds/create",
+    "parameters": []
+  },
+  "filament.resources.podcast/feeds.edit": {
+    "name": "filament.resources.podcast/feeds.edit",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/podcast/feeds/{record}/edit",
+    "action": "App\\Filament\\Resources\\FeedResource\\Pages\\EditFeed",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/podcast/feeds/{record}/edit",
+    "parameters": ["record"]
+  },
+  "filament.resources.podcast/feeds.index": {
+    "name": "filament.resources.podcast/feeds.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/podcast/feeds",
+    "action": "App\\Filament\\Resources\\FeedResource\\Pages\\ListFeeds",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/podcast/feeds",
+    "parameters": []
+  },
+  "filament.resources.podcast/podcasts.create": {
+    "name": "filament.resources.podcast/podcasts.create",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/podcast/podcasts/create",
+    "action": "App\\Filament\\Resources\\PodcastResource\\Pages\\CreatePodcast",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/podcast/podcasts/create",
+    "parameters": []
+  },
+  "filament.resources.podcast/podcasts.edit": {
+    "name": "filament.resources.podcast/podcasts.edit",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/podcast/podcasts/{record}/edit",
+    "action": "App\\Filament\\Resources\\PodcastResource\\Pages\\EditPodcast",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/podcast/podcasts/{record}/edit",
+    "parameters": ["record"]
+  },
+  "filament.resources.podcast/podcasts.index": {
+    "name": "filament.resources.podcast/podcasts.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/podcast/podcasts",
+    "action": "App\\Filament\\Resources\\PodcastResource\\Pages\\ListPodcasts",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/podcast/podcasts",
+    "parameters": []
+  },
+  "filament.resources.podcast/series.create": {
+    "name": "filament.resources.podcast/series.create",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/podcast/series/create",
+    "action": "App\\Filament\\Resources\\SerieResource\\Pages\\CreateSerie",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/podcast/series/create",
+    "parameters": []
+  },
+  "filament.resources.podcast/series.edit": {
+    "name": "filament.resources.podcast/series.edit",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/podcast/series/{record}/edit",
+    "action": "App\\Filament\\Resources\\SerieResource\\Pages\\EditSerie",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/podcast/series/{record}/edit",
+    "parameters": ["record"]
+  },
+  "filament.resources.podcast/series.index": {
+    "name": "filament.resources.podcast/series.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "admin/podcast/series",
+    "action": "App\\Filament\\Resources\\SerieResource\\Pages\\ListSeries",
+    "middleware": [
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
+      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
+      "Filament\\Http\\Middleware\\Authenticate"
+    ],
+    "example": "http://app.p1pdd.test/admin/podcast/series",
+    "parameters": []
+  },
+  "home": {
+    "name": "home",
+    "methods": ["GET", "HEAD"],
+    "uri": "/",
+    "action": "App\\Http\\Controllers\\HomeController@index",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test//",
+    "parameters": []
+  },
+  "ignition.executeSolution": {
+    "name": "ignition.executeSolution",
+    "methods": ["POST"],
+    "uri": "_ignition/execute-solution",
+    "action": "Spatie\\LaravelIgnition\\Http\\Controllers\\ExecuteSolutionController",
+    "middleware": [
+      "Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"
+    ],
+    "example": "http://app.p1pdd.test/_ignition/execute-solution",
+    "parameters": []
+  },
+  "ignition.healthCheck": {
+    "name": "ignition.healthCheck",
+    "methods": ["GET", "HEAD"],
+    "uri": "_ignition/health-check",
+    "action": "Spatie\\LaravelIgnition\\Http\\Controllers\\HealthCheckController",
+    "middleware": [
+      "Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"
+    ],
+    "example": "http://app.p1pdd.test/_ignition/health-check",
+    "parameters": []
+  },
+  "ignition.updateConfig": {
+    "name": "ignition.updateConfig",
+    "methods": ["POST"],
+    "uri": "_ignition/update-config",
+    "action": "Spatie\\LaravelIgnition\\Http\\Controllers\\UpdateConfigController",
+    "middleware": [
+      "Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"
+    ],
+    "example": "http://app.p1pdd.test/_ignition/update-config",
+    "parameters": []
+  },
+  "livewire.message": {
+    "name": "livewire.message",
+    "methods": ["POST"],
+    "uri": "livewire/message/{name}",
+    "action": "Livewire\\Controllers\\HttpConnectionHandler",
+    "middleware": ["web"],
+    "example": "http://app.p1pdd.test/livewire/message/{name}",
+    "parameters": ["name"]
+  },
+  "livewire.message-localized": {
+    "name": "livewire.message-localized",
+    "methods": ["POST"],
+    "uri": "{locale}/livewire/message/{name}",
+    "action": "Livewire\\Controllers\\HttpConnectionHandler",
+    "middleware": ["web"],
+    "example": "http://app.p1pdd.test/{locale}/livewire/message/{name}",
+    "parameters": ["locale", "name"]
+  },
+  "livewire.preview-file": {
+    "name": "livewire.preview-file",
+    "methods": ["GET", "HEAD"],
+    "uri": "livewire/preview-file/{filename}",
+    "action": "Livewire\\Controllers\\FilePreviewHandler@handle",
+    "middleware": ["web"],
+    "example": "http://app.p1pdd.test/livewire/preview-file/{filename}",
+    "parameters": ["filename"]
+  },
+  "livewire.upload-file": {
+    "name": "livewire.upload-file",
+    "methods": ["POST"],
+    "uri": "livewire/upload-file",
+    "action": "Livewire\\Controllers\\FileUploadHandler@handle",
+    "middleware": ["web"],
+    "example": "http://app.p1pdd.test/livewire/upload-file",
+    "parameters": []
+  },
+  "livewire/livewire.js": {
+    "name": null,
+    "methods": ["GET", "HEAD"],
+    "uri": "livewire/livewire.js",
+    "action": "Livewire\\Controllers\\LivewireJavaScriptAssets@source",
+    "middleware": [],
+    "example": "http://app.p1pdd.test/livewire/livewire.js",
+    "parameters": []
+  },
+  "livewire/livewire.js.map": {
+    "name": null,
+    "methods": ["GET", "HEAD"],
+    "uri": "livewire/livewire.js.map",
+    "action": "Livewire\\Controllers\\LivewireJavaScriptAssets@maps",
+    "middleware": [],
+    "example": "http://app.p1pdd.test/livewire/livewire.js.map",
+    "parameters": []
+  },
+  "log-viewer.files": {
+    "name": "log-viewer.files",
+    "methods": ["GET", "HEAD"],
+    "uri": "log-viewer/api/files",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@index",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/files",
+    "parameters": []
+  },
+  "log-viewer.files.clear-cache": {
+    "name": "log-viewer.files.clear-cache",
+    "methods": ["POST"],
+    "uri": "log-viewer/api/files/{fileIdentifier}/clear-cache",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@clearCache",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/files/{fileIdentifier}/clear-cache",
+    "parameters": ["fileIdentifier"]
+  },
+  "log-viewer.files.clear-cache-all": {
+    "name": "log-viewer.files.clear-cache-all",
+    "methods": ["POST"],
+    "uri": "log-viewer/api/clear-cache-all",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@clearCacheAll",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/clear-cache-all",
+    "parameters": []
+  },
+  "log-viewer.files.delete": {
+    "name": "log-viewer.files.delete",
+    "methods": ["DELETE"],
+    "uri": "log-viewer/api/files/{fileIdentifier}",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@delete",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/files/{fileIdentifier}",
+    "parameters": ["fileIdentifier"]
+  },
+  "log-viewer.files.delete-multiple-files": {
+    "name": "log-viewer.files.delete-multiple-files",
+    "methods": ["POST"],
+    "uri": "log-viewer/api/delete-multiple-files",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@deleteMultipleFiles",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/delete-multiple-files",
+    "parameters": []
+  },
+  "log-viewer.files.download": {
+    "name": "log-viewer.files.download",
+    "methods": ["GET", "HEAD"],
+    "uri": "log-viewer/api/files/{fileIdentifier}/download",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@download",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/files/{fileIdentifier}/download",
+    "parameters": ["fileIdentifier"]
+  },
+  "log-viewer.folders": {
+    "name": "log-viewer.folders",
+    "methods": ["GET", "HEAD"],
+    "uri": "log-viewer/api/folders",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FoldersController@index",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/folders",
+    "parameters": []
+  },
+  "log-viewer.folders.clear-cache": {
+    "name": "log-viewer.folders.clear-cache",
+    "methods": ["POST"],
+    "uri": "log-viewer/api/folders/{folderIdentifier}/clear-cache",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FoldersController@clearCache",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/folders/{folderIdentifier}/clear-cache",
+    "parameters": ["folderIdentifier"]
+  },
+  "log-viewer.folders.delete": {
+    "name": "log-viewer.folders.delete",
+    "methods": ["DELETE"],
+    "uri": "log-viewer/api/folders/{folderIdentifier}",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FoldersController@delete",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/folders/{folderIdentifier}",
+    "parameters": ["folderIdentifier"]
+  },
+  "log-viewer.folders.download": {
+    "name": "log-viewer.folders.download",
+    "methods": ["GET", "HEAD"],
+    "uri": "log-viewer/api/folders/{folderIdentifier}/download",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FoldersController@download",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/folders/{folderIdentifier}/download",
+    "parameters": ["folderIdentifier"]
+  },
+  "log-viewer.hosts": {
+    "name": "log-viewer.hosts",
+    "methods": ["GET", "HEAD"],
+    "uri": "log-viewer/api/hosts",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\HostsController@index",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/hosts",
+    "parameters": []
+  },
+  "log-viewer.index": {
+    "name": "log-viewer.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "log-viewer/{view?}",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\IndexController",
+    "middleware": [
+      "web",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/{view?}",
+    "parameters": ["view"]
+  },
+  "log-viewer.logs": {
+    "name": "log-viewer.logs",
+    "methods": ["GET", "HEAD"],
+    "uri": "log-viewer/api/logs",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\LogsController@index",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
+    ],
+    "example": "http://app.p1pdd.test/log-viewer/api/logs",
+    "parameters": []
+  },
+  "login": {
+    "name": null,
+    "methods": ["POST"],
+    "uri": "login",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@store",
+    "middleware": ["web", "guest:web", "throttle:login"],
+    "example": "http://app.p1pdd.test/login",
+    "parameters": []
+  },
+  "logout": {
+    "name": "logout",
+    "methods": ["POST"],
+    "uri": "logout",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@destroy",
+    "middleware": ["web"],
+    "example": "http://app.p1pdd.test/logout",
+    "parameters": []
+  },
+  "other-browser-sessions.destroy": {
+    "name": "other-browser-sessions.destroy",
+    "methods": ["DELETE"],
+    "uri": "user/other-browser-sessions",
+    "action": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\OtherBrowserSessionsController@destroy",
+    "middleware": [
+      "web",
+      "auth:sanctum",
+      "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
+    ],
+    "example": "http://app.p1pdd.test/user/other-browser-sessions",
+    "parameters": []
+  },
+  "page.about": {
+    "name": "page.about",
+    "methods": ["GET", "HEAD"],
+    "uri": "a-propos",
+    "action": "App\\Http\\Controllers\\HomeController@page",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/a-propos",
+    "parameters": []
+  },
+  "page.p1pdd": {
+    "name": "page.p1pdd",
+    "methods": ["GET", "HEAD"],
+    "uri": "p1pdd",
+    "action": "App\\Http\\Controllers\\HomeController@p1pdd",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/p1pdd",
+    "parameters": []
+  },
+  "page.pqd2p": {
+    "name": "page.pqd2p",
+    "methods": ["GET", "HEAD"],
+    "uri": "pqd2p",
+    "action": "App\\Http\\Controllers\\HomeController@pqd2p",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/pqd2p",
+    "parameters": []
+  },
+  "page.subscribe": {
+    "name": "page.subscribe",
+    "methods": ["GET", "HEAD"],
+    "uri": "s-abonner",
+    "action": "App\\Http\\Controllers\\HomeController@subscribe",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/s-abonner",
+    "parameters": []
+  },
+  "password.confirm": {
+    "name": "password.confirm",
+    "methods": ["POST"],
+    "uri": "user/confirm-password",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmablePasswordController@store",
+    "middleware": ["web", "auth:web"],
+    "example": "http://app.p1pdd.test/user/confirm-password",
+    "parameters": []
+  },
+  "password.confirmation": {
+    "name": "password.confirmation",
+    "methods": ["GET", "HEAD"],
+    "uri": "user/confirmed-password-status",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmedPasswordStatusController@show",
+    "middleware": ["web", "auth:web"],
+    "example": "http://app.p1pdd.test/user/confirmed-password-status",
+    "parameters": []
+  },
+  "password.email": {
+    "name": "password.email",
+    "methods": ["POST"],
+    "uri": "forgot-password",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\PasswordResetLinkController@store",
+    "middleware": ["web", "guest:web"],
+    "example": "http://app.p1pdd.test/forgot-password",
+    "parameters": []
+  },
+  "password.request": {
+    "name": "password.request",
+    "methods": ["GET", "HEAD"],
+    "uri": "forgot-password",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\PasswordResetLinkController@create",
+    "middleware": ["web", "guest:web"],
+    "example": "http://app.p1pdd.test/forgot-password",
+    "parameters": []
+  },
+  "password.reset": {
+    "name": "password.reset",
+    "methods": ["GET", "HEAD"],
+    "uri": "reset-password/{token}",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\NewPasswordController@create",
+    "middleware": ["web", "guest:web"],
+    "example": "http://app.p1pdd.test/reset-password/{token}",
+    "parameters": ["token"]
+  },
+  "password.update": {
+    "name": "password.update",
+    "methods": ["POST"],
+    "uri": "reset-password",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\NewPasswordController@store",
+    "middleware": ["web", "guest:web"],
+    "example": "http://app.p1pdd.test/reset-password",
+    "parameters": []
+  },
+  "podcasts.index": {
+    "name": "podcasts.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "podcasts",
+    "action": "App\\Http\\Controllers\\PodcastController@index",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/podcasts",
+    "parameters": []
+  },
+  "podcasts.show": {
+    "name": "podcasts.show",
+    "methods": ["GET", "HEAD"],
+    "uri": "podcasts/{podcast_slug}",
+    "action": "App\\Http\\Controllers\\PodcastController@show",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/podcasts/{podcast_slug}",
+    "parameters": ["podcast_slug"]
+  },
+  "posts.index": {
+    "name": "posts.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "blog",
+    "action": "App\\Http\\Controllers\\PostController@index",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/blog",
+    "parameters": []
+  },
+  "posts.show": {
+    "name": "posts.show",
+    "methods": ["GET", "HEAD"],
+    "uri": "blog/{post_slug}",
+    "action": "App\\Http\\Controllers\\PostController@show",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/blog/{post_slug}",
+    "parameters": ["post_slug"]
+  },
+  "profile.show": {
+    "name": "profile.show",
+    "methods": ["GET", "HEAD"],
+    "uri": "user/profile",
+    "action": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\UserProfileController@show",
+    "middleware": [
+      "web",
+      "auth:sanctum",
+      "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
+    ],
+    "example": "http://app.p1pdd.test/user/profile",
+    "parameters": []
+  },
+  "rss.index": {
+    "name": "rss.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "rss",
+    "action": "App\\Http\\Controllers\\RssController@index",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/rss",
+    "parameters": []
+  },
+  "rss.show": {
+    "name": "rss.show",
+    "methods": ["GET", "HEAD"],
+    "uri": "rss/{feed_slug}",
+    "action": "App\\Http\\Controllers\\RssController@show",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/rss/{feed_slug}",
+    "parameters": ["feed_slug"]
+  },
+  "sanctum.csrf-cookie": {
+    "name": "sanctum.csrf-cookie",
+    "methods": ["GET", "HEAD"],
+    "uri": "sanctum/csrf-cookie",
+    "action": "Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController@show",
+    "middleware": ["web"],
+    "example": "http://app.p1pdd.test/sanctum/csrf-cookie",
+    "parameters": []
+  },
+  "submission.index": {
+    "name": "submission.index",
+    "methods": ["GET", "HEAD"],
+    "uri": "contact",
+    "action": "App\\Http\\Controllers\\SubmissionController@index",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/contact",
+    "parameters": []
+  },
+  "submission.store": {
+    "name": "submission.store",
+    "methods": ["POST"],
+    "uri": "contact",
+    "action": "App\\Http\\Controllers\\SubmissionController@store",
+    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "example": "http://app.p1pdd.test/contact",
+    "parameters": []
+  },
+  "two-factor-challenge": {
+    "name": null,
+    "methods": ["POST"],
+    "uri": "two-factor-challenge",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticatedSessionController@store",
+    "middleware": ["web", "guest:web", "throttle:two-factor"],
+    "example": "http://app.p1pdd.test/two-factor-challenge",
+    "parameters": []
+  },
+  "two-factor.confirm": {
+    "name": "two-factor.confirm",
+    "methods": ["POST"],
+    "uri": "user/confirmed-two-factor-authentication",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmedTwoFactorAuthenticationController@store",
+    "middleware": ["web", "auth:web", "password.confirm"],
+    "example": "http://app.p1pdd.test/user/confirmed-two-factor-authentication",
+    "parameters": []
+  },
+  "two-factor.disable": {
+    "name": "two-factor.disable",
+    "methods": ["DELETE"],
+    "uri": "user/two-factor-authentication",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticationController@destroy",
+    "middleware": ["web", "auth:web", "password.confirm"],
+    "example": "http://app.p1pdd.test/user/two-factor-authentication",
+    "parameters": []
+  },
+  "two-factor.enable": {
+    "name": "two-factor.enable",
+    "methods": ["POST"],
+    "uri": "user/two-factor-authentication",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticationController@store",
+    "middleware": ["web", "auth:web", "password.confirm"],
+    "example": "http://app.p1pdd.test/user/two-factor-authentication",
+    "parameters": []
+  },
+  "two-factor.login": {
+    "name": "two-factor.login",
+    "methods": ["GET", "HEAD"],
+    "uri": "two-factor-challenge",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticatedSessionController@create",
+    "middleware": ["web", "guest:web"],
+    "example": "http://app.p1pdd.test/two-factor-challenge",
+    "parameters": []
+  },
+  "two-factor.qr-code": {
+    "name": "two-factor.qr-code",
+    "methods": ["GET", "HEAD"],
+    "uri": "user/two-factor-qr-code",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorQrCodeController@show",
+    "middleware": ["web", "auth:web", "password.confirm"],
+    "example": "http://app.p1pdd.test/user/two-factor-qr-code",
+    "parameters": []
+  },
+  "two-factor.recovery-codes": {
+    "name": "two-factor.recovery-codes",
+    "methods": ["GET", "HEAD"],
+    "uri": "user/two-factor-recovery-codes",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\RecoveryCodeController@index",
+    "middleware": ["web", "auth:web", "password.confirm"],
+    "example": "http://app.p1pdd.test/user/two-factor-recovery-codes",
+    "parameters": []
+  },
+  "two-factor.secret-key": {
+    "name": "two-factor.secret-key",
+    "methods": ["GET", "HEAD"],
+    "uri": "user/two-factor-secret-key",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorSecretKeyController@show",
+    "middleware": ["web", "auth:web", "password.confirm"],
+    "example": "http://app.p1pdd.test/user/two-factor-secret-key",
+    "parameters": []
+  },
+  "user-password.update": {
+    "name": "user-password.update",
+    "methods": ["PUT"],
+    "uri": "user/password",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\PasswordController@update",
+    "middleware": ["web", "auth:web"],
+    "example": "http://app.p1pdd.test/user/password",
+    "parameters": []
+  },
+  "user-profile-information.update": {
+    "name": "user-profile-information.update",
+    "methods": ["PUT"],
+    "uri": "user/profile-information",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\ProfileInformationController@update",
+    "middleware": ["web", "auth:web"],
+    "example": "http://app.p1pdd.test/user/profile-information",
+    "parameters": []
+  },
+  "user/confirm-password": {
+    "name": null,
+    "methods": ["GET", "HEAD"],
+    "uri": "user/confirm-password",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmablePasswordController@show",
+    "middleware": ["web", "auth:web"],
+    "example": "http://app.p1pdd.test/user/confirm-password",
+    "parameters": []
+  },
+  "user/two-factor-recovery-codes": {
+    "name": null,
+    "methods": ["POST"],
+    "uri": "user/two-factor-recovery-codes",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\RecoveryCodeController@store",
+    "middleware": ["web", "auth:web", "password.confirm"],
+    "example": "http://app.p1pdd.test/user/two-factor-recovery-codes",
+    "parameters": []
   }
-]
+}

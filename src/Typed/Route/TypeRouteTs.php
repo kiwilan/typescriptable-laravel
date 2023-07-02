@@ -167,64 +167,64 @@ class TypeRouteTs
         }, ",\n");
     }
 
-    private function setTsTypes(): string
-    {
-        return $this->collectRoutes(function (TypeRoute $route) {
-            $params = '';
+    // private function setTsTypes(): string
+    // {
+    //     return $this->collectRoutes(function (TypeRoute $route) {
+    //         $params = '';
 
-            if (empty($route->parameters())) {
-                $params = 'params?: undefined';
-            } else {
-                $params = collect($route->parameters())
-                    ->map(function (TypeRouteParam $param) {
-                        $required = $param->required() ? '' : '?';
+    //         if (empty($route->parameters())) {
+    //             $params = 'params?: undefined';
+    //         } else {
+    //             $params = collect($route->parameters())
+    //                 ->map(function (TypeRouteParam $param) {
+    //                     $required = $param->required() ? '' : '?';
 
-                        return "{$param->name()}{$required}: App.Route.Param,";
-                    })
-                    ->join(' ');
-                $params = <<<typescript
-                params: {
-                          {$params}
-                        }
-                typescript;
-            }
+    //                     return "{$param->name()}{$required}: App.Route.Param,";
+    //                 })
+    //                 ->join(' ');
+    //             $params = <<<typescript
+    //             params: {
+    //                       {$params}
+    //                     }
+    //             typescript;
+    //         }
 
-            return <<<typescript
-              type {$route->routeName()} = {
-                name: '{$route->pathType()}',
-                {$params},
-                query?: Record<string, App.Route.Param>,
-                hash?: string,
-              }
-            typescript;
-        }, ";\n");
-    }
+    //         return <<<typescript
+    //           type {$route->routeName()} = {
+    //             name: '{$route->pathType()}',
+    //             {$params},
+    //             query?: Record<string, App.Route.Param>,
+    //             hash?: string,
+    //           }
+    //         typescript;
+    //     }, ";\n");
+    // }
 
-    private function setTsGlobalTypes(): string
-    {
-        return $this->collectRoutes(function (TypeRoute $route) {
-            return <<<typescript
-            App.Route.Typed.{$route->routeName()}
-            typescript;
-        }, ' | ');
-    }
+    // private function setTsGlobalTypes(): string
+    // {
+    //     return $this->collectRoutes(function (TypeRoute $route) {
+    //         return <<<typescript
+    //         App.Route.Typed.{$route->routeName()}
+    //         typescript;
+    //     }, ' | ');
+    // }
 
-    private function setTsGlobalTypesMethod(string $method): string
-    {
-        $routes = $this->collectRoutesMethod($method);
+    // private function setTsGlobalTypesMethod(string $method): string
+    // {
+    //     $routes = $this->collectRoutesMethod($method);
 
-        return collect($routes)
-            ->map(function (TypeRoute $route) {
-                return <<<typescript
-                App.Route.Typed.{$route->routeName()}
-                typescript;
-            })->join(' | ');
-    }
+    //     return collect($routes)
+    //         ->map(function (TypeRoute $route) {
+    //             return <<<typescript
+    //             App.Route.Typed.{$route->routeName()}
+    //             typescript;
+    //         })->join(' | ');
+    // }
 
-    private function collectRoutesMethod(string $method): Collection
-    {
-        return $this->routes->filter(fn (TypeRoute $route) => $route->method() === $method);
-    }
+    // private function collectRoutesMethod(string $method): Collection
+    // {
+    //     return $this->routes->filter(fn (TypeRoute $route) => $route->method() === $method);
+    // }
 
     private function collectRoutes(Closure $closure, ?string $join = null): string|Collection
     {

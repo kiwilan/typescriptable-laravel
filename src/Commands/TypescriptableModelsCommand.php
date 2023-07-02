@@ -10,7 +10,7 @@ class TypescriptableModelsCommand extends Command
     public $signature = 'typescriptable:models
                         {--M|models-path : Path to models directory}
                         {--O|output-path : Path to output}
-                        {--P|php-path : Path to output PHP classes, if null wll not print PHP classes}';
+                        {--P|php-path : Path to output PHP classes, if null will not print PHP classes}';
 
     public $description = 'Generate Models types.';
 

@@ -69,6 +69,7 @@ declare namespace Inertia {
         top: number;
         left: number;
     }>;
+    errors: Inertia.Errors & Inertia.ErrorBag;
     rememberedState: Record<string, unknown>;
     resolvedErrors: Inertia.Errors;
   }

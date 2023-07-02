@@ -17,28 +17,41 @@ export class Router {
     return route.path
   }
 
-  public async get(name: App.Route.Name): Promise<void> {
+  public get(name: App.Route.Name): void {
     const url = this.convertURL(name)
-    return await inertia.get(url)
+    return inertia.get(url)
   }
 
-  public async post(name: App.Route.Name, data?: RequestPayload): Promise<void> {
+  public post(name: App.Route.Name, data?: RequestPayload): void {
     const url = this.convertURL(name)
-    return await inertia.get(url, data)
+    return inertia.post(url, this.convertData(data))
   }
 
-  public async put(name: App.Route.Name, data?: RequestPayload): Promise<void> {
+  public put(name: App.Route.Name, data?: RequestPayload): void {
     const url = this.convertURL(name)
-    return await inertia.get(url, data)
+    return inertia.put(url, this.convertData(data))
   }
 
-  public async patch(name: App.Route.Name, data?: RequestPayload): Promise<void> {
+  public patch(name: App.Route.Name, data?: RequestPayload): void {
     const url = this.convertURL(name)
-    return await inertia.get(url, data)
+    return inertia.patch(url, this.convertData(data))
   }
 
-  public async delete(name: App.Route.Name): Promise<void> {
+  public delete(name: App.Route.Name): void {
     const url = this.convertURL(name)
-    return await inertia.delete(url)
+    return inertia.delete(url)
+  }
+
+  private convertData(data?: RequestPayload): Record<string, any> {
+    if (!data)
+      return {}
+
+    if (typeof data.transform === 'function') {
+      return data.transform(data => ({
+        ...data,
+      }))
+    }
+
+    return data
   }
 }

@@ -68,7 +68,7 @@ class EloquentPhp
         return $self;
     }
 
-    public function print(): void
+    public function print(bool $delete = true): void
     {
         if (! File::exists($this->path)) {
             File::makeDirectory($this->path);
@@ -76,7 +76,10 @@ class EloquentPhp
 
         foreach ($this->content as $name => $content) {
             $path = "{$this->path}/{$name}";
-            File::delete($path);
+            if ($delete) {
+                File::delete($path);
+            }
+
             File::put($path, $content);
         }
     }
