@@ -8,9 +8,9 @@ use Kiwilan\Typescriptable\Typescriptable;
 class TypescriptableSettingsCommand extends Command
 {
     public $signature = 'typescriptable:settings
-                        {--settings-path : Path to settings directory}
-                        {--output-path : Path to output}
-                        {--extends : Extends class to parse}';
+                        {--S|settings-path : Path to settings directory}
+                        {--O|output-path : Path to output}
+                        {--E|extends : Extends class to parse}';
 
     public $description = 'Generate Spatie Settings types.';
 
