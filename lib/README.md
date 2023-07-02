@@ -1,17 +1,19 @@
 # @kiwilan/typescriptable-laravel
 
-Composer package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
+Add some helpers for your Inertia app with TypeScript.
+
+> **Notes**
+>
+> If you want to use helpers for Inertia, you have to use TypeScript into your project.
 
 ## Installation
 
+> **Warning**
+>
+> `composer` package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
+
 ```bash
 npm install @kiwilan/typescriptable-laravel --save-dev
-```
-
-Or
-
-```bash
-yarn install @kiwilan/typescriptable-laravel -D
 ```
 
 Or
@@ -22,31 +24,20 @@ pnpm add @kiwilan/typescriptable-laravel -D
 
 ## Features
 
-### Vite
-
--   Execute automatically [kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel)'s commands :' `typescriptable:models`, `typescriptable:routes` and `typescriptable:routes` with watch mode.
-
-### Vue
-
--   Plugin to inject all new features.
-
-### Inertia
-
--   Inertia types for `page` and global properties
--   `useTypescriptable` composable with some features:
+-   🦾 Add TypeScript experience into Inertia
+-   💨 Vite plugin to execute automatically [kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel)'s commands :' `typescriptable:models`, `typescriptable:routes` and `typescriptable:routes` with watch mode.
+-   💚 Vue plugin to use global methods for `template` into Vue components:
+    -   `$route` transform route to `string`
+    -   `$isRoute` transform route name or path to `boolean`
+    -   `$currentRoute` give current route
+    -   Auto-import : `Head` from `@inertiajs/vue3`, `Link` from `@inertiajs/vue3`
+-   💜 Inertia types for `page` and global properties
+-   📦 `useTypescriptable` composable with some features:
     -   `router` with `get`, `post`, `put`, `patch`, `delete` methods typed with selected routes
     -   `route` transform route to `string`
     -   `isRoute` transform route name or path to `boolean`
     -   `currentRoute` give current route
     -   `page` with `usePage` typed
--   `Route` Vue component with `to` prop typed with selected `GET` routes
--   Vue plugin to use global methods for `template` into Vue components:
-    -   `$route` transform route to `string`
-    -   `$isRoute` transform route name or path to `boolean`
-    -   `$currentRoute` give current route
--   Auto import components, you can use it without import
-    -   `Head` from `@inertiajs/vue3`
-    -   `Link` from `@inertiajs/vue3`
 
 ## Usage
 
@@ -89,10 +80,10 @@ import { createApp, h } from "vue";
 import { createInertiaApp, router } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createPinia } from "pinia";
-import { VueTypescriptable } from "@kiwilan/typescriptable-laravel";
-import NProgress from "nprogress";
+import { VueTypescriptable } from "@kiwilan/typescriptable-laravel"; // Import VueTypescriptable
+import NProgress from "nprogress"; // `pnpm add nprogress -D`
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
-import "./routes";
+import "./routes"; // Import routes
 
 createInertiaApp({
     title: (title) => `${title} - Laravel`,
@@ -102,10 +93,9 @@ createInertiaApp({
         const app = createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
-            .use(VueTypescriptable)
+            .use(VueTypescriptable) // Add Vue plugin
             .use(pinia);
 
-        // `pnpm add nprogress -D`
         router.on("start", () => NProgress.start());
         router.on("finish", () => NProgress.done());
 
@@ -120,40 +110,9 @@ createInertiaApp({
 });
 ```
 
-### Composables
+### useTypescriptable composable
 
-#### `useTypescriptable`
-
-```vue
-<script lang="ts" setup>
-import { useTypescriptable } from "@kiwilan/typescriptable-laravel";
-
-const { router, route, isRoute, currentRoute, page } = useTypescriptable();
-
-console.log(currentRoute());
-
-const form = reactive({
-    name: page.props.user.name,
-    email: page.props.user.email,
-});
-
-const pushToStories = () => {
-    if (isRoute({ name: "front.stories.index" })) {
-        return;
-    }
-
-    router.get({
-        name: "front.stories.index",
-    });
-};
-
-const logout = () => {
-    router.post({
-        name: "logout",
-    });
-};
-</script>
-```
+// TOOD
 
 ## Local test
 

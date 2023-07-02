@@ -2,7 +2,7 @@
   "name": "@kiwilan/typescriptable-laravel",
   "type": "module",
   "version": "1.3.0",
-  "description": "Vite plugin for typescriptable-laravel.",
+  "description": "Add some helpers for your Inertia app with TypeScript.",
   "author": "Ewilan Rivière <ewilan.riviere@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/kiwilan/typescriptable-laravel/lib",
