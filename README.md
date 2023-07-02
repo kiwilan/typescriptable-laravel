@@ -19,7 +19,7 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 >
 > -   [`kiwilan/typescriptable-laravel`](https://packagist.org/packages/kiwilan/typescriptable-laravel): PHP package for [Laravel](https://laravel.com/).
 > -   [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel): optional NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/) to have some helpers, if you want to know more about, [check documentation](https://github.com/kiwilan/typescriptable-laravel/blob/main/lib/README.md).
-> -   [ziggy](https://github.com/tighten/ziggy) is **NOT REQUIRED**
+> -   [`ziggy`](https://github.com/tighten/ziggy) is **NOT REQUIRED**
 
 |  Database  | Supported |
 | :--------: | :-------: |
@@ -74,6 +74,11 @@ return [
          * The path to the models directory.
          */
         'directory' => app_path('Models'),
+        /**
+         * The path to print PHP classes if you want to convert Models to simple classes.
+         * If null will not print PHP classes.
+         */
+        'php_path' => null,
         /**
          * Models to skip.
          */
