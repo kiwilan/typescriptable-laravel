@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
 it('can be run', function () {
     $currentDir = getcwd();
@@ -12,5 +13,7 @@ it('can be run', function () {
         '--output-path' => $outputDir,
         '--extends' => 'Kiwilan\Typescriptable\Tests\Data\Settings\Settings',
     ]);
-    expect(true)->toBeTrue();
+
+    $settings = outputDir(TypescriptableConfig::settingsFilename());
+    expect($settings)->toBeFile();
 });

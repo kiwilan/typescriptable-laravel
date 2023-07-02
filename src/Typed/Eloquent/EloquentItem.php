@@ -103,8 +103,8 @@ class EloquentItem
 
         // Add if not hidden
         foreach ($this->columns as $column) {
-            if (! in_array($column->name, $this->model->getHidden())) {
-                $properties[$column->name] = $column;
+            if (! in_array($column->name(), $this->model->getHidden())) {
+                $properties[$column->name()] = $column;
             }
         }
 

@@ -8,8 +8,8 @@ use Kiwilan\Typescriptable\Typescriptable;
 class TypescriptableRoutesCommand extends Command
 {
     public $signature = 'typescriptable:routes
-                        {--route-list : Path to JSON route list}
-                        {--output-path : Path to output}';
+                        {--R|route-list : Path to JSON route list}
+                        {--O|output-path : Path to output}';
 
     public $description = 'Generate Routes types.';
 

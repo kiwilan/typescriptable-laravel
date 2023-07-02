@@ -11,24 +11,28 @@ use Kiwilan\Typescriptable\Typed\Utils\ClassItem;
 use Kiwilan\Typescriptable\Typed\Utils\LaravelTeamType;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
+/**
+ * @property ClassItem[] $items
+ * @property array<string, EloquentProperty[]> $eloquents
+ * @property array<string, array<string, array<string, string>>> $list
+ */
 class EloquentType
 {
-    /** @var ClassItem[] */
-    public array $items = [];
-
-    /** @var array<string, EloquentProperty[]> */
-    public array $eloquents = [];
-
-    /** @var array<string, array<string, array<string, string>>> */
-    public array $list = [];
-
+    /**
+     * @property ClassItem[] $items
+     * @property array<string, EloquentProperty[]> $eloquents
+     * @property array<string, array<string, array<string, string>>> $list
+     */
     protected function __construct(
-        public string $modelsPath,
-        public string $outputPath,
+        protected string $modelsPath,
+        protected string $outputPath,
+        protected array $items = [],
+        protected array $eloquents = [],
+        protected array $list = [],
     ) {
     }
 
-    public static function make(?string $modelsPath, ?string $outputPath): self
+    public static function make(?string $modelsPath, ?string $outputPath, ?string $phpPath = null): self
     {
         if (! $modelsPath) {
             $modelsPath = TypescriptableConfig::modelsDirectory();
@@ -39,23 +43,62 @@ class EloquentType
             $outputPath = TypescriptableConfig::setPath();
         }
 
-        $self = new EloquentType($modelsPath, $outputPath);
-        // $self->items = $self->setItems();
+        if (! $phpPath) {
+            $phpPath = TypescriptableConfig::modelsPhpPath();
+        }
+
+        $self = new self($modelsPath, $outputPath);
         $self->items = ClassItem::list($self->modelsPath, TypescriptableConfig::modelsSkip());
         $self->list = $self->setList();
         $self->eloquents = $self->setEloquents();
 
         $typescript = EloquentTypescript::make($self->eloquents, "{$outputPath}/{$tsFilename}");
-        // $php = EloquentPhp::make($self->eloquents, $outputPath);
-
         $typescript->print();
-        // $php->print();
+
+        if ($phpPath) {
+            $php = EloquentPhp::make($self->eloquents, $phpPath);
+            $php->print();
+        }
 
         // if (TypescriptableConfig::modelsFakeTeam()) {
         //     $service->typeables['Team'] = ClassTemplate::fake('Team', LaravelTeamType::setFakeTeam());
         // }
 
         return $self;
+    }
+
+    public function modelsPath(): string
+    {
+        return $this->modelsPath;
+    }
+
+    public function outputPath(): string
+    {
+        return $this->outputPath;
+    }
+
+    /**
+     * @return ClassItem[]
+     */
+    public function items(): array
+    {
+        return $this->items;
+    }
+
+    /**
+     * @return array<string, EloquentProperty[]>
+     */
+    public function eloquents(): array
+    {
+        return $this->eloquents;
+    }
+
+    /**
+     * @return array<string, array<string, array<string, string>>>
+     */
+    public function list(): array
+    {
+        return $this->list;
     }
 
     private function setEloquents(): array
@@ -89,10 +132,10 @@ class EloquentType
             foreach ($item->eloquent->properties as $field => $property) {
                 $field = Str::snake($field);
                 $list[$modelName][$field] = [
-                    'name' => $property->name,
-                    'isArray' => $property->isArray,
-                    'type' => $property->type,
-                    'typeTs' => $property->typeTs,
+                    'name' => $property->name(),
+                    'isArray' => $property->isArray(),
+                    'type' => $property->type(),
+                    'typeTs' => $property->typeTs(),
                 ];
             }
         }

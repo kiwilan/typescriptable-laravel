@@ -1,11 +1,17 @@
 # @kiwilan/typescriptable-laravel
 
-[kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel) is required.
+Composer package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
 
 ## Installation
 
 ```bash
 npm install @kiwilan/typescriptable-laravel --save-dev
+```
+
+Or
+
+```bash
+yarn install @kiwilan/typescriptable-laravel -D
 ```
 
 Or
@@ -55,7 +61,16 @@ import { ViteTypescriptable } from "@kiwilan/typescriptable-laravel";
 export default defineConfig({
     plugins: [
         ViteTypescriptable({
-            // Options
+            models: true,
+            settings: false,
+            routes: false,
+            autoreload: true,
+            inertia: true,
+            inertiaPaths: {
+                base: "resources/js",
+                pageType: "types-inertia.d.ts",
+                globalType: "types-inertia-global.d.ts",
+            },
         }),
     ],
 });
@@ -69,6 +84,7 @@ In your `resources/js/app.ts`:
 import "./bootstrap";
 import "../css/app.css";
 
+import type { DefineComponent } from 'vue'
 import { createApp, h } from "vue";
 import { createInertiaApp, router } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
@@ -80,12 +96,7 @@ import "./routes";
 
 createInertiaApp({
     title: (title) => `${title} - Laravel`,
-    // @ts-expect-error resolvePageComponent ts error
-    resolve: (name) =>
-        resolvePageComponent(
-            `./Pages/${name}.vue`,
-            import.meta.glob("./Pages/**/*.vue")
-        ),
+    resolve: (name) => resolve: name => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')) as Promise<DefineComponent>,
     setup({ el, App, props, plugin }) {
         const pinia = createPinia();
         const app = createApp({ render: () => h(App, props) })

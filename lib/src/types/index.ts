@@ -35,7 +35,7 @@ export interface ViteTypescriptableOptions {
    * ```
    *
    * @default {
-   *   basePath: 'resources/js',
+   *   base: 'resources/js',
    *   pageType: 'types-inertia.d.ts',
    *   globalType: 'types-inertia-global.d.ts',
    * }

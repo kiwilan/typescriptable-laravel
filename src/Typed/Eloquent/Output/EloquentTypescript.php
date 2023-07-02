@@ -32,8 +32,8 @@ class EloquentTypescript
             $content[] = "  export type {$model} = {";
 
             foreach ($eloquent as $field => $property) {
-                $field = $property->isNullable ? "{$field}?" : $field;
-                $content[] = "    {$field}: {$property->typeTs}";
+                $field = $property->isNullable() ? "{$field}?" : $field;
+                $content[] = "    {$field}: {$property->typeTs()}";
             }
             $content[] = '  }';
         }

@@ -33,27 +33,33 @@ class EloquentPhp
             $content[] = "class {$model}";
             $content[] = '{';
 
+            $count = count($eloquent);
+            $i = 0;
             foreach ($eloquent as $property) {
-                $type = $property->type;
+                $name = $property->name();
+                $type = $property->type();
+
+                $i++;
+                $isLast = $i === $count;
                 $isPrimitive = $self->isPrimitive($type);
-                $type = $self->isClass($type) ? "\\{$type}" : $type;
-                $type = $self->isDateTime($type) ? "\\{$type}" : $type;
-                $type = $property->isNullable ? "?{$type}" : $type;
 
-                $arrayType = $property->isArray ? '[]' : '';
+                if ($isPrimitive) {
+                    $content[] = $self->setField($property, $isLast);
 
-                if (str_contains($type, '[]')) {
-                    $type = str_replace('[]', '', $type);
+                    continue;
                 }
-                $comment = $property->isArray ? '    /** @var '.$type.$arrayType.' */' : '';
-                $type = $property->isArray ? 'array' : $type;
 
-                $type = $self->isAdvancedArray($type) ? 'array' : $type;
+                if ($property->isArray()) {
+                    $content[] = $self->setField($property, $isLast);
 
-                $content[] = "{$comment}".PHP_EOL."    public {$type} \${$property->name};";
+                    continue;
+                }
+
+                $type = "\\{$type}";
+                $content[] = $self->setField($property, $isLast);
             }
 
-            $content[] = '};';
+            $content[] = '}';
             $content[] = '';
 
             $self->content["{$model}.php"] = implode(PHP_EOL, $content);
@@ -64,15 +70,53 @@ class EloquentPhp
 
     public function print(): void
     {
+        if (! File::exists($this->path)) {
+            File::makeDirectory($this->path);
+        }
+
         foreach ($this->content as $name => $content) {
             $path = "{$this->path}/{$name}";
+            File::delete($path);
             File::put($path, $content);
         }
     }
 
-    private function isAdvancedArray(string $type): bool
+    private function setField(EloquentProperty $property, bool $isLast): string
     {
-        return strpos($type, '[]') !== false;
+        $comment = null;
+        $field = '';
+        $type = $property->type();
+
+        if ($property->isArray()) {
+            if (str_contains($type, '[]')) {
+                $type = str_replace('[]', '', $type);
+            }
+            $comment = '    /** @var '.$type.'[] */';
+            $type = 'array';
+        }
+
+        if ($comment) {
+            $field = $comment.PHP_EOL;
+        }
+
+        if ($this->isDateTime($type)) {
+            $type = 'DateTime';
+        }
+
+        if ($this->isClass($type)) {
+            $type = "\\{$type}";
+        }
+
+        if ($property->isNullable() && $property->type() !== 'mixed') {
+            $type = "?{$type}";
+        }
+
+        $field .= "    public {$type} \${$property->name()};";
+        if (! $isLast) {
+            $field .= PHP_EOL;
+        }
+
+        return $field;
     }
 
     private function isClass(string $type): bool
@@ -89,16 +133,23 @@ class EloquentPhp
     {
         return in_array($type, [
             'int',
-            'float',
             'string',
             'bool',
+            'float',
             'array',
+            'mixed',
             'object',
+            'null',
             'callable',
             'iterable',
+            'resource',
             'void',
-            'null',
-            'mixed',
+            'never',
+            'false',
+            'true',
+            'self',
+            'static',
+            'parent',
         ]);
     }
 }

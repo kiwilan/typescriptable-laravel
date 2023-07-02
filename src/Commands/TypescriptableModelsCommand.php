@@ -8,14 +8,16 @@ use Kiwilan\Typescriptable\Typescriptable;
 class TypescriptableModelsCommand extends Command
 {
     public $signature = 'typescriptable:models
-                        {--models-path : Path to models directory}
-                        {--output-path : Path to output}';
+                        {--M|models-path : Path to models directory}
+                        {--O|output-path : Path to output}
+                        {--P|php-path : Path to output PHP classes, if null wll not print PHP classes}';
 
     public $description = 'Generate Models types.';
 
     public function __construct(
         public ?string $modelsPath = null,
         public ?string $outputPath = null,
+        public ?string $phpPath = null,
     ) {
         parent::__construct();
     }
@@ -24,11 +26,12 @@ class TypescriptableModelsCommand extends Command
     {
         $this->modelsPath = (string) $this->option('models-path');
         $this->outputPath = (string) $this->option('output-path');
+        $this->phpPath = (string) $this->option('php-path');
 
-        $service = Typescriptable::models($this->modelsPath, $this->outputPath);
+        $service = Typescriptable::models($this->modelsPath, $this->outputPath, $this->phpPath);
         $namespaces = [];
 
-        foreach ($service->items as $item) {
+        foreach ($service->items() as $item) {
             $namespaces[] = [$item->namespace];
         }
         $this->table(['Models'], $namespaces);
