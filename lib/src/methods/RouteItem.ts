@@ -16,7 +16,7 @@ export class RouteItem {
 
   static make(name: App.Route.Name, routes?: RoutesType): RouteItem {
     const list = RouteList.make(routes)
-    const route = list.getRoute(name)
+    const route = list.getRouteLink(name)
 
     const self = new RouteItem(route.name)
     // self.params = route.params || {}
