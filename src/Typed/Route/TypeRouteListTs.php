@@ -78,6 +78,7 @@ class TypeRouteListTs
                     typescript;
             }
             $methods = $route->methods();
+            $methods = array_filter($methods, fn ($method) => $method !== 'HEAD');
             $methods = array_map(fn ($method) => "'{$method}'", $methods);
             $methods = implode(', ', $methods);
 
