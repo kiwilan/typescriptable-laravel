@@ -1,13 +1,17 @@
 <?php
 
+use Dotenv\Dotenv;
 use Kiwilan\Typescriptable\Tests\TestCase;
 
-define('DATABASE_TYPES', [
-    'mysql',
-    'pgsql',
-    'sqlite',
-    'sqlsrv',
-]);
+function getDatabaseTypes(): array
+{
+    $dotenv = Dotenv::createMutable(getcwd());
+    $data = $dotenv->load();
+    $types = $data['DATABASE_TYPES'] ?? 'mysql,sqlite,pgsql,sqlsrv';
+    $types = explode(',', $types);
+
+    return $types;
+}
 
 function outputDir(?string $file = null): string
 {

@@ -6,20 +6,22 @@ use Kiwilan\Typescriptable\Typed\EloquentType;
 use Kiwilan\Typescriptable\Typed\Typescript\TypescriptToPhp;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
-it('can be run', function (string $type) {
-    TestCase::setupDatabase($type);
+it('can be run', function () {
+    foreach (getDatabaseTypes() as $type) {
+        TestCase::setupDatabase($type);
 
-    Artisan::call('typescriptable:models', [
-        '--models-path' => models(),
-        '--output-path' => outputDir(),
-        '--php-path' => outputDir().'/php',
-    ]);
+        Artisan::call('typescriptable:models', [
+            '--models-path' => models(),
+            '--output-path' => outputDir(),
+            '--php-path' => outputDir().'/php',
+        ]);
 
-    $models = outputDir(TypescriptableConfig::modelsFilename());
-    expect($models)->toBeFile();
-})->with(DATABASE_TYPES);
+        $models = outputDir(TypescriptableConfig::modelsFilename());
+        expect($models)->toBeFile();
+    }
+});
 
-it('is correct from models', function (string $type) {
+it('is correct from models', function () {
     TestCase::setupDatabase('mysql');
 
     $models = outputDir(TypescriptableConfig::modelsFilename());
@@ -53,4 +55,4 @@ it('is correct from models', function (string $type) {
             // expect($property->isNullable())->toBe($tsProperty->isNullable());
         }
     }
-})->with(DATABASE_TYPES);
+});
