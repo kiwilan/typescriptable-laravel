@@ -95,7 +95,7 @@ class TypeRouteTs
         {$this->tsParams}
           };
 
-          export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+          export type Method = 'HEAD' | 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
           export type Param = string | number | boolean | undefined;
           export interface Link { name: App.Route.Name; path: App.Route.Path; params?: App.Route.Params[App.Route.Name],  methods: App.Route.Method[]; };
         }
