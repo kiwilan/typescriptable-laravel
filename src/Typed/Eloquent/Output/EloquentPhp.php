@@ -68,7 +68,7 @@ class EloquentPhp
         return $self;
     }
 
-    public function print(bool $delete = true): void
+    public function print(bool $delete = false): void
     {
         if (! File::exists($this->path)) {
             File::makeDirectory($this->path);

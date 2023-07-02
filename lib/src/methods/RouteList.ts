@@ -12,8 +12,26 @@ export class RouteList {
     return new RouteList(routes as Record<App.Route.Name, App.Route.Link>)
   }
 
-  public getRoute(name: App.Route.Name): App.Route.Link {
+  public getRouteLink(name: App.Route.Name): App.Route.Link {
     return this.routes[name]
+  }
+
+  public getRouteBinded(name: App.Route.Name, params?: App.Route.Params[App.Route.Name]): string {
+    const route = this.routes[name]
+    if (!params)
+      return route.path
+
+    const paramRegex = /{(\w+)}/g
+
+    const current = route.path.replace(paramRegex, (match, paramName) => {
+      const paramValue = params[paramName]
+      if (paramValue === undefined)
+        throw new Error(`Missing parameter value for ${paramName}`)
+
+      return paramValue
+    })
+
+    return current
   }
 
   public getAllRoutes(): Record<App.Route.Name, App.Route.Link> {

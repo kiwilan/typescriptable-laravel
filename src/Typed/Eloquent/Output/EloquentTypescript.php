@@ -52,7 +52,7 @@ class EloquentTypescript
         return $self;
     }
 
-    public function print(bool $delete = true): void
+    public function print(bool $delete = false): void
     {
         if (! File::exists(dirname($this->path))) {
             File::makeDirectory(dirname($this->path));

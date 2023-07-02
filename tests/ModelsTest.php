@@ -24,6 +24,12 @@ it('can be run', function () {
 it('is correct from models', function () {
     TestCase::setupDatabase('mysql');
 
+    Artisan::call('typescriptable:models', [
+        '--models-path' => models(),
+        '--output-path' => outputDir(),
+        '--php-path' => outputDir().'/php',
+    ]);
+
     $models = outputDir(TypescriptableConfig::modelsFilename());
     $ts = TypescriptToPhp::make($models);
     $data = $ts->raw();
@@ -35,7 +41,7 @@ it('is correct from models', function () {
         }
     }
 
-    $type = EloquentType::make(models(), outputDir(), delete: false);
+    $type = EloquentType::make(models(), outputDir());
 
     expect(count($type->eloquents()))->toBe(count($classes));
 
