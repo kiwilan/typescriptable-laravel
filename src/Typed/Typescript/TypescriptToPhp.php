@@ -7,8 +7,8 @@ use Closure;
 class TypescriptToPhp
 {
     /**
-     * @property array<string, array<string, array{type: string, nullable: bool}>> $raw
-     * @property array<string, TypescriptClass> $classes
+     * @param  array<string, array<string, array{type: string, nullable: bool}>>  $raw
+     * @param  array<string, TypescriptClass>  $classes
      */
     protected function __construct(
         protected string $path,
@@ -111,7 +111,7 @@ class TypescriptToPhp
 class TypescriptClass
 {
     /**
-     * @property array<string, TypescriptProperty> $properties
+     * @param  array<string, TypescriptProperty>  $properties
      */
     protected function __construct(
         protected string $name,

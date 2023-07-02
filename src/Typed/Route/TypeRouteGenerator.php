@@ -38,10 +38,18 @@ class TypeRouteGenerator
             $content = collect($content);
 
             $content->each(function (array $route) use (&$items) {
-                $methods = $route['methods'];
-                $uri = $route['uri'];
-                $action = $route['action'];
-                $route = new Route($methods, '', $action);
+                $methods = $route['methods'] ?? [];
+                $uri = $route['uri'] ?? '';
+
+                $route = new Route(
+                    methods: $methods,
+                    uri: $uri,
+                    action: [
+                        'middleware' => $route['middleware'] ?? [],
+                        'as' => $route['name'] ?? null,
+                    ],
+                );
+
                 $route->uri = $uri;
 
                 $items->push($route);

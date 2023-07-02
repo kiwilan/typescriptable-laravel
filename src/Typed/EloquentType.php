@@ -11,17 +11,12 @@ use Kiwilan\Typescriptable\Typed\Utils\ClassItem;
 use Kiwilan\Typescriptable\Typed\Utils\LaravelTeamType;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
-/**
- * @property ClassItem[] $items
- * @property array<string, EloquentProperty[]> $eloquents
- * @property array<string, array<string, array<string, string>>> $list
- */
 class EloquentType
 {
     /**
-     * @property ClassItem[] $items
-     * @property array<string, EloquentProperty[]> $eloquents
-     * @property array<string, array<string, array<string, string>>> $list
+     * @param  ClassItem[]  $items
+     * @param  array<string, EloquentProperty[]>  $eloquents
+     * @param  array<string, array<string, array<string, string>>>  $list
      */
     protected function __construct(
         protected string $modelsPath,

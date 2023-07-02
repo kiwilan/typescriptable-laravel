@@ -42,6 +42,11 @@ class SettingTypescript
 
     public function print(): void
     {
+        if (! File::exists(dirname($this->path))) {
+            File::makeDirectory(dirname($this->path));
+        }
+        File::delete($this->path);
+
         File::put($this->path, $this->content);
     }
 }
