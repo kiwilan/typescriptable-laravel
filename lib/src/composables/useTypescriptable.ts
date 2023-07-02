@@ -54,12 +54,13 @@ export function useTypescriptable() {
     return list.getRouteFromUrl(url)
   }
 
-  function route(route: App.Route.Name): string {
-    const current = list.getRoute(route)
-    if (!current)
+  function route(name: App.Route.Name, params?: App.Route.Params[App.Route.Name]): string {
+    const route = list.getRouteBinded(name, params)
+
+    if (!route)
       throw new Error(`Route ${route} not found`)
 
-    return current.path
+    return route
   }
 
   return {
