@@ -53,25 +53,34 @@
     "methods": ["GET", "HEAD"],
     "uri": "download/{podcast_slug}",
     "action": "App\\Http\\Controllers\\DownloadController@show",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/download/{podcast_slug}",
     "parameters": ["podcast_slug"]
   },
-  "feeds": {
-    "name": null,
+  "feeds.index": {
+    "name": "feeds.index",
     "methods": ["GET", "HEAD"],
     "uri": "feeds",
     "action": "App\\Http\\Controllers\\FeedController@index",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/feeds",
     "parameters": []
   },
-  "feeds/{feed_slug}": {
-    "name": null,
+  "feeds.show": {
+    "name": "feeds.show",
     "methods": ["GET", "HEAD"],
     "uri": "feeds/{feed_slug}",
     "action": "App\\Http\\Controllers\\FeedController@show",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/feeds/{feed_slug}",
     "parameters": ["feed_slug"]
   },
@@ -657,7 +666,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "/",
     "action": "App\\Http\\Controllers\\HomeController@index",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test//",
     "parameters": []
   },
@@ -951,7 +963,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "a-propos",
     "action": "App\\Http\\Controllers\\HomeController@page",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/a-propos",
     "parameters": []
   },
@@ -960,7 +975,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "p1pdd",
     "action": "App\\Http\\Controllers\\HomeController@p1pdd",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/p1pdd",
     "parameters": []
   },
@@ -969,7 +987,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "pqd2p",
     "action": "App\\Http\\Controllers\\HomeController@pqd2p",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/pqd2p",
     "parameters": []
   },
@@ -978,7 +999,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "s-abonner",
     "action": "App\\Http\\Controllers\\HomeController@subscribe",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/s-abonner",
     "parameters": []
   },
@@ -1041,7 +1065,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "podcasts",
     "action": "App\\Http\\Controllers\\PodcastController@index",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/podcasts",
     "parameters": []
   },
@@ -1050,7 +1077,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "podcasts/{podcast_slug}",
     "action": "App\\Http\\Controllers\\PodcastController@show",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/podcasts/{podcast_slug}",
     "parameters": ["podcast_slug"]
   },
@@ -1059,7 +1089,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "blog",
     "action": "App\\Http\\Controllers\\PostController@index",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/blog",
     "parameters": []
   },
@@ -1068,7 +1101,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "blog/{post_slug}",
     "action": "App\\Http\\Controllers\\PostController@show",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/blog/{post_slug}",
     "parameters": ["post_slug"]
   },
@@ -1090,7 +1126,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "rss",
     "action": "App\\Http\\Controllers\\RssController@index",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/rss",
     "parameters": []
   },
@@ -1099,7 +1138,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "rss/{feed_slug}",
     "action": "App\\Http\\Controllers\\RssController@show",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/rss/{feed_slug}",
     "parameters": ["feed_slug"]
   },
@@ -1117,7 +1159,10 @@
     "methods": ["GET", "HEAD"],
     "uri": "contact",
     "action": "App\\Http\\Controllers\\SubmissionController@index",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/contact",
     "parameters": []
   },
@@ -1126,7 +1171,10 @@
     "methods": ["POST"],
     "uri": "contact",
     "action": "App\\Http\\Controllers\\SubmissionController@store",
-    "middleware": ["Illuminate\\Routing\\Middleware\\SubstituteBindings"],
+    "middleware": [
+      "web",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
+    ],
     "example": "http://app.p1pdd.test/contact",
     "parameters": []
   },
