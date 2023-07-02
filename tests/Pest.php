@@ -3,6 +3,16 @@
 use Dotenv\Dotenv;
 use Kiwilan\Typescriptable\Tests\TestCase;
 
+foreach (glob('.output/*') as $file) {
+    if (basename($file) !== '.gitignore') {
+        if (is_dir($file)) {
+            rmdir($file);
+        } else {
+            unlink($file);
+        }
+    }
+}
+
 function getDatabaseTypes(): array
 {
     $dotenv = Dotenv::createMutable(getcwd());

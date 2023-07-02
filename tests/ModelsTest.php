@@ -35,7 +35,7 @@ it('is correct from models', function () {
         }
     }
 
-    $type = EloquentType::make(models(), outputDir(), delete: false);
+    $type = EloquentType::make(models(), outputDir());
 
     expect(count($type->eloquents()))->toBe(count($classes));
 
