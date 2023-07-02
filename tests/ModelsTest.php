@@ -24,6 +24,12 @@ it('can be run', function () {
 it('is correct from models', function () {
     TestCase::setupDatabase('mysql');
 
+    Artisan::call('typescriptable:models', [
+        '--models-path' => models(),
+        '--output-path' => outputDir(),
+        '--php-path' => outputDir().'/php',
+    ]);
+
     $models = outputDir(TypescriptableConfig::modelsFilename());
     $ts = TypescriptToPhp::make($models);
     $data = $ts->raw();
