@@ -62,6 +62,19 @@ You can install the package via composer:
 composer require kiwilan/typescriptable-laravel
 ```
 
+### About TypeScript
+
+If you want to use `.d.ts` files, you need to use TypeScript in your Laravel project, you have to create a `tsconfig.json` file and add `.d.ts` paths in `compilerOptions.types`:
+
+```json
+{
+    "compilerOptions": {
+        "typeRoots": ["./node_modules/@types", "resources/**/*.d.ts"]
+    },
+    "include": ["resources/**/*.d.ts"]
+}
+```
+
 ## Configuration
 
 You can publish the config file
