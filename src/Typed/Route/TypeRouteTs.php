@@ -161,7 +161,7 @@ class TypeRouteTs
 
             if ($hasParams) {
                 $params = collect($route->parameters())
-                    ->map(fn (TypeRouteParam $param) => "'{$param->name()}'?: App.Route.ParamType")
+                    ->map(fn (TypeRouteParam $param) => "'{$param->name()}': App.Route.ParamType")
                     ->join(",\n");
 
                 return "    '{$route->name()}': {\n      {$params}\n    }";
