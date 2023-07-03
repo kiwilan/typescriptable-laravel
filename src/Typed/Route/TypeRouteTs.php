@@ -100,7 +100,7 @@ class TypeRouteTs
           export interface Link { name: App.Route.Name; path: App.Route.Path; params?: App.Route.Params[App.Route.Name],  methods: App.Route.Method[]; }
           export type RouteConfig<T extends App.Route.Name> = {
             name: T;
-            params: T extends keyof App.Route.Params ? App.Route.Params[T] : never;
+            params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never;
           };
         }
         typescript;
