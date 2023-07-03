@@ -10,7 +10,7 @@ export class RouteItem {
     protected params: App.Route.Params[App.Route.Name] = {}, // { 'story'?: string | number | boolean }
     protected query: Record<string, string | number | boolean | undefined> | undefined = {},
     protected hash: string = '',
-    protected method: App.Route.Method = 'GET', // 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+    protected methods: App.Route.Method[] = ['GET'], // 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
     protected path: string = '/',
   ) {}
 
@@ -21,7 +21,7 @@ export class RouteItem {
     const self = new RouteItem(route.name)
     // self.params = route.params || {}
     // self.query = route.query
-    self.method = route.method
+    self.methods = route.methods
     self.path = route.path
 
     self.path = self.setParams()

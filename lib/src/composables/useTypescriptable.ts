@@ -25,7 +25,7 @@ export function useTypescriptable() {
 
   const page = usePage<Inertia.PageProps>()
 
-  const isRoute = (route: App.Route.Path): boolean => {
+  const isRoute = (route: App.Route.Name): boolean => {
     const list = RouteList.make()
     const url = list.getCurrentUrl()
     const currentRoute = list.getRouteFromUrl(url)
@@ -57,8 +57,11 @@ export function useTypescriptable() {
   function route(name: App.Route.Name, params?: App.Route.Params[App.Route.Name]): string {
     const route = list.getRouteBinded(name, params)
 
-    if (!route)
-      throw new Error(`Route ${route} not found`)
+    return route
+  }
+
+  function to(name: App.Route.Name, params?: App.Route.Params[App.Route.Name]): string {
+    const route = list.getRouteBinded(name, params)
 
     return route
   }
@@ -70,5 +73,6 @@ export function useTypescriptable() {
     isDev,
     currentRoute,
     route,
+    to,
   }
 }

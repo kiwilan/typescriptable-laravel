@@ -6,4 +6,5 @@ it('can use route item', async () => {
   const item = RouteItem.make('feeds.show', Routes)
 
   expect(item).not.toBe(undefined)
+  expect(item.getPath()).toBe('/feeds/?')
 })

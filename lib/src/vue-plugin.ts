@@ -4,22 +4,22 @@ import { useTypescriptable } from './composables/useTypescriptable'
 
 export const VueTypescriptable: Plugin = {
   install: (app) => {
-    const inertia = useTypescriptable()
+    const ts = useTypescriptable()
 
-    app.config.globalProperties.$route = inertia.route as any
-    app.config.globalProperties.$isRoute = inertia.isRoute as any
-    app.config.globalProperties.$currentRoute = inertia.currentRoute as any
+    app.config.globalProperties.$route = ts.route
+    app.config.globalProperties.$isRoute = ts.isRoute
+    app.config.globalProperties.$currentRoute = ts.currentRoute
+    app.config.globalProperties.$to = ts.to
 
     app.provide('inertia', {
       route: app.config.globalProperties.$route,
       isRoute: app.config.globalProperties.$isRoute,
       currentRoute: app.config.globalProperties.$currentRoute,
+      to: app.config.globalProperties.$to,
     })
 
-    // eslint-disable-next-line vue/no-reserved-component-names
-    app.component('Head', Head)
-    // eslint-disable-next-line vue/no-reserved-component-names
-    app.component('Link', Link)
+    app.component('IHead', Head)
+    app.component('ILink', Link)
 
     return app
   },
