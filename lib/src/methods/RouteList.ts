@@ -18,6 +18,10 @@ export class RouteList {
 
   public getRouteBinded(name: App.Route.Name, params?: App.Route.Params[App.Route.Name]): string {
     const route = this.routes[name]
+
+    if (!route)
+      throw new Error(`Route ${name} not found`)
+
     if (!params)
       return route.path
 
@@ -30,6 +34,12 @@ export class RouteList {
 
       return paramValue
     })
+
+    return current
+  }
+
+  public getRouteBind<T extends App.Route.Name>(route: App.Route.RouteConfig<T>): string {
+    const current = this.getRouteBinded(route.name, route.params)
 
     return current
   }
@@ -100,6 +110,10 @@ export class RouteList {
   public getRouteFromUrl(url: string): App.Route.Link | undefined {
     const parts = this.parseURL(url)
     const candidates = this.getCandidatesFromUrl(url)
+    if (parts.length === 0) {
+      const item = candidates.find(item => item.path === url)
+      return item
+    }
 
     let rightRoute: App.Route.Link | undefined
     for (const candidate of candidates) {

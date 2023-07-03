@@ -12,7 +12,7 @@ export class Router {
 
   private convertURL(name: App.Route.Name): string {
     const list = RouteList.make()
-    const route = list.getRoute(name)
+    const route = list.getRouteLink(name)
 
     return route.path
   }

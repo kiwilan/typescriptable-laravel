@@ -87,8 +87,8 @@ declare namespace Inertia {
     sessions: { agent: { is_desktop: boolean; browser: string; platform: string; }, ip_address: string; is_current_device: boolean; last_active: string; }[];
   }
   export interface GlobalComponents {
-    Head: typeof import('@inertiajs/vue3').Head,
-    Link: typeof import('@inertiajs/vue3').Link,
+    IHead: typeof import('@inertiajs/vue3').Head,
+    ILink: typeof import('@inertiajs/vue3').Link,
   }
 }
 
