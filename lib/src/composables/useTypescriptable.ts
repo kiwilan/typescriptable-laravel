@@ -60,10 +60,9 @@ export function useTypescriptable() {
     return route
   }
 
-  function to(name: App.Route.Name, params?: App.Route.Params[App.Route.Name]): string {
-    const route = list.getRouteBinded(name, params)
-
-    return route
+  function to<T extends App.Route.Name>(route: App.Route.RouteConfig<T>): string {
+    const item = RouteList.make()
+    return item.getRouteBind(route)
   }
 
   return {
