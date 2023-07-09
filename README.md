@@ -141,6 +141,8 @@ With options:
 
 ## Examples
 
+Check [examples](docs/examples.md) documentation.
+
 ## Testing
 
 ```bash
