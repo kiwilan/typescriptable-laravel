@@ -43,7 +43,7 @@
     "clean": "rimraf dist && rimraf vue",
     "local": "rm -f ~/kiwilan-typescriptable-laravel-*.tgz || true && mv ./kiwilan-typescriptable-laravel-*.tgz ~/kiwilan-typescriptable-laravel.tgz",
     "package": "npm run clean && npm run build && npm pack && npm run local",
-    "deploy": "npm run clean && npm run build && npm pack --dry-run && npm publish --access public"
+    "release": "npm run clean && npm run build && npm pack --dry-run && npm publish --access public"
   },
   "peerDependencies": {
     "vite": "^4.x.x",
