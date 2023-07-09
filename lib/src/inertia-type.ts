@@ -80,7 +80,7 @@ declare namespace Inertia {
   private setGlobalType(): string {
     return `declare module 'vue' {
   interface ComponentCustomProperties {
-    $route: (route: App.Route.Name) => string;
+    $route: <T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never) => string;
     $isRoute: (name: App.Route.Name) => boolean;
     $currentRoute: () => App.Route.Link | undefined;
     $to: <T extends App.Route.Name>(route: App.Route.RouteConfig<T>) => string;

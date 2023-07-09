@@ -13,13 +13,12 @@ Add some helpers for your Inertia app with TypeScript.
 > `composer` package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
 
 ```bash
+# npm
 npm install @kiwilan/typescriptable-laravel --save-dev
-```
-
-Or
-
-```bash
+# pnpm
 pnpm add @kiwilan/typescriptable-laravel -D
+# yarn
+yarn add @kiwilan/typescriptable-laravel -D
 ```
 
 ## Features
@@ -52,16 +51,7 @@ import { ViteTypescriptable } from "@kiwilan/typescriptable-laravel";
 export default defineConfig({
     plugins: [
         ViteTypescriptable({
-            models: true,
-            settings: false,
-            routes: false,
-            autoreload: true,
-            inertia: true,
-            inertiaPaths: {
-                base: "resources/js",
-                pageType: "types-inertia.d.ts",
-                globalType: "types-inertia-global.d.ts",
-            },
+            // Options
         }),
     ],
 });

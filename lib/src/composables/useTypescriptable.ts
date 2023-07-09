@@ -54,10 +54,12 @@ export function useTypescriptable() {
     return list.getRouteFromUrl(url)
   }
 
-  function route(name: App.Route.Name, params?: App.Route.Params[App.Route.Name]): string {
-    const route = list.getRouteBinded(name, params)
-
-    return route
+  function route<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never): string {
+    const item = RouteList.make()
+    return item.getRouteBind({
+      name,
+      params,
+    })
   }
 
   function to<T extends App.Route.Name>(route: App.Route.RouteConfig<T>): string {
