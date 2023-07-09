@@ -1,5 +1,6 @@
 import type { Plugin } from 'vite'
 import type { ViteTypescriptableOptions } from './types/index'
+import { execute } from './server'
 import { InertiaType } from './inertia-type'
 
 const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
@@ -15,25 +16,6 @@ const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
   autoreload: true,
 }
 
-async function command(command: string) {
-  let exec = (_command: string, _callback: (error: any, stdout: any) => void) => {}
-  if (process.env.NODE_ENV !== 'production') {
-    const cp = await import('node:child_process')
-    exec = cp.exec
-  }
-  exec(
-    command,
-    (error) => {
-      if (error) {
-        console.error(`exec error: ${error}`)
-        return
-      }
-      // eslint-disable-next-line no-console
-      console.log(`${command} ready!`)
-    },
-  )
-}
-
 function ViteTypescriptable(userOptions: ViteTypescriptableOptions = {}): Plugin {
   return {
     name: 'vite-plugin-typescriptable-laravel',
@@ -41,16 +23,16 @@ function ViteTypescriptable(userOptions: ViteTypescriptableOptions = {}): Plugin
       const opts: ViteTypescriptableOptions = Object.assign({}, DEFAULT_OPTIONS, userOptions)
 
       if (opts.models)
-        command('php artisan typescriptable:models')
+        await execute('php artisan typescriptable:models')
 
       if (opts.settings)
-        command('php artisan typescriptable:settings')
+        await execute('php artisan typescriptable:settings')
 
       if (opts.routes)
-        command('php artisan typescriptable:routes')
+        await execute('php artisan typescriptable:routes')
 
       if (opts.inertia)
-        InertiaType.make(opts)
+        await InertiaType.make(opts)
     },
     async handleHotUpdate({ file, server }) {
       const opts = Object.assign({}, DEFAULT_OPTIONS, userOptions)
