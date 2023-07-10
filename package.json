@@ -9,7 +9,7 @@
     "test": "pnpm recursive run test",
     "coverage": "pnpm recursive run coverage",
     "package": "pnpm recursive run package",
-    "deploy": "pnpm recursive run deploy"
+    "release": "pnpm recursive run release"
   },
   "license": "MIT"
 }

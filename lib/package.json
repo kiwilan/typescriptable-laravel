@@ -1,7 +1,7 @@
 {
   "name": "@kiwilan/typescriptable-laravel",
   "type": "module",
-  "version": "1.3.0",
+  "version": "2.0.1",
   "description": "Add some helpers for your Inertia app with TypeScript.",
   "author": "Ewilan Rivière <ewilan.riviere@gmail.com>",
   "license": "MIT",
@@ -43,7 +43,7 @@
     "clean": "rimraf dist && rimraf vue",
     "local": "rm -f ~/kiwilan-typescriptable-laravel-*.tgz || true && mv ./kiwilan-typescriptable-laravel-*.tgz ~/kiwilan-typescriptable-laravel.tgz",
     "package": "npm run clean && npm run build && npm pack && npm run local",
-    "deploy": "npm run clean && npm run build && npm pack --dry-run && npm publish --access public"
+    "release": "npm run clean && npm run build && npm pack --dry-run && npm publish --access public"
   },
   "peerDependencies": {
     "vite": "^4.x.x",
@@ -72,7 +72,7 @@
     "tsup": "^7.1.0",
     "typescript": "^5.1.6",
     "vite": "^4.3.9",
-    "vite-plugin-dts": "3.0.0-beta.3",
+    "vite-plugin-dts": "^3.0.3",
     "vitest": "^0.32.2",
     "vue": "^3.3.4"
   }

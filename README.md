@@ -1,6 +1,6 @@
 # Typescriptable for Laravel
 
-![Banner with printer shop picture in background and Typescriptable Laravel title](docs/banner.jpg)
+![Banner with printer shop picture in background and Typescriptable Laravel title](https://raw.githubusercontent.com/kiwilan/typescriptable-laravel/main/docs/banner.jpg)
 
 [![php][php-version-src]][php-version-href]
 [![laravel][laravel-src]][laravel-href]
@@ -140,6 +140,8 @@ With options:
 -   --`O`|`output-path`: Path to output.
 
 ## Examples
+
+Check [examples](docs/examples.md) documentation.
 
 ## Testing
 

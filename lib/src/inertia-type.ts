@@ -1,21 +1,21 @@
-import { writeFile } from 'node:fs'
+import { write } from './server'
 import type { ViteTypescriptableOptions } from './vite-plugin'
 
 export class InertiaType {
-  static make(opts: ViteTypescriptableOptions) {
+  static async make(opts: ViteTypescriptableOptions) {
     const self = new InertiaType()
     const basePath = opts.inertiaPaths?.base || 'resources/js'
     const inertiaTypeFile = opts.inertiaPaths?.pageType || 'types-inertia.d.ts'
     const inertiaGlobalTypeFile = opts.inertiaPaths?.globalType || 'types-inertia-global.d.ts'
 
     if (inertiaTypeFile) {
-      self.setFile(`${basePath}/${inertiaTypeFile}`, self.setPageType())
+      await self.setFile(`${basePath}/${inertiaTypeFile}`, self.setPageType())
       // eslint-disable-next-line no-console
       console.log('Inertia types ready!')
     }
 
     if (inertiaGlobalTypeFile) {
-      self.setFile(`${basePath}/${inertiaGlobalTypeFile}`, self.setGlobalType())
+      await self.setFile(`${basePath}/${inertiaGlobalTypeFile}`, self.setGlobalType())
       // eslint-disable-next-line no-console
       console.log('Inertia global types ready!')
     }
@@ -25,13 +25,10 @@ export class InertiaType {
     return process.cwd()
   }
 
-  private setFile(filename: string, content: string) {
+  private async setFile(filename: string, content: string) {
     const path = `${this.rootPath()}/${filename}`
 
-    writeFile(path, content, (err) => {
-      if (err)
-        console.error(err)
-    })
+    await write(path, content)
   }
 
   private setPageType(): string {
@@ -80,7 +77,7 @@ declare namespace Inertia {
   private setGlobalType(): string {
     return `declare module 'vue' {
   interface ComponentCustomProperties {
-    $route: (route: App.Route.Name) => string;
+    $route: <T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never) => string;
     $isRoute: (name: App.Route.Name) => boolean;
     $currentRoute: () => App.Route.Link | undefined;
     $to: <T extends App.Route.Name>(route: App.Route.RouteConfig<T>) => string;
