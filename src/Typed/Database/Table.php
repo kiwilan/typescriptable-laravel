@@ -3,6 +3,7 @@
 namespace Kiwilan\Typescriptable\Typed\Database;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class Table
 {
@@ -48,6 +49,10 @@ class Table
 
         if ($converter === null) {
             throw new \Exception("Database driver not supported: {$this->driver}");
+        }
+
+        if (! Schema::hasTable($this->name)) {
+            return [];
         }
 
         foreach (DB::select($this->select) as $column) {

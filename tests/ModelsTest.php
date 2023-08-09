@@ -10,6 +10,10 @@ it('can be run', function () {
     foreach (getDatabaseTypes() as $type) {
         TestCase::setupDatabase($type);
 
+        config(['typescriptable.models.skip' => [
+            'App\\Models\\SushiTest',
+        ]]);
+
         Artisan::call('typescriptable:models', [
             '--models-path' => models(),
             '--output-path' => outputDir(),
@@ -22,6 +26,10 @@ it('can be run', function () {
 });
 
 it('is correct from models', function () {
+    config(['typescriptable.models.skip' => [
+        'App\\Models\\SushiTest',
+    ]]);
+
     TestCase::setupDatabase('mysql');
 
     Artisan::call('typescriptable:models', [
