@@ -6,7 +6,7 @@ export default defineConfig({
     index: 'src/index.ts',
   },
   format: ['cjs', 'esm'],
-  external: ['vue', '@inertiajs/vue3'],
+  external: ['vue', '@inertiajs/vue3', 'node:fs/promises', 'node:child_process'],
   outDir: 'dist',
   dts: true,
   minify: true,

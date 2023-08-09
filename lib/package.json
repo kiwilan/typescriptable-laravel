@@ -1,11 +1,11 @@
 {
   "name": "@kiwilan/typescriptable-laravel",
   "type": "module",
-  "version": "2.0.1",
+  "version": "2.0.4",
   "description": "Add some helpers for your Inertia app with TypeScript.",
   "author": "Ewilan Rivière <ewilan.riviere@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/kiwilan/typescriptable-laravel/lib",
+  "homepage": "https://github.com/kiwilan/typescriptable-laravel/tree/main/lib",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiwilan/typescriptable-laravel.git"
