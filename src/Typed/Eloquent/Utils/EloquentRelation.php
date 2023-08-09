@@ -12,8 +12,8 @@ class EloquentRelation
         public string $field,
         public bool $isArray = false,
         public bool $isMorph = false,
-        public ?string $type = null,
-        public ?string $typeTs = null,
+        public string $type = 'mixed',
+        public string $typeTs = 'any',
     ) {
     }
 
@@ -66,6 +66,14 @@ class EloquentRelation
 
         if ($relation->isMorph && ! $relation->type) {
             $relation->type = 'mixed';
+            $relation->typeTs = 'any';
+        }
+
+        if (! $relation->type) {
+            $relation->type = 'mixed';
+        }
+
+        if (! $relation->typeTs) {
             $relation->typeTs = 'any';
         }
 
