@@ -18,7 +18,7 @@ class SettingType
     ) {
     }
 
-    public static function make(?string $settingsPath, ?string $outputPath, ?string $extends): self
+    public static function make(?string $settingsPath, ?string $outputPath, ?string $extends): ?self
     {
         if (! $settingsPath) {
             $settingsPath = TypescriptableConfig::settingsDirectory();
@@ -32,6 +32,10 @@ class SettingType
 
         if (! $extends) {
             $extends = 'Spatie\LaravelSettings\Settings';
+        }
+
+        if (! file_exists($settingsPath)) {
+            return null;
         }
 
         $items = ClassItem::list($settingsPath, TypescriptableConfig::settingsSkip());
