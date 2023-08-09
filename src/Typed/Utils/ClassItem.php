@@ -63,14 +63,14 @@ class ClassItem
         /** @var \SplFileInfo $file */
         foreach ($iterator as $file) {
             if (! $file->isDir()) {
+                $namespace = ClassItem::getFileNamespace($file);
+                if (in_array($namespace, $skip)) {
+                    continue;
+                }
                 $model = ClassItem::make(
                     path: $file->getPathname(),
                     file: $file,
                 );
-
-                if (in_array($model->namespace, $skip)) {
-                    continue;
-                }
                 $classes[$model->name] = $model;
             }
         }
