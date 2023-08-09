@@ -17,7 +17,7 @@ class TypescriptableConfig
         return $path;
     }
 
-    public static function setPath(?string $filename = null): string
+    public static function setPath(string $filename = null): string
     {
         if (! $filename) {
             return TypescriptableConfig::outputPath();
