@@ -2,6 +2,11 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.11.02 - 2023-08-09
+
+- Fix `mixed` ts type to `any`
+- Fix `SettingType` allow path to not exists
+
 ## 1.11.01 - 2023-08-09
 
 - Add `EloquentRelation` fallback for `type` and `typeTs`
