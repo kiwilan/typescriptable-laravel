@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## 1.11.01 - 2023-08-09
+
+- Add `EloquentRelation` fallback for `type` and `typeTs`
+
 ## 1.11.0 - 2023-06-30
 
 - fix version
