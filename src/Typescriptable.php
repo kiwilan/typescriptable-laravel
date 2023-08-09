@@ -8,7 +8,7 @@ use Kiwilan\Typescriptable\Typed\SettingType;
 
 class Typescriptable
 {
-    public static function models(string $modelsPath, string $outputPath, ?string $phpPath = null): EloquentType
+    public static function models(string $modelsPath, string $outputPath, string $phpPath = null): EloquentType
     {
         return EloquentType::make($modelsPath, $outputPath, $phpPath);
     }

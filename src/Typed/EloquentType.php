@@ -27,7 +27,7 @@ class EloquentType
     ) {
     }
 
-    public static function make(?string $modelsPath, ?string $outputPath, ?string $phpPath = null, bool $delete = true): self
+    public static function make(?string $modelsPath, ?string $outputPath, string $phpPath = null, bool $delete = true): self
     {
         if (! $modelsPath) {
             $modelsPath = TypescriptableConfig::modelsDirectory();

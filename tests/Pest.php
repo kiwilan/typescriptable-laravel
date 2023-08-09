@@ -23,7 +23,7 @@ function getDatabaseTypes(): array
     return $types;
 }
 
-function outputDir(?string $file = null): string
+function outputDir(string $file = null): string
 {
     $currentDir = getcwd();
 
