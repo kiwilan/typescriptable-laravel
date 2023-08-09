@@ -49,6 +49,8 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 -   [ ] 90% coverage
 -   [x] Generate TS types for `morphTo`
 -   [ ] Improve `Casts\Attribute` methods
+-   [ ] Add parser for [https://github.com/calebporzio/sushi](https://github.com/calebporzio/sushi)
+-   [ ] Add parwser for [https://github.com/spatie/laravel-permission](https://github.com/spatie/laravel-permission)
 
 ## Installation
 
