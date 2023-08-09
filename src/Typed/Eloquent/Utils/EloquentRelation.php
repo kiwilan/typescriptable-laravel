@@ -60,20 +60,13 @@ class EloquentRelation
             $relation->type = $type;
         }
 
+        $typeTs = EloquentItem::phpToTs($relation->type);
         $relation->typeTs = $relation->isArray
-            ? "{$relation->type}[]"
-            : $relation->type;
+            ? "{$typeTs}[]"
+            : $typeTs;
 
         if ($relation->isMorph && ! $relation->type) {
             $relation->type = 'mixed';
-            $relation->typeTs = 'any';
-        }
-
-        if (! $relation->type) {
-            $relation->type = 'mixed';
-        }
-
-        if (! $relation->typeTs) {
             $relation->typeTs = 'any';
         }
 
