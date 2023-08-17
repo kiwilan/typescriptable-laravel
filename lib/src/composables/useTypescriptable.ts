@@ -1,34 +1,34 @@
 import { usePage } from '@inertiajs/vue3'
-import { RouteList, Router } from '@/methods'
+import { Http, Router } from '@/methods'
 import type { RequestPayload } from '@/types'
 
 export function useTypescriptable() {
-  const list = RouteList.make()
+  const http = Http.make()
+  const router = Router.make()
 
-  const router = {
+  const request = {
     get(name: App.Route.Name): void {
-      return Router.make().get(name)
+      return http.get(name)
     },
     post(name: App.Route.Name, data?: RequestPayload): void {
-      return Router.make().post(name, data)
+      return http.post(name, data)
     },
     put(name: App.Route.Name, data?: RequestPayload): void {
-      return Router.make().put(name, data)
+      return http.put(name, data)
     },
     patch(name: App.Route.Name, data?: RequestPayload): void {
-      return Router.make().patch(name, data)
+      return http.patch(name, data)
     },
     delete(name: App.Route.Name): void {
-      return Router.make().delete(name)
+      return http.delete(name)
     },
   }
 
   const page = usePage<Inertia.PageProps>()
 
   const isRoute = (route: App.Route.Name): boolean => {
-    const list = RouteList.make()
-    const url = list.getCurrentUrl()
-    const currentRoute = list.getRouteFromUrl(url)
+    const url = router.getCurrentUrl()
+    const currentRoute = router.getRouteFromUrl(url)
 
     const current: string = route
     if (currentRoute) {
@@ -50,30 +50,30 @@ export function useTypescriptable() {
   }
 
   function currentRoute(): App.Route.Link | undefined {
-    const url = list.getCurrentUrl()
-    return list.getRouteFromUrl(url)
+    const url = router.getCurrentUrl()
+    return router.getRouteFromUrl(url)
   }
 
   function route<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never): string {
-    const item = RouteList.make()
-    return item.getRouteBind({
+    return router.getRouteBind({
       name,
       params,
     })
   }
 
   function to<T extends App.Route.Name>(route: App.Route.RouteConfig<T>): string {
-    const item = RouteList.make()
-    return item.getRouteBind(route)
+    return router.getRouteBind(route)
   }
 
   return {
-    router,
+    request,
     isRoute,
     page,
     isDev,
     currentRoute,
     route,
     to,
+    Http,
+    Router,
   }
 }
