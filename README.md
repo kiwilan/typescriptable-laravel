@@ -147,12 +147,58 @@ Check [examples](docs/examples.md) documentation.
 
 ## Testing
 
+Create a `.env` file with your database configuration
+
 ```bash
 cp .env.example .env
 ```
 
+And you can run tests
+
 ```bash
 composer test
+```
+
+### Docker database
+
+> **Note**
+>
+> To install this on M1 Mac, you need to enable `Use Rosetta for x86/amd64 emulation on Apple Silicon` in Docker preferences.
+
+To install MySQL with Docker
+
+```bash
+docker run --name mysql \
+    -e MYSQL_ROOT_PASSWORD=root \
+    -e MYSQL_USER=testing \
+    -e MYSQL_PASSWORD=testing \
+    -e MYSQL_DATABASE=testing \
+    -p 3306:3306 \
+    -d \
+    mysql:8.0
+```
+
+To install PostgreSQL with Docker
+
+```bash
+docker run --name postgresql \
+    -e POSTGRES_USER=testing \
+    -e POSTGRES_PASSWORD=testing \
+    -e POSTGRES_DB=testing \
+    -p 5432:5432 \
+    -d \
+    postgres:15.4
+```
+
+To install SQL Server with Docker
+
+```bash
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=12345OHdf%e" \
+  -p 1433:1433 \
+  --name sqlserver \
+  --hostname sqlserver \
+  -d \
+  mcr.microsoft.com/mssql/server:2022-latest
 ```
 
 ## Changelog
