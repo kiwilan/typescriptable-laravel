@@ -11,26 +11,21 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/vue/index.ts'),
-      name: 'vue',
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'vite-plugin-typescriptable-laravel',
       fileName: 'index',
       formats: ['cjs', 'es'],
     },
-    outDir: 'vue',
+    outDir: 'dist',
     rollupOptions: {
-      external: ['node', 'vue', '@inertiajs/vue3'],
-      output: {
-        globals: {
-          vue: 'Vue',
-        },
-      },
+      external: ['vue', '@inertiajs/vue3', 'node:fs/promises', 'node:child_process'],
     },
   },
   plugins: [
     vue(),
     dts({
-      entryRoot: resolve(__dirname, 'src/vue'),
-      outDir: resolve(__dirname, 'vue'),
+      entryRoot: resolve(__dirname, 'src'),
+      outDir: resolve(__dirname, 'dist'),
     }),
   ],
 })

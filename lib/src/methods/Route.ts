@@ -1,7 +1,7 @@
-import { RouteList } from './RouteList'
+import { Router } from './Router'
 import type { RoutesType } from '.'
 
-export class RouteItem {
+export class Route {
   protected constructor(
     // protected type: App.Route.Type, // App.Route.Typed.Login | App.Route.Typed.Logout | App.Route.Typed.FrontStoriesShow
     // protected entity: App.Route.Link, // { name: App.Route.Name; path: App.Route.Path; params?: App.Route.Params[App.Route.Name],  method: App.Route.Method; }
@@ -14,11 +14,11 @@ export class RouteItem {
     protected path: string = '/',
   ) {}
 
-  static make(name: App.Route.Name, routes?: RoutesType): RouteItem {
-    const list = RouteList.make(routes)
+  static make(name: App.Route.Name, routes?: RoutesType): Route {
+    const list = Router.make(routes)
     const route = list.getRouteLink(name)
 
-    const self = new RouteItem(route.name)
+    const self = new Route(route.name)
     // self.params = route.params || {}
     // self.query = route.query
     self.methods = route.methods

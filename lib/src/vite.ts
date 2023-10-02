@@ -59,6 +59,4 @@ function ViteTypescriptable(userOptions: ViteTypescriptableOptions = {}): Plugin
 }
 
 export type { ViteTypescriptableOptions }
-export {
-  ViteTypescriptable,
-}
+export default ViteTypescriptable

@@ -8,7 +8,7 @@ Add some helpers for your Inertia app with TypeScript.
 
 ## Installation
 
-> **Warning**
+> **Important**
 >
 > `composer` package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
 
@@ -46,11 +46,11 @@ In your `vite.config.ts`:
 
 ```ts
 import { defineConfig } from "vite";
-import { ViteTypescriptable } from "@kiwilan/typescriptable-laravel";
+import typescriptable from "@kiwilan/typescriptable-laravel/vite";
 
 export default defineConfig({
     plugins: [
-        ViteTypescriptable({
+        typescriptable({
             // Options
         }),
     ],

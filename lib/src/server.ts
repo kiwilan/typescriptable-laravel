@@ -1,5 +1,3 @@
-import fs from 'node:fs/promises'
-
 export async function execute(command: string): Promise<void> {
   if (isProduction())
     return
@@ -21,5 +19,9 @@ export function isProduction(): boolean {
 }
 
 export async function write(path: string, content: string): Promise<void> {
-  await fs.writeFile(path, content)
+  if (isProduction())
+    return
+
+  const { writeFile } = await import('node:fs/promises')
+  await writeFile(path, content)
 }
