@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.11 - 2023-10-02
+
+- Typescript generated fixed
+
 ## v1.11.10 - 2023-10-02
 
 - Add header to `.d.ts` to skip Typescript errors
