@@ -1,7 +1,7 @@
 {
   "name": "@kiwilan/typescriptable-laravel",
   "type": "module",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Add some helpers for your Inertia app with TypeScript.",
   "author": "Ewilan Rivière <ewilan.riviere@gmail.com>",
   "license": "MIT",
