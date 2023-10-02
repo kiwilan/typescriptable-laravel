@@ -41,7 +41,8 @@ export class InertiaType {
 
   private setPageType(): string {
     const head = this.HEAD.join('\n')
-    return `${head}declare namespace Inertia {
+    return `${head}
+declare namespace Inertia {
   type Errors = Record<string, string>
   type ErrorBag = Record<string, Errors>
   interface Page {
@@ -63,17 +64,17 @@ export class InertiaType {
           banner?: string
           message?: string
           style?: string
-        };
-      };
+        }
+      }
       [key: string]: unknown
       errors: Inertia.Errors & Inertia.ErrorBag
     }
     url: string
-    version: string | null;
+    version: string | null
     scrollRegions: Array<{
-        top: number
-        left: number
-    }>;
+      top: number
+      left: number
+    }>
     errors: Inertia.Errors & Inertia.ErrorBag
     rememberedState: Record<string, unknown>
     resolvedErrors: Inertia.Errors
@@ -84,22 +85,23 @@ export class InertiaType {
 
   private setGlobalType(): string {
     const head = this.HEAD.join('\n')
-    return `${head}declare module 'vue' {
+    return `${head}
+declare module 'vue' {
   interface ComponentCustomProperties {
     $route: <T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never) => string
     $isRoute: (name: App.Route.Name) => boolean
     $currentRoute: () => App.Route.Link | undefined
     $to: <T extends App.Route.Name>(route: App.Route.RouteConfig<T>) => string
     $page: Inertia.Page
-    sessions: { agent: { is_desktop: boolean; browser: string; platform: string; }, ip_address: string; is_current_device: boolean; last_active: string; }[];
+    sessions: { agent: { is_desktop: boolean; browser: string; platform: string }; ip_address: string; is_current_device: boolean; last_active: string }[]
   }
   export interface GlobalComponents {
-    IHead: typeof import('@inertiajs/vue3').Head,
-    ILink: typeof import('@inertiajs/vue3').Link,
+    IHead: typeof import('@inertiajs/vue3').Head
+    ILink: typeof import('@inertiajs/vue3').Link
   }
 }
 
 export {}
-    `
+`
   }
 }
