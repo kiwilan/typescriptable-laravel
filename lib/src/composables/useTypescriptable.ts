@@ -1,4 +1,5 @@
 import { usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
 import { Http, Router } from '@/methods'
 import type { RequestPayload } from '@/types'
 
@@ -45,14 +46,14 @@ export function useTypescriptable() {
     return false
   }
 
-  function isDev(): boolean {
+  const isDev = computed(() => {
     return process.env.NODE_ENV === 'development'
-  }
+  })
 
-  function currentRoute(): App.Route.Link | undefined {
+  const currentRoute = computed((): App.Route.Link | undefined => {
     const url = router.getCurrentUrl()
     return router.getRouteFromUrl(url)
-  }
+  })
 
   function route<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never): string {
     return router.getRouteBind({
