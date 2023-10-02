@@ -47,6 +47,7 @@ class EloquentTypescript
             $content[] = LaravelPaginateType::make();
             $content[] = '}';
         }
+        $content[] = '';
 
         $self->content = implode(PHP_EOL, $content);
 

@@ -35,6 +35,7 @@ class SettingTypescript
             $content[] = '  }';
         }
         $content[] = '}';
+        $content[] = '';
 
         $self->content = implode(PHP_EOL, $content);
 
