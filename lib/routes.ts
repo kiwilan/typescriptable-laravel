@@ -279,6 +279,7 @@ declare global {
 }
 
 if (typeof window !== 'undefined') {
+  // eslint-disable-next-line valid-typeof
   if (typeof window !== undefined && typeof window.Routes !== undefined)
     window.Routes = Routes
 }

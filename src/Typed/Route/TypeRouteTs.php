@@ -171,7 +171,7 @@ class TypeRouteTs
             } else {
                 return "    '{$route->name()}': never";
             }
-        }, ",\n");
+        }, "\n");
     }
 
     // private function setTsTypes(): string

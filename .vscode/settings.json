@@ -1,5 +1,6 @@
 {
-  "typescript.tsdk": "lib/node_modules/typescript/lib",
-  "dotenv.enableAutocloaking": false
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "dotenv.enableAutocloaking": false,
   // "laravel-pint.configPath": "./pint.json"
+  "eslint.experimental.useFlatConfig": true
 }

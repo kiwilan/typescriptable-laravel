@@ -25,13 +25,13 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./vite": {
       "types": "./dist/vite.d.ts",
-      "require": "./dist/vite.cjs",
-      "import": "./dist/vite.js"
+      "import": "./dist/vite.js",
+      "require": "./dist/vite.cjs"
     },
     "./*": "./*"
   },
@@ -74,19 +74,16 @@
     }
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.39.6",
     "@inertiajs/core": "^1.0.11",
     "@inertiajs/vue3": "^1.0.11",
     "@types/node": "^20.8.0",
     "@vitejs/plugin-vue": "^4.3.4",
     "@vitest/coverage-v8": "^0.34.6",
     "autoprefixer": "^10.4.16",
-    "eslint": "^8.50.0",
     "postcss": "^8.4.31",
     "rimraf": "^5.0.5",
     "tailwindcss": "^3.3.3",
     "tsup": "^7.2.0",
-    "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-dts": "^3.6.0",
     "vitest": "^0.34.6",
