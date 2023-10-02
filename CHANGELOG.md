@@ -2,6 +2,21 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.10 - 2023-10-02
+
+- Add header to `.d.ts` to skip Typescript errors
+
+## 1.11.03 - 2023-08-09
+
+- Fix `Typescriptable::settings` return type to `?SettingType`
+- `Table` will now check if table exists before trying to scan it
+- `ClassItem` fix config skip model
+
+## 1.11.02 - 2023-08-09
+
+- Fix `mixed` ts type to `any`
+- Fix `SettingType` allow path to not exists
+
 ## 1.11.01 - 2023-08-09
 
 - Add `EloquentRelation` fallback for `type` and `typeTs`
