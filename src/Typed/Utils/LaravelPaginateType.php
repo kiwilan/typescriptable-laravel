@@ -7,12 +7,12 @@ class LaravelPaginateType
     public static function make()
     {
         return <<<'typescript'
-  export type PaginateLink = {
+  export interface PaginateLink {
     url: string;
     label: string;
     active: boolean;
   };
-  export type Paginate<T = any> = {
+  export interface Paginate<T = any> {
     data: T[];
     current_page: number;
     first_page_url: string;
@@ -27,7 +27,7 @@ class LaravelPaginateType
     to: number;
     total: number;
   };
-  export type ApiPaginate<T = any> = {
+  export interface ApiPaginate<T = any> {
     data: T[];
     links: {
       first?: string;

@@ -82,7 +82,7 @@ class TypescriptToPhp
 
     private function isType(string $content): string|false
     {
-        $regex = '/^export\s+type\s+([A-Za-z0-9]+)(?:<.*>)?\s*=\s*{/';
+        $regex = '/^export\s+interface\s+([A-Za-z0-9]+)(?:<.*>)?\s*{/';
 
         if (preg_match($regex, $content, $matches)) {
             $className = $matches[1];
