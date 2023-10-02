@@ -6,6 +6,7 @@ export class Router {
   ) {}
 
   public static make(routes?: RoutesType): Router {
+    // eslint-disable-next-line valid-typeof
     if (!routes && typeof window !== undefined && typeof window.Routes !== undefined)
       routes = window.Routes
 
@@ -83,7 +84,6 @@ export class Router {
     const items: App.Route.Link[] = []
 
     for (const route of Object.entries(this.routes)) {
-      const key = route[0]
       const value = route[1]
       items.push(value)
     }

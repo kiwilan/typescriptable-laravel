@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-// @ts-ignore
+// @ts-expect-error - Routes is defined in the global scope
 window.Routes = window.Routes || {}
 
 export {}

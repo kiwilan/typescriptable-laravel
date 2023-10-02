@@ -45,16 +45,16 @@ yarn add @kiwilan/typescriptable-laravel -D
 In your `vite.config.ts`:
 
 ```ts
-import { defineConfig } from "vite";
-import typescriptable from "@kiwilan/typescriptable-laravel/vite";
+import { defineConfig } from 'vite'
+import typescriptable from '@kiwilan/typescriptable-laravel/vite'
 
 export default defineConfig({
-    plugins: [
-        typescriptable({
-            // Options
-        }),
-    ],
-});
+  plugins: [
+    typescriptable({
+      // Options
+    }),
+  ],
+})
 ```
 
 ### Inertia setup
@@ -114,8 +114,8 @@ In `package.json`
 
 ```json
 {
-    "devDependencies": {
-        "@kiwilan/typescriptable-laravel": "file:~/kiwilan-typescriptable-laravel.tgz"
-    }
+  "devDependencies": {
+    "@kiwilan/typescriptable-laravel": "file:~/kiwilan-typescriptable-laravel.tgz"
+  }
 }
 ```

@@ -1,5 +1,6 @@
 {
   "name": "@kiwilan/typescriptable-laravel",
+  "type": "module",
   "scripts": {
     "dev": "pnpm run --parallel dev",
     "build": "pnpm recursive run build",
@@ -11,5 +12,10 @@
     "package": "pnpm recursive run package",
     "release": "pnpm recursive run release"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@antfu/eslint-config": "^1.0.0-beta.18",
+    "eslint": "^8.50.0",
+    "typescript": "^5.2.2"
+  }
 }
