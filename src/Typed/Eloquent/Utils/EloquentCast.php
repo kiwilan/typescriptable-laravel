@@ -104,7 +104,7 @@ class EloquentCast
         $type = '';
 
         foreach ($enum as $key => $value) {
-            $type .= "'{$value}' |";
+            $type .= " '{$value}' |";
         }
 
         $type = rtrim($type, '|');
