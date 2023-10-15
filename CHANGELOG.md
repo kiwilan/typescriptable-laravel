@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.13 - 2023-10-15
+
+- Fixes
+
 ## v1.11.12 - 2023-10-15
 
 - Models relationships fixes
