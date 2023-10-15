@@ -61,6 +61,9 @@ class EloquentRelation
         }
 
         $typeTs = "App.Models.{$relation->type}";
+        if ($relation->type === 'mixed') {
+            $typeTs = 'any';
+        }
 
         $relation->typeTs = $relation->isArray
             ? "{$typeTs}[]"
