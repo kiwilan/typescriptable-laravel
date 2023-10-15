@@ -3,7 +3,7 @@
 namespace Kiwilan\Typescriptable\Typed\Eloquent\Utils;
 
 use Kiwilan\Typescriptable\Typed\Database\Column;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentItem;
+use Kiwilan\Typescriptable\Typed\Eloquent\TypeConverter;
 
 class EloquentProperty
 {
@@ -35,7 +35,8 @@ class EloquentProperty
             $column->isNullable,
         );
 
-        $self->typeTs = EloquentItem::phpToTs($self->type);
+        $converter = TypeConverter::make($self->type);
+        $self->typeTs = $converter->getTsType();
 
         return $self;
     }

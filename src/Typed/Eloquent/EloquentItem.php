@@ -60,6 +60,7 @@ class EloquentItem
         $self->casts = EloquentCast::toArray($self);
 
         $self->properties = $self->setProperties();
+        // ray($self);
 
         return $self;
     }
@@ -159,84 +160,5 @@ class EloquentItem
         }
 
         return $properties;
-    }
-
-    public static function phpToTs(string $type): string
-    {
-        $isArray = false;
-        $isAdvanced = false;
-
-        if (str_contains($type, 'date')) {
-            $type = 'DateTime';
-        }
-
-        if (str_contains($type, 'array<')) {
-            $regex = '/array<[^,]+,[^>]+>/';
-            preg_match($regex, $type, $matches);
-
-            if (count($matches) > 0) {
-                $isAdvanced = true;
-                $type = str_replace('array<', '', $type);
-                $type = str_replace('>', '', $type);
-
-                $types = explode(',', $type);
-                $type = '';
-
-                $keyType = trim($types[0]);
-                $valueType = trim($types[1]);
-
-                $keyType = self::primitivesPhpToTs($keyType);
-                $valueType = self::primitivesPhpToTs($valueType);
-
-                $type = "{[key: {$keyType}]: {$valueType}}";
-
-                return $type;
-            }
-        }
-
-        if (str_contains($type, '[]')) {
-            $isArray = true;
-            $type = str_replace('[]', '', $type);
-        }
-
-        if (str_contains($type, 'array<')) {
-            $isArray = true;
-            $type = str_replace('array<', '', $type);
-            $type = str_replace('>', '', $type);
-        }
-
-        $type = self::primitivesPhpToTs($type);
-
-        if ($isArray) {
-            $type .= '[]';
-        }
-
-        return $type;
-    }
-
-    private static function primitivesPhpToTs(string $type): string
-    {
-        $type = match ($type) {
-            'int' => 'number',
-            'float' => 'number',
-            'string' => 'string',
-            'bool' => 'boolean',
-            'true' => 'boolean',
-            'false' => 'boolean',
-            'array' => 'any[]',
-            'object' => 'any',
-            'mixed' => 'any',
-            'null' => 'undefined',
-            'void' => 'void',
-            'callable' => 'Function',
-            'iterable' => 'any[]',
-            'DateTime' => 'Date',
-            'DateTimeInterface' => 'Date',
-            'Carbon' => 'Date',
-            'Model' => 'any',
-            default => 'any', // skip `Illuminate\Database\Eloquent\Casts\Attribute`
-        };
-
-        return $type;
     }
 }
