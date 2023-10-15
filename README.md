@@ -201,6 +201,10 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=12345OHdf%e" \
   mcr.microsoft.com/mssql/server:2022-latest
 ```
 
+> **Warning**
+>
+> If you have an error like this: "An invalid attribute was designated on the PDO object", you have to update `msphpsql` driver. Check <https://github.com/laravel/framework/issues/47937> for more information.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
