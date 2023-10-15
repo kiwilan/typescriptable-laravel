@@ -2,7 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Typed\Setting;
 
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentItem;
+use Kiwilan\Typescriptable\Typed\Eloquent\TypeConverter;
 use Kiwilan\Typescriptable\Typed\Utils\ClassItem;
 use ReflectionNamedType;
 use ReflectionProperty;
@@ -74,7 +74,8 @@ class SettingItemProperty
             isBuiltin: $type instanceof ReflectionNamedType ? $type->isBuiltin() : false,
         );
 
-        $self->typeTs = EloquentItem::phpToTs($self->type);
+        $converter = TypeConverter::make($self->type);
+        $self->typeTs = $converter->getTsType();
 
         return $self;
     }

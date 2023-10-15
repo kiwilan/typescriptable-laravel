@@ -60,7 +60,8 @@ class EloquentRelation
             $relation->type = $type;
         }
 
-        $typeTs = EloquentItem::phpToTs($relation->type);
+        $typeTs = "App.Models.{$relation->type}";
+
         $relation->typeTs = $relation->isArray
             ? "{$typeTs}[]"
             : $typeTs;

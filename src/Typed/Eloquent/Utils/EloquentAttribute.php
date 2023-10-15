@@ -4,6 +4,7 @@ namespace Kiwilan\Typescriptable\Typed\Eloquent\Utils;
 
 use Illuminate\Support\Str;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentItem;
+use Kiwilan\Typescriptable\Typed\Eloquent\TypeConverter;
 use ReflectionMethod;
 use ReflectionNamedType;
 
@@ -104,7 +105,9 @@ class EloquentAttribute
 
         if ($type) {
             $item->type = $type;
-            $item->typeTs = EloquentItem::phpToTs($type);
+
+            $converter = TypeConverter::make($type);
+            $item->typeTs = $converter->getTsType();
         }
 
         if (str_contains($type, '[]') || str_contains($type, 'Collection') || str_contains($type, 'array')) {
@@ -119,7 +122,9 @@ class EloquentAttribute
 
         if ($advanced) {
             $item->type = "{$advanced}[]";
-            $item->typeTs = EloquentItem::phpToTs($advanced).'[]';
+
+            $converter = TypeConverter::make($advanced);
+            $item->typeTs = $converter->getTsType().'[]';
         }
 
         return $item;
