@@ -60,7 +60,6 @@ class EloquentItem
         $self->casts = EloquentCast::toArray($self);
 
         $self->properties = $self->setProperties();
-        // ray($self);
 
         return $self;
     }
