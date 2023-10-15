@@ -45,16 +45,16 @@ yarn add @kiwilan/typescriptable-laravel -D
 In your `vite.config.ts`:
 
 ```ts
-import { defineConfig } from 'vite'
-import typescriptable from '@kiwilan/typescriptable-laravel/vite'
+import { defineConfig } from "vite";
+import typescriptable from "@kiwilan/typescriptable-laravel/vite";
 
 export default defineConfig({
-  plugins: [
-    typescriptable({
-      // Options
-    }),
-  ],
-})
+    plugins: [
+        typescriptable({
+            // Options
+        }),
+    ],
+});
 ```
 
 ### Inertia setup
@@ -65,26 +65,29 @@ In your `resources/js/app.ts`:
 import "./bootstrap";
 import "../css/app.css";
 
-import type { DefineComponent } from 'vue'
+import type { DefineComponent } from "vue";
 import { createApp, h } from "vue";
 import { createInertiaApp, router } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
-import { createPinia } from "pinia";
+
 import { VueTypescriptable } from "@kiwilan/typescriptable-laravel"; // Import VueTypescriptable
-import NProgress from "nprogress"; // `pnpm add nprogress -D`
+import NProgress from "nprogress"; // Install nprogress `npm install --save-dev nprogress`
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
+
 import "./routes"; // Import routes
 
 createInertiaApp({
     title: (title) => `${title} - Laravel`,
-    resolve: (name) => resolve: name => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')) as Promise<DefineComponent>,
+    resolve: (name) =>
+        resolvePageComponent(
+            `./Pages/${name}.vue`,
+            import.meta.glob("./Pages/**/*.vue")
+        ) as Promise<DefineComponent>,
     setup({ el, App, props, plugin }) {
-        const pinia = createPinia();
         const app = createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
-            .use(VueTypescriptable) // Add Vue plugin
-            .use(pinia);
+            .use(VueTypescriptable); // Add Vue plugin
 
         router.on("start", () => NProgress.start());
         router.on("finish", () => NProgress.done());
@@ -114,8 +117,8 @@ In `package.json`
 
 ```json
 {
-  "devDependencies": {
-    "@kiwilan/typescriptable-laravel": "file:~/kiwilan-typescriptable-laravel.tgz"
-  }
+    "devDependencies": {
+        "@kiwilan/typescriptable-laravel": "file:~/kiwilan-typescriptable-laravel.tgz"
+    }
 }
 ```
