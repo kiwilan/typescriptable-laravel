@@ -3,7 +3,6 @@ import type { ViteTypescriptableOptions } from './vite'
 
 export class InertiaType {
   readonly HEAD = [
-    '/* eslint-disable eslint-comments/no-unlimited-disable */',
     '/* eslint-disable */',
     '/* prettier-ignore */',
     '// @ts-nocheck',
