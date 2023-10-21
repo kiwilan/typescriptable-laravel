@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.14 - 2023-10-21
+
+- Fix `[Bug]: linting problem` #36
+
 ## v1.11.13 - 2023-10-15
 
 - Fixes
