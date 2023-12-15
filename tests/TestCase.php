@@ -42,7 +42,7 @@ class TestCase extends Orchestra
     /**
      * Get the database connection.
      */
-    private static function getDriver(string $type = null): Driver
+    private static function getDriver(?string $type = null): Driver
     {
         $driver = new Driver();
 
@@ -96,7 +96,7 @@ class TestCase extends Orchestra
         self::setupDatabase();
     }
 
-    public static function setupDatabase(string $type = null): void
+    public static function setupDatabase(?string $type = null): void
     {
         if (! $type) {
             return;

@@ -12,7 +12,7 @@ class TypeRouteGenerator
     /** @var Collection<string, TypeRoute> */
     protected Collection $routes;
 
-    public static function make(string $list = null): self
+    public static function make(?string $list = null): self
     {
         $self = new self();
         $self->routes = $self->parse($list);
@@ -28,7 +28,7 @@ class TypeRouteGenerator
     /**
      * @return Collection<string, TypeRoute>
      */
-    private function parse(string $list = null): Collection
+    private function parse(?string $list = null): Collection
     {
         /** @var Collection<int, Route> $items */
         $items = collect([]);
