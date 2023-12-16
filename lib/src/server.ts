@@ -1,7 +1,4 @@
 export async function execute(command: string): Promise<void> {
-  if (isProduction())
-    return
-
   const { exec } = await import('node:child_process')
 
   exec(command, (error) => {
@@ -14,14 +11,7 @@ export async function execute(command: string): Promise<void> {
   })
 }
 
-export function isProduction(): boolean {
-  return process.env.NODE_ENV === 'production'
-}
-
 export async function write(path: string, content: string): Promise<void> {
-  if (isProduction())
-    return
-
   const { writeFile } = await import('node:fs/promises')
   await writeFile(path, content)
 }
