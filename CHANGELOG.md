@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.21 - 2023-12-16
+
+- Fix `EloquentRelation` warning if `type` is not exist
+
 ## v1.11.14 - 2023-10-21
 
 - Fix `[Bug]: linting problem` #36
