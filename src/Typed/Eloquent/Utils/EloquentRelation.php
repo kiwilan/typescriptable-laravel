@@ -26,6 +26,10 @@ class EloquentRelation
         $relations = [];
 
         foreach ($reflect->getMethods() as $method) {
+            if (! $method->getReturnType()) {
+                continue;
+            }
+
             $isRelation = str_contains($method->getReturnType(), 'Illuminate\Database\Eloquent\Relations');
 
             if (! $isRelation) {

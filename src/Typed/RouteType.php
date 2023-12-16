@@ -16,7 +16,7 @@ class RouteType
     ) {
     }
 
-    public static function make(string $routeList = null, string $outputPath = null): self
+    public static function make(?string $routeList = null, ?string $outputPath = null): self
     {
         $filename = TypescriptableConfig::routesFilename();
         $filenameRoutes = TypescriptableConfig::routesFilenameList();

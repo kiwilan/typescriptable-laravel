@@ -234,7 +234,7 @@ class TypeRouteTs
     //     return $this->routes->filter(fn (TypeRoute $route) => $route->method() === $method);
     // }
 
-    private function collectRoutes(Closure $closure, string $join = null): string|Collection
+    private function collectRoutes(Closure $closure, ?string $join = null): string|Collection
     {
         $routes = $this->routes->map(fn (TypeRoute $route, string $key) => $closure($route, $key));
 
