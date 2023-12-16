@@ -23,7 +23,7 @@ class Typescriptable
         return implode(PHP_EOL, self::TS_HEAD);
     }
 
-    public static function models(string $modelsPath, string $outputPath, string $phpPath = null): EloquentType
+    public static function models(string $modelsPath, string $outputPath, ?string $phpPath = null): EloquentType
     {
         return EloquentType::make($modelsPath, $outputPath, $phpPath);
     }
