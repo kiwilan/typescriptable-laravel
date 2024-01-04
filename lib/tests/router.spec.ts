@@ -1,16 +1,16 @@
 import { expect, it } from 'vitest'
-import { Router } from '../src/methods'
+import { LaravelRouter } from '../src/methods'
 import { Routes } from '../routes'
 
 it('can get all routes', async () => {
-  const list = Router.make(Routes).getAllRoutes()
+  const list = LaravelRouter.create(Routes).getAllRoutes()
 
   expect(list).not.toBe(undefined)
   expect(list?.home.name).toBe('home')
 })
 
 it('can use bind route', async () => {
-  const list = Router.make(Routes)
+  const list = LaravelRouter.create(Routes)
 
   list.getRouteBind({
     name: 'feeds.show',
@@ -21,7 +21,7 @@ it('can use bind route', async () => {
 })
 
 it('can find routes', async () => {
-  const list = Router.make(Routes)
+  const list = LaravelRouter.create(Routes)
 
   const routeFromHome = list.getRouteFromUrl('/')
   const routeFromPosts = list.getRouteFromUrl('/blog')
@@ -44,7 +44,7 @@ it('can find routes', async () => {
 })
 
 it('can get route', async () => {
-  const list = Router.make(Routes)
+  const list = LaravelRouter.create(Routes)
 
   const home = list.getRouteLink('home')
   const postsSlug = list.getRouteLink('posts.show')

@@ -13,6 +13,7 @@
     },
     "typeRoots": ["./node_modules/@types", "./*.d.ts"],
     "resolveJsonModule": true,
+    "declaration": true,
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "strict": true,

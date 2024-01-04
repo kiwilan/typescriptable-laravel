@@ -1,5 +1,5 @@
-import { Router } from './Router'
-import { Route } from './Route'
+import { LaravelRouter } from './LaravelRouter'
+import { LaravelRoute } from './LaravelRoute'
 import { Http } from './Http'
 
 type RoutesType = Record<App.Route.Name, App.Route.Link> | undefined
@@ -8,7 +8,7 @@ export type {
   RoutesType,
 }
 export {
-  Router,
-  Route,
+  LaravelRouter,
+  LaravelRoute,
   Http,
 }
