@@ -114,5 +114,77 @@ return new class extends Migration
 
             $table->timestamps();
         });
+
+        Schema::create('members', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('tmdb_id')->nullable();
+            $table->string('credit_id')->nullable();
+            $table->unsignedSmallInteger('gender')->default(1);
+            $table->string('name')->nullable();
+            $table->string('original_name')->nullable();
+            $table->float('popularity')->nullable();
+            $table->string('poster')->nullable();
+            $table->string('poster_tmdb')->nullable();
+            $table->string('poster_color')->nullable();
+            $table->string('tmdb_url')->nullable();
+
+            $table->timestamps();
+        });
+
+        Schema::create('memberables', function (Blueprint $table) {
+            $table->foreignId('member_id')->index();
+            $table->string('character')->nullable();
+            $table->string('job')->nullable();
+            $table->string('department')->nullable();
+            $table->integer('order')->nullable();
+            $table->boolean('is_adult')->default(false);
+            $table->string('known_for_department')->nullable();
+            $table->boolean('is_crew')->nullable();
+            $table->ulidMorphs('memberable');
+        });
+
+        Schema::create('movies', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+
+            $table->integer('tmdb_id')->nullable();
+            $table->string('title')->nullable();
+            $table->integer('year')->nullable();
+            $table->string('slug')->unique();
+            $table->string('french_title')->nullable();
+            $table->string('original_title')->nullable();
+            $table->date('release_date')->nullable();
+            $table->string('original_language')->nullable();
+            $table->text('overview')->nullable();
+            $table->float('popularity')->nullable();
+            $table->boolean('is_adult')->nullable();
+            $table->string('homepage')->nullable();
+            $table->string('tagline')->nullable();
+            $table->string('status')->nullable();
+            $table->string('certification')->nullable();
+            $table->string('tmdb_url')->nullable();
+
+            $table->string('imdb_id')->nullable();
+            $table->integer('runtime')->nullable();
+            $table->bigInteger('budget')->nullable();
+            $table->bigInteger('revenue')->nullable();
+            $table->string('edition')->nullable();
+            $table->string('version')->nullable();
+            $table->string('library')->nullable();
+            $table->boolean('is_multilingual')->default(false);
+
+            $table->string('poster')->nullable();
+            $table->string('poster_tmdb')->nullable();
+            $table->string('poster_color')->nullable();
+
+            $table->string('backdrop')->nullable();
+            $table->string('backdrop_tmdb')->nullable();
+
+            $table->dateTime('added_at')->nullable();
+            $table->dateTime('fetched_at')->nullable();
+            $table->boolean('fetched_has_failed')->default(false);
+
+            $table->timestamps();
+        });
     }
 };
