@@ -103,7 +103,7 @@ export interface HttpRequestAnonymous {
    *
    * @default 'GET'
    */
-  method: HttpMethod
+  method?: HttpMethod
   /**
    * HTTP headers.
    *
