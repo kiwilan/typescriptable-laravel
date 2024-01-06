@@ -1,12 +1,9 @@
-import { Router } from './Router'
+import { LaravelRouter } from './LaravelRouter'
 import type { RoutesType } from '.'
 
-export class Route {
+export class LaravelRoute {
   protected constructor(
-    // protected type: App.Route.Type, // App.Route.Typed.Login | App.Route.Typed.Logout | App.Route.Typed.FrontStoriesShow
-    // protected entity: App.Route.Link, // { name: App.Route.Name; path: App.Route.Path; params?: App.Route.Params[App.Route.Name],  method: App.Route.Method; }
     protected name: App.Route.Name, // 'login' | 'logout' | 'front.stories.show'
-    // protected uri: App.Route.Path, // '/login' | '/logout' | '/stories/{story}'
     protected params: App.Route.Params[App.Route.Name] = {}, // { 'story'?: string | number | boolean }
     protected query: Record<string, string | number | boolean | undefined> | undefined = {},
     protected hash: string = '',
@@ -14,13 +11,11 @@ export class Route {
     protected path: string = '/',
   ) {}
 
-  static make(name: App.Route.Name, routes?: RoutesType): Route {
-    const list = Router.make(routes)
-    const route = list.getRouteLink(name)
+  static create(name: App.Route.Name, routes?: RoutesType): LaravelRoute {
+    const laravelRouter = LaravelRouter.create(routes)
+    const route = laravelRouter.getRouteLink(name)
 
-    const self = new Route(route.name)
-    // self.params = route.params || {}
-    // self.query = route.query
+    const self = new LaravelRoute(route.name)
     self.methods = route.methods
     self.path = route.path
 

@@ -17,7 +17,7 @@ class EloquentTypescript
     }
 
     /**
-     * @param  array<string,EloquentProperty[]>  $eloquents
+     * @param  array<string,EloquentProperty[] | array<string,EloquentProperty[]>>  $eloquents
      */
     public static function make(array $eloquents, string $path): self
     {
@@ -33,8 +33,17 @@ class EloquentTypescript
             $content[] = "  export interface {$model} {";
 
             foreach ($eloquent as $field => $property) {
-                $field = $property->isNullable() ? "{$field}?" : $field;
-                $content[] = "    {$field}: {$property->typeTs()}";
+                if (! is_array($property)) {
+                    $field = $property->isNullable() ? "{$field}?" : $field;
+                    $content[] = "    {$field}: {$property->typescriptType()}";
+                } else {
+                    $content[] = "    {$field}: {";
+                    foreach ($property as $name => $prop) {
+                        $name = $prop->isNullable() ? "{$name}?" : $name;
+                        $content[] = "      {$name}: {$prop->typescriptType()}";
+                    }
+                    $content[] = '    }';
+                }
             }
             $content[] = '  }';
         }

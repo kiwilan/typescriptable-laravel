@@ -20,7 +20,7 @@ class Table
     public static function make(string $table): self
     {
         $self = new self(
-            driver: config('database.default'),
+            driver: Schema::getConnection()->getDriverName(),
             name: $table
         );
 

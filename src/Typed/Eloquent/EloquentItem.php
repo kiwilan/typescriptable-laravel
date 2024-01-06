@@ -21,6 +21,9 @@ class EloquentItem
     /** @var EloquentRelation[] */
     public array $relations = [];
 
+    /** @var EloquentRelation[] */
+    public array $morphRelations = [];
+
     /** @var EloquentAttribute[] */
     public array $attributes = [];
 
@@ -87,7 +90,7 @@ class EloquentItem
 
         foreach ($this->relations as $field => $relation) {
             if ($relation->isArray) {
-                $counts[$field] = $relation->type;
+                $counts[$field] = $relation->phpType;
             }
         }
 
@@ -113,26 +116,32 @@ class EloquentItem
             $properties[$type->field] = new EloquentProperty(
                 table: $this->tableName,
                 name: $type->field,
-                type: $type->type,
+                phpType: $type->phpType,
                 isAttribute: true,
                 isNullable: true,
                 isArray: $type->isArray,
-                typeTs: $type->typeTs,
+                typescriptType: $type->typescriptType,
             );
         }
 
         // Add relations
         foreach ($this->relations as $field => $relation) {
-            $properties[$relation->field] = new EloquentProperty(
+            $property = new EloquentProperty(
                 table: $this->tableName,
                 name: $relation->field,
-                type: $relation->type,
-                typeTs: $relation->typeTs,
+                phpType: $relation->phpType,
+                typescriptType: $relation->typescriptType,
                 isRelation: true,
                 isRelationMorph: $relation->isMorph,
                 isNullable: true,
                 isArray: $relation->isArray,
             );
+            $property->parseMorphRelation($relation);
+            $properties[$relation->field] = $property;
+
+            if ($relation->isMorph) {
+                $this->morphRelations[$relation->field] = $relation;
+            }
         }
 
         // Add counts
@@ -140,8 +149,8 @@ class EloquentItem
             $properties["{$field}_count"] = new EloquentProperty(
                 table: $this->tableName,
                 name: "{$field}_count",
-                type: 'int',
-                typeTs: 'number',
+                phpType: 'int',
+                typescriptType: 'number',
                 isNullable: true,
                 isCount: true,
             );
@@ -152,9 +161,10 @@ class EloquentItem
             $properties[$field] = new EloquentProperty(
                 table: $this->tableName,
                 name: $field,
-                type: $cast->type,
-                typeTs: $cast->typeTs,
+                phpType: $cast->typePhp,
+                typescriptType: $cast->typescriptType,
                 isCast: true,
+                isNullable: true,
             );
         }
 

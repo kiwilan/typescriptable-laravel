@@ -12,10 +12,10 @@ class EloquentAttribute
 {
     protected function __construct(
         public string $field,
-        public string $type,
+        public string $phpType,
         public bool $isLegacy = false,
         public bool $isArray = false,
-        public ?string $typeTs = null,
+        public ?string $typescriptType = null,
     ) {
     }
 
@@ -34,7 +34,7 @@ class EloquentAttribute
 
             $item = new EloquentAttribute(
                 field: $name,
-                type: 'string',
+                phpType: 'string',
             );
 
             if ($name === 'getMediableAttribute') {
@@ -104,10 +104,10 @@ class EloquentAttribute
         }
 
         if ($type) {
-            $item->type = $type;
+            $item->phpType = $type;
 
             $converter = TypeConverter::make($type);
-            $item->typeTs = $converter->getTsType();
+            $item->typescriptType = $converter->getTypescriptType();
         }
 
         if (str_contains($type, '[]') || str_contains($type, 'Collection') || str_contains($type, 'array')) {
@@ -115,16 +115,16 @@ class EloquentAttribute
         }
 
         if (str_contains($type, 'boolean')) {
-            $item->type = 'bool';
+            $item->phpType = 'bool';
         }
 
-        $advanced = $this->isAdvancedArray($item->type);
+        $advanced = $this->isAdvancedArray($item->phpType);
 
         if ($advanced) {
-            $item->type = "{$advanced}[]";
+            $item->phpType = "{$advanced}[]";
 
             $converter = TypeConverter::make($advanced);
-            $item->typeTs = $converter->getTsType().'[]';
+            $item->typescriptType = $converter->getTypescriptType().'[]';
         }
 
         return $item;
@@ -162,8 +162,8 @@ class EloquentAttribute
             if ($name === 'getMediableAttribute') {
                 return new EloquentAttribute(
                     field: 'mediable',
-                    type: 'array',
-                    typeTs: self::mediableTs($eloquent),
+                    phpType: 'array',
+                    typescriptType: self::mediableTs($eloquent),
                 );
             }
         }

@@ -25,7 +25,7 @@ class TypeConverter
         return $this->phpType;
     }
 
-    public function getTsType(): string
+    public function getTypescriptType(): string
     {
         return $this->tsType;
     }

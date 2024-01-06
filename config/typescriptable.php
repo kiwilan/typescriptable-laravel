@@ -66,6 +66,7 @@ return [
          */
         'skip' => [
             'name' => [
+                '__clockwork.*',
                 'debugbar.*',
                 'horizon.*',
                 'telescope.*',

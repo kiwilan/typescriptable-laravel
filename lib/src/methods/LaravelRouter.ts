@@ -1,16 +1,16 @@
 import type { RoutesType } from '.'
 
-export class Router {
+export class LaravelRouter {
   protected constructor(
     protected routes: Record<App.Route.Name, App.Route.Link>,
   ) {}
 
-  public static make(routes?: RoutesType): Router {
+  public static create(routes?: RoutesType): LaravelRouter {
     // eslint-disable-next-line valid-typeof
     if (!routes && typeof window !== undefined && typeof window.Routes !== undefined)
       routes = window.Routes
 
-    return new Router(routes as Record<App.Route.Name, App.Route.Link>)
+    return new LaravelRouter(routes as Record<App.Route.Name, App.Route.Link>)
   }
 
   public getRouteLink(name: App.Route.Name): App.Route.Link {
@@ -118,22 +118,21 @@ export class Router {
 
     let rightRoute: App.Route.Link | undefined
     for (const candidate of candidates) {
-      const partsRoute = candidate.path.split('/')
+      const route = candidate.path
+      if (route === url) {
+        rightRoute = candidate
+        break
+      }
+
+      const partsRoute = route.split('/')
       partsRoute.shift()
       const partsRouteLength = partsRoute.length
       const partsLength = parts.length
 
-      const hasParamOptional = partsRoute.find(part => part.startsWith('{') && part.endsWith('?}')) !== undefined
-
-      if (hasParamOptional) {
-        if (partsRouteLength === partsLength)
-          rightRoute = this.matchRoute(candidate, parts, partsRoute)
-        else if (partsRouteLength === partsLength + 1)
-          rightRoute = this.matchRoute(candidate, parts, partsRoute)
-      }
-      else {
-        if (partsRouteLength === partsLength)
-          rightRoute = this.matchRoute(candidate, parts, partsRoute)
+      if (partsRouteLength === partsLength) {
+        rightRoute = this.matchRoute(candidate, parts, partsRoute)
+        if (rightRoute)
+          break
       }
     }
 

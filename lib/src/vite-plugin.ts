@@ -6,7 +6,7 @@ import { InertiaType } from './inertia-type'
 const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
   models: true,
   settings: false,
-  routes: false,
+  routes: true,
   inertia: true,
   inertiaPaths: {
     base: 'resources/js',
@@ -16,6 +16,32 @@ const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
   autoreload: true,
 }
 
+/**
+ * Vite plugin to generate TypeScript types for Laravel.
+ *
+ * @example
+ *
+ * ```ts
+ * import typescriptable from '@kiwilan/typescriptable-laravel/vite'
+ *
+ * export default defineConfig({
+ *   plugins: [
+ *     typescriptable({
+ *       models: true,
+ *       settings: false,
+ *       routes: true,
+ *       inertia: true,
+ *       inertiaPaths: {
+ *         base: 'resources/js',
+ *         pageType: 'types-inertia.d.ts',
+ *         globalType: 'types-inertia-global.d.ts',
+ *       },
+ *       autoreload: true,
+ *     }),
+ *   ],
+ * })
+ * ```
+ */
 function ViteTypescriptable(userOptions: ViteTypescriptableOptions = {}): Plugin {
   return {
     name: 'vite-plugin-typescriptable-laravel',

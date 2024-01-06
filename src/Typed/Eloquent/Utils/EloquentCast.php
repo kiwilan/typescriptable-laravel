@@ -12,9 +12,9 @@ class EloquentCast
 
     protected function __construct(
         public string $field,
-        public string $type,
+        public string $typePhp,
         public bool $isEnum = false,
-        public ?string $typeTs = null,
+        public ?string $typescriptType = null,
     ) {
     }
 
@@ -31,7 +31,7 @@ class EloquentCast
         foreach ($casts as $field => $type) {
             $cast = new EloquentCast(
                 field: $field,
-                type: $type,
+                typePhp: $type,
             );
             $cast = $cast->make($cast);
 
@@ -43,11 +43,36 @@ class EloquentCast
 
     private function make(EloquentCast $cast): EloquentCast
     {
-        $type = $cast->type;
+        $type = $cast->typePhp;
 
         if (str_contains($type, ':') && ! str_contains($type, 'encrypted:')) {
             $type = explode(':', $type)[0];
         }
+
+        $cast->typePhp = match ($cast->typePhp) {
+            'array' => 'array',
+            'bool' => 'bool',
+            'boolean' => 'bool',
+            'collection' => 'array',
+            'date' => '\DateTime',
+            'datetime' => '\DateTime',
+            'immutable_date' => '\DateTime',
+            'immutable_datetime' => '\DateTime',
+            'decimal' => 'float',
+            'double' => 'float',
+            'encrypted' => 'string',
+            'encrypted:array' => 'array',
+            'encrypted:collection' => 'array',
+            'encrypted:object' => 'object',
+            'float' => 'float',
+            'int' => 'int',
+            'integer' => 'int',
+            'object' => 'object',
+            'real' => 'float',
+            'string' => 'string',
+            'timestamp' => '\DateTime',
+            default => $cast->typePhp,
+        };
 
         $tsType = match ($type) {
             'array' => 'any[]',
@@ -73,10 +98,10 @@ class EloquentCast
             default => 'any',
         };
 
-        $cast->typeTs = $tsType;
+        $cast->typescriptType = $tsType;
 
         if (str_contains($type, 'boolean')) {
-            $cast->type = 'bool';
+            $cast->typePhp = 'bool';
         }
 
         if ($tsType !== 'any') {
@@ -93,7 +118,7 @@ class EloquentCast
 
         if ($cast->isEnum) {
             $cast->enums = $this->setEnums($reflect);
-            $cast->typeTs = $this->enumsToTs($cast->enums);
+            $cast->typescriptType = $this->enumsToTs($cast->enums);
         }
 
         return $cast;

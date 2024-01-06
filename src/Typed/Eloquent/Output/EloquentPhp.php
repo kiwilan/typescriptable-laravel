@@ -16,7 +16,7 @@ class EloquentPhp
     }
 
     /**
-     * @param  array<string,EloquentProperty[]>  $eloquents
+     * @param  array<string,EloquentProperty[] | array<string,EloquentProperty[]>>  $eloquents
      */
     public static function make(array $eloquents, string $path): self
     {
@@ -36,27 +36,14 @@ class EloquentPhp
             $count = count($eloquent);
             $i = 0;
             foreach ($eloquent as $property) {
-                $name = $property->name();
-                $type = $property->type();
-
-                $i++;
-                $isLast = $i === $count;
-                $isPrimitive = $self->isPrimitive($type);
-
-                if ($isPrimitive) {
-                    $content[] = $self->setField($property, $isLast);
-
-                    continue;
+                if (is_array($property)) {
+                    // foreach ($property as $p) {
+                    //     $self->scanProperty($p, $i, $count, $content);
+                    // }
+                    // pivot
+                } else {
+                    $self->scanProperty($property, $i, $count, $content);
                 }
-
-                if ($property->isArray()) {
-                    $content[] = $self->setField($property, $isLast);
-
-                    continue;
-                }
-
-                $type = "\\{$type}";
-                $content[] = $self->setField($property, $isLast);
             }
 
             $content[] = '}';
@@ -66,6 +53,31 @@ class EloquentPhp
         }
 
         return $self;
+    }
+
+    private function scanProperty(EloquentProperty $property, int &$i, int $count, array &$content)
+    {
+        $name = $property->name();
+        $type = $property->phpType();
+
+        $i++;
+        $isLast = $i === $count;
+        $isPrimitive = $this->isPrimitive($type);
+
+        if ($isPrimitive) {
+            $content[] = $this->setField($property, $isLast);
+
+            return;
+        }
+
+        if ($property->isArray()) {
+            $content[] = $this->setField($property, $isLast);
+
+            return;
+        }
+
+        $type = "\\{$type}";
+        $content[] = $this->setField($property, $isLast);
     }
 
     public function print(bool $delete = false): void
@@ -88,7 +100,7 @@ class EloquentPhp
     {
         $comment = null;
         $field = '';
-        $type = $property->type();
+        $type = $property->phpType();
 
         if ($property->isArray()) {
             if (str_contains($type, '[]')) {
@@ -110,7 +122,7 @@ class EloquentPhp
             $type = "\\{$type}";
         }
 
-        if ($property->isNullable() && $property->type() !== 'mixed') {
+        if ($property->isNullable() && $property->phpType() !== 'mixed') {
             $type = "?{$type}";
         }
 
