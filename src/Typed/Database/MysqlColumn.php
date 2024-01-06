@@ -6,6 +6,12 @@ use Doctrine\DBAL\Types\Types;
 
 class MysqlColumn implements IColumn
 {
+    public const TYPE = 'mysql';
+
+    public const TABLE_NAME = 'Tables_in_testing';
+
+    public const TABLE_TYPE = 'Table_type';
+
     protected function __construct(
         public ?string $Field = null,
         public ?string $Type = null,
@@ -62,11 +68,11 @@ class MysqlColumn implements IColumn
             'timestamp' => 'DateTime',
             'time' => Types::TIME_IMMUTABLE,
             'year' => Types::STRING,
-            'int' => Types::INTEGER,
-            'tinyint' => Types::INTEGER,
-            'smallint' => Types::INTEGER,
-            'mediumint' => Types::INTEGER,
-            'bigint' => Types::INTEGER,
+            'int' => 'int',
+            'tinyint' => 'int',
+            'smallint' => 'int',
+            'mediumint' => 'int',
+            'bigint' => 'int',
             'float' => Types::FLOAT,
             'double' => Types::FLOAT,
             'decimal' => Types::FLOAT,

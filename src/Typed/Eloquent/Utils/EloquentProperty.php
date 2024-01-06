@@ -10,7 +10,7 @@ class EloquentProperty
     public function __construct(
         protected string $table,
         protected string $name,
-        protected string $type,
+        protected string $phpType,
         protected bool $isPrimary = false,
         protected bool $isNullable = false,
         protected bool $isHidden = false,
@@ -21,7 +21,8 @@ class EloquentProperty
         protected bool $isAttribute = false,
         protected bool $isCount = false,
         protected bool $isCast = false,
-        protected ?string $typeTs = null,
+        protected bool $isPivot = false,
+        protected ?string $typescriptType = null,
     ) {
     }
 
@@ -35,10 +36,22 @@ class EloquentProperty
             $column->isNullable,
         );
 
-        $converter = TypeConverter::make($self->type);
-        $self->typeTs = $converter->getTsType();
+        $converter = TypeConverter::make($self->phpType);
+        $self->typescriptType = $converter->getTypescriptType();
 
         return $self;
+    }
+
+    public function parseMorphRelation(EloquentRelation $relation): self
+    {
+        if (! $this->isRelationMorph || ! $relation->hasPivot) {
+            return $this;
+        }
+
+        $this->phpType = $relation->phpType;
+        $this->typescriptType = $relation->typescriptType;
+
+        return $this;
     }
 
     public function table(): string
@@ -51,9 +64,9 @@ class EloquentProperty
         return $this->name;
     }
 
-    public function type(): string
+    public function phpType(): string
     {
-        return $this->type;
+        return $this->phpType;
     }
 
     public function isPrimary(): bool
@@ -106,8 +119,8 @@ class EloquentProperty
         return $this->isCast;
     }
 
-    public function typeTs(): ?string
+    public function typescriptType(): ?string
     {
-        return $this->typeTs;
+        return $this->typescriptType;
     }
 }

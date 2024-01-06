@@ -6,6 +6,12 @@ use Doctrine\DBAL\Types\Types;
 
 class SqlServerColumn implements IColumn
 {
+    public const TYPE = 'sqlsrv';
+
+    public const TABLE_NAME = 'name';
+
+    public const TABLE_TYPE = 'type';
+
     protected function __construct(
         public ?string $columnName = null,
         public ?string $dataType = null,
@@ -32,7 +38,7 @@ class SqlServerColumn implements IColumn
     public static function typeToPhp(string $formatType): string
     {
         return match ($formatType) {
-            'bigint' => Types::INTEGER,
+            'bigint' => 'int',
             'binary' => Types::BINARY,
             'bit' => Types::BOOLEAN,
             'char' => Types::STRING,
@@ -43,7 +49,7 @@ class SqlServerColumn implements IColumn
             'decimal' => Types::FLOAT,
             'float' => Types::FLOAT,
             'image' => Types::BINARY,
-            'int' => Types::INTEGER,
+            'int' => 'int',
             'money' => Types::FLOAT,
             'nchar' => Types::STRING,
             'ntext' => Types::STRING,
@@ -51,12 +57,12 @@ class SqlServerColumn implements IColumn
             'nvarchar' => Types::STRING,
             'real' => Types::FLOAT,
             'smalldatetime' => 'DateTime',
-            'smallint' => Types::INTEGER,
+            'smallint' => 'int',
             'smallmoney' => Types::FLOAT,
             'text' => Types::STRING,
             'time' => Types::TIME_IMMUTABLE,
             'timestamp' => Types::BINARY,
-            'tinyint' => Types::INTEGER,
+            'tinyint' => 'int',
             'uniqueidentifier' => Types::GUID,
             'varbinary' => Types::BINARY,
             'varchar' => Types::STRING,

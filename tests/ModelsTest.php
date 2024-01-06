@@ -11,7 +11,7 @@ it('can be run', function () {
         TestCase::setupDatabase($type);
 
         config(['typescriptable.models.skip' => [
-            'App\\Models\\SushiTest',
+            'Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest',
         ]]);
 
         Artisan::call('typescriptable:models', [
@@ -57,14 +57,18 @@ it('is correct from models', function () {
         expect(array_key_exists($field, $classes))->toBeTrue();
 
         $tsProperties = $classes[$field]->properties();
-        expect(count($tsProperties))->toBe(count($properties));
+        if (! array_key_exists('pivot', $properties)) {
+            expect(count($tsProperties))->toBe(count($properties));
+        }
 
         expect(array_key_exists($field, $data))->toBeTrue();
         foreach ($properties as $key => $property) {
             $tsProperty = $tsProperties[$key];
 
             expect(array_key_exists($key, $tsProperties))->toBeTrue();
-            expect($property->name())->toBe($tsProperty->name());
+            if (! is_array($property)) {
+                expect($property->name())->toBe($tsProperty->name());
+            }
             // expect($property->typeTs())->toBe($tsProperty->type());
             // expect($property->isNullable())->toBe($tsProperty->isNullable());
         }

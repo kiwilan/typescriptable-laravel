@@ -2,8 +2,6 @@
 
 namespace Kiwilan\Typescriptable\Typed\Database;
 
-use Doctrine\DBAL\Types\Types;
-
 class Column
 {
     protected function __construct(
@@ -46,15 +44,16 @@ class Column
             default => null,
         };
 
+        $phpType = match ($phpType) {
+            'boolean' => 'bool',
+            default => $phpType,
+        };
+
         if ($phpType === null) {
             throw new \Exception("Database driver not supported: {$driver}");
         }
 
         $self->typePhp = $phpType;
-
-        if ($self->typePhp === Types::INTEGER) {
-            $self->typePhp = 'int';
-        }
 
         return $self;
     }

@@ -75,7 +75,7 @@ class SettingItemProperty
         );
 
         $converter = TypeConverter::make($self->type);
-        $self->typeTs = $converter->getTsType();
+        $self->typeTs = $converter->getTypescriptType();
 
         return $self;
     }

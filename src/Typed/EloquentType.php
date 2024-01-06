@@ -16,6 +16,7 @@ class EloquentType
     /**
      * @param  ClassItem[]  $items
      * @param  array<string, EloquentProperty[]>  $eloquents
+     * @param  array<string, array<string, EloquentProperty>>  $pivots
      * @param  array<string, array<string, array<string, string>>>  $list
      */
     protected function __construct(
@@ -23,11 +24,12 @@ class EloquentType
         protected string $outputPath,
         protected array $items = [],
         protected array $eloquents = [],
+        protected array $pivots = [],
         protected array $list = [],
     ) {
     }
 
-    public static function make(?string $modelsPath, ?string $outputPath, ?string $phpPath = null, bool $delete = true): self
+    public static function make(?string $modelsPath, ?string $outputPath, string $phpPath = null, bool $delete = true): self
     {
         if (! $modelsPath) {
             $modelsPath = TypescriptableConfig::modelsDirectory();
@@ -46,6 +48,7 @@ class EloquentType
         $self->items = ClassItem::list($self->modelsPath, TypescriptableConfig::modelsSkip());
         $self->list = $self->setList();
         $self->eloquents = $self->setEloquents();
+        $self->setPivots();
 
         $typescript = EloquentTypescript::make($self->eloquents, "{$outputPath}/{$tsFilename}");
         $typescript->print($delete);
@@ -104,6 +107,16 @@ class EloquentType
             $modelName = $item->name;
             $eloquents[$modelName] = [];
 
+            if (! empty($item->eloquent->morphRelations)) {
+                foreach ($item->eloquent->morphRelations as $relation) {
+                    if ($relation->hasPivot) {
+                        foreach ($relation->pivotAttributes as $a) {
+                            $this->pivots[$relation->pivotModel][$a->name()] = $a;
+                        }
+                    }
+                }
+            }
+
             foreach ($item->eloquent->properties as $field => $property) {
                 $field = Str::snake($field);
                 $eloquents[$modelName][$field] = $property;
@@ -111,6 +124,19 @@ class EloquentType
         }
 
         return $eloquents;
+    }
+
+    private function setPivots(): self
+    {
+        if ($this->pivots) {
+            foreach ($this->pivots as $pivot => $attributes) {
+                foreach ($attributes as $attribute) {
+                    $this->eloquents[$pivot]['pivot'][$attribute->name()] = $attribute;
+                }
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -129,8 +155,8 @@ class EloquentType
                 $list[$modelName][$field] = [
                     'name' => $property->name(),
                     'isArray' => $property->isArray(),
-                    'type' => $property->type(),
-                    'typeTs' => $property->typeTs(),
+                    'phpType' => $property->phpType(),
+                    'typescriptType' => $property->typescriptType(),
                 ];
             }
         }

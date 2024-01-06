@@ -6,6 +6,12 @@ use Doctrine\DBAL\Types\Types;
 
 class SqliteColumn implements IColumn
 {
+    public const TYPE = 'sqlite';
+
+    public const TABLE_NAME = 'name';
+
+    public const TABLE_TYPE = 'type';
+
     protected function __construct(
         public ?int $cid = null,
         public ?string $name = null,
@@ -42,15 +48,15 @@ class SqliteColumn implements IColumn
     public static function typeToPhp(string $formatType): string
     {
         return match ($formatType) {
-            'INT' => Types::INTEGER,
-            'INTEGER' => Types::INTEGER,
-            'TINYINT' => Types::INTEGER,
-            'SMALLINT' => Types::INTEGER,
-            'MEDIUMINT' => Types::INTEGER,
-            'BIGINT' => Types::INTEGER,
-            'UNSIGNED BIG INT' => Types::INTEGER,
-            'INT2' => Types::INTEGER,
-            'INT8' => Types::INTEGER,
+            'INT' => 'int',
+            'INTEGER' => 'int',
+            'TINYINT' => 'int',
+            'SMALLINT' => 'int',
+            'MEDIUMINT' => 'int',
+            'BIGINT' => 'int',
+            'UNSIGNED BIG INT' => 'int',
+            'INT2' => 'int',
+            'INT8' => 'int',
             'CHARACTER(20)' => Types::STRING,
             'VARCHAR(255)' => Types::STRING,
             'VARYING CHARACTER(255)' => Types::STRING,
