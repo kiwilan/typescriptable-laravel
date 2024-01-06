@@ -40,7 +40,7 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
     -   Scan route parameters
     -   For Inertia, you can install [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel) NPM package to use some helpers
 -   ✅ Multiple commands to generate types
-    -   `php artisan typescriptable` for all
+    -   `php artisan typescriptable` for models, settings and routes (safe even if you don't use all)
     -   `php artisan typescriptable:models` for Eloquent models
     -   `php artisan typescriptable:settings` for `spatie/laravel-settings`
     -   `php artisan typescriptable:routes` for Laravel routes
