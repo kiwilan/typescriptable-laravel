@@ -20,29 +20,16 @@ class DatabaseScan
     public static function make(): self
     {
         $type = Schema::getConnection()->getDriverName();
-        $property = match ($type) {
-            'mysql' => MysqlColumn::TABLE_NAME,
-            'pgsql' => PostgreColumn::TABLE_NAME,
-            'sqlite' => SqliteColumn::TABLE_NAME,
-            'sqlsrv' => SqlServerColumn::TABLE_NAME,
-            default => throw new \Exception('Unsupported database type: '.$type),
-        };
-
-        $schemaTables = Schema::getAllTables();
-        $tables = array_map(function (object $table) use ($property) {
-            if (property_exists($table, $property)) {
-                return $table->{$property};
-            }
-        }, $schemaTables);
+        $schemaTables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
 
         $items = [];
-        foreach ($tables as $table) {
+        foreach ($schemaTables as $table) {
             $items[$table] = Table::make($table);
         }
 
         return new self(
             driver: $type,
-            tables: $tables,
+            tables: $schemaTables,
             items: $items,
         );
     }
