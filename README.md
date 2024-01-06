@@ -46,11 +46,10 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 
 ### Roadmap
 
--   [ ] 90% coverage
--   [x] Generate TS types for `morphTo`
 -   [ ] Improve `Casts\Attribute` methods
--   [ ] Add parser for [https://github.com/calebporzio/sushi](https://github.com/calebporzio/sushi)
--   [ ] Add parwser for [https://github.com/spatie/laravel-permission](https://github.com/spatie/laravel-permission)
+-   [ ] Add parser for [calebporzio/sushi](https://github.com/calebporzio/sushi)
+-   [ ] Add parser for [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
+-   [ ] Add parser for [mongodb](https://github.com/mongodb/laravel-mongodb)
 
 ## Installation
 
@@ -140,6 +139,23 @@ With options:
 
 -   --`R`|`routes-path`: Path to routes directory.
 -   --`O`|`output-path`: Path to output.
+
+## Troubleshooting
+
+### Override models
+
+`kiwilan/typescriptable-laravel` will cover many cases, but if you want to override some models, you can just create a type like `resources/js/types/index.ts` and extends `Model` type.
+
+```ts
+interface BookAdvanced extends App.Models.Book {
+    pivot: {
+        created_at: string;
+        updated_at: string;
+    };
+}
+```
+
+And you can import custom type in your code when you need to use advanced type.
 
 ## Examples
 

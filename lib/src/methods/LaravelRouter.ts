@@ -1,4 +1,3 @@
-import { log } from 'node:console'
 import type { RoutesType } from '.'
 
 export class LaravelRouter {

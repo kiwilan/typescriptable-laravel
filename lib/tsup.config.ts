@@ -10,7 +10,7 @@ export default defineConfig({
   external: ['vue', '@inertiajs/vue3', 'node:fs/promises', 'node:child_process'],
   outDir: 'dist',
   dts: true,
-  // minify: true,
-  // treeshake: true,
-  // splitting: true,
+  minify: true,
+  treeshake: true,
+  splitting: true,
 })

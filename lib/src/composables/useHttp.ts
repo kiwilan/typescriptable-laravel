@@ -5,11 +5,11 @@ import type { HttpRequest, HttpRequestAnonymous, HttpRequestBody, RouteName } fr
  * Composable for HTTP requests, using Inertia.
  *
  * @method `raw` Make a HTTP request with URL.
- * @method `get` Make a GET request with Laravel route name.
- * @method `post` Make a POST request with Laravel route name.
- * @method `put` Make a PUT request with Laravel route name.
- * @method `patch` Make a PATCH request with Laravel route name.
- * @method `delete` Make a DELETE request with Laravel route name.
+ * @method `get` Make a GET Inertia request with Laravel route name.
+ * @method `post` Make a POST Inertia request with Laravel route name.
+ * @method `put` Make a PUT Inertia request with Laravel route name.
+ * @method `patch` Make a PATCH Inertia request with Laravel route name.
+ * @method `delete` Make a DELETE Inertia request with Laravel route name.
  *
  * @example
  *

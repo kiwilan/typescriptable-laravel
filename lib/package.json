@@ -1,7 +1,7 @@
 {
   "name": "@kiwilan/typescriptable-laravel",
   "type": "module",
-  "version": "2.3.01",
+  "version": "2.3.02",
   "description": "Add some helpers for your Inertia app with TypeScript.",
   "author": "Ewilan Rivière <ewilan.riviere@gmail.com>",
   "license": "MIT",
@@ -71,6 +71,9 @@
     },
     "vue": {
       "optional": true
+    },
+    "laravel-vite-plugin": {
+      "optional": true
     }
   },
   "devDependencies": {
@@ -80,6 +83,7 @@
     "@vitejs/plugin-vue": "^5.0.2",
     "@vitest/coverage-v8": "^1.1.1",
     "autoprefixer": "^10.4.16",
+    "laravel-vite-plugin": "^1.0.1",
     "postcss": "^8.4.32",
     "rimraf": "^5.0.5",
     "tailwindcss": "^3.4.0",
