@@ -187,7 +187,11 @@ class EloquentRelation
 
         $this->hasPivot = true;
         $this->phpType = $related;
-        $this->typescriptType = "App.Models.{$related}";
+
+        $tsModel = explode('\\', $related);
+        $this->pivotModel = $tsModel[count($tsModel) - 1];
+        $this->typescriptType = 'App.Models.'.$tsModel[count($tsModel) - 1];
+
         if ($this->isArray) {
             $this->typescriptType .= '[]';
         }
