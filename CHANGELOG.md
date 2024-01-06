@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.30 - 2024-01-06
+
+- Add `pivot` parser with `EloquentRelation` parser to add `pivot` property to original model.
+
 ## v1.11.21 - 2023-12-16
 
 - Fix `EloquentRelation` warning if `type` is not exist
