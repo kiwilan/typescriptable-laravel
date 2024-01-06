@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.32 - 2024-01-06
+
+- Fix EloquentRelation prefix morph relations
+
 ## v1.11.31 - 2024-01-06
 
 - Replace `Schema::getAllTables()` with `Schema::getConnection()->getDoctrineSchemaManager()->listTableNames()`
