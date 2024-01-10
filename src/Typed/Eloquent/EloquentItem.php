@@ -50,7 +50,7 @@ class EloquentItem
         $self = new self(
             class: $class,
             model: $instance,
-            tableName: $instance->getTable(),
+            tableName: Table::getName($instance),
             name: $class->name,
         );
 

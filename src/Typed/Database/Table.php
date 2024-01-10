@@ -2,8 +2,10 @@
 
 namespace Kiwilan\Typescriptable\Typed\Database;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class Table
 {
@@ -15,6 +17,22 @@ class Table
         public string $name,
         public ?string $select = null,
     ) {
+    }
+
+    public static function getName(Model|string $model): string
+    {
+        if ($model instanceof Model) {
+            $name = $model->getTable();
+        } else {
+            $name = $model;
+        }
+        $prefix = TypescriptableConfig::databasePrefix();
+
+        if ($prefix) {
+            $name = "{$prefix}{$name}";
+        }
+
+        return $name;
     }
 
     public static function make(string $table): self
