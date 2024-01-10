@@ -2,6 +2,12 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.33 - 2024-01-10
+
+- Add config option for database prefix `DB_PREFIX` (can be used into `database.php` file)
+
+Issue #44
+
 ## v1.11.32 - 2024-01-06
 
 - Fix EloquentRelation prefix morph relations
