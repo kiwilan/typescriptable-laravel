@@ -178,7 +178,7 @@ class EloquentRelation
             return;
         }
 
-        $this->pivotTable = $pivotTable;
+        $this->pivotTable = Table::getName($pivotTable);
         $this->pivotModel = $related;
 
         foreach ($database->getItems()[$pivotTable]->columns as $column) {

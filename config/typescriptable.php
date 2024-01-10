@@ -7,6 +7,11 @@ return [
     'output_path' => resource_path('js'),
 
     /**
+     * The prefix for the database tables.
+     */
+    'database_prefix' => env('DB_PREFIX', ''),
+
+    /**
      * Options for the models.
      */
     'models' => [

@@ -17,6 +17,15 @@ class TypescriptableConfig
         return $path;
     }
 
+    public static function databasePrefix(): ?string
+    {
+        if (env('DB_PREFIX')) {
+            return env('DB_PREFIX');
+        }
+
+        return config('typescriptable.database_prefix');
+    }
+
     public static function setPath(?string $filename = null): string
     {
         if (! $filename) {
@@ -89,6 +98,7 @@ class TypescriptableConfig
     public static function routesSkipName(): array
     {
         return config('typescriptable.routes.skip.name') ?? [
+            '__clockwork.*',
             'debugbar.*',
             'horizon.*',
             'telescope.*',
