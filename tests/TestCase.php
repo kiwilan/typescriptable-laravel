@@ -139,7 +139,6 @@ class TestCase extends Orchestra
         config()->set('database.default', $driver->name);
         config()->set("database.connections.{$driver->name}", [
             'driver' => $driver->name,
-            'database' => $driver->database,
             'url' => $driver->url,
             'host' => $driver->host,
             'port' => $driver->port,
