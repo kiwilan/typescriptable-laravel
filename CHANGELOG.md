@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.34 - 2024-01-11
+
+- Hotfix for `v1.11.33`
+
 ## v1.11.33 - 2024-01-10
 
 - Add config option for database prefix `DB_PREFIX` (can be used into `database.php` file)
