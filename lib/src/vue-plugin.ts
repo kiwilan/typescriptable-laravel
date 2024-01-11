@@ -5,8 +5,11 @@ import { useRouter } from './composables/useRouter'
 /**
  * Vue plugin to use Inertia.js with TypeScript.
  *
- * - Add `$route`, `$isRoute`, `$currentRoute` and `$to` helpers.
+ * - Add `$route`, `$isRoute`, and `$currentRoute` helpers.
  * - Add `<IHead>` and `<ILink>` components.
+ *
+ * @see https://inertiajs.com/title-and-meta
+ * @see https://inertiajs.com/links
  *
  * @example
  *
@@ -36,7 +39,7 @@ import { useRouter } from './composables/useRouter'
  * <template>
  *  <div>
  *    <IHead title="MyApp" />
- *    <ILink :href="$to({ name: 'home' })">Home</ILink>
+ *    <ILink :href="$route('home')">Home</ILink>
  *    <div v-if="$isRoute('home')">Home page</div>
  *    <div>Current route: {{ $currentRoute.name }}</div>
  *  </div>
@@ -50,13 +53,11 @@ export const VueTypescriptable: Plugin = {
     app.config.globalProperties.$route = router.route
     app.config.globalProperties.$isRoute = router.isRoute
     app.config.globalProperties.$currentRoute = router.currentRoute
-    app.config.globalProperties.$to = router.to
 
     app.provide('inertia', {
       route: app.config.globalProperties.$route,
       isRoute: app.config.globalProperties.$isRoute,
       currentRoute: app.config.globalProperties.$currentRoute,
-      to: app.config.globalProperties.$to,
     })
 
     app.component('IHead', Head)

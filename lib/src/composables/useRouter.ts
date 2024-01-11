@@ -7,7 +7,6 @@ import { LaravelRouter } from '@/methods'
  * @method `isRoute` Check if current route is the given route.
  * @method `currentRoute` Get current route.
  * @method `route` Get route URL from route name and params, can be used into template with `$route` helper.
- * @method `to` Get route URL from route config, to use with `href` prop of `<inertia-link>`, can be used into template with `$to` helper.
  */
 export function useRouter() {
   /**
@@ -64,30 +63,9 @@ export function useRouter() {
     })
   }
 
-  /**
-   * Get route URL from route config, to use with `href` prop of `<inertia-link>`, can be used into template with `$to` helper.
-   *
-   * @example
-   *
-   * ```vue
-   * <script setup lang="ts">
-   * import { Link } from '@inertiajs/vue3'
-   * </script>
-   *
-   * <template>
-   *  <Link :href="to({ name: 'home' })">Home</Link>
-   * </template>
-   * ```
-   */
-  function to<T extends App.Route.Name>(route: App.Route.RouteConfig<T>): string {
-    const router = LaravelRouter.create()
-    return router.getRouteBind(route)
-  }
-
   return {
     isRoute,
     currentRoute,
     route,
-    to,
   }
 }

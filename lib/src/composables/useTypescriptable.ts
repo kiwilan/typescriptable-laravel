@@ -1,48 +1,48 @@
 import { usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
-import { Http, LaravelRouter } from '@/methods'
+import { HttpRequest, LaravelRouter } from '@/methods'
 import type { RequestPayload } from '@/types'
 
 /**
- * @deprecated Use `useHttp()` or `useRouter()` instead.
+ * @deprecated Use `useFetch()` or `useRouter()` instead.
  */
 export function useTypescriptable() {
-  const http = Http.create()
+  const http = HttpRequest.create()
   const laravelRouter = LaravelRouter.create()
 
   /**
-   * @deprecated Use `useHttp()` instead.
+   * @deprecated Use `useFetch()` instead.
    */
   const request = {
     /**
-     * @deprecated Use `useHttp()` instead.
+     * @deprecated Use `useFetch()` instead.
      */
     get(name: App.Route.Name): void {
-      return http.get(name)
+      return http.inertia(name, 'GET')
     },
     /**
-     * @deprecated Use `useHttp()` instead.
+     * @deprecated Use `useFetch()` instead.
      */
     post(name: App.Route.Name, data?: RequestPayload): void {
-      return http.post(name, data)
+      return http.inertia(name, 'POST', data)
     },
     /**
-     * @deprecated Use `useHttp()` instead.
+     * @deprecated Use `useFetch()` instead.
      */
     put(name: App.Route.Name, data?: RequestPayload): void {
-      return http.put(name, data)
+      return http.inertia(name, 'PUT', data)
     },
     /**
-     * @deprecated Use `useHttp()` instead.
+     * @deprecated Use `useFetch()` instead.
      */
     patch(name: App.Route.Name, data?: RequestPayload): void {
-      return http.patch(name, data)
+      return http.inertia(name, 'PATCH', data)
     },
     /**
-     * @deprecated Use `useHttp()` instead.
+     * @deprecated Use `useFetch()` instead.
      */
     delete(name: App.Route.Name): void {
-      return http.delete(name)
+      return http.inertia(name, 'DELETE')
     },
   }
 
@@ -113,7 +113,7 @@ export function useTypescriptable() {
     currentRoute,
     route,
     to,
-    Http,
+    HttpRequest,
     Router: laravelRouter,
   }
 }
