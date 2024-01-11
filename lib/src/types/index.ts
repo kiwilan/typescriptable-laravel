@@ -63,26 +63,20 @@ export type RequestPayload = Record<string, any> | InertiaForm<any>
 export type RouteName = App.Route.Name
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
-export interface HttpRequest {
+export interface HttpRequestQuery {
   /**
    * Add query data to URL.
    */
   query?: Record<string, any>
 }
 
-export interface HttpRequestBody extends HttpRequest {
+export interface HttpRequestBody extends HttpRequestQuery {
   /**
    * Body data.
    *
    * @default {}
    */
   body?: RequestPayload
-  /**
-   * Send request with Inertia (useful for forms)
-   *
-   * @default true
-   */
-  isInertia?: boolean
 }
 
 export interface HttpRequestAnonymous {
@@ -99,12 +93,6 @@ export interface HttpRequestAnonymous {
    */
   body?: RequestPayload
   /**
-   * HTTP method.
-   *
-   * @default 'GET'
-   */
-  method?: HttpMethod
-  /**
    * HTTP headers.
    *
    * @default {}
@@ -116,10 +104,4 @@ export interface HttpRequestAnonymous {
    * @default 'application/json'
    */
   contentType?: string
-  /**
-   * Send request with Inertia (can't be used with `options.contentType` and `options.headers`).
-   *
-   * @default false
-   */
-  isInertia?: boolean
 }

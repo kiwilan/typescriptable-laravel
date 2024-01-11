@@ -1,7 +1,7 @@
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import type { DefineComponent } from 'vue'
 import { useTypescriptable } from './composables/useTypescriptable'
-import { useHttp } from './composables/useHttp'
+import { useFetch } from './composables/useFetch'
 import { useRouter } from './composables/useRouter'
 import { useInertia } from './composables/useInertia'
 import { VueTypescriptable } from './vue-plugin'
@@ -13,7 +13,7 @@ async function resolve(name: string, glob: Record<string, () => Promise<unknown>
 export {
   VueTypescriptable,
   useTypescriptable,
-  useHttp,
+  useFetch,
   useRouter,
   useInertia,
   resolve,

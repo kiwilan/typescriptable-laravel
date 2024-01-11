@@ -1,6 +1,6 @@
 import { LaravelRouter } from './LaravelRouter'
 import { LaravelRoute } from './LaravelRoute'
-import { Http } from './Http'
+import { HttpRequest } from './HttpRequest'
 
 type RoutesType = Record<App.Route.Name, App.Route.Link> | undefined
 
@@ -10,5 +10,5 @@ export type {
 export {
   LaravelRouter,
   LaravelRoute,
-  Http,
+  HttpRequest,
 }
