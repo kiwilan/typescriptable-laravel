@@ -4,12 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create($this->createTable('users'), function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('stories', function (Blueprint $table) {
+        Schema::create($this->createTable('stories'), function (Blueprint $table) {
             $table->id();
 
             $table->string('title');
@@ -39,7 +40,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('authors', function (Blueprint $table) {
+        Schema::create($this->createTable('authors'), function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
@@ -49,7 +50,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('chapters', function (Blueprint $table) {
+        Schema::create($this->createTable('chapters'), function (Blueprint $table) {
             $table->id();
 
             $table->string('name')->nullable();
@@ -60,7 +61,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create($this->createTable('categories'), function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
@@ -71,29 +72,29 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('stories', function (Blueprint $table) {
-            $table->foreignId('author_id')->nullable()->constrained('authors')->nullOnDelete();
-            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
+        Schema::table($this->createTable('stories'), function (Blueprint $table) {
+            $table->foreignId('author_id')->nullable()->constrained($this->createTable('authors'))->nullOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained($this->createTable('categories'))->nullOnDelete();
         });
 
-        Schema::table('chapters', function (Blueprint $table) {
-            $table->foreignId('story_id')->nullable()->constrained('stories')->nullOnDelete();
+        Schema::table($this->createTable('chapters'), function (Blueprint $table) {
+            $table->foreignId('story_id')->nullable()->constrained($this->createTable('stories'))->nullOnDelete();
         });
 
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create($this->createTable('tags'), function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
             $table->timestamps();
         });
 
-        Schema::create('story_tag', function (Blueprint $table) {
+        Schema::create($this->createTable('story_tag'), function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tag_id')->constrained();
-            $table->foreignId('story_id')->constrained();
+            $table->foreignId('tag_id')->constrained($this->createTable('tags'))->cascadeOnDelete();
+            $table->foreignId('story_id')->constrained($this->createTable('stories'))->cascadeOnDelete();
         });
 
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create($this->createTable('comments'), function (Blueprint $table) {
             $table->id();
 
             $table->string('name')->nullable();
@@ -107,7 +108,7 @@ return new class extends Migration
 
             $table->foreignId('comment_id')
                 ->nullable()
-                ->constrained()
+                ->constrained($this->createTable('comments'))
                 ->onDelete('no action');
 
             $table->morphs('commentable');
@@ -115,7 +116,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create($this->createTable('members'), function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('tmdb_id')->nullable();
@@ -132,7 +133,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('memberables', function (Blueprint $table) {
+        Schema::create($this->createTable('memberables'), function (Blueprint $table) {
             $table->foreignId('member_id')->index();
             $table->string('character')->nullable();
             $table->string('job')->nullable();
@@ -144,7 +145,7 @@ return new class extends Migration
             $table->ulidMorphs('memberable');
         });
 
-        Schema::create('movies', function (Blueprint $table) {
+        Schema::create($this->createTable('movies'), function (Blueprint $table) {
             $table->ulid('id')->primary();
 
             $table->integer('tmdb_id')->nullable();
@@ -186,5 +187,16 @@ return new class extends Migration
 
             $table->timestamps();
         });
+    }
+
+    private function createTable(string $name): string
+    {
+        $prefix = TypescriptableConfig::databasePrefix();
+
+        if ($prefix) {
+            $name = "{$prefix}{$name}";
+        }
+
+        return $name;
     }
 };

@@ -69,7 +69,9 @@ class Table
             throw new \Exception("Database driver not supported: {$this->driver}");
         }
 
-        if (! Schema::hasTable($this->name)) {
+        $schemaTables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
+
+        if (! in_array($this->name, $schemaTables)) {
             return [];
         }
 
