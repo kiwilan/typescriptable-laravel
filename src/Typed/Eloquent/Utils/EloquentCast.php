@@ -78,10 +78,10 @@ class EloquentCast
             'array' => 'any[]',
             'boolean' => 'boolean',
             'collection' => 'any[]',
-            'date' => 'Date',
-            'datetime' => 'Date',
-            'immutable_date' => 'Date',
-            'immutable_datetime' => 'Date',
+            'date' => 'string',
+            'datetime' => 'string',
+            'immutable_date' => 'string',
+            'immutable_datetime' => 'string',
             'decimal' => 'number',
             'double' => 'number',
             'encrypted' => 'any',
@@ -94,7 +94,7 @@ class EloquentCast
             'object' => 'any',
             'real' => 'number',
             'string' => 'string',
-            'timestamp' => 'Date',
+            'timestamp' => 'string',
             default => 'any',
         };
 
