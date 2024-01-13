@@ -2,6 +2,12 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.36 - 2024-01-13
+
+- `DateTime` type is now `string` for Typescript
+
+For issue #46
+
 ## v1.11.35 - 2024-01-11
 
 - Fix
