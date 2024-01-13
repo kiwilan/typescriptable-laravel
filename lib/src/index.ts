@@ -1,20 +1,47 @@
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import type { DefineComponent } from 'vue'
-import { useTypescriptable } from './composables/useTypescriptable'
-import { useFetch } from './composables/useFetch'
-import { useRouter } from './composables/useRouter'
-import { useInertia } from './composables/useInertia'
+import {
+  useDate,
+  useFetch,
+  useInertia,
+  useLazy,
+  usePaginate,
+  usePagination,
+  useQuery,
+  useRouter,
+  useSearch,
+  useSidebar,
+  useSlideover,
+  useTypescriptable,
+} from './composables'
+import type {
+  Query,
+  SortItem,
+} from './composables'
 import { VueTypescriptable } from './vue-plugin'
 
 async function resolve(name: string, glob: Record<string, () => Promise<unknown>>): Promise<DefineComponent> {
   return resolvePageComponent(`./Pages/${name}.vue`, glob) as Promise<DefineComponent>
 }
 
+export type {
+  Query,
+  SortItem,
+}
+
 export {
   VueTypescriptable,
-  useTypescriptable,
-  useFetch,
-  useRouter,
-  useInertia,
   resolve,
+  useDate,
+  useFetch,
+  useInertia,
+  useLazy,
+  usePaginate,
+  usePagination,
+  useQuery,
+  useRouter,
+  useSearch,
+  useSidebar,
+  useSlideover,
+  useTypescriptable,
 }
