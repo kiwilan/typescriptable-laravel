@@ -95,7 +95,7 @@ class TypescriptToPhp
     }
 
     /**
-     * @param  Closure  $closure function(string $line, int $lineNumber): void
+     * @param  Closure  $closure  function(string $line, int $lineNumber): void
      */
     private function readLineByLine(string $path, Closure $closure)
     {

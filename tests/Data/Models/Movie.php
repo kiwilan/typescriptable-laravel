@@ -71,7 +71,8 @@ class Movie extends Model
 
     public function members(): \Illuminate\Database\Eloquent\Relations\MorphToMany
     {
-        return $this->morphToMany(Member::class, 'memberable')
+        return $this
+            ->morphToMany(Member::class, 'memberable')
             ->withPivot([
                 'character',
                 'job',

@@ -7,6 +7,7 @@ import { LaravelRouter } from '@/methods'
  * @method `isRoute` Check if current route is the given route.
  * @method `currentRoute` Get current route.
  * @method `route` Get route URL from route name and params, can be used into template with `$route` helper.
+ * @method `router` Get router instance.
  */
 export function useRouter() {
   /**
@@ -63,9 +64,12 @@ export function useRouter() {
     })
   }
 
+  const router = computed(() => LaravelRouter.create())
+
   return {
     isRoute,
     currentRoute,
     route,
+    router,
   }
 }
