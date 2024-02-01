@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.40 - 2024-02-01
+
+Hotfix for relation parsing if multiline.
+
 ## v1.11.36 - 2024-01-13
 
 - `DateTime` type is now `string` for Typescript
