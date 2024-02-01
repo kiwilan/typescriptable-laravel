@@ -64,14 +64,25 @@ class EloquentRelation
             isArray: str_contains($method->getReturnType(), 'Many'),
             isMorph: $isMorph,
         );
-        $return_line = $method->getEndLine() - 2;
 
-        $lines = file($method->getFileName());
-        $return_line_content = $lines[$return_line];
+        $startLine = $method->getStartLine();
+        $endLine = $method->getEndLine();
+
+        $contents = file($method->getFileName());
+        $lines = [];
+
+        for ($i = $startLine; $i < $endLine; $i++) {
+            $lines[] = $contents[$i];
+        }
+
+        $removeChars = ['{', '}', ';', '"', "'", "\n", "\r", "\t", ''];
+        $lines = array_map(fn ($line) => str_replace($removeChars, '', $line), $lines);
+        $lines = array_map(fn ($line) => trim($line), $lines);
+        $lines = array_filter($lines, fn ($line) => ! empty($line));
+        $line = implode(' ', $lines);
 
         $regex = '/\w+::class/';
-
-        if (preg_match($regex, $return_line_content, $matches)) {
+        if (preg_match($regex, $line, $matches)) {
             $type = $matches[0];
             $type = str_replace('::class', '', $type);
             $relation->phpType = $type;
