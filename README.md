@@ -54,7 +54,7 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 
 ## Installation
 
-> **Warning**
+> [!WARNING]
 >
 > PHP 8.1+ is required and Laravel 9+ is recommended.
 
@@ -246,7 +246,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Credits
 
--   [Ewilan Riviere](https://github.com/ewilan-riviere)
+-   [Spatie](https://github.com/spatie/package-skeleton-laravel): for spatie/package-skeleton-laravel
+-   [Ewilan Riviere](https://github.com/ewilan-riviere): Author package
 
 ## License
 
