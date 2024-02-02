@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
     "jsx": "preserve",
+    "lib": ["ESNext", "DOM"],
     "module": "ES2020",
     "moduleResolution": "Node",
     "paths": {
@@ -11,14 +11,14 @@
       "~": ["./"],
       "~/*": ["./*"]
     },
-    "typeRoots": ["./node_modules/@types", "./*.d.ts"],
     "resolveJsonModule": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types", "./*.d.ts"],
     "strict": true,
     "strictNullChecks": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true
   },
   "include": [
     "src",
