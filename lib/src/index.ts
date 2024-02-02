@@ -16,7 +16,6 @@ export {
   useFetch,
   useInertia,
   useLazy,
-  usePaginate,
   usePagination,
   useQuery,
   useRouter,

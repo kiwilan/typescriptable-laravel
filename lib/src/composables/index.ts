@@ -2,7 +2,6 @@ import { useDate } from './useDate'
 import { useFetch } from './useFetch'
 import { useInertia } from './useInertia'
 import { useLazy } from './useLazy'
-import { usePaginate } from './usePaginate'
 import { usePagination } from './usePagination'
 import { useQuery } from './useQuery'
 import { useRouter } from './useRouter'
@@ -17,7 +16,6 @@ export {
   useFetch,
   useInertia,
   useLazy,
-  usePaginate,
   usePagination,
   useQuery,
   useRouter,
