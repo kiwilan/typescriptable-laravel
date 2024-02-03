@@ -12,6 +12,7 @@ export interface SortItem {
 }
 
 const current = ref<Query>()
+const total = ref<number>()
 const isCleared = ref<boolean>(false)
 const sort = ref<string>()
 const limit = ref<number>(10)
@@ -19,6 +20,7 @@ const isReversed = ref(false)
 
 export function useQuery<T>(propQuery: App.Paginate<T>, prop: string = 'query') {
   current.value = propQuery
+  total.value = propQuery.total
   sort.value = current.value.sort
   limit.value = current.value.per_page
 
@@ -172,6 +174,7 @@ export function useQuery<T>(propQuery: App.Paginate<T>, prop: string = 'query') 
 
   return {
     request: current,
+    total,
     clear,
     sortBy,
     sortReverse,
