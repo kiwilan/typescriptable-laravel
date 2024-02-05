@@ -125,11 +125,11 @@ export function usePagination(models: App.Paginate) {
     return currentUrl
   }
 
-  const nextPageLink = computed((): string | undefined => {
+  const nextPageLink = computed((): string => {
     return convertUrl('page', models.current_page + 1)
   })
 
-  const previousPageLink = computed((): string | undefined => {
+  const previousPageLink = computed((): string => {
     return convertUrl('page', models.current_page - 1)
   })
 
