@@ -13,6 +13,8 @@ export function usePagination(models: App.Paginate) {
   const pages = ref<PaginateLink[]>([])
   const previousPage = ref<string>()
   const nextPage = ref<string>()
+  const canNext = ref<boolean>(models.current_page !== models.last_page)
+  const canPrevious = ref<boolean>(models.current_page !== 1)
 
   function getQuery() {
     const query = new URLSearchParams(window.location.search)
@@ -124,16 +126,10 @@ export function usePagination(models: App.Paginate) {
   }
 
   const nextPageLink = computed((): string | undefined => {
-    if (models.current_page !== models.last_page)
-      return undefined
-
     return convertUrl('page', models.current_page + 1)
   })
 
   const previousPageLink = computed((): string | undefined => {
-    if (models.current_page === 1)
-      return undefined
-
     return convertUrl('page', models.current_page - 1)
   })
 
@@ -143,5 +139,7 @@ export function usePagination(models: App.Paginate) {
     nextPage,
     nextPageLink,
     previousPageLink,
+    canNext,
+    canPrevious,
   }
 }
