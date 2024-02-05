@@ -124,7 +124,7 @@ export function usePagination(models: App.Paginate) {
   }
 
   const nextPageLink = computed((): string | undefined => {
-    if (models.current_page === models.last_page)
+    if (models.current_page !== models.last_page)
       return undefined
 
     return convertUrl('page', models.current_page + 1)
