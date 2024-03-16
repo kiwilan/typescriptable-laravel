@@ -2,8 +2,6 @@
 
 namespace Kiwilan\Typescriptable\Typed\Database;
 
-use Doctrine\DBAL\Types\Types;
-
 class MysqlColumn implements IColumn
 {
     public const TYPE = 'mysql';
@@ -48,39 +46,39 @@ class MysqlColumn implements IColumn
     public static function typeToPhp(string $formatType): string
     {
         return match ($formatType) {
-            'char' => Types::STRING,
-            'varchar' => Types::STRING,
-            'tinytext' => Types::STRING,
-            'text' => Types::STRING,
-            'mediumtext' => Types::STRING,
-            'longtext' => Types::STRING,
-            'tinyblob' => Types::STRING,
-            'blob' => Types::STRING,
-            'mediumblob' => Types::STRING,
-            'longblob' => Types::STRING,
-            'enum' => Types::STRING,
-            'set' => Types::STRING,
-            'binary' => Types::STRING,
-            'varbinary' => Types::STRING,
-            'bit' => Types::STRING,
-            'date' => Types::STRING,
-            'datetime' => Types::STRING,
-            'timestamp' => Types::STRING,
-            'time' => Types::STRING,
-            'year' => Types::STRING,
+            'char' => 'string',
+            'varchar' => 'string',
+            'tinytext' => 'string',
+            'text' => 'string',
+            'mediumtext' => 'string',
+            'longtext' => 'string',
+            'tinyblob' => 'string',
+            'blob' => 'string',
+            'mediumblob' => 'string',
+            'longblob' => 'string',
+            'enum' => 'string',
+            'set' => 'string',
+            'binary' => 'string',
+            'varbinary' => 'string',
+            'bit' => 'string',
+            'date' => 'string',
+            'datetime' => 'string',
+            'timestamp' => 'string',
+            'time' => 'string',
+            'year' => 'string',
             'int' => 'int',
             'tinyint' => 'int',
             'smallint' => 'int',
             'mediumint' => 'int',
             'bigint' => 'int',
-            'float' => Types::FLOAT,
-            'double' => Types::FLOAT,
-            'decimal' => Types::FLOAT,
-            'boolean' => Types::BOOLEAN,
-            'json' => Types::JSON,
-            'jsonb' => Types::JSON,
-            'uuid' => Types::STRING,
-            default => Types::STRING,
+            'float' => 'float',
+            'double' => 'float',
+            'decimal' => 'float',
+            'boolean' => 'boolean',
+            'json' => 'json',
+            'jsonb' => 'json',
+            'uuid' => 'string',
+            default => 'string',
         };
     }
 }
