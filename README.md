@@ -54,14 +54,29 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 
 ## Installation
 
+This version requires [PHP](https://www.php.net/) `8.2+` and supports [Laravel](https://laravel.com/) 11.
+
 > [!WARNING]
 >
-> PHP 8.1+ is required and Laravel 9+ is recommended.
+> Laravel 11 dropped [Doctrine DBAL](https://laravel.com/docs/11.x/upgrade#doctrine-dbal-removal). For previous Laravel versions, you can use `1.12.03` version.
+
+| Version                                                                          | L9                 | L10                | L11                |
+| -------------------------------------------------------------------------------- | ------------------ | ------------------ | ------------------ |
+| [1.12.03](https://packagist.org/packages/kiwilan/typescriptable-laravel#1.12.03) | :white_check_mark: | :white_check_mark: | :x:                |
+| [2.0.0](https://packagist.org/packages/kiwilan/typescriptable-laravel#2.0.0)     | :x:                | :x:                | :white_check_mark: |
 
 You can install the package via composer:
 
+With **Laravel v11+** and PHP v`8.2`
+
 ```bash
 composer require kiwilan/typescriptable-laravel
+```
+
+With **Laravel v9-10** and PHP v`8.1`
+
+```
+composer require kiwilan/typescriptable-laravel:1.12.03
 ```
 
 ### About TypeScript
@@ -269,5 +284,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [tests-href]: https://github.com/kiwilan/typescriptable-laravel/actions/workflows/run-tests.yml
 [codecov-src]: https://codecov.io/gh/kiwilan/typescriptable-laravel/branch/main/graph/badge.svg?token=P9XIK2KV9G
 [codecov-href]: https://codecov.io/gh/kiwilan/typescriptable-laravel
-[laravel-src]: https://img.shields.io/static/v1?label=Laravel&message=v9&style=flat-square&colorA=18181B&colorB=FF2D20
+[laravel-src]: https://img.shields.io/static/v1?label=Laravel&message=v9-11&style=flat-square&colorA=18181B&colorB=FF2D20
 [laravel-href]: https://laravel.com
