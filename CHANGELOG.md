@@ -2,6 +2,62 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.11.40 - 2024-02-01
+
+Hotfix for relation parsing if multiline.
+
+## v1.11.36 - 2024-01-13
+
+- `DateTime` type is now `string` for Typescript
+
+For issue #46
+
+## v1.11.35 - 2024-01-11
+
+- Fix
+
+## v1.11.34 - 2024-01-11
+
+- Hotfix for `v1.11.33`
+
+## v1.11.33 - 2024-01-10
+
+- Add config option for database prefix `DB_PREFIX` (can be used into `database.php` file)
+
+Issue #44
+
+## v1.11.32 - 2024-01-06
+
+- Fix EloquentRelation prefix morph relations
+
+## v1.11.31 - 2024-01-06
+
+- Replace `Schema::getAllTables()` with `Schema::getConnection()->getDoctrineSchemaManager()->listTableNames()`
+
+## v1.11.30 - 2024-01-06
+
+- Add `pivot` parser with `EloquentRelation` parser to add `pivot` property to original model.
+
+## v1.11.21 - 2023-12-16
+
+- Fix `EloquentRelation` warning if `type` is not exist
+
+## v1.11.14 - 2023-10-21
+
+- Fix `[Bug]: linting problem` #36
+
+## v1.11.13 - 2023-10-15
+
+- Fixes
+
+## v1.11.12 - 2023-10-15
+
+- Models relationships fixes
+
+## v1.11.11 - 2023-10-02
+
+- Typescript generated fixed
+
 ## v1.11.10 - 2023-10-02
 
 - Add header to `.d.ts` to skip Typescript errors
