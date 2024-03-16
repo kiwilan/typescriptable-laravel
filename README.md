@@ -58,6 +58,13 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 >
 > PHP 8.1+ is required and Laravel 9+ is recommended.
 
+This version requires [PHP](https://www.php.net/) 8.1-8.3 and supports [Laravel](https://laravel.com/) 11.
+
+| Markdown | L9                 | L10                | L11                |
+| -------- | ------------------ | ------------------ | ------------------ |
+| 1.12.03  | :white_check_mark: | :white_check_mark: | :x:                |
+| 2.0.0    | :x:                | :x:                | :white_check_mark: |
+
 You can install the package via composer:
 
 ```bash
