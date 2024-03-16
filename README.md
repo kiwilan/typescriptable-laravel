@@ -54,16 +54,16 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 
 ## Installation
 
-This version requires [PHP](https://www.php.net/) 8.1-8.3 and supports [Laravel](https://laravel.com/) 11.
+This version requires [PHP](https://www.php.net/) `8.2+` and supports [Laravel](https://laravel.com/) 11.
+
+> [!WARNING]
+>
+> Laravel 11 dropped [Doctrine DBAL](https://laravel.com/docs/11.x/upgrade#doctrine-dbal-removal). For previous Laravel versions, you can use `1.12.03` version.
 
 | Version                                                                          | L9                 | L10                | L11                |
 | -------------------------------------------------------------------------------- | ------------------ | ------------------ | ------------------ |
 | [1.12.03](https://packagist.org/packages/kiwilan/typescriptable-laravel#1.12.03) | :white_check_mark: | :white_check_mark: | :x:                |
 | [2.0.0](https://packagist.org/packages/kiwilan/typescriptable-laravel#2.0.0)     | :x:                | :x:                | :white_check_mark: |
-
-> [!WARNING]
->
-> Laravel 11 dropped [Doctrine DBAL](https://laravel.com/docs/11.x/upgrade#doctrine-dbal-removal). For previous Laravel versions, you can use `1.12.03` version.
 
 You can install the package via composer:
 
@@ -272,7 +272,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [version-src]: https://img.shields.io/packagist/v/kiwilan/typescriptable-laravel.svg?style=flat-square&colorA=18181B&colorB=777BB4
 [version-href]: https://packagist.org/packages/kiwilan/typescriptable-laravel
-[php-version-src]: https://img.shields.io/static/v1?style=flat-square&label=PHP&message=v8.1+&color=777BB4&logo=php&logoColor=ffffff&labelColor=18181b
+[php-version-src]: https://img.shields.io/static/v1?style=flat-square&label=PHP&message=v8.1&color=777BB4&logo=php&logoColor=ffffff&labelColor=18181b
 [php-version-href]: https://www.php.net/
 [npm-version-src]: https://img.shields.io/npm/v/@kiwilan/typescriptable-laravel.svg?style=flat-square&color=CB3837&logoColor=ffffff&labelColor=18181b
 [npm-version-href]: https://www.npmjs.com/package/@kiwilan/typescriptable-laravel
