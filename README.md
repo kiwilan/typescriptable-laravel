@@ -284,5 +284,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [tests-href]: https://github.com/kiwilan/typescriptable-laravel/actions/workflows/run-tests.yml
 [codecov-src]: https://codecov.io/gh/kiwilan/typescriptable-laravel/branch/main/graph/badge.svg?token=P9XIK2KV9G
 [codecov-href]: https://codecov.io/gh/kiwilan/typescriptable-laravel
-[laravel-src]: https://img.shields.io/static/v1?label=Laravel&message=v9&style=flat-square&colorA=18181B&colorB=FF2D20
+[laravel-src]: https://img.shields.io/static/v1?label=Laravel&message=v9+&style=flat-square&colorA=18181B&colorB=FF2D20
 [laravel-href]: https://laravel.com

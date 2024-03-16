@@ -33,9 +33,9 @@
   },
   "require-dev": {
     "laravel/pint": "^1.0",
-    "nunomaduro/collision": "^8.0",
+    "nunomaduro/collision": "^7.6.0 || ^8.0",
     "larastan/larastan": "^2.8.0",
-    "orchestra/testbench": "^9.0",
+    "orchestra/testbench": "^8.5 || ^9.0",
     "pestphp/pest": "^2.8.1",
     "pestphp/pest-plugin-laravel": "*",
     "phpstan/extension-installer": "^1.1",
