@@ -272,7 +272,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [version-src]: https://img.shields.io/packagist/v/kiwilan/typescriptable-laravel.svg?style=flat-square&colorA=18181B&colorB=777BB4
 [version-href]: https://packagist.org/packages/kiwilan/typescriptable-laravel
-[php-version-src]: https://img.shields.io/static/v1?style=flat-square&label=PHP&message=v8.1&color=777BB4&logo=php&logoColor=ffffff&labelColor=18181b
+[php-version-src]: https://img.shields.io/static/v1?style=flat-square&label=PHP&message=v8.1+&color=777BB4&logo=php&logoColor=ffffff&labelColor=18181b
 [php-version-href]: https://www.php.net/
 [npm-version-src]: https://img.shields.io/npm/v/@kiwilan/typescriptable-laravel.svg?style=flat-square&color=CB3837&logoColor=ffffff&labelColor=18181b
 [npm-version-href]: https://www.npmjs.com/package/@kiwilan/typescriptable-laravel
@@ -284,5 +284,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [tests-href]: https://github.com/kiwilan/typescriptable-laravel/actions/workflows/run-tests.yml
 [codecov-src]: https://codecov.io/gh/kiwilan/typescriptable-laravel/branch/main/graph/badge.svg?token=P9XIK2KV9G
 [codecov-href]: https://codecov.io/gh/kiwilan/typescriptable-laravel
-[laravel-src]: https://img.shields.io/static/v1?label=Laravel&message=v9+&style=flat-square&colorA=18181B&colorB=FF2D20
+[laravel-src]: https://img.shields.io/static/v1?label=Laravel&message=v9-11&style=flat-square&colorA=18181B&colorB=FF2D20
 [laravel-href]: https://laravel.com
