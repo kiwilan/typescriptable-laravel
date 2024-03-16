@@ -69,7 +69,12 @@ class Table
             throw new \Exception("Database driver not supported: {$this->driver}");
         }
 
-        $schemaTables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
+        $schemaTables = [];
+        if (intval(app()->version()) >= 11) {
+            $schemaTables = Schema::getTableListing();
+        } else {
+            $schemaTables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames(); // @phpstan-ignore-line
+        }
 
         if (! in_array($this->name, $schemaTables)) {
             return [];

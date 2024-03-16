@@ -20,7 +20,13 @@ class DatabaseScan
     public static function make(): self
     {
         $type = Schema::getConnection()->getDriverName();
-        $schemaTables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
+
+        $schemaTables = [];
+        if (intval(app()->version()) >= 11) {
+            $schemaTables = Schema::getTableListing();
+        } else {
+            $schemaTables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames(); // @phpstan-ignore-line
+        }
 
         $items = [];
         foreach ($schemaTables as $table) {

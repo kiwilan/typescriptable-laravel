@@ -2,8 +2,6 @@
 
 namespace Kiwilan\Typescriptable\Typed\Database;
 
-use Doctrine\DBAL\Types\Types;
-
 class SqlServerColumn implements IColumn
 {
     public const TYPE = 'sqlsrv';
@@ -39,35 +37,35 @@ class SqlServerColumn implements IColumn
     {
         return match ($formatType) {
             'bigint' => 'int',
-            'binary' => Types::BINARY,
-            'bit' => Types::BOOLEAN,
-            'char' => Types::STRING,
-            'date' => Types::STRING,
-            Types::STRING => Types::STRING,
-            'datetime2' => Types::STRING,
-            'datetimeoffset' => Types::STRING,
-            'decimal' => Types::FLOAT,
-            'float' => Types::FLOAT,
-            'image' => Types::BINARY,
+            'binary' => 'binary',
+            'bit' => 'boolean',
+            'char' => 'string',
+            'date' => 'string',
+            'string' => 'string',
+            'datetime2' => 'string',
+            'datetimeoffset' => 'string',
+            'decimal' => 'float',
+            'float' => 'float',
+            'image' => 'binary',
             'int' => 'int',
-            'money' => Types::FLOAT,
-            'nchar' => Types::STRING,
-            'ntext' => Types::STRING,
-            'numeric' => Types::FLOAT,
-            'nvarchar' => Types::STRING,
-            'real' => Types::FLOAT,
-            'smalldatetime' => Types::STRING,
+            'money' => 'float',
+            'nchar' => 'string',
+            'ntext' => 'string',
+            'numeric' => 'float',
+            'nvarchar' => 'string',
+            'real' => 'float',
+            'smalldatetime' => 'string',
             'smallint' => 'int',
-            'smallmoney' => Types::FLOAT,
-            'text' => Types::STRING,
-            'time' => Types::STRING,
-            'timestamp' => Types::BINARY,
+            'smallmoney' => 'float',
+            'text' => 'string',
+            'time' => 'string',
+            'timestamp' => 'binary',
             'tinyint' => 'int',
-            'uniqueidentifier' => Types::GUID,
-            'varbinary' => Types::BINARY,
-            'varchar' => Types::STRING,
-            'xml' => Types::STRING,
-            default => Types::STRING,
+            'uniqueidentifier' => 'guid',
+            'varbinary' => 'binary',
+            'varchar' => 'string',
+            'xml' => 'string',
+            default => 'string',
         };
     }
 }

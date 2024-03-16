@@ -2,8 +2,6 @@
 
 namespace Kiwilan\Typescriptable\Typed\Database;
 
-use Doctrine\DBAL\Types\Types;
-
 class SqliteColumn implements IColumn
 {
     public const TYPE = 'sqlite';
@@ -57,28 +55,28 @@ class SqliteColumn implements IColumn
             'UNSIGNED BIG INT' => 'int',
             'INT2' => 'int',
             'INT8' => 'int',
-            'CHARACTER(20)' => Types::STRING,
-            'VARCHAR(255)' => Types::STRING,
-            'VARYING CHARACTER(255)' => Types::STRING,
-            'NCHAR(55)' => Types::STRING,
-            'NATIVE CHARACTER' => Types::STRING,
-            'NVARCHAR(100)' => Types::STRING,
-            'TEXT' => Types::STRING,
-            'CLOB' => Types::STRING,
-            'BLOB' => Types::STRING,
-            'REAL' => Types::FLOAT,
-            'DOUBLE' => Types::FLOAT,
-            'DOUBLE PRECISION' => Types::FLOAT,
-            'FLOAT' => Types::FLOAT,
-            'NUMERIC' => Types::FLOAT,
-            'DECIMAL(10,5)' => Types::FLOAT,
-            'BOOLEAN' => Types::BOOLEAN,
-            'DATE' => Types::STRING,
-            'DATETIME' => Types::STRING,
-            'TIMESTAMP' => Types::STRING,
-            'TIME' => Types::TIME_MUTABLE,
-            'BLOB' => Types::BINARY,
-            default => Types::STRING,
+            'CHARACTER(20)' => 'string',
+            'VARCHAR(255)' => 'string',
+            'VARYING CHARACTER(255)' => 'string',
+            'NCHAR(55)' => 'string',
+            'NATIVE CHARACTER' => 'string',
+            'NVARCHAR(100)' => 'string',
+            'TEXT' => 'string',
+            'CLOB' => 'string',
+            'BLOB' => 'string',
+            'REAL' => 'float',
+            'DOUBLE' => 'float',
+            'DOUBLE PRECISION' => 'float',
+            'FLOAT' => 'float',
+            'NUMERIC' => 'float',
+            'DECIMAL(10,5)' => 'float',
+            'BOOLEAN' => 'boolean',
+            'DATE' => 'string',
+            'DATETIME' => 'string',
+            'TIMESTAMP' => 'string',
+            'TIME' => 'time',
+            'BLOB' => 'binary',
+            default => 'string',
         };
     }
 }
