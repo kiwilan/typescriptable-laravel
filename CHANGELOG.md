@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.12.02 - 2024-03-16
+
+Drop `doctrine/dbal` to `require-dev` and update dependencies.
+
 ## v1.12.0 - 2024-03-16
 
 Add support for Laravel 11
