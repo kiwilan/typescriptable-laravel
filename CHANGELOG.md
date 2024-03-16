@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v1.12.0 - 2024-03-16
+
+Add support for Laravel 11
+
 ## v1.11.40 - 2024-02-01
 
 Hotfix for relation parsing if multiline.
