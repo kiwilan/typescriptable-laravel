@@ -227,6 +227,10 @@ docker run --name postgresql \
 
 To install SQL Server with Docker
 
+> [!WARNING]
+>
+> If you have an error like this: "An invalid attribute was designated on the PDO object", you have to update `msphpsql` driver. Check <https://github.com/laravel/framework/issues/47937> for more information.
+
 ```bash
 docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=12345OHdf%e" \
   -p 1433:1433 \
@@ -236,17 +240,13 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=12345OHdf%e" \
   mcr.microsoft.com/mssql/server:2022-latest
 ```
 
-> [!WARNING]
->
-> If you have an error like this: "An invalid attribute was designated on the PDO object", you have to update `msphpsql` driver. Check <https://github.com/laravel/framework/issues/47937> for more information.
-
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Credits
 
--   [Spatie](https://github.com/spatie/package-skeleton-laravel): for spatie/package-skeleton-laravel
+-   [Spatie](https://github.com/spatie): for [`spatie/package-skeleton-laravel`](https://github.com/spatie/package-skeleton-laravel)
 -   [Ewilan Riviere](https://github.com/ewilan-riviere): Author package
 
 ## License

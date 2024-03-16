@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 interface PaginateLink extends App.PaginateLink {
   isLink?: boolean
@@ -111,9 +111,31 @@ export function usePagination(models: App.Paginate) {
 
   paginate()
 
+  function convertUrl(queryName: string, queryValue: number | string) {
+    let currentUrl = window.location.href
+    if (currentUrl.includes(`${queryName}=`))
+      currentUrl = currentUrl.replace(/page=\d+/, `${queryName}=${queryValue}`)
+    else if (currentUrl.includes('?'))
+      currentUrl += `&${queryName}=${queryValue}`
+    else
+      currentUrl += `?${queryName}=${queryValue}`
+
+    return currentUrl
+  }
+
+  const nextPageLink = computed((): string => {
+    return convertUrl('page', models.current_page + 1)
+  })
+
+  const previousPageLink = computed((): string => {
+    return convertUrl('page', models.current_page - 1)
+  })
+
   return {
     pages,
     previousPage,
     nextPage,
+    nextPageLink,
+    previousPageLink,
   }
 }
