@@ -67,13 +67,13 @@ This version requires [PHP](https://www.php.net/) 8.1-8.3 and supports [Laravel]
 
 You can install the package via composer:
 
-With Laravel 11+
+With Laravel 11+ and PHP 8.2
 
 ```bash
 composer require kiwilan/typescriptable-laravel
 ```
 
-With Laravel 9-10
+With Laravel 9-10 and PHP 8.1
 
 ```
 composer require kiwilan/typescriptable-laravel:1.12.03
