@@ -2,6 +2,19 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v2.0.0 - 2024-03-16
+
+Drop Laravel 9 and Laravel 10 and PHP 8.1 support (Laravel 11 support only PHP 8.2+).
+
+> Laravel is no longer dependent on the Doctrine DBAL and registering custom Doctrines types is no longer necessary for the proper creation and alteration of various column types that previously required custom types.
+From [Laravel News](https://laravel-news.com/laravel-11)
+
+To install package with old versions of Laravel, use the following command:
+
+```bash
+composer require kiwilan/typescriptable-laravel:1.12.03
+
+```
 ## v1.12.03 - 2024-03-16
 
 Readd `doctrine/dbal` for Laravel < 11.
