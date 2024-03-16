@@ -54,21 +54,29 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 
 ## Installation
 
-> [!WARNING]
->
-> PHP 8.1+ is required and Laravel 9+ is recommended.
-
 This version requires [PHP](https://www.php.net/) 8.1-8.3 and supports [Laravel](https://laravel.com/) 11.
 
-| Markdown | L9                 | L10                | L11                |
-| -------- | ------------------ | ------------------ | ------------------ |
-| 1.12.03  | :white_check_mark: | :white_check_mark: | :x:                |
-| 2.0.0    | :x:                | :x:                | :white_check_mark: |
+| Version                                                                          | L9                 | L10                | L11                |
+| -------------------------------------------------------------------------------- | ------------------ | ------------------ | ------------------ |
+| [1.12.03](https://packagist.org/packages/kiwilan/typescriptable-laravel#1.12.03) | :white_check_mark: | :white_check_mark: | :x:                |
+| [2.0.0](https://packagist.org/packages/kiwilan/typescriptable-laravel#2.0.0)     | :x:                | :x:                | :white_check_mark: |
+
+> [!WARNING]
+>
+> Laravel 11 dropped [Doctrine DBAL](https://laravel.com/docs/11.x/upgrade#doctrine-dbal-removal). For previous Laravel versions, you can use `1.12.03` version.
 
 You can install the package via composer:
 
+With Laravel 11+
+
 ```bash
 composer require kiwilan/typescriptable-laravel
+```
+
+With Laravel 9-10
+
+```
+composer require kiwilan/typescriptable-laravel:1.12.03
 ```
 
 ### About TypeScript
