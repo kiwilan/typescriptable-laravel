@@ -6,6 +6,9 @@ export class LaravelRouter {
   ) {}
 
   public static create(routes?: RoutesType): LaravelRouter {
+    if (typeof window === 'undefined')
+      return new LaravelRouter({} as Record<App.Route.Name, App.Route.Link>)
+
     // eslint-disable-next-line valid-typeof
     if (!routes && typeof window !== undefined && typeof window?.Routes !== undefined)
       routes = window?.Routes
