@@ -28,7 +28,7 @@ export function useQuery<T>(propQuery: App.Paginate<T>, prop: string = 'query') 
    * Set the sort value to the query.
    */
   function initializeSort() {
-    const query = new URLSearchParams(window.location.search)
+    const query = new URLSearchParams(window?.location.search)
     const querySort = query.get('sort')
     if (querySort)
       sort.value = querySort

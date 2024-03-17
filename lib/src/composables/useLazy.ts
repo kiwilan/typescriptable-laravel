@@ -4,7 +4,7 @@ import { ref } from 'vue'
  * Lazy load images
  */
 export function useLazy(loadingColor?: string) {
-  let url = window.location.href
+  let url = window?.location.href
   const baseURL = url.split('/')
   baseURL.pop()
   url = baseURL.join('/')

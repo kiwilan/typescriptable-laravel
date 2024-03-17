@@ -55,8 +55,8 @@ class TypeRouteListTs
         }
 
         if (typeof window !== 'undefined') {
-          if (typeof window !== undefined && typeof window.Routes !== undefined)
-            window.Routes = Routes
+          if (typeof window !== undefined && typeof window?.Routes !== undefined)
+            window?.Routes = Routes
         }
 
         export { Routes }
