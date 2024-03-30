@@ -40,6 +40,10 @@ export function useInertia<T = App.Models.User>() {
     return process.env.NODE_ENV === 'development'
   })
 
+  const isClient = computed(() => {
+    return typeof window !== 'undefined'
+  })
+
   return {
     page,
     component,
@@ -49,5 +53,6 @@ export function useInertia<T = App.Models.User>() {
     auth,
     user,
     isDev,
+    isClient,
   }
 }
