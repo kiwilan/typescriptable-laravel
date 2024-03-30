@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v2.0.01 - 2024-03-30
+
+Add `appUrl` to `routes.ts`.
+
 ## v2.0.0 - 2024-03-16
 
 Drop Laravel 9 and Laravel 10 and PHP 8.1 support (Laravel 11 support only PHP 8.2+).
@@ -13,6 +17,7 @@ To install package with old versions of Laravel, use the following command:
 
 ```bash
 composer require kiwilan/typescriptable-laravel:1.12.03
+
 
 ```
 ## v1.12.03 - 2024-03-16
