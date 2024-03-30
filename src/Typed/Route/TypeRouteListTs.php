@@ -41,6 +41,7 @@ class TypeRouteListTs
     public function get(): string
     {
         $head = Typescriptable::head();
+        $appUrl = config('app.url');
 
         return <<<typescript
         {$head}
@@ -54,12 +55,14 @@ class TypeRouteListTs
           }
         }
 
+        const appUrl = '{$appUrl}';
+
         if (typeof window !== 'undefined') {
           if (typeof window !== undefined && typeof window?.Routes !== undefined)
             window?.Routes = Routes
         }
 
-        export { Routes }
+        export { Routes, appUrl }
 
         typescript;
     }
