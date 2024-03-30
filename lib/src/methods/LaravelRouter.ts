@@ -6,9 +6,12 @@ export class LaravelRouter {
   ) {}
 
   public static create(routes?: RoutesType): LaravelRouter {
+    if (typeof window === 'undefined')
+      return new LaravelRouter({} as Record<App.Route.Name, App.Route.Link>)
+
     // eslint-disable-next-line valid-typeof
-    if (!routes && typeof window !== undefined && typeof window.Routes !== undefined)
-      routes = window.Routes
+    if (!routes && typeof window !== undefined && typeof window?.Routes !== undefined)
+      routes = window?.Routes
 
     return new LaravelRouter(routes as Record<App.Route.Name, App.Route.Link>)
   }
@@ -50,7 +53,7 @@ export class LaravelRouter {
   }
 
   public getCurrentUrl(): string {
-    return window.location.pathname
+    return window?.location.pathname
   }
 
   public matchRoute(route: App.Route.Link, parts: string[], partsRoute: string[]): App.Route.Link | undefined {

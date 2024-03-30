@@ -15,7 +15,7 @@ export function usePagination(models: App.Paginate) {
   const nextPage = ref<string>()
 
   function getQuery() {
-    const query = new URLSearchParams(window.location.search)
+    const query = new URLSearchParams(window?.location.search)
     query.delete('page')
 
     return query.toString()
@@ -112,7 +112,7 @@ export function usePagination(models: App.Paginate) {
   paginate()
 
   function convertUrl(queryName: string, queryValue: number | string) {
-    let currentUrl = window.location.href
+    let currentUrl = window?.location.href
     if (currentUrl.includes(`${queryName}=`))
       currentUrl = currentUrl.replace(/page=\d+/, `${queryName}=${queryValue}`)
     else if (currentUrl.includes('?'))

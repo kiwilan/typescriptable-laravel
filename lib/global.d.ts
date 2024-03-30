@@ -5,6 +5,6 @@ declare global {
 }
 
 // @ts-expect-error - Routes is defined in the global scope
-window.Routes = window.Routes || {}
+window?.Routes = window?.Routes || {}
 
 export {}
