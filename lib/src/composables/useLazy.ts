@@ -4,10 +4,13 @@ import { ref } from 'vue'
  * Lazy load images
  */
 export function useLazy(loadingColor?: string) {
-  let url = window?.location.href
-  const baseURL = url.split('/')
-  baseURL.pop()
-  url = baseURL.join('/')
+  let url = 'http://localhost'
+  if (isClient()) {
+    url = window?.location.href
+    const baseURL = url.split('/')
+    baseURL.pop()
+    url = baseURL.join('/')
+  }
 
   if (!loadingColor)
     loadingColor = '#1f2937'
@@ -37,6 +40,10 @@ export function useLazy(loadingColor?: string) {
     img.setAttribute('loading', 'lazy')
 
     return img
+  }
+
+  function isClient(): boolean {
+    return typeof window !== 'undefined'
   }
 
   const vLazy = {
