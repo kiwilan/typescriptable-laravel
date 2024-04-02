@@ -1,5 +1,6 @@
 import { router as inertia } from '@inertiajs/vue3'
 import { LaravelRouter } from './LaravelRouter'
+import { ServerRoutes } from './ServerRoutes'
 import type { HttpMethod, HttpRequestAnonymous, HttpRequestQuery, RequestPayload } from '@/types'
 
 export class HttpRequest {
@@ -16,7 +17,13 @@ export class HttpRequest {
    * Useful for API, use `fetch` under the hood.
    */
   public async http(url: string, method: HttpMethod, options: HttpRequestAnonymous = { contentType: 'application/json' }): Promise<Response> {
-    const urlBuiltWithQuery = this.urlBuiltWithQuery(url, options.query)
+    let urlBuiltWithQuery = this.urlBuiltWithQuery(url, options.query)
+
+    const isClient = ServerRoutes.isClient()
+    if (!isClient) {
+      const baseURL = ServerRoutes.getBaseURL()
+      urlBuiltWithQuery = `${baseURL}${urlBuiltWithQuery}`
+    }
 
     return await fetch(urlBuiltWithQuery, {
       method,

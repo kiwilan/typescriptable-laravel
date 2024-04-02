@@ -12,6 +12,7 @@ export type {
 } from './composables'
 
 export {
+  useClickOutside,
   useDate,
   useFetch,
   useInertia,

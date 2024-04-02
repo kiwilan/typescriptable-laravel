@@ -1,3 +1,4 @@
+import { useClickOutside } from './useClickOutside'
 import { useDate } from './useDate'
 import { useFetch } from './useFetch'
 import { useInertia } from './useInertia'
@@ -12,6 +13,7 @@ import { useTypescriptable } from './useTypescriptable'
 import type { Query, SortItem } from './useQuery'
 
 export {
+  useClickOutside,
   useDate,
   useFetch,
   useInertia,

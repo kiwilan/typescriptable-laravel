@@ -12,13 +12,11 @@ export function useSearch(limit: number | false = 20, routeName = 'api.search.in
   const { route } = useRouter()
 
   function checkSystem() {
-    if (navigator === undefined || navigator?.userAgent === undefined) {
-      searchText.value = 'Ctrl+K'
-      return
+    searchText.value = 'Ctrl+K'
+    if (typeof navigator !== 'undefined') {
+      const isMac = navigator?.userAgent.toUpperCase().includes('MAC')
+      searchText.value = isMac ? '⌘+K' : 'Ctrl+K'
     }
-
-    const isMac = navigator?.userAgent.toUpperCase().includes('MAC')
-    searchText.value = isMac ? '⌘+K' : 'Ctrl+K'
   }
   checkSystem()
 
