@@ -1,19 +1,27 @@
+import { ServerRoutes } from './ServerRoutes'
 import type { RoutesType } from '.'
 
 export class LaravelRouter {
   protected constructor(
-    protected routes: Record<App.Route.Name, App.Route.Link>,
+    protected routes = {} as Record<App.Route.Name, App.Route.Link>,
+    public isClient = false,
   ) {}
 
   public static create(routes?: RoutesType): LaravelRouter {
-    if (typeof window === 'undefined')
-      return new LaravelRouter({} as Record<App.Route.Name, App.Route.Link>)
+    const self = new LaravelRouter()
 
-    // eslint-disable-next-line valid-typeof
-    if (!routes && typeof window !== undefined && typeof window?.Routes !== undefined)
-      routes = window?.Routes
+    if (routes) {
+      self.routes = routes
+      self.isClient = true
 
-    return new LaravelRouter(routes as Record<App.Route.Name, App.Route.Link>)
+      return self
+    }
+
+    const serverRoutes = ServerRoutes.create()
+    self.routes = serverRoutes.routes
+    self.isClient = ServerRoutes.isClient()
+
+    return self
   }
 
   public getRouteLink(name: App.Route.Name): App.Route.Link {
@@ -53,7 +61,10 @@ export class LaravelRouter {
   }
 
   public getCurrentUrl(): string {
-    return window?.location.pathname
+    if (ServerRoutes.isClient())
+      return window?.location.pathname
+
+    return ServerRoutes.getBaseURL() || 'http://localhost'
   }
 
   public matchRoute(route: App.Route.Link, parts: string[], partsRoute: string[]): App.Route.Link | undefined {
