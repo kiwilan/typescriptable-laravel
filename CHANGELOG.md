@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v2.0.03 - 2024-04-08
+
+Routes generation fixes with ESLint (typo, multiple params).
+
 ## v2.0.02 - 2024-03-30
 
 Fix `window.Routes = Routes` for `routes.ts`
@@ -21,6 +25,7 @@ To install package with old versions of Laravel, use the following command:
 
 ```bash
 composer require kiwilan/typescriptable-laravel:1.12.03
+
 
 
 
