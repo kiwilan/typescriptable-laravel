@@ -55,10 +55,10 @@ class TypeRouteListTs
           }
         }
 
-        const appUrl = '{$appUrl}';
+        const appUrl = '{$appUrl}'
 
         if (typeof window !== 'undefined') {
-          if (typeof window !== undefined && typeof window?.Routes !== undefined)
+          if (typeof window !== 'undefined' && typeof window?.Routes !== 'undefined')
             window.Routes = Routes
         }
 
@@ -77,6 +77,13 @@ class TypeRouteListTs
                 $params = 'params: undefined';
             } else {
                 $params = $params->join(' ');
+                if (str_contains($params, ',')) {
+                    $paramsExplode = explode(',', $params);
+                    $paramsExplode = array_map(fn ($param) => trim($param), $paramsExplode);
+                    $paramsExplode = array_filter($paramsExplode, fn ($param) => ! empty($param));
+                    $paramsExplode = array_map(fn ($param) => "{$param},", $paramsExplode);
+                    $params = implode("\n      ", $paramsExplode);
+                }
                 $params = <<<typescript
                     params: {
                           {$params}

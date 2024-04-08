@@ -51,14 +51,14 @@
   "download.show": {
     "name": "download.show",
     "methods": ["GET", "HEAD"],
-    "uri": "download/{podcast_slug}",
+    "uri": "download/{feed_slug}/{podcast_slug}",
     "action": "App\\Http\\Controllers\\DownloadController@show",
     "middleware": [
       "web",
       "Illuminate\\Routing\\Middleware\\SubstituteBindings"
     ],
     "example": "http://app.p1pdd.test/download/{podcast_slug}",
-    "parameters": ["podcast_slug"]
+    "parameters": ["feed_slug", "podcast_slug"]
   },
   "feeds.index": {
     "name": "feeds.index",
@@ -1075,14 +1075,14 @@
   "podcasts.show": {
     "name": "podcasts.show",
     "methods": ["GET", "HEAD"],
-    "uri": "podcasts/{podcast_slug}",
+    "uri": "podcasts/{feed_slug}/{podcast_slug}",
     "action": "App\\Http\\Controllers\\PodcastController@show",
     "middleware": [
       "web",
       "Illuminate\\Routing\\Middleware\\SubstituteBindings"
     ],
     "example": "http://app.p1pdd.test/podcasts/{podcast_slug}",
-    "parameters": ["podcast_slug"]
+    "parameters": ["feed_slug", "podcast_slug"]
   },
   "posts.index": {
     "name": "posts.index",
