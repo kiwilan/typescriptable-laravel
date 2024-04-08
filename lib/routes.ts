@@ -26,8 +26,9 @@ const Routes: Record<App.Route.Name, App.Route.Link> = {
   },
   'download.show': {
     name: 'download.show',
-    path: '/download/{podcast_slug}',
+    path: '/download/{feed_slug}/{podcast_slug}',
     params: {
+      feed_slug: 'string',
       podcast_slug: 'string',
     },
     methods: ['GET'],
@@ -281,7 +282,7 @@ declare global {
 if (typeof window !== 'undefined') {
   // eslint-disable-next-line valid-typeof
   if (typeof window !== undefined && typeof window?.Routes !== undefined)
-    window?.Routes = Routes
+    window.Routes = Routes
 }
 
 export { Routes }
