@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v2.0.04 - 2024-04-15
+
+Add filter on `items()` to keep only class with inheritance from `Model` class
+
 ## v2.0.03 - 2024-04-08
 
 Routes generation fixes with ESLint (typo, multiple params).
@@ -25,6 +29,7 @@ To install package with old versions of Laravel, use the following command:
 
 ```bash
 composer require kiwilan/typescriptable-laravel:1.12.03
+
 
 
 
