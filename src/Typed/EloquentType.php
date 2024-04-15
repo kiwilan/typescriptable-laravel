@@ -46,6 +46,8 @@ class EloquentType
 
         $self = new self($modelsPath, $outputPath);
         $self->items = ClassItem::list($self->modelsPath, TypescriptableConfig::modelsSkip());
+        $self->items = array_filter($self->items, fn ($item) => $item->isModel);
+
         $self->list = $self->setList();
         $self->eloquents = $self->setEloquents();
         $self->setPivots();
