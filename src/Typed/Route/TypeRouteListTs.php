@@ -58,8 +58,7 @@ class TypeRouteListTs
         const appUrl = '{$appUrl}'
 
         if (typeof window !== 'undefined') {
-          if (typeof window !== 'undefined' && typeof window?.Routes !== 'undefined')
-            window.Routes = Routes
+          window.Routes = Routes
         }
 
         export { Routes, appUrl }
