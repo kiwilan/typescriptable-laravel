@@ -3,13 +3,20 @@ import { ref } from 'vue'
 /**
  * Lazy load images
  */
-export function useLazy(loadingColor?: string) {
+export function useLazy(loadingColor?: string, fallbackPath = '/placeholder.webp') {
   let url = 'http://localhost'
+  let domain = ''
+  let fallbackError = false
+  const fallbackDefault = 'https://raw.githubusercontent.com/kiwilan/steward-laravel/main/public/no-image-available.jpg'
+
   if (isClient()) {
     url = window?.location.href
     const baseURL = url.split('/')
     baseURL.pop()
     url = baseURL.join('/')
+
+    const newUrl = new URL(url)
+    domain = newUrl.origin
   }
 
   if (!loadingColor)
@@ -44,6 +51,11 @@ export function useLazy(loadingColor?: string) {
 
   function isClient(): boolean {
     return typeof window !== 'undefined'
+  }
+
+  async function checkFallbackUrl(url: string) {
+    const response = await fetch(url)
+    fallbackError = !response.ok
   }
 
   const vLazy = {
@@ -96,8 +108,12 @@ export function useLazy(loadingColor?: string) {
         }
 
         img.onerror = () => {
-          const fallback = '/placeholder.webp'
-          img.setAttribute('src', `${url}${fallback}`)
+          let fallbackUrl = `${domain}${fallbackPath}`
+          if (fallbackError)
+            fallbackUrl = fallbackDefault
+
+          img.setAttribute('src', fallbackUrl)
+          checkFallbackUrl(fallbackUrl)
 
           placeholder.setAttribute('style', `${stylePlaceholder.join(' ')} opacity: 0;`)
           setTimeout(() => {
