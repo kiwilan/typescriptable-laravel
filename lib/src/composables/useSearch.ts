@@ -20,7 +20,14 @@ export function useSearch(limit: number | false = 20, routeName = 'api.search.in
   }
   checkSystem()
 
-  async function searching(event: Event) {
+  /**
+   * Search for the given value
+   *
+   * @param event - The input event
+   * @param timeout - The timeout before searching
+   * @param logging - Log the search
+   */
+  async function searching(event: Event, timeout = 500, logging = false) {
     searchUsed.value = true
     loading.value = true
     setTimeout(async () => {
@@ -37,11 +44,18 @@ export function useSearch(limit: number | false = 20, routeName = 'api.search.in
 
       const body = await res.json()
       results.value = convertResults(body)
+      if (logging) {
+        // eslint-disable-next-line no-console
+        console.log(results.value)
+      }
 
       loading.value = false
-    }, 500)
+    }, timeout)
   }
 
+  /**
+   * Clear the search field and results
+   */
   function clearSearch() {
     if (searchField.value)
       searchField.value.value = ''
@@ -49,6 +63,23 @@ export function useSearch(limit: number | false = 20, routeName = 'api.search.in
     results.value = []
   }
 
+  /**
+   * Keybinding for the search field
+   * - `Ctrl+K` or `⌘+K` to focus the search field
+   * - `Enter` to search
+   * - `Escape` to close the search
+   *
+   * ```js
+   * import { useSearch } from '@kiwilan/typescriptable-laravel'
+   * import { onMounted } from 'vue'
+   *
+   * const { keybinding } = useSearch()
+   *
+   * onMounted(() => {
+   *   keybinding()
+   * })
+   * ```
+   */
   function keybinding() {
     document.addEventListener('keydown', (event) => {
       if (event.metaKey && event.key === 'k') {
@@ -59,6 +90,8 @@ export function useSearch(limit: number | false = 20, routeName = 'api.search.in
         event.preventDefault()
         searchField.value?.focus()
       }
+      if (event.key === 'Escape')
+        closeSearch()
 
       const element = searchField.value
       if (element && element === document.activeElement && element.value.length > 0) {
