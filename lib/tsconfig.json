@@ -1,32 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "jsx": "preserve",
-    "lib": ["ESNext", "DOM"],
-    "module": "ES2020",
-    "moduleResolution": "Node",
     "paths": {
       "@": ["./src"],
       "@/*": ["./src/*"],
       "~": ["./"],
       "~/*": ["./*"]
     },
-    "resolveJsonModule": true,
-    "typeRoots": ["./node_modules/@types", "./*.d.ts"],
+    "target": "ESNext",
+    "jsx": "preserve",
+    "lib": ["ESNext", "DOM"],
+    "module": "ES2020",
+    "moduleResolution": "Node",
+    "noImplicitAny": false,
     "strict": true,
     "strictNullChecks": true,
-    "noImplicitAny": false,
+    "esModuleInterop": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "esModuleInterop": true
+    "jsxImportSource": "vue"
   },
   "include": [
     "src",
     "tests",
-    "./*.d.ts",
-    "./*.ts",
-    "./src/**/*.vue",
-    "./node_modules/@inertiajs/vue3"
+    "*.d.ts"
   ],
   "exclude": ["**/dist", "**/node_modules"]
 }

@@ -1,6 +1,6 @@
 import type { Plugin } from 'vue'
 import { Head, Link } from '@inertiajs/vue3'
-import { useRouter } from './composables/useRouter'
+import { useRouter } from '../composables/useRouter'
 
 /**
  * Vue plugin to use Inertia.js with TypeScript.

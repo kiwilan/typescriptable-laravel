@@ -1,66 +1,81 @@
 import { router } from '@inertiajs/vue3'
 import { ref } from 'vue'
-import { useRouter } from './useRouter'
 
-export function useSearch(limit: number | false = 20, routeName = 'api.search.index') {
+/**
+ * Options for the search function
+ *
+ * - `searchQuery` - The query parameter for the search, default is `search`
+ * - `limitQuery` - The query parameter for the limit, default is `limit`
+ * - `limit` - The limit of the search, default is `false`
+ * - `shortcut` - The keybinding for the search field, default is `Ctrl+K`
+ * - `shortcutMacos` - The keybinding for MacOS, default is `⌘+K`
+ */
+interface SearchOptions {
+  searchQuery?: string
+  limitQuery?: string
+  limit?: number | false
+  shortcut?: string
+  shortcutMacos?: string
+}
+
+export function useSearch<T = any>(searchUrl: string, options: SearchOptions = {}) {
   const loading = ref(false)
-  const searchUsed = ref(false)
-  const searchText = ref('Ctrl+K')
-  const searchField = ref<HTMLInputElement>()
-  const results = ref<any[]>([])
+  const used = ref(false)
+  const shortcut = ref('Ctrl+K')
 
-  const { route } = useRouter()
-
-  function checkSystem() {
-    searchText.value = 'Ctrl+K'
-    if (typeof navigator !== 'undefined') {
-      const isMac = navigator?.userAgent.toUpperCase().includes('MAC')
-      searchText.value = isMac ? '⌘+K' : 'Ctrl+K'
-    }
-  }
-  checkSystem()
+  const input = ref<HTMLInputElement>()
+  const query = ref<string>()
+  const response = ref<T>()
 
   /**
    * Search for the given value
    *
    * @param event - The input event
    * @param timeout - The timeout before searching
-   * @param logging - Log the search
    */
-  async function searching(event: Event, timeout = 500, logging = false) {
-    searchUsed.value = true
-    loading.value = true
+  async function search(event: Event, timeout = 500) {
+    used.value = true // now search is used
+    loading.value = true // start loading
+
     setTimeout(async () => {
       const e = event.target as HTMLInputElement
-      const value = e.value
+      query.value = e.value // set the query
 
-      let url = route(routeName as any)
+      let url = searchUrl
       const params = new URLSearchParams()
-      params.append('search', value)
-      params.append('limit', limit ? limit.toString() : 'false')
+      params.append(options.searchQuery ?? 'search', query.value)
+      if (options.limit)
+        params.append(options.limitQuery ?? 'limit', options.limit.toString())
       url += `?${params.toString()}`
 
       const res = await fetch(url)
-
       const body = await res.json()
-      results.value = convertResults(body)
-      if (logging) {
-        // eslint-disable-next-line no-console
-        console.log(results.value)
-      }
+      response.value = body
 
-      loading.value = false
+      loading.value = false // stop loading
     }, timeout)
   }
 
   /**
    * Clear the search field and results
    */
-  function clearSearch() {
-    if (searchField.value)
-      searchField.value.value = ''
-    searchUsed.value = false
-    results.value = []
+  function clear() {
+    if (input.value)
+      input.value.value = ''
+
+    query.value = ''
+    used.value = false
+    response.value = undefined
+  }
+
+  /**
+   * Close the search field
+   */
+  function close() {
+    clear()
+    loading.value = false
+    used.value = false
+    input.value?.blur()
   }
 
   /**
@@ -84,16 +99,16 @@ export function useSearch(limit: number | false = 20, routeName = 'api.search.in
     document.addEventListener('keydown', (event) => {
       if (event.metaKey && event.key === 'k') {
         event.preventDefault()
-        searchField.value?.focus()
+        input.value?.focus()
       }
       if (event.ctrlKey && event.key === 'k') {
         event.preventDefault()
-        searchField.value?.focus()
+        input.value?.focus()
       }
       if (event.key === 'Escape')
-        closeSearch()
+        close()
 
-      const element = searchField.value
+      const element = input.value
       if (element && element === document.activeElement && element.value.length > 0) {
         if (event.key === 'Enter') {
           event.preventDefault()
@@ -103,27 +118,26 @@ export function useSearch(limit: number | false = 20, routeName = 'api.search.in
     })
   }
 
-  function convertResults(body: any) {
-    return Object.values(body)
-  }
+  function checkSystem() {
+    const shortcutOther = options.shortcut ?? 'Ctrl+K'
+    const shortcutMacos = options.shortcutMacos ?? '⌘+K'
 
-  function closeSearch() {
-    clearSearch()
-    loading.value = false
-    searchUsed.value = false
-    searchField.value?.blur()
+    if (typeof navigator !== 'undefined') {
+      const isMac = navigator?.userAgent.toUpperCase().includes('MAC')
+      shortcut.value = isMac ? shortcutMacos : shortcutOther
+    }
   }
+  checkSystem()
 
   return {
-    loading,
-    searchText,
-    searchField,
-    searching,
-    searchUsed,
-    clearSearch,
-    results,
-    convertResults,
+    search,
     keybinding,
-    closeSearch,
+    shortcut,
+    input,
+    loading,
+    used,
+    clear,
+    close,
+    response,
   }
 }

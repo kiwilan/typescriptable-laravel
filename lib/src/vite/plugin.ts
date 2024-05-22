@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
-import type { ViteTypescriptableOptions } from './types/index'
+import type { ViteTypescriptableOptions } from '../types/index'
+import { InertiaType } from '../types/inertia'
 import { execute } from './server'
-import { InertiaType } from './inertia-type'
 
 const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
   models: true,

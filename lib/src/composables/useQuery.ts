@@ -89,7 +89,7 @@ export function useQuery<T>(propQuery: App.Paginate<T>, prop: string = 'query') 
   /**
    * Compare deep equality of two objects.
    */
-  function deepEqual(x: object, y: object) {
+  function deepEqual(x: object, y: object): boolean {
     const ok = Object.keys
     const tx = typeof x
     const ty = typeof y

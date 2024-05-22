@@ -1,16 +1,29 @@
 import { defineConfig } from 'tsup'
+import tsconfig from './tsconfig.json'
 
 export default defineConfig({
   name: 'vite-plugin-typescriptable-laravel',
   entry: {
     index: 'src/index.ts',
-    vite: 'src/vite-plugin.ts',
+    vite: 'src/vite.ts',
+    vue: 'src/vue.ts',
   },
-  format: ['cjs', 'esm'],
-  external: ['vue', 'vite', '@inertiajs/vue3', 'node', 'node:fs', 'node:fs/promises', 'node:child_process'],
   outDir: 'dist',
-  dts: true,
+  clean: true,
   minify: true,
-  treeshake: true,
-  splitting: true,
+  format: ['cjs', 'esm'],
+  dts: true,
+  // treeshake: true,
+  // splitting: true,
+  // sourcemap: true,
+  // onSuccess: 'npm run build:fix',
+  external: [
+    'vue',
+    'vite',
+    '@inertiajs/vue3',
+    'node',
+    'node:fs',
+    'node:fs/promises',
+    'node:child_process',
+  ],
 })
