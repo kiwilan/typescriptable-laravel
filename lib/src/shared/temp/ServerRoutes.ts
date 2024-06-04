@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import { usePage } from '@inertiajs/vue3'
 
 export class ServerRoutes {
   protected constructor(
@@ -8,14 +9,16 @@ export class ServerRoutes {
 
   public static create(): ServerRoutes {
     const self = new ServerRoutes()
+    const page = usePage()
+    console.log(page.props.ziggy)
 
-    if (!ServerRoutes.isClient()) {
-      const routes = self.serverRoutes()
+    if (ServerRoutes.isClient()) {
+      const routes = window.Routes
       if (routes)
         self.routes = routes
     }
     else {
-      const routes = window.Routes
+      const routes = self.serverRoutes()
       if (routes)
         self.routes = routes
     }

@@ -10,7 +10,6 @@ import { useRouter } from './useRouter'
 import { useSearch } from './useSearch'
 import { useSidebar } from './useSidebar'
 import { useSlideover } from './useSlideover'
-import { useTypescriptable } from './useTypescriptable'
 import type { Query, SortItem } from './useQuery'
 
 export {
@@ -26,7 +25,6 @@ export {
   useSearch,
   useSidebar,
   useSlideover,
-  useTypescriptable,
   Query,
   SortItem,
 }

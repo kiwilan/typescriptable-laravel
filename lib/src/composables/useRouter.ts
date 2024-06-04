@@ -1,22 +1,23 @@
 import { computed } from 'vue'
-import { LaravelRouter } from '@/methods'
+import { LaravelRouter } from '../shared/router/LaravelRouter'
 
 /**
  * Composable for advanced usage of Laravel router.
  *
- * @method `isRoute` Check if current route is the given route.
+ * @method `isRouteEqualTo` Check if current route is the given route.
  * @method `currentRoute` Get current route.
  * @method `route` Get route URL from route name and params, can be used into template with `$route` helper.
  * @method `router` Get router instance.
  */
 export function useRouter() {
+  const laravelRouter = LaravelRouter.create()
+  const currentUrl = laravelRouter.getUrl()
+
   /**
    * Check if current route is the given route.
    */
-  function isRoute(route: App.Route.Name): boolean {
-    const router = LaravelRouter.create()
-    const url = router.getCurrentUrl()
-    const currentRoute = router.getRouteFromUrl(url)
+  function isRouteEqualTo(route: App.Route.Name): boolean {
+    const currentRoute = laravelRouter.urlToRoute(currentUrl)
 
     const current: string = route
     if (currentRoute) {
@@ -37,10 +38,7 @@ export function useRouter() {
    * Get current route.
    */
   const currentRoute = computed((): App.Route.Link | undefined => {
-    const router = LaravelRouter.create()
-    const url = router.getCurrentUrl()
-
-    return router.getRouteFromUrl(url)
+    return laravelRouter.urlToRoute(currentUrl)
   })
 
   /**
@@ -57,19 +55,16 @@ export function useRouter() {
    * ```
    */
   function route<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never): string {
-    const router = LaravelRouter.create()
-    return router.getRouteBind({
+    return laravelRouter.routeToUrl({
       name,
       params,
     })
   }
 
-  const router = computed(() => LaravelRouter.create())
-
   return {
-    isRoute,
+    isRouteEqualTo,
     currentRoute,
     route,
-    router,
+    router: laravelRouter,
   }
 }

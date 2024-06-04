@@ -1,11 +1,10 @@
 import { router as inertia } from '@inertiajs/vue3'
-import { LaravelRouter } from './LaravelRouter'
-import { ServerRoutes } from './ServerRoutes'
-import type { HttpMethod, HttpRequestAnonymous, HttpRequestQuery, RequestPayload } from '@/types'
+import { LaravelRouter } from '../router/LaravelRouter'
+import type { HttpMethod, HttpRequestAnonymous, HttpRequestQuery, RequestPayload } from '@/types/http'
 
 export class HttpRequest {
   protected constructor(
-    protected laravel: LaravelRouter,
+    protected laravelRouter: LaravelRouter,
   ) {}
 
   static create(): HttpRequest {
@@ -17,13 +16,7 @@ export class HttpRequest {
    * Useful for API, use `fetch` under the hood.
    */
   public async http(url: string, method: HttpMethod, options: HttpRequestAnonymous = { contentType: 'application/json' }): Promise<Response> {
-    let urlBuiltWithQuery = this.urlBuiltWithQuery(url, options.query)
-
-    const isClient = ServerRoutes.isClient()
-    if (!isClient) {
-      const baseURL = ServerRoutes.getBaseURL()
-      urlBuiltWithQuery = `${baseURL}${urlBuiltWithQuery}`
-    }
+    const urlBuiltWithQuery = this.urlBuiltWithQuery(url, options.query)
 
     return await fetch(urlBuiltWithQuery, {
       method,
@@ -45,7 +38,7 @@ export class HttpRequest {
 
   public toUrl(name: App.Route.Name, params?: any, query?: Record<string, any>): string {
     const p = params as Record<string, any>
-    const route = this.laravel.getRouteLink(name)
+    const route = this.laravelRouter.routeNameToLink(name)
     const url = this.assignParams(route.path, p)
 
     if (!query)
@@ -61,7 +54,7 @@ export class HttpRequest {
       return url
 
     // detect params in url with braces
-    const matches = url.match(/({\w+})/g)
+    const matches = url.match(/(\{\w+\})/g)
     if (!matches)
       return url
 
@@ -86,7 +79,11 @@ export class HttpRequest {
 
   private urlBuiltWithQuery(url: string, query: Record<string, any> = {}): string {
     const q = this.queryToString(query)
-    return `${url}${q}`
+    let fullUrl = `${url}${q}`
+    if (fullUrl.endsWith('?'))
+      fullUrl = fullUrl.slice(0, -1)
+
+    return fullUrl
   }
 
   private sendInertia(method: HttpMethod, url: string, body?: Record<string, any>): void {

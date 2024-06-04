@@ -1,5 +1,6 @@
-import { HttpRequest } from '@/methods'
-import type { HttpRequestAnonymous, HttpRequestBody, HttpRequestQuery } from '@/types'
+import { HttpRequest } from '../shared/http/HttpRequest'
+import { HttpResponse } from '../shared/http/HttpResponse'
+import type { HttpRequestAnonymous, HttpRequestBody, HttpRequestQuery } from '@/types/http'
 
 /**
  * Composable for HTTP requests, with anonymous requests, Laravel or Inertia.
@@ -34,20 +35,20 @@ export function useFetch() {
    * - Headers are empty by default, override them with `options.headers`.
    */
   const http = {
-    async get(url: string, options?: HttpRequestAnonymous): Promise<Response> {
-      return await request.http(url, 'GET', options)
+    async get(url: string, options?: HttpRequestAnonymous): Promise<HttpResponse> {
+      return await HttpResponse.create(url, 'GET', options)
     },
-    async post(url: string, options?: HttpRequestBody): Promise<Response> {
-      return await request.http(url, 'POST', options)
+    async post(url: string, options?: HttpRequestBody): Promise<HttpResponse> {
+      return await HttpResponse.create(url, 'POST', options)
     },
-    async put(url: string, options?: HttpRequestBody): Promise<Response> {
-      return await request.http(url, 'PUT', options)
+    async put(url: string, options?: HttpRequestBody): Promise<HttpResponse> {
+      return await HttpResponse.create(url, 'PUT', options)
     },
-    async patch(url: string, options?: HttpRequestBody): Promise<Response> {
-      return await request.http(url, 'PATCH', options)
+    async patch(url: string, options?: HttpRequestBody): Promise<HttpResponse> {
+      return await HttpResponse.create(url, 'PATCH', options)
     },
-    async delete(url: string, options?: HttpRequestQuery): Promise<Response> {
-      return await request.http(url, 'DELETE', options)
+    async delete(url: string, options?: HttpRequestQuery): Promise<HttpResponse> {
+      return await HttpResponse.create(url, 'DELETE', options)
     },
   }
 
@@ -62,25 +63,25 @@ export function useFetch() {
    * - URL is built with Laravel route name, params and query.
    */
   const laravel = {
-    async get<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never, options?: HttpRequestQuery): Promise<Response> {
+    async get<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never, options?: HttpRequestQuery): Promise<HttpResponse> {
       const url = request.toUrl(name, params, options?.query)
-      return await request.http(url, 'GET')
+      return await HttpResponse.create(url, 'GET', options)
     },
-    async post<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never, options?: HttpRequestBody): Promise<Response> {
+    async post<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never, options?: HttpRequestBody): Promise<HttpResponse> {
       const url = request.toUrl(name, params, options?.query)
-      return await request.http(url, 'POST', options)
+      return await HttpResponse.create(url, 'POST', options)
     },
-    async put<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never, options?: HttpRequestBody): Promise<Response> {
+    async put<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never, options?: HttpRequestBody): Promise<HttpResponse> {
       const url = request.toUrl(name, params, options?.query)
-      return await request.http(url, 'PUT', options)
+      return await HttpResponse.create(url, 'PUT', options)
     },
-    async patch<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never, options?: HttpRequestBody): Promise<Response> {
+    async patch<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never, options?: HttpRequestBody): Promise<HttpResponse> {
       const url = request.toUrl(name, params, options?.query)
-      return await request.http(url, 'PATCH', options)
+      return await HttpResponse.create(url, 'PATCH', options)
     },
-    async delete<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never, options?: HttpRequestQuery): Promise<Response> {
+    async delete<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never, options?: HttpRequestQuery): Promise<HttpResponse> {
       const url = request.toUrl(name, params, options?.query)
-      return await request.http(url, 'DELETE')
+      return await HttpResponse.create(url, 'DELETE', options)
     },
   }
 

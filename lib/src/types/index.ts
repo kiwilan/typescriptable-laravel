@@ -1,5 +1,3 @@
-import type { InertiaForm } from '@inertiajs/vue3'
-
 export interface ViteTypescriptableOptions {
   /**
    * Enable types for Eloquent models.
@@ -53,55 +51,4 @@ export interface ViteTypescriptableOptions {
    * @default true
    */
   autoreload?: boolean
-}
-
-export type Route = App.Route.Name
-export type RouteParam = App.Route.Params[App.Route.Name]
-export type RequestPayload = Record<string, any> | InertiaForm<any>
-
-// Http types
-export type RouteName = App.Route.Name
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
-
-export interface HttpRequestQuery {
-  /**
-   * Add query data to URL.
-   */
-  query?: Record<string, any>
-}
-
-export interface HttpRequestBody extends HttpRequestQuery {
-  /**
-   * Body data.
-   *
-   * @default {}
-   */
-  body?: RequestPayload
-}
-
-export interface HttpRequestAnonymous {
-  /**
-   * Query data.
-   *
-   * @default {}
-   */
-  query?: Record<string, any>
-  /**
-   * Body data.
-   *
-   * @default {}
-   */
-  body?: RequestPayload
-  /**
-   * HTTP headers.
-   *
-   * @default {}
-   */
-  headers?: Record<string, string>
-  /**
-   * HTTP Content-Type header.
-   *
-   * @default 'application/json'
-   */
-  contentType?: string
 }
