@@ -20,7 +20,7 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 >
 > -   [`kiwilan/typescriptable-laravel`](https://packagist.org/packages/kiwilan/typescriptable-laravel): current PHP package for [Laravel](https://laravel.com/).
 > -   [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel): optional NPM package to use with [Vite](https://vitejs.dev/) and [Inertia](https://inertiajs.com/) to have some helpers, if you want to know more about, [check documentation](https://github.com/kiwilan/typescriptable-laravel/blob/main/lib/README.md).
-> -   [`ziggy`](https://github.com/tighten/ziggy) is **NOT REQUIRED**
+> -   [`ziggy`](https://github.com/tighten/ziggy) is **REQUIRED** for [`@kiwilan/typescriptable-laravel`](https://www.npmjs.com/package/@kiwilan/typescriptable-laravel)
 
 ## Features
 

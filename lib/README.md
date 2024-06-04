@@ -4,6 +4,7 @@ Add some helpers for your Inertia app with TypeScript.
 
 > [!IMPORTANT]
 >
+> -   [`ziggy`](https://github.com/tighten/ziggy) is **REQUIRED**
 > -   PHP `composer` package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
 > -   Built for [Vite](https://vitejs.dev/) with `laravel-vite-plugin`, [Inertia](https://inertiajs.com/) and [Vue 3](https://vuejs.org/).
 
@@ -18,12 +19,45 @@ pnpm add @kiwilan/typescriptable-laravel -D
 yarn add @kiwilan/typescriptable-laravel -D
 ```
 
+Middleware `HandleInertiaRequests.php` have to be updated with `ziggy`:
+
+```php
+<?php
+
+namespace App\Http\Middleware;
+
+use Illuminate\Http\Request;
+use Inertia\Middleware;
+use Tighten\Ziggy\Ziggy;
+
+class HandleInertiaRequests extends Middleware
+{
+    protected $rootView = 'app';
+
+    public function version(Request $request): ?string
+    {
+        return parent::version($request);
+    }
+
+    public function share(Request $request): array
+    {
+        return [
+            ...parent::share($request),
+            'ziggy' => fn () => [
+                ...(new Ziggy)->toArray(),
+                'location' => $request->url(),
+            ],
+        ];
+    }
+}
+```
+
 ## Features
 
 -   🦾 Add TypeScript experience into `inertia`
 -   💨 Vite plugin to execute automatically [kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel)'s commands :' `typescriptable:models`, `typescriptable:routes` and `typescriptable:routes` with watch mode.
 -   📦 Vue composables
-    -   `useRouter()` composable with `isRoute()` method, `currentRoute` computed and `route()` method
+    -   `useRouter()` composable with `isRouteEqualTo()` method, `currentRoute` computed and `route()` method
     -   `useInertia()` composable for `page` computed, `component` computed, `props` computed, `url` computed, `version` computed, `auth` computed, `user` computed and `isDev` computed
     -   `useFetch()` with `http` group methods, `laravel` group methods and `inertia` group methods. Each group has `get()`, `post()`, `put()`, `patch()` and `delete()` methods
         -   `http` is for anonymous HTTP requests with native `fetch`
@@ -31,7 +65,7 @@ yarn add @kiwilan/typescriptable-laravel -D
         -   `inertia` is for Inertia HTTP requests with route name
 -   💚 Vue plugin to use global methods for `template` into Vue components:
     -   `$route` transform route to `string` with Laravel route name and parameters
-    -   `$isRoute` transform route name or path to `boolean`
+    -   `$isRouteEqualTo` transform route name or path to `boolean`
     -   `$currentRoute` give current route
     -   Auto-import : `Head` from `@inertiajs/vue3`, `Link` from `@inertiajs/vue3`
 
@@ -77,7 +111,6 @@ import { createInertiaApp, router } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import { VueTypescriptable } from "@kiwilan/typescriptable-laravel"; // Import VueTypescriptable
-import "./routes"; // Import routes
 
 createInertiaApp({
     title: (title) => `${title} - Laravel`,
@@ -105,7 +138,7 @@ import {
     useFetch,
 } from "@kiwilan/typescriptable-laravel";
 
-const { route, isRoute, currentRoute } = useRouter();
+const { route, isRouteEqualTo, currentRoute } = useRouter();
 const { page, component, props, url, version, auth, user, isDev } =
     useInertia();
 // HTTP requests, each group has get(), post(), put(), patch() and delete() methods
