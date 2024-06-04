@@ -1,4 +1,4 @@
-import Notifications from './Notifications'
+import Notifications from './components/Notifications'
 
 export {
   Notifications,

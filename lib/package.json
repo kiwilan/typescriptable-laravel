@@ -1,7 +1,7 @@
 {
   "name": "@kiwilan/typescriptable-laravel",
   "type": "module",
-  "version": "2.4.37",
+  "version": "2.4.39",
   "description": "Add some helpers for your Inertia app with TypeScript.",
   "author": "Ewilan Rivière <ewilan.riviere@gmail.com>",
   "license": "MIT",
@@ -22,26 +22,26 @@
     "vite",
     "typescript"
   ],
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "exports": {
     "./vite": {
-      "import": "./dist/vite.js",
       "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.js",
       "require": "./dist/vite.cjs"
     },
     "./vue": {
-      "import": "./dist/vue.js",
       "types": "./dist/vue.d.ts",
+      "import": "./dist/vue.js",
       "require": "./dist/vue.cjs"
     },
     ".": {
-      "import": "./dist/index.js",
       "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     }
   },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "typesVersions": {
     "*": {
       "vite": [
@@ -91,7 +91,7 @@
     "autoprefixer": "^10.4.16",
     "laravel-vite-plugin": "^1.0.1",
     "postcss": "^8.4.33",
-    "rimraf": "^5.0.5",
+    "rimraf": "^5.0.7",
     "tailwindcss": "^3.4.1",
     "tsup": "^8.0.1",
     "vite": "^5.0.11",

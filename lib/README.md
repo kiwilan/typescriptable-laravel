@@ -56,7 +56,7 @@ export default defineConfig({
                 globalType: "types-inertia-global.d.ts",
             },
             models: true,
-            routes: true,
+            routes: false,
             settings: true,
         }),
     ],

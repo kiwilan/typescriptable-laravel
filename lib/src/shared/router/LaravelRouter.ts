@@ -151,7 +151,7 @@ export class LaravelRouter {
   private bindRoute(name: App.Route.Name, params?: App.Route.Params[App.Route.Name]): string {
     const route = this.typedRoutes[name]
 
-    if (!route)
+    if (!route || !route.path)
       console.error(`Route ${name} not found`)
 
     if (!params)
@@ -246,9 +246,10 @@ export class LaravelRouter {
    */
   private parseZiggy() {
     const page = usePage()
+
     let ziggy = page.props?.ziggy as Ziggy | undefined
     if (ziggy === undefined) {
-      console.error('`@kiwilan/typescriptable-laravel` error: `ziggy` props is `undefined` into `usePage()` from `@inertiajs/vue3`. You can see an example here: https://gist.github.com/ewilan-riviere/f1dbc20669ed2669f745e3e0e0771537#file-handleinertiarequests-php')
+      console.warn('`@kiwilan/typescriptable-laravel` error: `ziggy` props is `undefined` into `usePage()` from `@inertiajs/vue3`. You can see an example here: https://gist.github.com/ewilan-riviere/f1dbc20669ed2669f745e3e0e0771537#file-handleinertiarequests-php')
       ziggy = defaultZiggy
     }
 

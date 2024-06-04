@@ -1,5 +1,5 @@
-import { h, ref } from 'vue'
-import { useNotification } from '../composables/useNotification'
+import { h } from 'vue'
+import { useNotification } from '../../composables/useNotification'
 import Notification from './Notification'
 
 interface Props {

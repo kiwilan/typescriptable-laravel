@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useNotification } from '../composables/useNotification'
+import { useNotification } from '../../composables/useNotification'
 
 const { notifications } = useNotification()
 </script>

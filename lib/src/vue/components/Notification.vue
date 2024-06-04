@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
-import { type NotificationExtended, useNotification } from '../composables/useNotification'
+import { type NotificationExtended, useNotification } from '../../composables/useNotification'
 
 const props = defineProps<{
   notification: NotificationExtended

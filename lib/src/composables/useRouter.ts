@@ -10,14 +10,12 @@ import { LaravelRouter } from '../shared/router/LaravelRouter'
  * @method `router` Get router instance.
  */
 export function useRouter() {
-  const laravelRouter = LaravelRouter.create()
-  const currentUrl = laravelRouter.getUrl()
-
   /**
    * Check if current route is the given route.
    */
   function isRouteEqualTo(route: App.Route.Name): boolean {
-    const currentRoute = laravelRouter.urlToRoute(currentUrl)
+    const laravelRouter = LaravelRouter.create() // keep it here for Vue plugin provider
+    const currentRoute = laravelRouter.urlToRoute(laravelRouter.getUrl())
 
     const current: string = route
     if (currentRoute) {
@@ -38,7 +36,8 @@ export function useRouter() {
    * Get current route.
    */
   const currentRoute = computed((): App.Route.Link | undefined => {
-    return laravelRouter.urlToRoute(currentUrl)
+    const laravelRouter = LaravelRouter.create() // keep it here for Vue plugin provider
+    return laravelRouter.urlToRoute(laravelRouter.getUrl())
   })
 
   /**
@@ -55,11 +54,14 @@ export function useRouter() {
    * ```
    */
   function route<T extends App.Route.Name>(name: T, params?: T extends keyof App.Route.Params ? App.Route.Params[T] : never): string {
+    const laravelRouter = LaravelRouter.create() // keep it here for Vue plugin provider
     return laravelRouter.routeToUrl({
       name,
       params,
     })
   }
+
+  const laravelRouter = computed(() => LaravelRouter.create())
 
   return {
     isRouteEqualTo,

@@ -1,5 +1,4 @@
 import { defineConfig } from 'tsup'
-import tsconfig from './tsconfig.json'
 
 export default defineConfig({
   name: 'vite-plugin-typescriptable-laravel',
@@ -13,9 +12,9 @@ export default defineConfig({
   minify: true,
   format: ['cjs', 'esm'],
   dts: true,
-  // treeshake: true,
-  // splitting: true,
-  // sourcemap: true,
+  treeshake: true,
+  splitting: true,
+  sourcemap: true,
   // onSuccess: 'npm run build:fix',
   external: [
     'vue',

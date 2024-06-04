@@ -6,7 +6,7 @@ import { execute } from './server'
 const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
   models: true,
   settings: false,
-  routes: true,
+  routes: false,
   inertia: true,
   inertiaPaths: {
     base: 'resources/js',
@@ -29,7 +29,7 @@ const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
  *     typescriptable({
  *       models: true,
  *       settings: false,
- *       routes: true,
+ *       routes: false,
  *       inertia: true,
  *       inertiaPaths: {
  *         base: 'resources/js',
