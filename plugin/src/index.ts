@@ -30,6 +30,16 @@ export {
   useSlideover,
 } from './composables'
 
+export type {
+  RoutesType,
+} from './shared'
+
+export {
+  HttpRequest,
+  HttpResponse,
+  LaravelRouter,
+} from './shared'
+
 export {
   VueTypescriptable,
   resolveTitle,

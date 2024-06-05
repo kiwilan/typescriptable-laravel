@@ -8,8 +8,8 @@ phpstan.neon
 testbench.yaml
 vendor
 node_modules
-lib/dist
-lib/types
+plugin/dist
+plugin/types
 .DS_Store
 .env
 .env.testing
