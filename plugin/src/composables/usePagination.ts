@@ -1,4 +1,5 @@
-import { computed, ref } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+import { computed, onMounted, ref } from 'vue'
 
 interface PaginateLink extends App.PaginateLink {
   isLink?: boolean
@@ -109,10 +110,13 @@ export function usePagination(models: App.Paginate) {
     nextPage.value = models.next_page_url ? `${models.next_page_url}&${getQuery()}` : undefined
   }
 
-  paginate()
-
   function convertUrl(queryName: string, queryValue: number | string) {
-    let currentUrl = window?.location.href
+    const { url, props } = usePage()
+    const baseURL = (props.ziggy as any)?.url
+    if (!baseURL)
+      return ''
+
+    let currentUrl = `${baseURL}${url}`
     if (currentUrl.includes(`${queryName}=`))
       currentUrl = currentUrl.replace(/page=\d+/, `${queryName}=${queryValue}`)
     else if (currentUrl.includes('?'))
@@ -129,6 +133,10 @@ export function usePagination(models: App.Paginate) {
 
   const previousPageLink = computed((): string => {
     return convertUrl('page', models.current_page - 1)
+  })
+
+  onMounted(() => {
+    paginate()
   })
 
   return {

@@ -1,5 +1,5 @@
-import { useForm } from '@inertiajs/vue3'
-import { ref } from 'vue'
+import { useForm, usePage } from '@inertiajs/vue3'
+import { onMounted, ref } from 'vue'
 
 export interface Query<T = any> extends App.Paginate<T> {
   sort?: string
@@ -11,14 +11,14 @@ export interface SortItem {
   value: string
 }
 
-const current = ref<Query>()
-const total = ref<number>()
-const isCleared = ref<boolean>(false)
-const sort = ref<string>()
-const limit = ref<number>(10)
-const isReversed = ref(false)
-
 export function useQuery<T>(propQuery: App.Paginate<T>, prop: string = 'query') {
+  const current = ref<Query<T>>()
+  const total = ref<number>()
+  const isCleared = ref<boolean>(false)
+  const sort = ref<string>()
+  const limit = ref<number>(10)
+  const isReversed = ref(false)
+
   current.value = propQuery
   total.value = propQuery.total
   sort.value = current.value.sort
@@ -28,7 +28,12 @@ export function useQuery<T>(propQuery: App.Paginate<T>, prop: string = 'query') 
    * Set the sort value to the query.
    */
   function initializeSort() {
-    const query = new URLSearchParams(window?.location.search)
+    const { url } = usePage()
+    let search: string | undefined
+    if (url.includes('?'))
+      search = `?${url.split('?')[1]}`
+
+    const query = new URLSearchParams(search)
     const querySort = query.get('sort')
     if (querySort)
       sort.value = querySort
@@ -170,10 +175,12 @@ export function useQuery<T>(propQuery: App.Paginate<T>, prop: string = 'query') 
     }
   }
 
-  initializeSort()
+  onMounted(() => {
+    initializeSort()
+  })
 
   return {
-    request: current,
+    query: current,
     total,
     clear,
     sortBy,
