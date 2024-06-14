@@ -2,6 +2,11 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v2.0.07 - 2024-06-14
+
+- Fix `EloquentPhp::class` for `\` duplicates
+- Fix `EloquentCast::class` with `UnitEnum` and public constants into enum classes
+
 ## v2.0.06 - 2024-04-15
 
 Fix `window.Routes` from `routes.ts` auto-generated file
@@ -37,6 +42,7 @@ To install package with old versions of Laravel, use the following command:
 
 ```bash
 composer require kiwilan/typescriptable-laravel:1.12.03
+
 
 
 
