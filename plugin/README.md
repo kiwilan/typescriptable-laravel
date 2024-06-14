@@ -23,8 +23,8 @@ yarn add @kiwilan/typescriptable-laravel -D
 
 > [!IMPORTANT]
 >
-> -   [`tightenco/ziggy`](https://github.com/tighten/ziggy) is **REQUIRED**
-> -   PHP `composer` package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
+> -   [`tightenco/ziggy`](https://github.com/tighten/ziggy) is required for route helpers.
+> -   [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is recommended for better experience with TypeScript.
 
 When you install [Inertia](https://inertiajs.com/) with Laravel, I advice to use [Jetstream](https://jetstream.laravel.com) to setup your project. If you don't want to use Jetstream, you can just manually add `ziggy` to `HandleInertiaRequests.php` middleware (or any other middleware added to `web` middleware) into `share()` method.
 
