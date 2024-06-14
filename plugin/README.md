@@ -93,6 +93,7 @@ import typescriptable from "@kiwilan/typescriptable-laravel/vite";
 
 export default defineConfig({
     plugins: [
+        // Default config
         typescriptable({
             autoreload: true,
             inertia: true,
