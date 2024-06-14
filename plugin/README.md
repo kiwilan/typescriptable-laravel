@@ -29,7 +29,7 @@ yarn add @kiwilan/typescriptable-laravel -D
 When you install [Inertia](https://inertiajs.com/) with Laravel, I advice to use [Jetstream](https://jetstream.laravel.com) to setup your project. If you don't want to use Jetstream, you can just manually add `ziggy` to `HandleInertiaRequests.php` middleware (or any other middleware added to `web` middleware) into `share()` method.
 
 > [!NOTE]
-> You can see an example of `HandleInertiaRequests.php` middleware here: <https://gist.github.com/ewilan-riviere/f1dbc20669ed2669f745e3e0e0771537>.
+> You can see an example of `HandleInertiaRequests.php` middleware with [this gist](https://gist.github.com/ewilan-riviere/f1dbc20669ed2669f745e3e0e0771537).
 
 Middleware `HandleInertiaRequests.php` have to be updated with `tightenco/ziggy`:
 
