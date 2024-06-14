@@ -4,9 +4,8 @@ Add some helpers for your Inertia app with TypeScript.
 
 > [!IMPORTANT]
 >
-> -   [`ziggy`](https://github.com/tighten/ziggy) is **REQUIRED**
-> -   PHP `composer` package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
-> -   Built for [Vite](https://vitejs.dev/) with `laravel-vite-plugin`, [Inertia](https://inertiajs.com/) and [Vue 3](https://vuejs.org/).
+> -   Built for [Vite](https://vitejs.dev/) with [`laravel-vite-plugin`](https://github.com/laravel/vite-plugin) and [Inertia](https://inertiajs.com/).
+> -   Built for [Vue 3](https://vuejs.org/)
 
 ## Installation
 
@@ -19,7 +18,19 @@ pnpm add @kiwilan/typescriptable-laravel -D
 yarn add @kiwilan/typescriptable-laravel -D
 ```
 
-Middleware `HandleInertiaRequests.php` have to be updated with `ziggy`:
+## Requirements
+
+> [!IMPORTANT]
+>
+> -   [`tightenco/ziggy`](https://github.com/tighten/ziggy) is **REQUIRED**
+> -   PHP `composer` package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
+
+When you install [Inertia](https://inertiajs.com/) with Laravel, I advice to use [Jetstream](https://jetstream.laravel.com) to setup your project. If you don't want to use Jetstream, you can just manually add `ziggy` to `HandleInertiaRequests.php` middleware (or any other middleware added to `web` middleware) into `share()` method.
+
+> [!NOTE]
+> You can see an example of `HandleInertiaRequests.php` middleware here: <https://gist.github.com/ewilan-riviere/f1dbc20669ed2669f745e3e0e0771537>.
+
+Middleware `HandleInertiaRequests.php` have to be updated with `tightenco/ziggy`:
 
 ```php
 <?php
