@@ -112,6 +112,12 @@ export default defineConfig({
 
 ### Inertia
 
+This below configuration is not required, if you want to use global methods into your `template`, you have to add `VueTypescriptable` into your Vue app.
+
+-   `resolveTitle()` is a helper to resolve title with `title` and `appName` parameters and `seperator` as optional parameter
+-   `resolvePages()` is a helper to resolve pages with `name` and `pages` parameters with right return type for TypeScript
+-   `VueTypescriptable` is a Vue plugin to add global methods for `template` into Vue components
+
 In your `resources/js/app.ts`:
 
 ```ts
