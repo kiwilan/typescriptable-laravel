@@ -33,6 +33,7 @@ return new class extends Migration
             $table->text('picture')->nullable();
             $table->string('status')->default(PublishStatusEnum::draft->value);
             $table->dateTime('published_at')->nullable();
+            $table->string('format')->nullable();
 
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
@@ -186,6 +187,27 @@ return new class extends Migration
             $table->boolean('fetched_has_failed')->default(false);
 
             $table->timestamps();
+        });
+
+        Schema::create('media', function (Blueprint $table) {
+            $table->id();
+
+            $table->morphs('model');
+            $table->uuid()->nullable()->unique();
+            $table->string('collection_name');
+            $table->string('name');
+            $table->string('file_name');
+            $table->string('mime_type')->nullable();
+            $table->string('disk');
+            $table->string('conversions_disk')->nullable();
+            $table->unsignedBigInteger('size');
+            $table->json('manipulations');
+            $table->json('custom_properties');
+            $table->json('generated_conversions');
+            $table->json('responsive_images');
+            $table->unsignedInteger('order_column')->nullable()->index();
+
+            $table->nullableTimestamps();
         });
     }
 

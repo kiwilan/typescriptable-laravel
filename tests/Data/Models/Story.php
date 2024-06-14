@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
+use Kiwilan\Typescriptable\Tests\Data\Enums\StoryFormatEnum;
 
 class Story extends Model
 {
@@ -22,6 +23,7 @@ class Story extends Model
         'picture',
         'published_at',
         'status',
+        'format',
     ];
 
     protected $appends = [
@@ -35,6 +37,7 @@ class Story extends Model
     protected $casts = [
         'published_at' => 'datetime',
         'status' => PublishStatusEnum::class,
+        'format' => StoryFormatEnum::class,
     ];
 
     /**

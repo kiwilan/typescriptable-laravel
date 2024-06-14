@@ -1,0 +1,102 @@
+{
+  "name": "@kiwilan/typescriptable-laravel",
+  "type": "module",
+  "version": "2.4.42",
+  "description": "Add some helpers for your Inertia app with TypeScript.",
+  "author": "Ewilan Rivière <ewilan.riviere@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/kiwilan/typescriptable-laravel/tree/main/lib",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiwilan/typescriptable-laravel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kiwilan/typescriptable-laravel/issues"
+  },
+  "keywords": [
+    "typescriptable",
+    "laravel",
+    "inertia",
+    "ts",
+    "vue",
+    "vite",
+    "typescript"
+  ],
+  "exports": {
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.js",
+      "require": "./dist/vite.cjs"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "import": "./dist/vue.js",
+      "require": "./dist/vue.cjs"
+    },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "vite": [
+        "./dist/vite.d.ts"
+      ],
+      "vue": [
+        "./dist/vue.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup --clean",
+    "watch": "tsup --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "clean": "rimraf dist && rimraf vue",
+    "local": "rm -f ~/kiwilan-typescriptable-laravel-*.tgz || true && mv ./kiwilan-typescriptable-laravel-*.tgz ~/kiwilan-typescriptable-laravel.tgz",
+    "package": "npm run clean && npm run build && npm pack && npm run local",
+    "release": "npm run clean && npm run build && npm pack --dry-run && npm publish --access public"
+  },
+  "peerDependencies": {
+    "vite": "^4.x.x || ^5.x.x",
+    "vue": "^3.x.x"
+  },
+  "peerDependenciesMeta": {
+    "laravel-vite-plugin": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@inertiajs/core": "^1.0.14",
+    "@inertiajs/vue3": "^1.0.14",
+    "@types/node": "^20.11.0",
+    "@vitejs/plugin-vue": "^5.0.3",
+    "@vitest/coverage-v8": "^1.2.0",
+    "autoprefixer": "^10.4.16",
+    "laravel-vite-plugin": "^1.0.1",
+    "postcss": "^8.4.33",
+    "rimraf": "^5.0.7",
+    "tailwindcss": "^3.4.1",
+    "tsup": "^8.0.1",
+    "vite": "^5.0.11",
+    "vite-plugin-dts": "^3.7.0",
+    "vitest": "^1.2.0",
+    "vue": "^3.4.13"
+  }
+}
