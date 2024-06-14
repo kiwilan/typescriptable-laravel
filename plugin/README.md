@@ -137,6 +137,40 @@ createInertiaApp({
 });
 ```
 
+For SSR support, you have to add `VueTypescriptable` into your `ssr.ts`:
+
+```ts
+import { createInertiaApp } from "@inertiajs/vue3";
+import createServer from "@inertiajs/vue3/server";
+import { renderToString } from "@vue/server-renderer";
+import { createSSRApp, h } from "vue";
+import {
+    VueTypescriptable,
+    resolvePages,
+    resolveTitle,
+} from "@kiwilan/typescriptable-laravel";
+import { ZiggyVue } from "../../vendor/tightenco/ziggy";
+
+createServer((page) =>
+    createInertiaApp({
+        title: (title) => resolveTitle(title, "My App"), // Optional
+        page,
+        render: renderToString,
+        resolve: (name) =>
+            resolvePages(name, import.meta.glob("./Pages/**/*.vue")), // Optional
+        setup({ App, props, plugin }) {
+            return createSSRApp({ render: () => h(App, props) })
+                .use(plugin)
+                .use(VueTypescriptable) // Add Vue plugin
+                .use(ZiggyVue, {
+                    ...(page.props.ziggy as any),
+                    location: new URL((page.props.ziggy as any).location),
+                });
+        },
+    })
+);
+```
+
 ## Usage
 
 Many options are available into composables
