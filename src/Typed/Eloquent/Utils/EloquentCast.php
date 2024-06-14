@@ -2,8 +2,10 @@
 
 namespace Kiwilan\Typescriptable\Typed\Eloquent\Utils;
 
+use BackedEnum;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentItem;
 use ReflectionClass;
+use UnitEnum;
 
 class EloquentCast
 {
@@ -140,9 +142,15 @@ class EloquentCast
     private function setEnums(ReflectionClass $reflector): array
     {
         $enums = [];
+        $constants = $reflector->getConstants();
+        $constants = array_filter($constants, fn ($value) => is_object($value));
 
-        foreach ($reflector->getConstants() as $name => $enum) {
-            $enums[$name] = is_string($enum) ? "'{$enum}'" : $enum->value;
+        foreach ($constants as $name => $enum) {
+            if ($enum instanceof BackedEnum) {
+                $enums[$name] = $enum->value;
+            } elseif ($enum instanceof UnitEnum) {
+                $enums[$name] = $enum->name;
+            }
         }
 
         return $enums;

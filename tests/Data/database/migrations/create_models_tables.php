@@ -33,6 +33,7 @@ return new class extends Migration
             $table->text('picture')->nullable();
             $table->string('status')->default(PublishStatusEnum::draft->value);
             $table->dateTime('published_at')->nullable();
+            $table->string('format')->nullable();
 
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();

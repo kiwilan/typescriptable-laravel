@@ -131,6 +131,8 @@ class EloquentPhp
             $field .= PHP_EOL;
         }
 
+        $field = str_replace('\\\\', '\\', $field);
+
         return $field;
     }
 
