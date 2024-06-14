@@ -6,6 +6,7 @@ Add some helpers for your Inertia app with TypeScript.
 >
 > -   Built for [Vite](https://vitejs.dev/) with [`laravel-vite-plugin`](https://github.com/laravel/vite-plugin) and [Inertia](https://inertiajs.com/).
 > -   Built for [Vue 3](https://vuejs.org/)
+> -   Works with SSR (Server Side Rendering) for [Inertia](https://inertiajs.com/server-side-rendering)
 
 ## Installation
 
@@ -119,14 +120,12 @@ import "../css/app.css";
 import type { DefineComponent } from "vue";
 import { createApp, h } from "vue";
 import { createInertiaApp, router } from "@inertiajs/vue3";
-import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
+import { VueTypescriptable, resolvePages, resolveTitle } from '@kiwilan/typescriptable-laravel'; // Import VueTypescriptable
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
-import { VueTypescriptable } from "@kiwilan/typescriptable-laravel"; // Import VueTypescriptable
 
 createInertiaApp({
-    title: (title) => `${title} - Laravel`,
-    resolve: (name) =>
-        resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob("./Pages/**/*.vue")) as Promise<DefineComponent>,
+    title: title => resolveTitle(title, 'My App'), // You can use helper `resolveTitle()`
+  resolve: name => resolvePages(name, import.meta.glob('./Pages/**/*.vue')), // You can use helper `resolvePages()`
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
