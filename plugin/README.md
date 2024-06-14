@@ -4,9 +4,9 @@ Add some helpers for your Inertia app with TypeScript.
 
 > [!IMPORTANT]
 >
-> -   [`ziggy`](https://github.com/tighten/ziggy) is **REQUIRED**
-> -   PHP `composer` package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
-> -   Built for [Vite](https://vitejs.dev/) with `laravel-vite-plugin`, [Inertia](https://inertiajs.com/) and [Vue 3](https://vuejs.org/).
+> -   Built for [Vite](https://vitejs.dev/) with [`laravel-vite-plugin`](https://github.com/laravel/vite-plugin) and [Inertia](https://inertiajs.com/).
+> -   Built for [Vue 3](https://vuejs.org/)
+> -   Works with SSR (Server Side Rendering) for [Inertia](https://inertiajs.com/server-side-rendering)
 
 ## Installation
 
@@ -19,7 +19,19 @@ pnpm add @kiwilan/typescriptable-laravel -D
 yarn add @kiwilan/typescriptable-laravel -D
 ```
 
-Middleware `HandleInertiaRequests.php` have to be updated with `ziggy`:
+## Requirements
+
+> [!IMPORTANT]
+>
+> -   [`tightenco/ziggy`](https://github.com/tighten/ziggy) is **REQUIRED**
+> -   PHP `composer` package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
+
+When you install [Inertia](https://inertiajs.com/) with Laravel, I advice to use [Jetstream](https://jetstream.laravel.com) to setup your project. If you don't want to use Jetstream, you can just manually add `ziggy` to `HandleInertiaRequests.php` middleware (or any other middleware added to `web` middleware) into `share()` method.
+
+> [!NOTE]
+> You can see an example of `HandleInertiaRequests.php` middleware here: <https://gist.github.com/ewilan-riviere/f1dbc20669ed2669f745e3e0e0771537>.
+
+Middleware `HandleInertiaRequests.php` have to be updated with `tightenco/ziggy`:
 
 ```php
 <?php
@@ -81,6 +93,7 @@ import typescriptable from "@kiwilan/typescriptable-laravel/vite";
 
 export default defineConfig({
     plugins: [
+        // Default config
         typescriptable({
             autoreload: true,
             inertia: true,
@@ -108,14 +121,12 @@ import "../css/app.css";
 import type { DefineComponent } from "vue";
 import { createApp, h } from "vue";
 import { createInertiaApp, router } from "@inertiajs/vue3";
-import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
+import { VueTypescriptable, resolvePages, resolveTitle } from '@kiwilan/typescriptable-laravel'; // Import VueTypescriptable
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
-import { VueTypescriptable } from "@kiwilan/typescriptable-laravel"; // Import VueTypescriptable
 
 createInertiaApp({
-    title: (title) => `${title} - Laravel`,
-    resolve: (name) =>
-        resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob("./Pages/**/*.vue")) as Promise<DefineComponent>,
+    title: title => resolveTitle(title, 'My App'), // You can use helper `resolveTitle()`
+  resolve: name => resolvePages(name, import.meta.glob('./Pages/**/*.vue')), // You can use helper `resolvePages()`
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
