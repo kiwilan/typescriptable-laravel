@@ -63,10 +63,13 @@ export function useRouter() {
 
   const laravelRouter = computed(() => LaravelRouter.create())
 
+  const baseURL = computed(() => laravelRouter.value.getBaseURL())
+
   return {
     isRouteEqualTo,
     currentRoute,
     route,
     router: laravelRouter,
+    baseURL,
   }
 }
