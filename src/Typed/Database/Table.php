@@ -16,8 +16,7 @@ class Table
         public string $driver,
         public string $name,
         public ?string $select = null,
-    ) {
-    }
+    ) {}
 
     public static function getName(Model|string $model): string
     {

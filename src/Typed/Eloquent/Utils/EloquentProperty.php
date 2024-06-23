@@ -23,8 +23,7 @@ class EloquentProperty
         protected bool $isCast = false,
         protected bool $isPivot = false,
         protected ?string $typescriptType = null,
-    ) {
-    }
+    ) {}
 
     public static function fromDb(Column $column): self
     {

@@ -17,8 +17,7 @@ class EloquentCast
         public string $typePhp,
         public bool $isEnum = false,
         public ?string $typescriptType = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string,EloquentCast>

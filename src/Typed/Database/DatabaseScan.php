@@ -14,8 +14,7 @@ class DatabaseScan
         protected string $driver,
         protected array $tables = [],
         protected array $items = [],
-    ) {
-    }
+    ) {}
 
     public static function make(): self
     {

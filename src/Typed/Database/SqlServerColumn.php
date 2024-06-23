@@ -13,8 +13,7 @@ class SqlServerColumn implements IColumn
     protected function __construct(
         public ?string $columnName = null,
         public ?string $dataType = null,
-    ) {
-    }
+    ) {}
 
     public static function make(array|object $data, string $table, string $driver): Column
     {

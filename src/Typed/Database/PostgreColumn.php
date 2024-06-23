@@ -13,8 +13,7 @@ class PostgreColumn implements IColumn
     protected function __construct(
         public ?string $column_name = null,
         public ?string $data_type = null,
-    ) {
-    }
+    ) {}
 
     public static function make(array|object $data, string $table, string $driver): Column
     {

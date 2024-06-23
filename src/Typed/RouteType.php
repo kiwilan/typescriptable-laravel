@@ -13,8 +13,7 @@ class RouteType
     protected function __construct(
         public string $path,
         public string $pathList,
-    ) {
-    }
+    ) {}
 
     public static function make(?string $jsonOutput = null, bool $withList = false, ?string $outputPath = null): self
     {
