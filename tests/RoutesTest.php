@@ -5,7 +5,8 @@ use Kiwilan\Typescriptable\TypescriptableConfig;
 
 it('can be run', function () {
     Artisan::call('typescriptable:routes', [
-        '--route-list' => routes(),
+        '--json' => routes(),
+        '--list' => true,
         '--output-path' => outputDir(),
     ]);
 
