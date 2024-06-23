@@ -13,8 +13,7 @@ class EloquentTypescript
     protected function __construct(
         public string $path,
         public string $content = '',
-    ) {
-    }
+    ) {}
 
     /**
      * @param  array<string,EloquentProperty[] | array<string,EloquentProperty[]>>  $eloquents

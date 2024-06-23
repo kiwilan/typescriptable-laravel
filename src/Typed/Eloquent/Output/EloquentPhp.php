@@ -12,8 +12,7 @@ class EloquentPhp
 
     protected function __construct(
         public string $path,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  array<string,EloquentProperty[] | array<string,EloquentProperty[]>>  $eloquents

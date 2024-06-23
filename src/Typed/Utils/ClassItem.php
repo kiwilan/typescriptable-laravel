@@ -18,8 +18,7 @@ class ClassItem
         public bool $isModel = false,
         public ?string $extends = null,
         public ?EloquentItem $eloquent = null,
-    ) {
-    }
+    ) {}
 
     public static function make(string $path, SplFileInfo $file): self
     {

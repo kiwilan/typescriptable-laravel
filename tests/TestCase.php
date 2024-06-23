@@ -181,8 +181,7 @@ class Driver
         public ?string $database = null,
         public ?string $user = null,
         public ?string $password = null,
-    ) {
-    }
+    ) {}
 
     public static function all(): array
     {

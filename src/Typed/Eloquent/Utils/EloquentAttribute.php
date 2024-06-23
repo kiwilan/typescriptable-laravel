@@ -16,8 +16,7 @@ class EloquentAttribute
         public bool $isLegacy = false,
         public bool $isArray = false,
         public ?string $typescriptType = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string,EloquentAttribute>

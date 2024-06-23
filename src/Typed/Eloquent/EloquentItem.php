@@ -39,8 +39,7 @@ class EloquentItem
         public string $tableName,
         public string $name,
         public ?Table $table = null,
-    ) {
-    }
+    ) {}
 
     public static function make(ClassItem $class): self
     {

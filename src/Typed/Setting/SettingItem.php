@@ -16,8 +16,7 @@ class SettingItem
         public ClassItem $class,
         public string $name,
         public array $properties = [],
-    ) {
-    }
+    ) {}
 
     public static function make(ClassItem $class): self
     {
@@ -47,8 +46,7 @@ class SettingItemProperty
         public bool $isNullable = false,
         public bool $isBuiltin = false,
         public string $typeTs = 'any',
-    ) {
-    }
+    ) {}
 
     public static function make(ReflectionProperty $property): self
     {

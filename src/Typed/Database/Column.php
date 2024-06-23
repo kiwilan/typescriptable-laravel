@@ -13,8 +13,7 @@ class Column
         public bool $isPrimary = false,
         public string $typeFormat = 'string',
         public string $typePhp = 'string',
-    ) {
-    }
+    ) {}
 
     public static function convert(
         string $driver,

@@ -26,8 +26,7 @@ class EloquentType
         protected array $eloquents = [],
         protected array $pivots = [],
         protected array $list = [],
-    ) {
-    }
+    ) {}
 
     public static function make(?string $modelsPath, ?string $outputPath, ?string $phpPath = null, bool $delete = true): self
     {

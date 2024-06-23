@@ -25,8 +25,7 @@ class EloquentRelation
         public ?string $pivotTable = null,
         public ?string $pivotModel = null,
         public ?array $pivotAttributes = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string,EloquentRelation>
