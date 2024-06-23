@@ -5,9 +5,10 @@ namespace Kiwilan\Typescriptable\Typed\Route;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route as FacadesRoute;
+use Kiwilan\Typescriptable\Typed\Route\Models\TypeRoute;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
-class TypeRouteGenerator
+class RouteGenerator
 {
     /** @var Collection<string, TypeRoute> */
     protected Collection $routes;

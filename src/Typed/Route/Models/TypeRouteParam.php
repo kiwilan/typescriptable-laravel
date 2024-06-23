@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Route;
+namespace Kiwilan\Typescriptable\Typed\Route\Models;
 
 use Illuminate\Routing\Route;
 

@@ -3,9 +3,11 @@
 namespace Kiwilan\Typescriptable\Typed\Route;
 
 use Illuminate\Support\Collection;
+use Kiwilan\Typescriptable\Typed\Route\Models\TypeRoute;
+use Kiwilan\Typescriptable\Typed\Route\Models\TypeRouteParam;
 use Kiwilan\Typescriptable\Typescriptable;
 
-class TypeRouteListTs
+class RouteList
 {
     /** @var Collection<string, TypeRoute> */
     protected Collection $routes;

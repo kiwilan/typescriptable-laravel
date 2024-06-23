@@ -3,9 +3,9 @@
 namespace Kiwilan\Typescriptable\Typed;
 
 use Illuminate\Support\Facades\File;
-use Kiwilan\Typescriptable\Typed\Route\TypeRouteGenerator;
-use Kiwilan\Typescriptable\Typed\Route\TypeRouteListTs;
-use Kiwilan\Typescriptable\Typed\Route\TypeRouteTs;
+use Kiwilan\Typescriptable\Typed\Route\RouteGenerator;
+use Kiwilan\Typescriptable\Typed\Route\RouteList;
+use Kiwilan\Typescriptable\Typed\Route\RouteTypes;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class RouteType
@@ -16,14 +16,14 @@ class RouteType
     ) {
     }
 
-    public static function make(?string $routeList = null, ?string $outputPath = null): self
+    public static function make(?string $jsonOutput = null, bool $withList = false, ?string $outputPath = null): self
     {
         $filename = TypescriptableConfig::routesFilename();
         $filenameRoutes = TypescriptableConfig::routesFilenameList();
 
-        $routes = TypeRouteGenerator::make($routeList)->get();
-        $tsTypeRoute = TypeRouteTs::make($routes)->get();
-        $tsRoute = TypeRouteListTs::make($routes)->get();
+        $routes = RouteGenerator::make($jsonOutput)->get();
+        $routeTypes = RouteTypes::make($routes)->get();
+        $routeList = RouteList::make($routes)->get();
 
         $file = $outputPath.DIRECTORY_SEPARATOR.$filename;
         $fileRoutes = $outputPath.DIRECTORY_SEPARATOR.$filenameRoutes;
@@ -34,8 +34,11 @@ class RouteType
         }
 
         $self = new self($file, $fileRoutes);
-        $self->print($file, $tsTypeRoute);
-        $self->print($fileRoutes, $tsRoute);
+
+        $self->print($file, $routeTypes);
+        if ($withList) {
+            $self->print($fileRoutes, $routeList);
+        }
 
         return $self;
     }

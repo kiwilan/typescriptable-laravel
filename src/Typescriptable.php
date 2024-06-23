@@ -29,9 +29,9 @@ class Typescriptable
         return EloquentType::make($modelsPath, $outputPath, $phpPath);
     }
 
-    public static function routes(string $routeList, string $outputPath): RouteType
+    public static function routes(string $json_output, bool $with_list, string $output_path): RouteType
     {
-        return RouteType::make($routeList, $outputPath);
+        return RouteType::make($json_output, $with_list, $output_path);
     }
 
     public static function settings(string $settingsPath, string $outputPath, string $extends): ?SettingType
