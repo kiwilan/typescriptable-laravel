@@ -6,6 +6,9 @@ export class HttpDownload {
     private filename?: string,
   ) {}
 
+  /**
+   * Create a new download instance.
+   */
   public static async create(response: HttpResponse, forceFilename?: string): Promise<HttpDownload> {
     const self = new HttpDownload(response, forceFilename)
     if (!forceFilename)
@@ -14,7 +17,10 @@ export class HttpDownload {
     return self
   }
 
-  public triggerDownload(url: string | undefined, filename?: string): void {
+  /**
+   * Trigger a download from a URL.
+   */
+  public direct(url: string | undefined, filename?: string): void {
     if (!url) {
       console.warn('No URL provided to download')
       return
@@ -36,6 +42,9 @@ export class HttpDownload {
     document.body.removeChild(a)
   }
 
+  /**
+   * Download the response as a Blob.
+   */
   public async blob(): Promise<void> {
     const blob = await this.response.getBody<Blob>('blob')
     if (!blob) {
@@ -45,6 +54,9 @@ export class HttpDownload {
     return this.fromBlob(blob, this.filename)
   }
 
+  /**
+   * Download the response as an ArrayBuffer.
+   */
   public async arrayBuffer(): Promise<void> {
     const arrayBuffer = await this.response.getBody<ArrayBuffer>('arrayBuffer')
     if (!arrayBuffer) {
@@ -54,18 +66,27 @@ export class HttpDownload {
     return this.fromArrayBuffer(arrayBuffer, this.filename)
   }
 
+  /**
+   * Download the response as a Blob.
+   */
   private fromBlob(blob: Blob, filename?: string): void {
     const url = URL.createObjectURL(blob) // Create a URL for the Blob
-    this.triggerDownload(url, filename)
+    this.direct(url, filename)
 
     URL.revokeObjectURL(url) // Revoke the Blob URL to free up memory
   }
 
+  /**
+   * Download the response as an ArrayBuffer.
+   */
   private fromArrayBuffer(arrayBuffer: ArrayBuffer, filename?: string): void {
     const blob = new Blob([arrayBuffer])
     this.fromBlob(blob, filename)
   }
 
+  /**
+   * Find the filename from the response headers.
+   */
   private findName(response: HttpResponse): string | undefined {
     const name = response.getHeader('Content-Disposition') ?? undefined
     if (name)
