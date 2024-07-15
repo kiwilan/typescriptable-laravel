@@ -18,6 +18,12 @@ export interface ViteTypescriptableOptions {
    */
   routes?: boolean
   /**
+   * Print a list of routes.
+   *
+   * @default false
+   */
+  routesList?: boolean
+  /**
    * Enable types for Inertia.
    *
    * @default true

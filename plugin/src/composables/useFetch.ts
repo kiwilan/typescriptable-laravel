@@ -1,5 +1,6 @@
 import { HttpRequest } from '../shared/http/HttpRequest'
 import { HttpResponse } from '../shared/http/HttpResponse'
+import { HttpDownload } from '@/shared/http/HttpDownload'
 import type { HttpRequestAnonymous, HttpRequestBody, HttpRequestQuery } from '@/types/http'
 
 /**
@@ -110,9 +111,17 @@ export function useFetch() {
     },
   }
 
+  /**
+   * Download a file from the response (blob or array buffer).
+   */
+  async function download(response: HttpResponse, filename?: string): Promise<HttpDownload> {
+    return await HttpDownload.create(response, filename)
+  }
+
   return {
     http,
     laravel,
     inertia,
+    download,
   }
 }

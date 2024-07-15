@@ -7,6 +7,7 @@ const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
   models: true,
   settings: false,
   routes: true,
+  routesList: false,
   inertia: true,
   inertiaPaths: {
     base: 'resources/js',
@@ -30,6 +31,7 @@ const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
  *       models: true,
  *       settings: false,
  *       routes: true,
+ *       routesList: false,
  *       inertia: true,
  *       inertiaPaths: {
  *         base: 'resources/js',
@@ -56,6 +58,9 @@ function ViteTypescriptable(userOptions: ViteTypescriptableOptions = {}): Plugin
 
       if (opts.routes)
         await execute('php artisan typescriptable:routes')
+
+      if (opts.routesList)
+        await execute('php artisan typescriptable:routes --list')
 
       if (opts.inertia)
         await InertiaType.make(opts)

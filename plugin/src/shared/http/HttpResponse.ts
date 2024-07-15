@@ -5,7 +5,7 @@ export class HttpResponse {
   private constructor(
     private response: Response,
     private headers: Headers,
-    private status: number,
+    private statusCode: number,
     private statusText: string,
     private type: ResponseType,
     private ok: boolean,
@@ -51,10 +51,19 @@ export class HttpResponse {
   }
 
   /**
+   * @deprecated Use `getStatusCode()` instead.
+   *
    * Get status code of the response (200, 404, 500, etc.)
    */
   public getStatus(): number {
-    return this.status
+    return this.statusCode
+  }
+
+  /**
+   * Get status code of the response (200, 404, 500, etc.)
+   */
+  public getStatusCode(): number {
+    return this.statusCode
   }
 
   /**
