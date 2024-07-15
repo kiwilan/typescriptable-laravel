@@ -111,11 +111,19 @@ export function useFetch() {
     },
   }
 
-  /**
-   * Download a file from the response (blob or array buffer).
-   */
-  async function download(response: HttpResponse, filename?: string): Promise<HttpDownload> {
-    return await HttpDownload.create(response, filename)
+  const download = {
+    /**
+     * Trigger a download from the response (blob or array buffer).
+     */
+    async trigger(response: HttpResponse, filename?: string): Promise<HttpDownload> {
+      return await HttpDownload.create(response, filename)
+    },
+    /**
+     * Trigger a download from a URL.
+     */
+    triggerDirect(url: string | undefined, filename?: string): void {
+      return HttpDownload.direct(url, filename)
+    },
   }
 
   return {

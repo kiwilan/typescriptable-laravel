@@ -20,7 +20,7 @@ export class HttpDownload {
   /**
    * Trigger a download from a URL.
    */
-  public direct(url: string | undefined, filename?: string): void {
+  public static direct(url: string | undefined, filename?: string): void {
     if (!url) {
       console.warn('No URL provided to download')
       return
@@ -71,7 +71,7 @@ export class HttpDownload {
    */
   private fromBlob(blob: Blob, filename?: string): void {
     const url = URL.createObjectURL(blob) // Create a URL for the Blob
-    this.direct(url, filename)
+    HttpDownload.direct(url, filename)
 
     URL.revokeObjectURL(url) // Revoke the Blob URL to free up memory
   }
