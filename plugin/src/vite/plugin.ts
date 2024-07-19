@@ -7,7 +7,7 @@ const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
   models: true,
   settings: false,
   routes: true,
-  routesList: false,
+  routesList: true,
   inertia: true,
   inertiaPaths: {
     base: 'resources/js',
@@ -31,7 +31,7 @@ const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
  *       models: true,
  *       settings: false,
  *       routes: true,
- *       routesList: false,
+ *       routesList: true,
  *       inertia: true,
  *       inertiaPaths: {
  *         base: 'resources/js',
