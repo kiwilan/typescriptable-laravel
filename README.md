@@ -45,7 +45,7 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
     -   `php artisan typescriptable:settings` for `spatie/laravel-settings`
     -   `php artisan typescriptable:routes` for Laravel routes
 
-<iframe src="https://giphy.com/embed/1ffOwHDZehVb6JlRid" width="480" height="269" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+![Eldorado Road Both Scene](https://i.giphy.com/1ffOwHDZehVb6JlRid.webp)
 
 > Because you need PHP and Typescript.
 
