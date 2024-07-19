@@ -21,8 +21,7 @@ class SchemaClass
         protected bool $isModel = false,
         protected array $traits = [],
         protected ?string $extends = null,
-    ) {
-    }
+    ) {}
 
     public static function make(SplFileInfo $file, string $basePath): ?self
     {

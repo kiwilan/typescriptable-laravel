@@ -11,8 +11,7 @@ class ParserRelation
         protected ?string $type = null,
         protected ?string $related = null,
         protected ?string $relatedBase = null,
-    ) {
-    }
+    ) {}
 
     public static function make(ReflectionMethod $method, string $baseNamespace): self
     {

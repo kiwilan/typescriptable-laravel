@@ -19,8 +19,7 @@ class Table
         protected string $driver,
         protected string $name,
         protected ?string $select = null,
-    ) {
-    }
+    ) {}
 
     public static function make(string $table): self
     {

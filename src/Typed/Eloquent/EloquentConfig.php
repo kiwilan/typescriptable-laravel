@@ -10,6 +10,5 @@ class EloquentConfig
         public ?string $phpPath = null,
         public bool $legacy = false,
         public ?string $tsFilename = null,
-    ) {
-    }
+    ) {}
 }
