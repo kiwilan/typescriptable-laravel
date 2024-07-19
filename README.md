@@ -45,6 +45,10 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
     -   `php artisan typescriptable:settings` for `spatie/laravel-settings`
     -   `php artisan typescriptable:routes` for Laravel routes
 
+<iframe src="https://giphy.com/embed/1ffOwHDZehVb6JlRid" width="480" height="269" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+> Because you need PHP and Typescript.
+
 ### Roadmap
 
 -   [ ] Improve `Casts\Attribute` methods
@@ -104,6 +108,11 @@ You can publish the config file
 php artisan vendor:publish --tag="typescriptable-config"
 ```
 
+> [!IMPORTANT]
+>
+> You can configure `engine.models` with `artisan` or `typescriptable` to change parser engine. By default, it uses `artisan` command with [`model:show`](https://blog.laravel.com/laravel-new-model-show-command) command.
+> `artisan` is default engine because it's more reliable and faster than `typescriptable` engine.
+
 ## Usage
 
 ```bash
@@ -160,18 +169,14 @@ With options:
 
 ### Database prefix
 
-If you have a database prefix, you can add it in `config/typescriptable.php` file with `DB_PREFIX` env variable.
+You can use `prefix` variable into `config/database.php` file.
 
 ```php
-return [
-    'database_prefix' => env('DB_PREFIX', ''),
-];
-```
-
-Or you can use `DB_PREFIX` into `config/database.php` file.
-
-```php
-'prefix' => env('DB_PREFIX', ''),
+'connections' => [
+    'YOUR_DATABASE_CONNECTION' => [
+        'prefix' => '',
+    ],
+],
 ```
 
 Two configs works.
@@ -211,49 +216,7 @@ composer test
 
 ### Docker database
 
-> [!NOTE]
->
-> To install this on M1 Mac, you need to enable `Use Rosetta for x86/amd64 emulation on Apple Silicon` in Docker preferences.
-
-To install MySQL with Docker
-
-```bash
-docker run --name mysql \
-    -e MYSQL_ROOT_PASSWORD=root \
-    -e MYSQL_USER=testing \
-    -e MYSQL_PASSWORD=testing \
-    -e MYSQL_DATABASE=testing \
-    -p 3306:3306 \
-    -d \
-    mysql:8.0
-```
-
-To install PostgreSQL with Docker
-
-```bash
-docker run --name postgresql \
-    -e POSTGRES_USER=testing \
-    -e POSTGRES_PASSWORD=testing \
-    -e POSTGRES_DB=testing \
-    -p 5432:5432 \
-    -d \
-    postgres:15.4
-```
-
-To install SQL Server with Docker
-
-> [!WARNING]
->
-> If you have an error like this: "An invalid attribute was designated on the PDO object", you have to update `msphpsql` driver. Check <https://github.com/laravel/framework/issues/47937> for more information.
-
-```bash
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=12345OHdf%e" \
-  -p 1433:1433 \
-  --name sqlserver \
-  --hostname sqlserver \
-  -d \
-  mcr.microsoft.com/mssql/server:2022-latest
-```
+You can check <https://gist.github.com/ewilan-riviere/101cb03ee381b0adc2a22826d84e7577> gist to have a Docker database configuration.
 
 ## Changelog
 
