@@ -2,6 +2,7 @@
 
 namespace Kiwilan\Typescriptable;
 
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Typed\EloquentType;
 use Kiwilan\Typescriptable\Typed\RouteType;
 use Kiwilan\Typescriptable\Typed\SettingType;
@@ -24,9 +25,9 @@ class Typescriptable
         return implode(PHP_EOL, self::TS_HEAD);
     }
 
-    public static function models(string $modelsPath, string $outputPath, ?string $phpPath = null): EloquentType
+    public static function models(EloquentConfig $config): EloquentType
     {
-        return EloquentType::make($modelsPath, $outputPath, $phpPath);
+        return EloquentType::make($config)->execute();
     }
 
     public static function routes(string $json_output, bool $with_list, string $output_path): RouteType
@@ -34,8 +35,8 @@ class Typescriptable
         return RouteType::make($json_output, $with_list, $output_path);
     }
 
-    public static function settings(string $settingsPath, string $outputPath, string $extends): ?SettingType
+    public static function settings(string $settings_path, string $output_path, string $extends): ?SettingType
     {
-        return SettingType::make($settingsPath, $outputPath, $extends);
+        return SettingType::make($settings_path, $output_path, $extends);
     }
 }

@@ -28,13 +28,7 @@ class TypescriptableSettingsCommand extends Command
         $this->outputPath = (string) $this->option('output-path');
         $this->extends = (string) $this->option('extends');
 
-        $service = Typescriptable::settings($this->settingsPath, $this->outputPath, $this->extends);
-        // $namespaces = [];
-
-        // foreach ($service->items as $item) {
-        //     $namespaces[] = [$item->namespace];
-        // }
-        // $this->table(['Models'], $namespaces);
+        Typescriptable::settings($this->settingsPath, $this->outputPath, $this->extends);
 
         $this->info('Generated settings types.');
 

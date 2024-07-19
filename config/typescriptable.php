@@ -2,14 +2,20 @@
 
 return [
     /**
+     * Engine used for parsing.
+     */
+    'engine' => [
+        /**
+         * `artisan` will use the `php artisan model:show` command to parse the models.
+         * `typescriptable` will use internal engine to parse the models.
+         */
+        'models' => 'artisan', // artisan / typescriptable
+    ],
+
+    /**
      * The path to the output directory.
      */
     'output_path' => resource_path('js'),
-
-    /**
-     * The prefix for the database tables.
-     */
-    'database_prefix' => env('DB_PREFIX', ''),
 
     /**
      * Options for the models.

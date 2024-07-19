@@ -3,6 +3,7 @@
 namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Typescriptable;
 
 class TypescriptableModelsCommand extends Command
@@ -10,29 +11,28 @@ class TypescriptableModelsCommand extends Command
     public $signature = 'typescriptable:models
                         {--M|models-path : Path to models directory}
                         {--O|output-path : Path to output}
-                        {--P|php-path : Path to output PHP classes, if null will not print PHP classes}';
+                        {--P|php-path : Path to output PHP classes, if null will not print PHP classes}
+                        {--l|legacy : Use legacy mode}';
 
     public $description = 'Generate Models types.';
 
-    public function __construct(
-        public ?string $modelsPath = null,
-        public ?string $outputPath = null,
-        public ?string $phpPath = null,
-    ) {
-        parent::__construct();
-    }
-
     public function handle(): int
     {
-        $this->modelsPath = (string) $this->option('models-path');
-        $this->outputPath = (string) $this->option('output-path');
-        $this->phpPath = (string) $this->option('php-path');
+        $modelsPath = (string) $this->option('models-path');
+        $outputPath = (string) $this->option('output-path');
+        $phpPath = (string) $this->option('php-path');
+        $legacy = (bool) $this->option('legacy');
 
-        $service = Typescriptable::models($this->modelsPath, $this->outputPath, $this->phpPath);
+        $service = Typescriptable::models(new EloquentConfig(
+            modelsPath: $modelsPath,
+            outputPath: $outputPath,
+            phpPath: $phpPath,
+            legacy: $legacy,
+        ));
         $namespaces = [];
 
-        foreach ($service->items() as $item) {
-            $namespaces[] = [$item->namespace];
+        foreach ($service->app()->models() as $model) {
+            $namespaces[] = [$model->schemaClass()->namespace()];
         }
         $this->table(['Models'], $namespaces);
 

@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd" backupGlobals="false" bootstrap="vendor/autoload.php" colors="true" processIsolation="false" stopOnFailure="false" executionOrder="random" failOnWarning="true" failOnRisky="true" failOnEmptyTestSuite="true" beStrictAboutOutputDuringTests="true" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd" backupGlobals="false"
+  bootstrap="vendor/autoload.php" colors="true" processIsolation="false" stopOnFailure="false"
+  executionOrder="random" failOnWarning="true" failOnRisky="true" failOnEmptyTestSuite="true"
+  beStrictAboutOutputDuringTests="true" cacheDirectory=".phpunit.cache"
+  backupStaticProperties="false">
   <php>
-    <env name="DB_CONNECTION" value="sqlite"/>
-    <!-- sqlite, mysql, pgsql, sqlsrv -->
-    <env name="DB_MYSQL_HOST" value="127.0.0.1"/>
-    <env name="DB_MYSQL_PORT" value="3306"/>
-    <env name="DB_MYSQL_USER" value="root"/>
-    <env name="DB_MYSQL_PASSWORD" value=""/>
-    <env name="DB_MYSQL_DATABASE" value="testing"/>
-    <env name="DB_SQLITE_DATABASE" value=":memory:"/>
-    <env name="DB_PGSQL_HOST" value="127.0.0.1"/>
-    <env name="DB_PGSQL_PORT" value="5432"/>
-    <env name="DB_PGSQL_USER" value="postgres"/>
-    <env name="DB_PGSQL_PASSWORD" value=""/>
-    <env name="DB_PGSQL_DATABASE" value="testing"/>
-    <env name="DB_SQLSRV_HOST" value="127.0.0.1"/>
-    <env name="DB_SQLSRV_PORT" value="1433"/>
-    <env name="DB_SQLSRV_USER" value="sa"/>
-    <env name="DB_SQLSRV_PASSWORD" value=""/>
-    <env name="DB_SQLSRV_DATABASE" value="testing"/>
+    <env name="DB_CONNECTION" value="sqlite" />
+    <!-- sqlite, mysql, mariadb, pgsql, sqlsrv -->
+    <env name="DB_MYSQL_HOST" value="127.0.0.1" />
+    <env name="DB_MYSQL_PORT" value="3306" />
+    <env name="DB_MYSQL_USER" value="root" />
+    <env name="DB_MYSQL_PASSWORD" value="" />
+    <env name="DB_MYSQL_DATABASE" value="testing" />
+    <env name="DB_MARIADB_HOST" value="127.0.0.1" />
+    <env name="DB_MARIADB_PORT" value="3306" />
+    <env name="DB_MARIADB_USER" value="root" />
+    <env name="DB_MARIADB_PASSWORD" value="" />
+    <env name="DB_MARIADB_DATABASE" value="testing" />
+    <env name="DB_SQLITE_DATABASE" value=":memory:" />
+    <env name="DB_PGSQL_HOST" value="127.0.0.1" />
+    <env name="DB_PGSQL_PORT" value="5432" />
+    <env name="DB_PGSQL_USER" value="postgres" />
+    <env name="DB_PGSQL_PASSWORD" value="" />
+    <env name="DB_PGSQL_DATABASE" value="testing" />
+    <env name="DB_SQLSRV_HOST" value="127.0.0.1" />
+    <env name="DB_SQLSRV_PORT" value="1433" />
+    <env name="DB_SQLSRV_USER" value="sa" />
+    <env name="DB_SQLSRV_PASSWORD" value="" />
+    <env name="DB_SQLSRV_DATABASE" value="testing" />
   </php>
   <testsuites>
     <testsuite name="Kiwilan Test Suite">
@@ -27,13 +37,13 @@
   </testsuites>
   <coverage>
     <report>
-      <html outputDirectory="build/coverage"/>
-      <text outputFile="build/coverage.txt"/>
-      <clover outputFile="build/logs/clover.xml"/>
+      <html outputDirectory="build/coverage" />
+      <text outputFile="build/coverage.txt" />
+      <clover outputFile="build/logs/clover.xml" />
     </report>
   </coverage>
   <logging>
-    <junit outputFile="build/report.junit.xml"/>
+    <junit outputFile="build/report.junit.xml" />
   </logging>
   <source>
     <include>

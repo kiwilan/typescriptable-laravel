@@ -6,6 +6,17 @@ use Illuminate\Support\Facades\File;
 
 class TypescriptableConfig
 {
+    public static function engineModels(): string
+    {
+        $engine = config('typescriptable.engine.models') ?? 'artisan';
+
+        if (! in_array($engine, ['artisan', 'typescriptable'])) {
+            throw new \Exception('Invalid engine models');
+        }
+
+        return $engine;
+    }
+
     public static function outputPath(): string
     {
         $path = config('typescriptable.output_path') ?? resource_path('js');
@@ -15,15 +26,6 @@ class TypescriptableConfig
         }
 
         return $path;
-    }
-
-    public static function databasePrefix(): ?string
-    {
-        if (env('DB_PREFIX')) {
-            return env('DB_PREFIX');
-        }
-
-        return config('typescriptable.database_prefix');
     }
 
     public static function setPath(?string $filename = null): string
@@ -50,6 +52,11 @@ class TypescriptableConfig
         return config('typescriptable.models.php_path') ?? null;
     }
 
+    /**
+     * Models to skip.
+     *
+     * @return string[]
+     */
     public static function modelsSkip(): array
     {
         return config('typescriptable.models.skip') ?? [];

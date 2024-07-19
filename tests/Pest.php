@@ -17,7 +17,7 @@ function getDatabaseTypes(): array
 {
     $dotenv = Dotenv::createMutable(getcwd());
     $data = $dotenv->load();
-    $types = $data['DATABASE_TYPES'] ?? 'mysql,sqlite,pgsql,sqlsrv';
+    $types = $data['DATABASE_TYPES'] ?? 'mysql,mariadb,sqlite,pgsql,sqlsrv';
     $types = explode(',', $types);
 
     return $types;
@@ -53,6 +53,13 @@ function settings(): string
     $currentDir = getcwd();
 
     return "{$currentDir}/tests/Data/Settings";
+}
+
+function deleteFile(string $file): void
+{
+    if (file_exists($file)) {
+        unlink($file);
+    }
 }
 
 uses(TestCase::class)->in(__DIR__);

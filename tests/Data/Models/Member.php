@@ -37,12 +37,12 @@ class Member extends Model
 
     public function getPosterUrlAttribute(): string
     {
-        return $this->mediable('poster');
+        return 'poster';
     }
 
     public function getShowRouteAttribute(): string
     {
-        return route('members.show', ['member_tmdb_id' => $this->tmdb_id]);
+        return 'members.show';
     }
 
     public function memberable(): \Illuminate\Database\Eloquent\Relations\MorphTo

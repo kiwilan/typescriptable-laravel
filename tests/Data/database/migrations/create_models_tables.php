@@ -4,13 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
-use Kiwilan\Typescriptable\TypescriptableConfig;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->createTable('users'), function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
@@ -23,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create($this->createTable('stories'), function (Blueprint $table) {
+        Schema::create('stories', function (Blueprint $table) {
             $table->id();
 
             $table->string('title');
@@ -41,7 +40,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create($this->createTable('authors'), function (Blueprint $table) {
+        Schema::create('authors', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
@@ -51,7 +50,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create($this->createTable('chapters'), function (Blueprint $table) {
+        Schema::create('chapters', function (Blueprint $table) {
             $table->id();
 
             $table->string('name')->nullable();
@@ -62,7 +61,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create($this->createTable('categories'), function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
@@ -73,29 +72,29 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table($this->createTable('stories'), function (Blueprint $table) {
-            $table->foreignId('author_id')->nullable()->constrained($this->createTable('authors'))->nullOnDelete();
-            $table->foreignId('category_id')->nullable()->constrained($this->createTable('categories'))->nullOnDelete();
+        Schema::table('stories', function (Blueprint $table) {
+            $table->foreignId('author_id')->nullable()->constrained('authors')->nullOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
         });
 
-        Schema::table($this->createTable('chapters'), function (Blueprint $table) {
-            $table->foreignId('story_id')->nullable()->constrained($this->createTable('stories'))->nullOnDelete();
+        Schema::table('chapters', function (Blueprint $table) {
+            $table->foreignId('story_id')->nullable()->constrained('stories')->nullOnDelete();
         });
 
-        Schema::create($this->createTable('tags'), function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
             $table->timestamps();
         });
 
-        Schema::create($this->createTable('story_tag'), function (Blueprint $table) {
+        Schema::create('story_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tag_id')->constrained($this->createTable('tags'))->cascadeOnDelete();
-            $table->foreignId('story_id')->constrained($this->createTable('stories'))->cascadeOnDelete();
+            $table->foreignId('tag_id')->constrained('tags')->cascadeOnDelete();
+            $table->foreignId('story_id')->constrained('stories')->cascadeOnDelete();
         });
 
-        Schema::create($this->createTable('comments'), function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
 
             $table->string('name')->nullable();
@@ -109,7 +108,7 @@ return new class extends Migration
 
             $table->foreignId('comment_id')
                 ->nullable()
-                ->constrained($this->createTable('comments'))
+                ->constrained('comments')
                 ->onDelete('no action');
 
             $table->morphs('commentable');
@@ -117,7 +116,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create($this->createTable('members'), function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('tmdb_id')->nullable();
@@ -134,7 +133,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create($this->createTable('memberables'), function (Blueprint $table) {
+        Schema::create('memberables', function (Blueprint $table) {
             $table->foreignId('member_id')->index();
             $table->string('character')->nullable();
             $table->string('job')->nullable();
@@ -146,12 +145,13 @@ return new class extends Migration
             $table->ulidMorphs('memberable');
         });
 
-        Schema::create($this->createTable('movies'), function (Blueprint $table) {
+        Schema::create('movies', function (Blueprint $table) {
             $table->ulid('id')->primary();
 
             $table->integer('tmdb_id')->nullable();
-            $table->string('title')->nullable();
+            $table->string('title')->nullable()->unique();
             $table->integer('year')->nullable();
+            $table->json('subtitles');
             $table->string('slug')->unique();
             $table->string('french_title')->nullable();
             $table->string('original_title')->nullable();
@@ -168,7 +168,11 @@ return new class extends Migration
 
             $table->string('imdb_id')->nullable();
             $table->integer('runtime')->nullable();
-            $table->bigInteger('budget')->nullable();
+            $table->enum('budget', [
+                PublishStatusEnum::draft->value,
+                PublishStatusEnum::scheduled->value,
+                PublishStatusEnum::published->value,
+            ])->default(PublishStatusEnum::draft);
             $table->bigInteger('revenue')->nullable();
             $table->string('edition')->nullable();
             $table->string('version')->nullable();
@@ -181,6 +185,8 @@ return new class extends Migration
 
             $table->string('backdrop')->nullable();
             $table->string('backdrop_tmdb')->nullable();
+
+            $table->foreignId('author_id')->nullable()->constrained('authors')->nullOnDelete();
 
             $table->dateTime('added_at')->nullable();
             $table->dateTime('fetched_at')->nullable();
@@ -209,16 +215,5 @@ return new class extends Migration
 
             $table->nullableTimestamps();
         });
-    }
-
-    private function createTable(string $name): string
-    {
-        $prefix = TypescriptableConfig::databasePrefix();
-
-        if ($prefix) {
-            $name = "{$prefix}{$name}";
-        }
-
-        return $name;
     }
 };

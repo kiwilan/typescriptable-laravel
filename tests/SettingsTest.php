@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Artisan;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
+beforeEach(function () {
+    $settings = outputDir('types-settings.d.ts');
+    deleteFile($settings);
+});
+
 it('can be run', function () {
     $currentDir = getcwd();
     $settingsDir = "{$currentDir}/tests/Data/Settings";

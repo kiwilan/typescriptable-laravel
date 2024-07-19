@@ -65,12 +65,14 @@ class TestCase extends Orchestra
         $user = "DB_{$connection}_USER";
         $password = "DB_{$connection}_PASSWORD";
         $databaseName = "DB_{$connection}_DATABASE";
+        $prefix = 'DB_PREFIX';
 
         $driver->host = $data[$host] ? $data[$host] : getenv($host);
         $driver->port = $data[$port] ? $data[$port] : getenv($port);
         $driver->user = $data[$user] ? $data[$user] : getenv($user);
         $driver->password = $data[$password] ? $data[$password] : getenv($password);
         $driver->database = $data[$databaseName] ? $data[$databaseName] : getenv($databaseName);
+        $driver->prefix = $data[$prefix] ? $data[$prefix] : getenv($prefix);
 
         $driver->url = null;
         if ($driver->host && $driver->user && $driver->port) {
@@ -106,13 +108,25 @@ class TestCase extends Orchestra
 
         $configs = [
             'sqlite' => [
-                'prefix' => '',
+                'prefix' => $driver->prefix,
             ],
             'mysql' => [
                 'unix_socket' => '',
                 'charset' => 'utf8mb4',
                 'collation' => 'utf8mb4_unicode_ci',
-                'prefix' => '',
+                'prefix' => $driver->prefix,
+                'prefix_indexes' => true,
+                'strict' => true,
+                'engine' => null,
+                'options' => extension_loaded('pdo_mysql') ? array_filter([
+                    PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                ]) : [],
+            ],
+            'mariadb' => [
+                'unix_socket' => '',
+                'charset' => 'utf8mb4',
+                'collation' => 'utf8mb4_unicode_ci',
+                'prefix' => $driver->prefix,
                 'prefix_indexes' => true,
                 'strict' => true,
                 'engine' => null,
@@ -122,19 +136,21 @@ class TestCase extends Orchestra
             ],
             'pgsql' => [
                 'charset' => 'utf8',
-                'prefix' => '',
+                'prefix' => $driver->prefix,
                 'prefix_indexes' => true,
                 'search_path' => 'public',
                 'sslmode' => 'prefer',
             ],
             'sqlsrv' => [
                 'charset' => 'utf8',
-                'prefix' => '',
+                'prefix' => $driver->prefix,
                 'prefix_indexes' => true,
                 // 'encrypt' => env('DB_ENCRYPT', 'yes'),
                 // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
             ],
         ];
+
+        config()->set('media-library.media_model', \Spatie\MediaLibrary\MediaCollections\Models\Media::class);
 
         config()->set('database.default', $driver->name);
         config()->set("database.connections.{$driver->name}", [
@@ -145,6 +161,7 @@ class TestCase extends Orchestra
             'database' => $driver->database,
             'username' => $driver->user,
             'password' => $driver->password,
+            'prefix' => $driver->prefix,
             ...$configs[$driver->name],
         ]);
 
@@ -181,7 +198,9 @@ class Driver
         public ?string $database = null,
         public ?string $user = null,
         public ?string $password = null,
-    ) {}
+        public ?string $prefix = null,
+    ) {
+    }
 
     public static function all(): array
     {

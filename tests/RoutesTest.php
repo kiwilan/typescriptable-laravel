@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Artisan;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
+beforeEach(function () {
+    $routes = outputDir('types-routes.d.ts');
+    deleteFile($routes);
+});
+
 it('can be run', function () {
     Artisan::call('typescriptable:routes', [
         '--json' => routes(),

@@ -2,15 +2,18 @@
 
 namespace Kiwilan\Typescriptable\Tests\Data\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
+use Kiwilan\Typescriptable\Tests\Data\Models\Nested\Author;
 use Spatie\Image\Enums\Fit;
-use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Movie extends Model implements HasMedia
+class Movie extends Model implements \Spatie\MediaLibrary\HasMedia
 {
     use HasFactory;
     use HasUlids;
@@ -19,6 +22,7 @@ class Movie extends Model implements HasMedia
     protected $fillable = [
         'title',
         'year',
+        'subtitles',
         'french_title',
         'original_title',
         'release_date',
@@ -49,13 +53,21 @@ class Movie extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'budget' => 'integer',
+        'subtitles' => 'array',
+        'budget' => PublishStatusEnum::class,
+        'homepage' => PublishStatusEnum::class,
         'revenue' => 'integer',
         'is_multilingual' => 'boolean',
+        'added_at' => 'datetime:Y-m-d',
     ];
 
     protected $appends = [
         'show_route',
+        'api_route',
+    ];
+
+    protected $hidden = [
+        'budget',
     ];
 
     protected $queryDefaultSort = 'title';
@@ -70,6 +82,21 @@ class Movie extends Model implements HasMedia
             ->addMediaConversion('preview')
             ->fit(Fit::Contain, 300, 300)
             ->nonQueued();
+    }
+
+    public function getShowRouteAttribute(): string
+    {
+        return 'movies.show';
+    }
+
+    /**
+     * @return string
+     */
+    protected function apiRoute(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $value) => ucfirst($value),
+        );
     }
 
     public function similars(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -96,5 +123,10 @@ class Movie extends Model implements HasMedia
                 'is_crew',
             ])
             ->orderBy('order');
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(Author::class, 'author_id');
     }
 }
