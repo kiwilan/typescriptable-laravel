@@ -13,7 +13,8 @@ class ParserAccessor
         public bool $isLegacy = false,
         public bool $isArray = false,
         public ?string $typescriptType = null,
-    ) {}
+    ) {
+    }
 
     /**
      * @return ParserAccessor[]

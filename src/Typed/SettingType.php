@@ -16,7 +16,8 @@ class SettingType
     protected function __construct(
         public string $settingsPath,
         public string $outputPath,
-    ) {}
+    ) {
+    }
 
     public static function make(?string $settingsPath, ?string $outputPath, ?string $extends): ?self
     {

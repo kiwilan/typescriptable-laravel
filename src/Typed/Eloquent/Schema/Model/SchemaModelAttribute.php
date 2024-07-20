@@ -20,7 +20,8 @@ class SchemaModelAttribute
         protected ?string $phpType = null,
         protected ?string $typescriptType = null,
         protected ?array $databaseFields = null,
-    ) {}
+    ) {
+    }
 
     /**
      * Make a new instance.

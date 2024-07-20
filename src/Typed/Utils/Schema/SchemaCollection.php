@@ -12,7 +12,8 @@ class SchemaCollection
         protected string $basePath,
         protected array $skip = [],
         protected array $items = [],
-    ) {}
+    ) {
+    }
 
     /**
      * @param  string[]  $skip

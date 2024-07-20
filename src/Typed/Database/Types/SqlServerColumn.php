@@ -11,7 +11,8 @@ class SqlServerColumn implements IColumn
         public ?string $DATA_TYPE = null,
         public ?string $IS_NULLABLE = null,
         public ?string $COLUMN_DEFAULT = null,
-    ) {}
+    ) {
+    }
 
     public static function make(array|object $data): SchemaModelAttribute
     {

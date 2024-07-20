@@ -13,7 +13,8 @@ class MysqlColumn implements IColumn
         public ?string $Key = null,
         public ?string $Default = null,
         public ?string $Extra = null,
-    ) {}
+    ) {
+    }
 
     public static function make(array|object $data): SchemaModelAttribute
     {

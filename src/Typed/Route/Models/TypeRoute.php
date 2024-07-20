@@ -24,7 +24,8 @@ class TypeRoute
         protected ?string $namePathCamel = null,
         protected ?string $routeName = null,
         protected string $method = 'GET',
-    ) {}
+    ) {
+    }
 
     public static function make(Route $route): self
     {

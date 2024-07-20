@@ -11,7 +11,8 @@ class SchemaModelRelation
         protected bool $isInternal = true,
         protected bool $isPlural = false,
         protected string $typescriptType = 'any',
-    ) {}
+    ) {
+    }
 
     public static function make(array $data): self
     {

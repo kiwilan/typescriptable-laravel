@@ -21,7 +21,8 @@ class SchemaModel
         protected array $relations = [],
         protected array $observers = [],
         protected ?string $typescriptModelName = null,
-    ) {}
+    ) {
+    }
 
     public static function make(array $data, SchemaClass $schemaClass): self
     {

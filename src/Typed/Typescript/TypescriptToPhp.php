@@ -14,7 +14,8 @@ class TypescriptToPhp
         protected string $path,
         protected array $raw = [],
         protected array $classes = [],
-    ) {}
+    ) {
+    }
 
     public static function make(string $path): self
     {
@@ -115,7 +116,8 @@ class TypescriptClass
     protected function __construct(
         protected string $name,
         protected array $properties = [],
-    ) {}
+    ) {
+    }
 
     /**
      * @param  array<string, array{type: string, nullable: bool}>  $properties
@@ -151,7 +153,8 @@ class TypescriptProperty
         protected string $name,
         protected string $type,
         protected bool $nullable,
-    ) {}
+    ) {
+    }
 
     public static function make(string $name, string $type, bool $nullable): self
     {

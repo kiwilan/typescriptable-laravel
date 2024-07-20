@@ -20,7 +20,8 @@ class SchemaApp
         protected ?string $driver = null,
         protected ?string $databaseName = null,
         protected ?string $databasePrefix = null,
-    ) {}
+    ) {
+    }
 
     public static function make(string $modelPath): self
     {
