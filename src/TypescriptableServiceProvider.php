@@ -2,7 +2,7 @@
 
 namespace Kiwilan\Typescriptable;
 
-use Kiwilan\Typescriptable\Commands\ModelListCommand;
+use Kiwilan\Typescriptable\Commands\EloquentListCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableEloquentCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
@@ -27,7 +27,7 @@ class TypescriptableServiceProvider extends PackageServiceProvider
                 TypescriptableEloquentCommand::class,
                 TypescriptableRoutesCommand::class,
                 TypescriptableSettingsCommand::class,
-                ModelListCommand::class,
+                EloquentListCommand::class,
             ]);
     }
 }
