@@ -12,8 +12,7 @@ class DatabaseConversion
         protected ?string $databaseType,
         protected ?string $phpType = 'mixed',
         protected string $typescriptType = 'any',
-    ) {
-    }
+    ) {}
 
     /**
      * Make a new instance.

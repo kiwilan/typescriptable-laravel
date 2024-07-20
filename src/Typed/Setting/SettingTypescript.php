@@ -10,8 +10,7 @@ class SettingTypescript
     protected function __construct(
         public string $path,
         public string $content = '',
-    ) {
-    }
+    ) {}
 
     /**
      * @param  array<string,SettingItem>  $items

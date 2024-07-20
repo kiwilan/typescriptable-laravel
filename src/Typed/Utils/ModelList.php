@@ -14,8 +14,7 @@ class ModelList
     protected function __construct(
         protected string $path,
         protected array $models = [],
-    ) {
-    }
+    ) {}
 
     public static function make(?string $path = null): self
     {

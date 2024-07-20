@@ -14,8 +14,7 @@ class EloquentType
 
     protected function __construct(
         protected EloquentConfig $config,
-    ) {
-    }
+    ) {}
 
     public static function make(EloquentConfig $config): self
     {

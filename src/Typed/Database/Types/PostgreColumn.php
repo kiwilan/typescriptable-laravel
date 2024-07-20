@@ -11,8 +11,7 @@ class PostgreColumn implements IColumn
         public ?string $data_type = null,
         public ?string $is_nullable = null,
         public ?string $column_default = null,
-    ) {
-    }
+    ) {}
 
     public static function make(array|object $data): SchemaModelAttribute
     {

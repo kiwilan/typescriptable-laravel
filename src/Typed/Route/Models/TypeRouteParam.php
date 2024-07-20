@@ -12,8 +12,7 @@ class TypeRouteParam
         protected ?string $type = 'string',
         protected bool $required = true,
         protected ?string $default = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @return TypeRouteParam[]

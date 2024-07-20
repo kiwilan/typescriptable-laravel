@@ -9,8 +9,7 @@ class TypeConverter
         protected string $tsType = 'any',
         protected bool $isArray = false,
         protected bool $isAdvanced = false,
-    ) {
-    }
+    ) {}
 
     public static function make(string $type): self
     {
