@@ -13,7 +13,7 @@ foreach (glob('.output/*') as $file) {
     }
 }
 
-function getDatabaseTypes(): array
+function databaseDrivers(): array
 {
     $dotenv = Dotenv::createMutable(getcwd());
     $data = $dotenv->load();

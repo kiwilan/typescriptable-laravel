@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Artisan;
 class TypescriptableCommand extends Command
 {
     public $signature = 'typescriptable
-                        {--M|models : Generate Models types.}
+                        {--E|eloquent : Generate Eloquent models types.}
                         {--R|routes : Generate Routes types.}
                         {--S|settings : Generate Settings types.}';
 
     public $description = 'Generate types.';
 
     public function __construct(
-        public bool $models = false,
+        public bool $eloquent = false,
         public bool $routes = false,
         public bool $settings = false,
     ) {
@@ -27,19 +27,19 @@ class TypescriptableCommand extends Command
         $this->newLine();
         $this->info('Generating types...');
 
-        $this->models = $this->option('models') ?: false;
+        $this->eloquent = $this->option('eloquent') ?: false;
         $this->routes = $this->option('routes') ?: false;
         $this->settings = $this->option('settings') ?: false;
 
-        if (! $this->models && ! $this->routes && ! $this->settings) {
-            $this->models = true;
+        if (! $this->eloquent && ! $this->routes && ! $this->settings) {
+            $this->eloquent = true;
             $this->routes = true;
             $this->settings = true;
         }
 
-        if ($this->models) {
-            $this->info('Generating types for Models...');
-            Artisan::call('typescriptable:models', [
+        if ($this->eloquent) {
+            $this->info('Generating types for Eloquent...');
+            Artisan::call('typescriptable:eloquent', [
             ], $this->output);
         }
 

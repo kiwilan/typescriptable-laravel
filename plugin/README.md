@@ -67,7 +67,7 @@ class HandleInertiaRequests extends Middleware
 ## Features
 
 -   🦾 Add TypeScript experience into `inertia`
--   💨 Vite plugin to execute automatically [kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel)'s commands :' `typescriptable:models`, `typescriptable:routes` and `typescriptable:routes` with watch mode.
+-   💨 Vite plugin to execute automatically [kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel)'s commands :' `typescriptable:eloquent`, `typescriptable:routes` and `typescriptable:routes` with watch mode.
 -   📦 Vue composables
     -   `useRouter()` composable with `isRouteEqualTo()` method, `currentRoute` computed and `route()` method
     -   `useInertia()` composable for `page` computed, `component` computed, `props` computed, `url` computed, `version` computed, `auth` computed, `user` computed and `isDev` computed

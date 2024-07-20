@@ -11,24 +11,19 @@ use Kiwilan\Typescriptable\Typed\Eloquent\Schema\SchemaApp;
 use Kiwilan\Typescriptable\Typed\EloquentType;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
-use Kiwilan\Typescriptable\TypescriptableConfig;
 
-class EloquentTypeLegacy extends EloquentType implements IEloquentType
+class EloquentTypeParser extends EloquentType implements IEloquentType
 {
     public function run(): self
     {
-        $this->app = SchemaApp::make($this->config->modelsPath)->isLegacy();
+        $this->app = SchemaApp::make($this->config->modelsPath)->enableParer();
 
-        $collect = SchemaCollection::make($this->config->modelsPath, TypescriptableConfig::modelsSkip());
+        $collect = SchemaCollection::make($this->config->modelsPath, $this->config->skipModels);
         $schemas = $collect->onlyModels();
         $this->app->parseBaseNamespace($schemas);
 
         $models = $this->parseModels($schemas);
         $this->app->setModels($models);
-
-        ray($this->app);
-        ray($this->app()->models());
-        ray($this->app()->models()['Kiwilan\Typescriptable\Tests\Data\Models\Movie']->relations());
 
         return $this;
     }
@@ -96,6 +91,7 @@ class EloquentTypeLegacy extends EloquentType implements IEloquentType
                 nullable: true,
                 default: null,
                 unique: false,
+                appended: true,
                 cast: 'accessor'
             );
             $table->addAttribute($attr);

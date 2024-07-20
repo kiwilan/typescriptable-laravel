@@ -7,9 +7,9 @@ return [
     'engine' => [
         /**
          * `artisan` will use the `php artisan model:show` command to parse the models.
-         * `typescriptable` will use internal engine to parse the models.
+         * `parser` will use internal engine to parse the models.
          */
-        'models' => 'artisan', // artisan / typescriptable
+        'models' => 'artisan', // artisan / parser
     ],
 
     /**
@@ -18,10 +18,10 @@ return [
     'output_path' => resource_path('js'),
 
     /**
-     * Options for the models.
+     * Options for the Eloquent models.
      */
-    'models' => [
-        'filename' => 'types-models.d.ts',
+    'eloquent' => [
+        'filename' => 'types-eloquent.d.ts',
         /**
          * The path to the models directory.
          */

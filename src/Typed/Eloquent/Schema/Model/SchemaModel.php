@@ -82,6 +82,11 @@ class SchemaModel
         return $this->attributes;
     }
 
+    public function getAttribute(string $name): ?SchemaModelAttribute
+    {
+        return $this->attributes[$name] ?? null;
+    }
+
     public function updateAccessor(ParserAccessor $accessor): self
     {
         $attribute = $this->attributes[$accessor->field] ?? null;
@@ -99,6 +104,11 @@ class SchemaModel
     public function relations(): array
     {
         return $this->relations;
+    }
+
+    public function getRelation(string $name): ?SchemaModelRelation
+    {
+        return $this->relations[$name] ?? null;
     }
 
     public function observers(): array

@@ -40,6 +40,16 @@ class SchemaModelRelation
         return $this->relatedToModel;
     }
 
+    public function isInternal(): bool
+    {
+        return $this->isInternal;
+    }
+
+    public function isPlural(): bool
+    {
+        return $this->isPlural;
+    }
+
     public function typescriptType(): string
     {
         return $this->typescriptType;

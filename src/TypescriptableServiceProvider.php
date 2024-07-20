@@ -4,7 +4,7 @@ namespace Kiwilan\Typescriptable;
 
 use Kiwilan\Typescriptable\Commands\ModelListCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableCommand;
-use Kiwilan\Typescriptable\Commands\TypescriptableModelsCommand;
+use Kiwilan\Typescriptable\Commands\TypescriptableEloquentCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableRoutesCommand;
 use Kiwilan\Typescriptable\Commands\TypescriptableSettingsCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -24,7 +24,7 @@ class TypescriptableServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasCommands([
                 TypescriptableCommand::class,
-                TypescriptableModelsCommand::class,
+                TypescriptableEloquentCommand::class,
                 TypescriptableRoutesCommand::class,
                 TypescriptableSettingsCommand::class,
                 ModelListCommand::class,

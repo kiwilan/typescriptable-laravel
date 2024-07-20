@@ -3,22 +3,22 @@
 namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
-use Kiwilan\Typescriptable\Typed\Utils\ModelList;
+use Kiwilan\Typescriptable\Typed\Utils\EloquentList;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
-class ModelListCommand extends Command
+class EloquentListCommand extends Command
 {
-    public $signature = 'model:list
+    public $signature = 'eloquent:list
                         {modelPath? : The path to the models.}';
 
-    public $description = 'List all models.';
+    public $description = 'List all Eloquent models.';
 
     public function handle(): int
     {
-        $modelPath = $this->argument('modelPath') ?? TypescriptableConfig::modelsDirectory();
+        $modelPath = $this->argument('modelPath') ?? TypescriptableConfig::eloquentDirectory();
 
-        $list = ModelList::make($modelPath);
+        $list = EloquentList::make($modelPath);
 
         $this->table(
             ['Name', 'Namespace', 'Path'],
@@ -26,7 +26,7 @@ class ModelListCommand extends Command
                 $model->name(),
                 $model->namespace(),
                 $model->path(),
-            ], $list->models())
+            ], $list->eloquentModels())
         );
 
         return self::SUCCESS;

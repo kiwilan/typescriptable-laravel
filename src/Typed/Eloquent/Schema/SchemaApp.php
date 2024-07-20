@@ -14,7 +14,7 @@ class SchemaApp
      */
     protected function __construct(
         protected string $modelPath,
-        protected bool $legacy = false,
+        protected bool $useParser = false,
         protected ?string $baseNamespace = null,
         protected array $models = [],
         protected ?string $driver = null,
@@ -29,6 +29,11 @@ class SchemaApp
         try {
             $self->driver = Schema::getConnection()->getDriverName();
             $self->databaseName = Schema::getConnection()->getDatabaseName();
+            if (str_contains($self->databaseName, ';Database=')) {
+                $exploded = explode(';Database=', $self->databaseName);
+                $self->databaseName = $exploded[1] ?? Schema::getConnection()->getDatabaseName();
+            }
+
             $self->databasePrefix = config("database.connections.{$self->driver}.prefix");
         } catch (\Exception $e) {
         }
@@ -41,14 +46,14 @@ class SchemaApp
         return $this->modelPath;
     }
 
-    public function legacy(): bool
+    public function useParser(): bool
     {
-        return $this->legacy;
+        return $this->useParser;
     }
 
-    public function isLegacy(): self
+    public function enableParer(): self
     {
-        $this->legacy = true;
+        $this->useParser = true;
 
         return $this;
     }
@@ -66,9 +71,19 @@ class SchemaApp
         return $this->models;
     }
 
+    public function getModel(string $namespace): ?SchemaModel
+    {
+        return $this->models[$namespace] ?? null;
+    }
+
     public function driver(): string
     {
         return $this->driver;
+    }
+
+    public function databaseName(): ?string
+    {
+        return $this->databaseName;
     }
 
     public function databasePrefix(): ?string

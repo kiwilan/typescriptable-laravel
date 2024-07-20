@@ -46,10 +46,14 @@ class SchemaModelAttribute
             $data['default'] ?? null,
             $data['unique'] ?? false,
             $data['fillable'] ?? false,
-            $data['hidden'] ?? null,
-            $data['appended'] ?? null,
+            $data['hidden'] ?? false,
+            $data['appended'] ?? false,
             $data['cast'] ?? null,
         );
+
+        if ($self->default === 'NULL') {
+            $self->default = null;
+        }
 
         $types = DatabaseConversion::make($driver, $self->databaseType, $self->cast);
         $self->phpType = $types->phpType();

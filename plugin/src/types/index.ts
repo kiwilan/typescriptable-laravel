@@ -4,7 +4,7 @@ export interface ViteTypescriptableOptions {
    *
    * @default true
    */
-  models?: boolean
+  eloquent?: boolean
   /**
    * Enable types for Spatie
    *

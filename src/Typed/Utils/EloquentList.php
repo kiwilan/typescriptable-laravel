@@ -6,14 +6,14 @@ use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
-class ModelList
+class EloquentList
 {
     /**
-     * @param  SchemaClass[]  $models
+     * @param  SchemaClass[]  $eloquentModels
      */
     protected function __construct(
         protected string $path,
-        protected array $models = [],
+        protected array $eloquentModels = [],
     ) {}
 
     public static function make(?string $path = null): self
@@ -23,8 +23,8 @@ class ModelList
         }
 
         $self = new self($path);
-        $collect = SchemaCollection::make($self->path, TypescriptableConfig::modelsSkip());
-        $self->models = $collect->onlyModels();
+        $collect = SchemaCollection::make($self->path, TypescriptableConfig::eloquentSkip());
+        $self->eloquentModels = $collect->onlyModels();
 
         return $self;
     }
@@ -42,8 +42,8 @@ class ModelList
      *
      * @return SchemaClass[]
      */
-    public function models(): array
+    public function eloquentModels(): array
     {
-        return $this->models;
+        return $this->eloquentModels;
     }
 }

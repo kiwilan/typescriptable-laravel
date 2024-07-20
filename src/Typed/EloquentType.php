@@ -3,10 +3,9 @@
 namespace Kiwilan\Typescriptable\Typed;
 
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeLegacy;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeShow;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeArtisan;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeParser;
 use Kiwilan\Typescriptable\Typed\Eloquent\Schema\SchemaApp;
-use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class EloquentType
 {
@@ -18,29 +17,18 @@ class EloquentType
 
     public static function make(EloquentConfig $config): self
     {
+        // delete old `types-models.d.ts` file
+
         return new self($config);
     }
 
     public function execute(): self
     {
         $type = null;
-        if ($this->config->legacy) {
-            $type = new EloquentTypeLegacy($this->config);
+        if ($this->config->useParser) {
+            $type = new EloquentTypeParser($this->config);
         } else {
-            $type = new EloquentTypeShow($this->config);
-        }
-
-        if (! $type->config->modelsPath) {
-            $type->config->modelsPath = $this->config->modelsPath ?: TypescriptableConfig::modelsDirectory();
-        }
-
-        $type->config->tsFilename = $this->config->tsFilename ?: TypescriptableConfig::modelsFilename();
-        if (! $type->config->outputPath) {
-            $type->config->outputPath = $this->config->outputPath ?: TypescriptableConfig::setPath();
-        }
-
-        if (! $type->config->phpPath) {
-            $type->config->phpPath = $this->config->phpPath ?: TypescriptableConfig::modelsPhpPath();
+            $type = new EloquentTypeArtisan($this->config);
         }
 
         return $type->run();

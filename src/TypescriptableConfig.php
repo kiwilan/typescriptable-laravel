@@ -37,39 +37,39 @@ class TypescriptableConfig
         return TypescriptableConfig::outputPath().DIRECTORY_SEPARATOR.$filename;
     }
 
-    public static function modelsFilename(): string
+    public static function eloquentFilename(): string
     {
-        return config('typescriptable.models.filename') ?? 'types-models.d.ts';
+        return config('typescriptable.eloquent.filename') ?? 'types-eloquent.d.ts';
     }
 
-    public static function modelsDirectory(): string
+    public static function eloquentDirectory(): string
     {
-        return config('typescriptable.models.directory') ?? app_path('Models');
+        return config('typescriptable.eloquent.directory') ?? app_path('Models');
     }
 
-    public static function modelsPhpPath(): ?string
+    public static function eloquentPhpPath(): ?string
     {
-        return config('typescriptable.models.php_path') ?? null;
+        return config('typescriptable.eloquent.php_path') ?? null;
     }
 
     /**
-     * Models to skip.
+     * Eloquent models to skip.
      *
      * @return string[]
      */
-    public static function modelsSkip(): array
+    public static function eloquentSkip(): array
     {
-        return config('typescriptable.models.skip') ?? [];
+        return config('typescriptable.eloquent.skip') ?? [];
     }
 
-    public static function modelsPaginate(): bool
+    public static function eloquentPaginate(): bool
     {
-        return config('typescriptable.models.paginate') ?? true;
+        return config('typescriptable.eloquent.paginate') ?? true;
     }
 
-    public static function modelsFakeTeam(): bool
+    public static function eloquentFakeTeam(): bool
     {
-        return config('typescriptable.models.fake_team') ?? false;
+        return config('typescriptable.eloquent.fake_team') ?? false;
     }
 
     public static function settingsFilename(): string

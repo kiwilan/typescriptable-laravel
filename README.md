@@ -41,7 +41,7 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
     -   For Inertia, you can install [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/blob/main/plugin/README.md) NPM package to use some helpers
 -   ✅ Multiple commands to generate types
     -   `php artisan typescriptable` for models, settings and routes (safe even if you don't use all)
-    -   `php artisan typescriptable:models` for Eloquent models
+    -   `php artisan typescriptable:eloquent` for Eloquent models
     -   `php artisan typescriptable:settings` for `spatie/laravel-settings`
     -   `php artisan typescriptable:routes` for Laravel routes
 
@@ -110,8 +110,8 @@ php artisan vendor:publish --tag="typescriptable-config"
 
 > [!IMPORTANT]
 >
-> You can configure `engine.models` with `artisan` or `typescriptable` to change parser engine. By default, it uses `artisan` command with [`model:show`](https://blog.laravel.com/laravel-new-model-show-command) command.
-> `artisan` is default engine because it's more reliable and faster than `typescriptable` engine.
+> You can configure `engine.models` with `artisan` or `parser` to change parser engine. By default, it uses `artisan` command with [`model:show`](https://blog.laravel.com/laravel-new-model-show-command) command.
+> `artisan` is default engine because it's more reliable and faster than `parser` engine.
 
 ## Usage
 
@@ -125,12 +125,12 @@ With options:
 -   --`R`|`routes`: Generate Routes types.
 -   --`S`|`settings`: Generate Settings types.
 
-### Eloquent Models
+### Eloquent models
 
-Generate `resources/js/types-models.d.ts` file with all models types.
+Generate `resources/js/types-eloquent.d.ts` file with all models types.
 
 ```bash
-php artisan typescriptable:models
+php artisan typescriptable:eloquent
 ```
 
 With options:

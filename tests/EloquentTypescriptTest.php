@@ -1,88 +1,45 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Kiwilan\Typescriptable\Commands\TypescriptableEloquentCommand;
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\EloquentType;
-use Kiwilan\Typescriptable\Typed\Typescript\TypescriptToPhp;
-use Kiwilan\Typescriptable\Typed\Utils\ModelList;
+use Kiwilan\Typescriptable\Typescriptable;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    $models = outputDir('types-models.d.ts');
+    $models = outputDir('types-eloquent.d.ts');
     deleteFile($models);
 });
 
-it('can be run with show method', function () {
-    foreach (getDatabaseTypes() as $type) {
+it('can be run', function () {
+    foreach (databaseDrivers() as $type) {
         ray('Database type: '.$type);
         TestCase::setupDatabase($type);
 
-        config(['typescriptable.models.skip' => [
+        config(['typescriptable.eloquent.skip' => [
             'Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest',
         ]]);
 
-        Artisan::call('typescriptable:models', [
-            '--models-path' => models(),
-            '--output-path' => outputDir(),
-            '--php-path' => outputDir().'/php',
-            '--legacy' => false,
-        ]);
-
-        // $models = outputDir(TypescriptableConfig::modelsFilename());
-        // expect($models)->toBeFile();
-    }
-});
-
-it('can be run with legacy method', function () {
-    foreach (getDatabaseTypes() as $type) {
-        ray('Database type: '.$type);
-        TestCase::setupDatabase($type);
-
-        config(['typescriptable.models.skip' => [
-            'Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest',
-        ]]);
-
-        Artisan::call('typescriptable:models', [
+        Artisan::call(TypescriptableEloquentCommand::class, [
             '--models-path' => models(),
             '--output-path' => outputDir(),
             '--php-path' => outputDir().'/php',
             '--legacy' => true,
         ]);
 
-        // $models = outputDir(TypescriptableConfig::modelsFilename());
-        // expect($models)->toBeFile();
+        $models = outputDir(TypescriptableConfig::eloquentFilename());
+        expect($models)->toBeFile();
     }
 });
 
-// it('can be run', function () {
-//     foreach (getDatabaseTypes() as $type) {
-//         ray('Database type: '.$type);
-//         TestCase::setupDatabase($type);
-
-//         config(['typescriptable.models.skip' => [
-//             'Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest',
-//         ]]);
-
-//         Artisan::call('typescriptable:models', [
-//             '--models-path' => models(),
-//             '--output-path' => outputDir(),
-//             '--php-path' => outputDir().'/php',
-//             '--legacy' => true,
-//         ]);
-
-//         $models = outputDir(TypescriptableConfig::modelsFilename());
-//         expect($models)->toBeFile();
-//     }
-// });
-
 // it('is correct from models', function () {
-//     config(['typescriptable.models.skip' => [
+//     config(['typescriptable.eloquent.skip' => [
 //         'App\\Models\\SushiTest',
 //     ]]);
 
 //     TestCase::setupDatabase('mysql');
 
-//     Artisan::call('typescriptable:models', [
+//     Artisan::call(TypescriptableEloquentCommand::class, [
 //         '--models-path' => models(),
 //         '--output-path' => outputDir(),
 //         '--php-path' => outputDir().'/php',
