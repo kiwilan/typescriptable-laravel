@@ -13,8 +13,7 @@ class SqliteColumn implements IColumn
         public ?int $notnull = null,
         public ?string $dflt_value = null,
         public ?int $pk = null,
-    ) {
-    }
+    ) {}
 
     public static function make(array|object $data): SchemaModelAttribute
     {
