@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Artisan;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    $routes = outputDir('types-routes.d.ts');
-    deleteFile($routes);
+    deleteFile(outputDir('types-routes.d.ts'));
 });
 
 it('can be run', function () {

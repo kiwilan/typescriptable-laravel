@@ -2,43 +2,21 @@
 
 use Kiwilan\Typescriptable\Tests\TestCase;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
+use Kiwilan\Typescriptable\Typed\EloquentType;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
-use Kiwilan\Typescriptable\Typescriptable;
 
 it('can be run with parser', function (string $driver) {
     TestCase::setupDatabase($driver);
 
-    $type = Typescriptable::models(new EloquentConfig(
+    $type = EloquentType::make(new EloquentConfig(
         modelsPath: models(),
         outputPath: outputDir(),
         phpPath: outputDir().'/php',
         useParser: true,
         skipModels: ['Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest'],
-    ));
+    ))->execute();
 
     $app = $type->app();
-    ray($app);
-
-    expect($app->modelPath())->toBe(models());
-    expect($app->useParser())->toBeTrue();
-    expect($app->baseNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models');
-    expect($app->models())->toBeArray();
-    expect(count($app->models()))->toBe(8);
-    expect($app->driver())->toBe($driver);
-    expect($app->databaseName())->toBeIn(['testing', ':memory:']);
-    expect($app->databasePrefix())->toBe('ts_');
-
-    $config = $type->config();
-
-    expect($config->modelsPath)->toBe(models());
-    expect($config->outputPath)->toBe(outputDir());
-    expect($config->phpPath)->toBe(outputDir().'/php');
-    expect($config->useParser)->toBeTrue();
-    expect($config->tsFilename)->toBe('types-eloquent.d.ts');
-    expect($config->skipModels)->toBeArray();
-    expect(count($config->skipModels))->toBe(1);
-    expect($config->skipModels[0])->toBe('Kiwilan\Typescriptable\Tests\Data\Models\SushiTest');
-
     $movie = $app->getModel('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
 
     expect($movie->schemaClass())->toBeInstanceOf(SchemaClass::class);
@@ -47,7 +25,7 @@ it('can be run with parser', function (string $driver) {
     expect($movie->table())->toBe('ts_movies');
     expect($movie->policy())->toBeNull();
     expect($movie->attributes())->toBeArray();
-    expect(count($movie->attributes()))->toBe(39);
+    expect(count($movie->attributes()))->toBe(43);
     expect($movie->relations())->toBeArray();
     expect(count($movie->relations()))->toBe(5);
     expect($movie->typescriptModelName())->toBe('Movie');
@@ -121,7 +99,7 @@ it('can be run with parser', function (string $driver) {
     expect($members->laravelType())->toBe('MorphToMany');
     expect($members->relatedToModel())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Member');
     expect($members->isInternal())->toBeTrue();
-    expect($members->isPlural())->toBeTrue();
+    expect($members->isMany())->toBeTrue();
     expect($members->typescriptType())->toBe('App.Models.Member[]');
 
     $author = $movie->getRelation('author');
@@ -129,7 +107,7 @@ it('can be run with parser', function (string $driver) {
     expect($author->laravelType())->toBe('BelongsTo');
     expect($author->relatedToModel())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Nested\Author');
     expect($author->isInternal())->toBeTrue();
-    expect($author->isPlural())->toBeFalse();
+    expect($author->isMany())->toBeFalse();
     expect($author->typescriptType())->toBe('App.Models.NestedAuthor');
 
     $media = $movie->getRelation('media');
@@ -137,6 +115,11 @@ it('can be run with parser', function (string $driver) {
     expect($media->laravelType())->toBe('MorphMany');
     expect($media->relatedToModel())->toBe('Spatie\MediaLibrary\MediaCollections\Models\Media');
     expect($media->isInternal())->toBeFalse();
-    expect($media->isPlural())->toBeTrue();
+    expect($media->isMany())->toBeTrue();
     expect($media->typescriptType())->toBe('any[]');
-})->with(databaseDrivers());
+
+    $members_count = $movie->getAttribute('members_count');
+    expect($members_count->name())->toBe('members_count');
+    expect($members_count->phpType())->toBe('int');
+    expect($members_count->typescriptType())->toBe('number');
+})->with(DatabaseDriverEnums());

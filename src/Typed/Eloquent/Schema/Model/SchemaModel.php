@@ -11,7 +11,7 @@ class SchemaModel
      * @param  SchemaModelAttribute[]  $attributes
      * @param  SchemaModelRelation[]  $relations
      */
-    protected function __construct(
+    public function __construct(
         protected SchemaClass $schemaClass,
         protected string $namespace,
         protected string $driver,
@@ -85,6 +85,13 @@ class SchemaModel
     public function getAttribute(string $name): ?SchemaModelAttribute
     {
         return $this->attributes[$name] ?? null;
+    }
+
+    public function setAttribute(SchemaModelAttribute $attribute): self
+    {
+        $this->attributes[$attribute->name()] = $attribute;
+
+        return $this;
     }
 
     public function updateAccessor(ParserAccessor $accessor): self

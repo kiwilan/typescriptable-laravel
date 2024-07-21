@@ -94,8 +94,8 @@ class ParserAccessor
         if ($type) {
             $item->phpType = $type;
 
-            $converter = ParserAccessorType::make($type);
-            $item->typescriptType = $converter->getTypescriptType();
+            $parser = ParserPhpType::make($type);
+            $item->typescriptType = $parser->typescriptType();
         }
 
         if (str_contains($type, '[]') || str_contains($type, 'Collection') || str_contains($type, 'array')) {
@@ -111,8 +111,8 @@ class ParserAccessor
         if ($advanced) {
             $item->phpType = "{$advanced}[]";
 
-            $converter = ParserAccessorType::make($advanced);
-            $item->typescriptType = $converter->getTypescriptType().'[]';
+            $parser = ParserPhpType::make($advanced);
+            $item->typescriptType = $parser->typescriptType().'[]';
         }
 
         return $item;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Typescript;
+namespace Kiwilan\Typescriptable\Typed\Utils;
 
 use Closure;
 
@@ -54,6 +54,29 @@ class TypescriptToPhp
     public function classes(): array
     {
         return $this->classes;
+    }
+
+    /**
+     * @return array<string, TypescriptClass>
+     */
+    public function onlyModels(): array
+    {
+        $additonalClasses = [
+            'PaginateLink',
+            'Paginate',
+            'ApiPaginate',
+        ];
+
+        $items = [];
+        foreach ($this->classes as $key => $value) {
+            if (in_array($key, $additonalClasses)) {
+                continue;
+            }
+
+            $items[$key] = $value;
+        }
+
+        return $items;
     }
 
     private function parseProperty(string $line, ?string $className): void

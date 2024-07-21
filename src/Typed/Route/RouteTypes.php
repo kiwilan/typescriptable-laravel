@@ -72,7 +72,7 @@ class RouteTypes
           export type Path = {$this->tsPaths};
           export interface Params {
         {$this->tsParams}
-          };
+          }
 
           export type Method = 'HEAD' | 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
           export type ParamType = string | number | boolean | undefined

@@ -2,7 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Typed\Setting;
 
-use Kiwilan\Typescriptable\Typed\Typescript\TypeConverter;
+use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserPhpType;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 use ReflectionNamedType;
 use ReflectionProperty;
@@ -72,8 +72,8 @@ class SettingItemProperty
             isBuiltin: $type instanceof ReflectionNamedType ? $type->isBuiltin() : false,
         );
 
-        $converter = TypeConverter::make($self->type);
-        $self->typeTs = $converter->getTypescriptType();
+        $parser = ParserPhpType::make($self->type);
+        $self->typeTs = $parser->typescriptType();
 
         return $self;
     }

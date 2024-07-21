@@ -9,7 +9,8 @@ class SchemaModelRelation
         protected ?string $laravelType = null,
         protected ?string $relatedToModel = null,
         protected bool $isInternal = true,
-        protected bool $isPlural = false,
+        protected bool $isMany = false,
+        protected string $phpType = 'mixed',
         protected string $typescriptType = 'any',
     ) {}
 
@@ -20,7 +21,11 @@ class SchemaModelRelation
             $data['type'] ?? null,
             $data['related'] ?? null,
         );
-        $self->isPlural = $self->relationTypeIsPlural($self->laravelType);
+        $self->isMany = $self->relationTypeisMany($self->laravelType);
+        $self->phpType = $self->relatedToModel;
+        if ($self->isMany) {
+            $self->phpType = "{$self->relatedToModel}[]";
+        }
 
         return $self;
     }
@@ -45,9 +50,24 @@ class SchemaModelRelation
         return $this->isInternal;
     }
 
-    public function isPlural(): bool
+    public function isMany(): bool
     {
-        return $this->isPlural;
+        return $this->isMany;
+    }
+
+    public function phpType(): string
+    {
+        return $this->phpType;
+    }
+
+    public function setPhpType(string $phpType): self
+    {
+        $this->phpType = $phpType;
+        if ($this->isMany) {
+            $this->phpType = "{$phpType}[]";
+        }
+
+        return $this;
     }
 
     public function typescriptType(): string
@@ -68,14 +88,14 @@ class SchemaModelRelation
             $this->typescriptType = $typescriptType;
         }
 
-        if ($this->isPlural) {
+        if ($this->isMany) {
             $this->typescriptType = "{$this->typescriptType}[]";
         }
 
         return $this;
     }
 
-    private function relationTypeIsPlural(string $type): bool
+    private function relationTypeisMany(string $type): bool
     {
         if (in_array($type, [
             'BelongsToMany',

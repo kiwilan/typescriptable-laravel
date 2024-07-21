@@ -1,12 +1,12 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Typescript;
+namespace Kiwilan\Typescriptable\Typed\Eloquent\Parser;
 
-class TypeConverter
+class ParserPhpType
 {
     protected function __construct(
         protected string $phpType,
-        protected string $tsType = 'any',
+        protected string $typescriptType = 'any',
         protected bool $isArray = false,
         protected bool $isAdvanced = false,
     ) {}
@@ -19,79 +19,12 @@ class TypeConverter
         return $self;
     }
 
-    public function getPhpType(): string
+    /**
+     * Convert PHP type to TypeScript type.
+     */
+    public static function toTypescript(string $phpType): string
     {
-        return $this->phpType;
-    }
-
-    public function getTypescriptType(): string
-    {
-        return $this->tsType;
-    }
-
-    public function isArray(): bool
-    {
-        return $this->isArray;
-    }
-
-    public function isAdvanced(): bool
-    {
-        return $this->isAdvanced;
-    }
-
-    private function parse(): static
-    {
-        if (str_contains($this->phpType, 'date')) {
-            $this->tsType = 'DateTime';
-        }
-
-        if (str_contains($this->phpType, 'array<')) {
-            $regex = '/array<[^,]+,[^>]+>/';
-            preg_match($regex, $this->phpType, $matches);
-
-            if (count($matches) > 0) {
-                $this->isAdvanced = true;
-                $type = str_replace('array<', '', $this->phpType);
-                $type = str_replace('>', '', $type);
-
-                $types = explode(',', $type);
-                $type = '';
-
-                $keyType = trim($types[0]);
-                $valueType = trim($types[1]);
-
-                $keyType = $this->fromPrimitive();
-                $valueType = $this->fromPrimitive();
-
-                $this->tsType = "{[key: {$keyType}]: {$valueType}}";
-
-                return $this;
-            }
-        }
-
-        if (str_contains($this->phpType, '[]')) {
-            $this->isArray = true;
-            $type = str_replace('[]', '', $this->phpType);
-        }
-
-        if (str_contains($this->phpType, 'array<')) {
-            $this->isArray = true;
-            $type = str_replace('array<', '', $this->phpType);
-            $type = str_replace('>', '', $type);
-        }
-
-        $this->tsType = $this->fromPrimitive();
-
-        if ($this->isArray) {
-            $this->tsType .= '[]';
-        }
-
-        return $this;
-    }
-
-    private function fromPrimitive(): string
-    {
-        $type = match ($this->phpType) {
+        return match ($phpType) {
             'int' => 'number',
             'float' => 'number',
             'string' => 'string',
@@ -111,7 +44,75 @@ class TypeConverter
             'Model' => 'any',
             default => 'any', // skip `Illuminate\Database\Eloquent\Casts\Attribute`
         };
+    }
 
-        return $type;
+    public function phpType(): string
+    {
+        return $this->phpType;
+    }
+
+    public function typescriptType(): string
+    {
+        return $this->typescriptType;
+    }
+
+    public function isArray(): bool
+    {
+        return $this->isArray;
+    }
+
+    public function isAdvanced(): bool
+    {
+        return $this->isAdvanced;
+    }
+
+    private function parse(): static
+    {
+        if (str_contains($this->phpType, 'date')) {
+            $this->typescriptType = 'DateTime';
+        }
+
+        if (str_contains($this->phpType, 'array<')) {
+            $regex = '/array<[^,]+,[^>]+>/';
+            preg_match($regex, $this->phpType, $matches);
+
+            if (count($matches) > 0) {
+                $this->isAdvanced = true;
+                $type = str_replace('array<', '', $this->phpType);
+                $type = str_replace('>', '', $type);
+
+                $types = explode(',', $type);
+                $type = '';
+
+                $keyType = trim($types[0]);
+                $valueType = trim($types[1]);
+
+                $keyType = self::toTypescript($this->phpType);
+                $valueType = self::toTypescript($this->phpType);
+
+                $this->typescriptType = "{[key: {$keyType}]: {$valueType}}";
+
+                return $this;
+            }
+        }
+
+        if (str_contains($this->phpType, '[]')) {
+            $this->isArray = true;
+            $type = str_replace('[]', '', $this->phpType);
+        }
+
+        if (str_contains($this->phpType, 'array<')) {
+            $this->isArray = true;
+            $type = str_replace('array<', '', $this->phpType);
+            $type = str_replace('>', '', $type);
+        }
+
+        $this->typescriptType = self::toTypescript($this->phpType);
+
+        if ($this->isArray) {
+            $this->typescriptType .= '[]';
+        }
+
+        return $this;
     }
 }

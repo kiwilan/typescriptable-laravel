@@ -13,7 +13,7 @@ class EloquentTypeArtisan extends EloquentType implements IEloquentType
 {
     public function run(): self
     {
-        $this->app = SchemaApp::make($this->config->modelsPath);
+        $this->app = SchemaApp::make($this->config->modelsPath, $this->config->phpPath);
 
         $collect = SchemaCollection::make($this->config->modelsPath, $this->config->skipModels);
         $schemas = $collect->onlyModels();

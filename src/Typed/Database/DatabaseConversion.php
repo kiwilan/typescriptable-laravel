@@ -3,14 +3,16 @@
 namespace Kiwilan\Typescriptable\Typed\Database;
 
 use BackedEnum;
+use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserPhpType;
 use UnitEnum;
 
 class DatabaseConversion
 {
     protected function __construct(
-        protected DatabaseDriver $databaseDriver,
+        protected DatabaseDriverEnum $databaseDriver,
         protected ?string $databaseType,
         protected ?string $phpType = 'mixed',
+        protected ?string $castType = null,
         protected string $typescriptType = 'any',
     ) {}
 
@@ -24,15 +26,16 @@ class DatabaseConversion
     public static function make(string $databaseDriver, ?string $databaseType, ?string $cast): self
     {
         $self = new self(
-            databaseDriver: DatabaseDriver::tryFrom(strtolower($databaseDriver)),
+            databaseDriver: DatabaseDriverEnum::tryFrom(strtolower($databaseDriver)),
             databaseType: $databaseType,
         );
 
         $self->phpType = $self->databaseDriver->toPhp($self->databaseType);
+        $self->castType = $cast;
         if ($cast) {
             $self->parseCast($cast);
         } else {
-            $self->typescriptType = $self->toTypescript($self->phpType);
+            $self->typescriptType = ParserPhpType::toTypescript($self->phpType);
         }
 
         return $self;
@@ -41,7 +44,7 @@ class DatabaseConversion
     /**
      * Get database driver.
      */
-    public function databaseDriver(): DatabaseDriver
+    public function databaseDriver(): DatabaseDriverEnum
     {
         return $this->databaseDriver;
     }
@@ -60,6 +63,14 @@ class DatabaseConversion
     public function phpType(): string
     {
         return $this->phpType;
+    }
+
+    /**
+     * Get Laravel cast type.
+     */
+    public function castType(): ?string
+    {
+        return $this->castType;
     }
 
     /**
@@ -186,46 +197,5 @@ class DatabaseConversion
         $typescript = rtrim($typescript, '|');
 
         return trim($typescript);
-    }
-
-    /**
-     * Convert PHP type to TypeScript type.
-     */
-    private function toTypescript(string $phpType): string
-    {
-        return match ($phpType) {
-            'string' => 'string',
-
-            'int' => 'number',
-            'integer' => 'number',
-            'float' => 'number',
-            'double' => 'number',
-
-            'bool' => 'boolean',
-            'boolean' => 'boolean',
-
-            'true' => 'boolean',
-            'false' => 'boolean',
-
-            'array' => 'any[]',
-            'iterable' => 'any[]',
-            'object' => 'any',
-            'mixed' => 'any',
-
-            'null' => 'undefined',
-            'void' => 'void',
-
-            'resource' => 'any',
-
-            'callable' => 'Function',
-
-            'DateTime' => 'Date',
-            'DateTimeInterface' => 'Date',
-            'Carbon' => 'Date',
-
-            'Model' => 'any',
-
-            default => 'any', // skip `Illuminate\Database\Eloquent\Casts\Attribute`
-        };
     }
 }

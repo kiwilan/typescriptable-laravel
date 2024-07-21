@@ -9,11 +9,11 @@ use Kiwilan\Typescriptable\TypescriptableConfig;
 class EloquentList
 {
     /**
-     * @param  SchemaClass[]  $eloquentModels
+     * @param  SchemaClass[]  $models
      */
     protected function __construct(
         protected string $path,
-        protected array $eloquentModels = [],
+        protected array $models = [],
     ) {}
 
     public static function make(?string $path = null): self
@@ -24,7 +24,7 @@ class EloquentList
 
         $self = new self($path);
         $collect = SchemaCollection::make($self->path, TypescriptableConfig::eloquentSkip());
-        $self->eloquentModels = $collect->onlyModels();
+        $self->models = $collect->onlyModels();
 
         return $self;
     }
@@ -42,8 +42,8 @@ class EloquentList
      *
      * @return SchemaClass[]
      */
-    public function eloquentModels(): array
+    public function models(): array
     {
-        return $this->eloquentModels;
+        return $this->models;
     }
 }

@@ -28,7 +28,7 @@ it('can use alias command', function () {
         '--models-path' => models(),
         '--output-path' => outputDir(),
         '--php-path' => outputDir().'/php',
-        '--parser' => false,
+        '--parser' => true,
     ]);
 
     expect(true)->toBeTrue(); // fake assertion to check if the command runs without error

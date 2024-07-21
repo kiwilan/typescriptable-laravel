@@ -6,6 +6,7 @@ use Dotenv\Dotenv;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Kiwilan\Typescriptable\Tests\Data\Database\Migrations\CreateModelsTables;
 use Kiwilan\Typescriptable\TypescriptableServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use PDO;
@@ -98,8 +99,15 @@ class TestCase extends Orchestra
         self::setupDatabase();
     }
 
+    public static function init()
+    {
+        config()->set('media-library.media_model', \Spatie\MediaLibrary\MediaCollections\Models\Media::class);
+    }
+
     public static function setupDatabase(?string $type = null): void
     {
+        self::init();
+
         if (! $type) {
             return;
         }
@@ -150,8 +158,6 @@ class TestCase extends Orchestra
             ],
         ];
 
-        config()->set('media-library.media_model', \Spatie\MediaLibrary\MediaCollections\Models\Media::class);
-
         config()->set('database.default', $driver->name);
         config()->set("database.connections.{$driver->name}", [
             'driver' => $driver->name,
@@ -165,17 +171,11 @@ class TestCase extends Orchestra
             ...$configs[$driver->name],
         ]);
 
-        if ($driver->name === 'sqlsrv') {
-            $pdo = new PDO("sqlsrv:Server=$driver->host,$driver->port", $driver->user, $driver->password);
-            $database = $driver->database;
-            $pdo->exec("IF EXISTS(SELECT * FROM sys.databases WHERE name='$database') DROP DATABASE $database");
-            $pdo->exec("CREATE DATABASE $database");
-        } else {
-            Schema::dropIfExists($driver->database);
-            Schema::dropAllTables($driver->database);
-        }
+        $error = false;
+        Schema::dropIfExists($driver->database);
+        Schema::dropAllTables($driver->database);
 
-        $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
+        $migration = new CreateModelsTables();
         $migration->up();
     }
 }

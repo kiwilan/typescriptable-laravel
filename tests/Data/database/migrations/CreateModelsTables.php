@@ -1,11 +1,13 @@
 <?php
 
+namespace Kiwilan\Typescriptable\Tests\Data\Database\Migrations;
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
 
-return new class extends Migration
+class CreateModelsTables extends Migration
 {
     public function up(): void
     {
@@ -216,4 +218,20 @@ return new class extends Migration
             $table->nullableTimestamps();
         });
     }
-};
+
+    public function down(): void
+    {
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('stories');
+        Schema::dropIfExists('authors');
+        Schema::dropIfExists('chapters');
+        Schema::dropIfExists('categories');
+        Schema::dropIfExists('tags');
+        Schema::dropIfExists('story_tag');
+        Schema::dropIfExists('comments');
+        Schema::dropIfExists('members');
+        Schema::dropIfExists('memberables');
+        Schema::dropIfExists('movies');
+        Schema::dropIfExists('media');
+    }
+}

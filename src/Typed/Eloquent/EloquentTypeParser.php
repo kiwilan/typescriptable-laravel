@@ -16,7 +16,7 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
 {
     public function run(): self
     {
-        $this->app = SchemaApp::make($this->config->modelsPath)->enableParer();
+        $this->app = SchemaApp::make($this->config->modelsPath, $this->config->phpPath)->enableParer();
 
         $collect = SchemaCollection::make($this->config->modelsPath, $this->config->skipModels);
         $schemas = $collect->onlyModels();

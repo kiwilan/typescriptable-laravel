@@ -76,9 +76,13 @@ class ParserRelation
         $externalMethod = str_replace('$this->', '', $external);
         $externalMethod = str_replace('()', '', $externalMethod);
         if (method_exists($reflect, $externalMethod)) {
-            $external = $reflect->{$externalMethod}();
-            if ($external) {
-                $this->related = $external;
+            try {
+                $external = $reflect->{$externalMethod}();
+                if ($external) {
+                    $this->related = $external;
+                }
+            } catch (\Throwable $th) {
+                //throw $th;
             }
         }
     }

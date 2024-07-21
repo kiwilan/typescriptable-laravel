@@ -24,19 +24,18 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 
 ## Features
 
--   💽 All Laravel databases are supported: MySQL, PostgreSQL, SQLite, SQL Server
--   💬 Generate TS types for [Eloquent models](https://laravel.com/docs/10.x/eloquent)
--   👭 Generate TS types for [Eloquent relations](https://laravel.com/docs/10.x/eloquent-relationships)
--   🪄 Generate TS types for `casts` (include native `enum` support)
--   📅 Generate TS types for `dates`
--   📝 Generate TS types for `appends` with [`accessors`](https://laravel.com/docs/10.x/eloquent-mutators#accessors-and-mutators)
-    -   Partial for `Illuminate\Database\Eloquent\Casts\Attribute`
-    -   Old way [`get*Attribute` methods](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor) are totally supported
+-   💽 All Laravel databases are supported: MySQL, MariaDB, PostgreSQL, SQLite, SQL Server
+-   💬 Generate TS types for [Eloquent models](https://laravel.com/docs/master/eloquent)
+-   👭 Generate TS types for [Eloquent relations](https://laravel.com/docs/master/eloquent-relationships)
+-   🪄 Generate TS types for [`casts`](https://laravel.com/docs/11.x/eloquent-mutators#attribute-casting) (include native `enum` support)
+-   📝 Generate TS types for `appends` and all [`accessors`](https://laravel.com/docs/master/eloquent-mutators#accessors-and-mutators)
+    -   For current with `Illuminate\Database\Eloquent\Casts\Attribute` with PHPDoc
+    -   For legacy with [`get*Attribute` methods](https://laravel.com/docs/master/eloquent-mutators#defining-an-accessor) are totally supported
 -   #️⃣ Generate TS types for `counts`
--   📖 Can generate pagination TS types for [Laravel pagination](https://laravel.com/docs/10.x/pagination)
+-   📖 Can generate pagination TS types for [Laravel pagination](https://laravel.com/docs/master/pagination)
 -   💾 Can generate simple PHP classes from Eloquent models
 -   ⚙️ Generate TS types for [`spatie/laravel-settings`](https://github.com/spatie/laravel-settings)
--   🛣 Generate TS types for [Laravel routes](https://laravel.com/docs/10.x/routing)
+-   🛣 Generate TS types for [Laravel routes](https://laravel.com/docs/master/routing)
     -   Scan route parameters
     -   For Inertia, you can install [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/blob/main/plugin/README.md) NPM package to use some helpers
 -   ✅ Multiple commands to generate types
@@ -94,11 +93,64 @@ If you want to use `.d.ts` files, you need to use TypeScript in your Laravel pro
 ```json
 {
     "compilerOptions": {
-        "typeRoots": ["./node_modules/@types", "resources/**/*.d.ts"]
+        "types": ["vite/client"]
     },
-    "include": ["resources/**/*.d.ts"]
+    "include": [
+        "resources/js/**/*.ts",
+        "resources/js/**/*.d.ts",
+        "resources/js/**/*.vue", // If you use Vue
+        "*.d.ts",
+        "vite.config.ts"
+    ]
 }
 ```
+
+<details>
+  <summary>Complete `tsconfig.json`</summary>
+
+Here is a complete `tsconfig.json` file example (you can adapt paths):
+
+```json
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "jsx": "preserve",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "paths": {
+            "@/*": ["./resources/js/*"],
+            "@": ["./resources/js"],
+            "~": ["./"],
+            "~/*": ["./*"]
+        },
+        "types": ["vite/client"],
+        "allowJs": true,
+        "strict": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "skipLibCheck": true
+    },
+    "include": [
+        "resources/js/**/*.ts",
+        "resources/js/**/*.d.ts",
+        "resources/js/**/*.vue",
+        "*.d.ts",
+        "vite.config.ts"
+    ]
+}
+```
+
+</details>
+
+### About NPM package `@kiwilan/typescriptable-laravel`
+
+NPM package is fully optional, you can use only PHP package. It's built for [Vite](https://vitejs.dev/) with [`laravel-vite-plugin`](https://github.com/laravel/vite-plugin) and [Inertia](https://inertiajs.com/) (only for [Vue 3](https://vuejs.org/)). It's SSR compatible.
+
+This package add some helpers to use **Laravel routes** fully typed with TypeScript into Vue components and some composables to use with Vue.
+
+Read full documentation here: [`@kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel/blob/main/plugin/README.md).
 
 ## Configuration
 
@@ -110,8 +162,7 @@ php artisan vendor:publish --tag="typescriptable-config"
 
 > [!IMPORTANT]
 >
-> You can configure `engine.models` with `artisan` or `parser` to change parser engine. By default, it uses `artisan` command with [`model:show`](https://blog.laravel.com/laravel-new-model-show-command) command.
-> `artisan` is default engine because it's more reliable and faster than `parser` engine.
+> You can configure `engine.models` with `artisan` or `parser` to change parser engine. By default, it uses `artisan` command with [`model:show`](https://blog.laravel.com/laravel-new-model-show-command) command. `artisan` is default engine because it's more reliable and faster than `parser` engine.
 
 ## Usage
 

@@ -5,6 +5,7 @@ namespace Kiwilan\Typescriptable\Typed\Eloquent\Schema;
 use Illuminate\Support\Facades\Schema;
 use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserAccessor;
 use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModel;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModelAttribute;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 
 class SchemaApp
@@ -14,6 +15,7 @@ class SchemaApp
      */
     protected function __construct(
         protected string $modelPath,
+        protected ?string $phpPath = null,
         protected bool $useParser = false,
         protected ?string $baseNamespace = null,
         protected array $models = [],
@@ -22,14 +24,14 @@ class SchemaApp
         protected ?string $databasePrefix = null,
     ) {}
 
-    public static function make(string $modelPath): self
+    public static function make(string $modelPath, ?string $phpPath): self
     {
-        $self = new self($modelPath);
+        $self = new self($modelPath, $phpPath);
 
         try {
             $self->driver = Schema::getConnection()->getDriverName();
             $self->databaseName = Schema::getConnection()->getDatabaseName();
-            if (str_contains($self->databaseName, ';Database=')) {
+            if (str_contains($self->databaseName, ';Database=')) { // for sqlsrv
                 $exploded = explode(';Database=', $self->databaseName);
                 $self->databaseName = $exploded[1] ?? Schema::getConnection()->getDatabaseName();
             }
@@ -44,6 +46,18 @@ class SchemaApp
     public function modelPath(): string
     {
         return $this->modelPath;
+    }
+
+    public function phpPath(): ?string
+    {
+        return $this->phpPath;
+    }
+
+    public function setPhpPath(string $phpPath): self
+    {
+        $this->phpPath = $phpPath;
+
+        return $this;
     }
 
     public function useParser(): bool
@@ -148,11 +162,30 @@ class SchemaApp
                     $modelNamespace = array_filter($models, fn (SchemaModel $m) => $m->namespace() === $relationNamespace);
                     $first = reset($modelNamespace);
                     if ($first) {
+                        $relation->setPhpType($first->schemaClass()?->fullname());
                         $typescript = $first->typescriptModelName();
                     }
                 }
 
                 $relation->setTypescriptType($typescript, $this->baseNamespace);
+
+                if ($relation->isMany()) {
+                    $model->setAttribute(new SchemaModelAttribute(
+                        name: $relation->name().'_count',
+                        databaseType: null,
+                        increments: false,
+                        nullable: true,
+                        default: null,
+                        unique: false,
+                        fillable: false,
+                        hidden: false,
+                        appended: false,
+                        cast: false,
+                        phpType: 'int',
+                        typescriptType: 'number',
+                        databaseFields: null,
+                    ));
+                }
             }
         }
 

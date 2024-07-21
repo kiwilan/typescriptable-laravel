@@ -26,7 +26,7 @@ class EloquentListCommand extends Command
                 $model->name(),
                 $model->namespace(),
                 $model->path(),
-            ], $list->eloquentModels())
+            ], $list->models())
         );
 
         return self::SUCCESS;

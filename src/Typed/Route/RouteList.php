@@ -34,7 +34,6 @@ class RouteList
             $items->put($route->name(), $route);
         });
         $self->routes = $items;
-
         $self->typescript = $self->setTypescript();
 
         return $self;

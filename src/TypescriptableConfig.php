@@ -10,7 +10,7 @@ class TypescriptableConfig
     {
         $engine = config('typescriptable.engine.models') ?? 'artisan';
 
-        if (! in_array($engine, ['artisan', 'typescriptable'])) {
+        if (! in_array($engine, ['artisan', 'parser'])) {
             throw new \Exception('Invalid engine models');
         }
 

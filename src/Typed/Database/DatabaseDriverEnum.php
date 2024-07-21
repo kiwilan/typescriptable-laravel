@@ -2,7 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Typed\Database;
 
-enum DatabaseDriver: string
+enum DatabaseDriverEnum: string
 {
     case sqlite = 'sqlite';
     case mysql = 'mysql';
@@ -26,7 +26,7 @@ enum DatabaseDriver: string
         }
 
         // Remove some keywords
-        $toRemove = ['unsigned', 'varying', 'native'];
+        $toRemove = ['unsigned', 'varying', 'native', 'big'];
         foreach ($toRemove as $remove) {
             $databaseType = str_replace("{$remove} ", '', $databaseType);
         }
@@ -211,7 +211,6 @@ enum DatabaseDriver: string
             'smallint' => 'int',
             'mediumint' => 'int',
             'bigint' => 'int',
-            'big int' => 'int',
             'int2' => 'int',
             'int8' => 'int',
             'character' => 'string',

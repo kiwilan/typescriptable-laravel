@@ -1,100 +1,132 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
-use Kiwilan\Typescriptable\Commands\TypescriptableEloquentCommand;
 use Kiwilan\Typescriptable\Tests\TestCase;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
+use Kiwilan\Typescriptable\Typed\Utils\TypescriptToPhp;
 use Kiwilan\Typescriptable\Typescriptable;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    $models = outputDir('types-eloquent.d.ts');
-    deleteFile($models);
+    deleteFile(outputDir('types-eloquent.d.ts'));
+    deleteDir(outputDir('php'));
 });
 
-it('can be run', function () {
-    foreach (databaseDrivers() as $type) {
-        ray('Database type: '.$type);
-        TestCase::setupDatabase($type);
+it('can be run', function (string $driver) {
+    TestCase::setupDatabase($driver);
 
-        config(['typescriptable.eloquent.skip' => [
-            'Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest',
-        ]]);
+    $type = Typescriptable::models(new EloquentConfig(
+        modelsPath: models(),
+        outputPath: outputDir(),
+        phpPath: outputDir().'/php',
+        useParser: false,
+        skipModels: ['Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest'],
+    ));
 
-        Artisan::call(TypescriptableEloquentCommand::class, [
-            '--models-path' => models(),
-            '--output-path' => outputDir(),
-            '--php-path' => outputDir().'/php',
-            '--legacy' => true,
-        ]);
+    $app = $type->app();
+    expect($app->driver())->toBe($driver);
 
-        $models = outputDir(TypescriptableConfig::eloquentFilename());
-        expect($models)->toBeFile();
-    }
-});
+    $models = outputDir(TypescriptableConfig::eloquentFilename());
+    expect($models)->toBeFile();
 
-// it('is correct from models', function () {
-//     config(['typescriptable.eloquent.skip' => [
-//         'App\\Models\\SushiTest',
-//     ]]);
+    $models = outputDir(TypescriptableConfig::eloquentFilename());
+    $ts = TypescriptToPhp::make($models);
+    $data = $ts->raw();
 
-//     TestCase::setupDatabase('mysql');
+    $movie = $data['Movie'];
 
-//     Artisan::call(TypescriptableEloquentCommand::class, [
-//         '--models-path' => models(),
-//         '--output-path' => outputDir(),
-//         '--php-path' => outputDir().'/php',
-//     ]);
+    $id = $movie['id'];
+    expect($id['type'])->toBe('string');
+    expect($id['nullable'])->toBeFalse();
 
-//     $models = outputDir(TypescriptableConfig::modelsFilename());
-//     $ts = TypescriptToPhp::make($models);
-//     $data = $ts->raw();
-//     $classes = $ts->classes();
+    $title = $movie['title'];
+    expect($title['type'])->toBe('string');
+    expect($title['nullable'])->toBeTrue();
 
-//     foreach ($classes as $key => $value) {
-//         if (str_contains($key, 'Paginate')) {
-//             unset($classes[$key]);
-//         }
-//     }
+    $subtitles = $movie['subtitles'];
+    expect($subtitles['type'])->toBe('any[]');
+    expect($subtitles['nullable'])->toBeFalse();
 
-//     $type = EloquentType::make(models(), outputDir());
+    $homepage = $movie['homepage'];
+    expect($homepage['type'])->toBe("'draft' | 'scheduled' | 'published'");
+    expect($homepage['nullable'])->toBeTrue();
 
-//     // expect(count($type->eloquents()))->toBe(count($classes));
+    $budget = $movie['budget'];
+    expect($budget['type'])->toBe("'draft' | 'scheduled' | 'published'");
+    expect($budget['nullable'])->toBeFalse();
 
-//     // foreach ($type->eloquents() as $field => $properties) {
-//     //     expect(array_key_exists($field, $classes))->toBeTrue();
+    $revenue = $movie['revenue'];
+    expect($revenue['type'])->toBe('number');
+    expect($revenue['nullable'])->toBeTrue();
 
-//     //     $tsProperties = $classes[$field]->properties();
-//     //     if (! array_key_exists('pivot', $properties)) {
-//     //         expect(count($tsProperties))->toBe(count($properties));
-//     //     }
+    $isMultilingual = $movie['is_multilingual'];
+    expect($isMultilingual['type'])->toBe('boolean');
+    expect($isMultilingual['nullable'])->toBeFalse();
 
-//     //     expect(array_key_exists($field, $data))->toBeTrue();
-//     //     foreach ($properties as $key => $property) {
-//     //         $tsProperty = $tsProperties[$key];
+    $authorId = $movie['author_id'];
+    expect($authorId['type'])->toBe('number');
+    expect($authorId['nullable'])->toBeTrue();
 
-//     //         expect(array_key_exists($key, $tsProperties))->toBeTrue();
-//     //         if (! is_array($property)) {
-//     //             expect($property->name())->toBe($tsProperty->name());
-//     //         }
-//     //         // expect($property->typeTs())->toBe($tsProperty->type());
-//     //         // expect($property->isNullable())->toBe($tsProperty->isNullable());
-//     //     }
-//     // }
-// });
+    $addedAt = $movie['added_at'];
+    expect($addedAt['type'])->toBe('string');
+    expect($addedAt['nullable'])->toBeTrue();
 
-// it('can list models', function () {
-//     $list = ModelList::make(models());
+    $fetchedAt = $movie['fetched_at'];
+    expect($fetchedAt['type'])->toBe('string');
+    expect($fetchedAt['nullable'])->toBeTrue();
 
-//     expect($list->models())->toBeArray();
-//     expect($list->path())->toBe(models());
-//     expect(count($list->models()))->toBe(10);
+    $showRoute = $movie['show_route'];
+    expect($showRoute['type'])->toBe('string');
+    expect($showRoute['nullable'])->toBeTrue();
 
-//     Artisan::call('model:list', [
-//         'modelPath' => models(),
-//     ]);
+    $apiRoute = $movie['api_route'];
+    expect($apiRoute['type'])->toBe('string');
+    expect($apiRoute['nullable'])->toBeTrue();
 
-//     $output = Artisan::output();
-//     expect($output)->toContain('Name');
-//     expect($output)->toContain('Namespace');
-//     expect($output)->toContain('Path');
-// });
+    $similars = $movie['similars'];
+    expect($similars['type'])->toBe('App.Models.Movie[]');
+    expect($similars['nullable'])->toBeTrue();
+
+    $recommendations = $movie['recommendations'];
+    expect($recommendations['type'])->toBe('App.Models.Movie[]');
+    expect($recommendations['nullable'])->toBeTrue();
+
+    $members = $movie['members'];
+    expect($members['type'])->toBe('App.Models.Member[]');
+    expect($members['nullable'])->toBeTrue();
+
+    $author = $movie['author'];
+    expect($author['type'])->toBe('App.Models.NestedAuthor');
+    expect($author['nullable'])->toBeTrue();
+
+    $media = $movie['media'];
+    expect($media['type'])->toBe('any[]');
+    expect($media['nullable'])->toBeTrue();
+
+    $members_count = $movie['members_count'];
+    expect($members_count['type'])->toBe('number');
+    expect($members_count['nullable'])->toBeTrue();
+
+    $classes = $ts->onlyModels();
+    expect(count($app->models()))->toBe(count($classes));
+
+    // foreach ($app->models() as $namespace => $model) {
+    //     expect(array_key_exists($namespace, $classes))->toBeTrue();
+
+    //     $tsProperties = $classes[$namespace]->properties();
+    //     if (! array_key_exists('pivot', $model)) {
+    //         expect(count($tsProperties))->toBe(count($model));
+    //     }
+
+    //     expect(array_key_exists($namespace, $data))->toBeTrue();
+    //     foreach ($model as $key => $property) {
+    //         $tsProperty = $tsProperties[$key];
+
+    //         expect(array_key_exists($key, $tsProperties))->toBeTrue();
+    //         if (! is_array($property)) {
+    //             expect($property->name())->toBe($tsProperty->name());
+    //         }
+    //         // expect($property->typeTs())->toBe($tsProperty->type());
+    //         // expect($property->isNullable())->toBe($tsProperty->isNullable());
+    //     }
+    // }
+})->with(DatabaseDriverEnums());
