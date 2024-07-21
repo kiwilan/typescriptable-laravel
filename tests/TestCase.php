@@ -170,8 +170,15 @@ class TestCase extends Orchestra
             ...$configs[$driver->name],
         ]);
 
-        Schema::dropIfExists($driver->database);
-        Schema::dropAllTables($driver->database);
+        if ($driver->name === 'sqlsrv') {
+            $pdo = new PDO("sqlsrv:Server=$driver->host,$driver->port", $driver->user, $driver->password);
+            $database = $driver->database;
+            $pdo->exec("IF EXISTS(SELECT * FROM sys.databases WHERE name='$database') DROP DATABASE $database");
+            $pdo->exec("CREATE DATABASE $database");
+        } else {
+            Schema::dropIfExists($driver->database);
+            Schema::dropAllTables($driver->database);
+        }
 
         $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
         $migration->up();

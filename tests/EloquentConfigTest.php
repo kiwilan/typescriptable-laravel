@@ -9,8 +9,8 @@ it('can use default config', function () {
 
     $config = new EloquentConfig();
 
-    expect($config->modelsPath)->toBe('/Users/ewilan/Workspace/laravel-typescriptable/vendor/orchestra/testbench-core/laravel/app/Models');
-    expect($config->outputPath)->toBe('/Users/ewilan/Workspace/laravel-typescriptable/vendor/orchestra/testbench-core/laravel/resources/js');
+    expect($config->modelsPath)->toContain('laravel-typescriptable/vendor/orchestra/testbench-core/laravel/app/Models');
+    expect($config->outputPath)->toContain('laravel-typescriptable/vendor/orchestra/testbench-core/laravel/resources/js');
     expect($config->phpPath)->toBeNull();
     expect($config->useParser)->toBeFalse();
     expect($config->tsFilename)->toBe('types-eloquent.d.ts');
