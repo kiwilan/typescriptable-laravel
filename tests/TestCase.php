@@ -6,6 +6,7 @@ use Dotenv\Dotenv;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Kiwilan\Typescriptable\Tests\Utils\Driver;
 use Kiwilan\Typescriptable\TypescriptableServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use PDO;
@@ -182,37 +183,5 @@ class TestCase extends Orchestra
 
         $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
         $migration->up();
-    }
-}
-
-class Driver
-{
-    public const SQLITE = 'sqlite';
-
-    public const MYSQL = 'mysql';
-
-    public const PGSQL = 'pgsql';
-
-    public const SQLSRV = 'sqlsrv';
-
-    public function __construct(
-        public ?string $name = null,
-        public ?string $host = null,
-        public ?string $port = null,
-        public ?string $url = null,
-        public ?string $database = null,
-        public ?string $user = null,
-        public ?string $password = null,
-        public ?string $prefix = null,
-    ) {}
-
-    public static function all(): array
-    {
-        return [
-            self::SQLITE,
-            self::MYSQL,
-            self::PGSQL,
-            self::SQLSRV,
-        ];
     }
 }

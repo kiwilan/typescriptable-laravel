@@ -10,8 +10,8 @@ it('is correct from models', function () {
     expect(count($schemas))->toBe(9);
 
     $movie = $schemas['Movie'];
-    expect($movie->basePath())->toContain('laravel-typescriptable/tests/Data/Models');
-    expect($movie->path())->toContain('laravel-typescriptable/tests/Data/Models/Movie.php');
+    expect($movie->basePath())->toContain('tests/Data/Models');
+    expect($movie->path())->toContain('tests/Data/Models/Movie.php');
     expect($movie->namespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
     expect($movie->name())->toBe('Movie');
     expect($movie->fullname())->toBe('Movie');
