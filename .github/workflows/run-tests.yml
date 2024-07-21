@@ -25,14 +25,14 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       mariadb:
         image: mariadb:11.4
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_USER: testing
-          MYSQL_PASSWORD: testing
-          MYSQL_DATABASE: testing
         ports:
           - 3307:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: testing
+          MARIADB_USER: testing
+          MARIADB_PASSWORD: testing
       pgsql:
         image: postgres:16.3
         env:
