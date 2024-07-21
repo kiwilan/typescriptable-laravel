@@ -1,13 +1,11 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Tests\Data\Database\Migrations;
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
 
-class CreateModelsTables extends Migration
+return new class extends Migration
 {
     public function up(): void
     {
@@ -234,4 +232,4 @@ class CreateModelsTables extends Migration
         Schema::dropIfExists('movies');
         Schema::dropIfExists('media');
     }
-}
+};

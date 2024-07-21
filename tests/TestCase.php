@@ -6,7 +6,6 @@ use Dotenv\Dotenv;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Kiwilan\Typescriptable\Tests\Data\Database\Migrations\CreateModelsTables;
 use Kiwilan\Typescriptable\TypescriptableServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use PDO;
@@ -171,11 +170,10 @@ class TestCase extends Orchestra
             ...$configs[$driver->name],
         ]);
 
-        $error = false;
         Schema::dropIfExists($driver->database);
         Schema::dropAllTables($driver->database);
 
-        $migration = new CreateModelsTables();
+        $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
         $migration->up();
     }
 }
