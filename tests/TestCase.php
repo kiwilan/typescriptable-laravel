@@ -171,10 +171,16 @@ class TestCase extends Orchestra
             ...$configs[$driver->name],
         ]);
 
+        // for github action
         if ($driver->name === 'sqlsrv') {
             $pdo = new PDO("sqlsrv:Server=$driver->host,$driver->port", $driver->user, $driver->password);
             $database = $driver->database;
-            $pdo->exec("IF EXISTS(SELECT * FROM sys.databases WHERE name='$database') DROP DATABASE $database");
+            // check if database exists
+            $stmt = $pdo->query("SELECT * FROM sys.databases WHERE name='$database'");
+            if ($stmt->fetch()) {
+                $pdo->exec("ALTER DATABASE $database SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+                $pdo->exec("DROP DATABASE $database");
+            }
             $pdo->exec("CREATE DATABASE $database");
         } else {
             Schema::dropIfExists($driver->database);
