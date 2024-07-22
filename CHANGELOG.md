@@ -2,6 +2,67 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v2.0.07 - 2024-06-14
+
+- Fix `EloquentPhp::class` for `\` duplicates
+- Fix `EloquentCast::class` with `UnitEnum` and public constants into enum classes
+
+## v2.0.06 - 2024-04-15
+
+Fix `window.Routes` from `routes.ts` auto-generated file
+
+## v2.0.05 - 2024-04-15
+
+Fix version
+
+## v2.0.04 - 2024-04-15
+
+Add filter on `items()` to keep only class with inheritance from `Model` class
+
+## v2.0.03 - 2024-04-08
+
+Routes generation fixes with ESLint (typo, multiple params).
+
+## v2.0.02 - 2024-03-30
+
+Fix `window.Routes = Routes` for `routes.ts`
+
+## v2.0.01 - 2024-03-30
+
+Add `appUrl` to `routes.ts`.
+
+## v2.0.0 - 2024-03-16
+
+Drop Laravel 9 and Laravel 10 and PHP 8.1 support (Laravel 11 support only PHP 8.2+).
+
+> Laravel is no longer dependent on the Doctrine DBAL and registering custom Doctrines types is no longer necessary for the proper creation and alteration of various column types that previously required custom types.
+From [Laravel News](https://laravel-news.com/laravel-11)
+
+To install package with old versions of Laravel, use the following command:
+
+```bash
+composer require kiwilan/typescriptable-laravel:1.12.03
+
+
+
+
+
+
+
+
+```
+## v1.12.03 - 2024-03-16
+
+Readd `doctrine/dbal` for Laravel < 11.
+
+## v1.12.02 - 2024-03-16
+
+Drop `doctrine/dbal` to `require-dev` and update dependencies.
+
+## v1.12.0 - 2024-03-16
+
+Add support for Laravel 11
+
 ## v1.11.40 - 2024-02-01
 
 Hotfix for relation parsing if multiline.
