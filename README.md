@@ -30,7 +30,7 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 -   🪄 Generate TS types for [`casts`](https://laravel.com/docs/11.x/eloquent-mutators#attribute-casting) (include native `enum` support)
 -   📝 Generate TS types for `appends` and all [`accessors`](https://laravel.com/docs/master/eloquent-mutators#accessors-and-mutators)
     -   `Illuminate\Database\Eloquent\Casts\Attribute` with PHPDoc
-    -   [`get*Attribute` methods](https://laravel.com/docs/master/eloquent-mutators#defining-an-accessor)
+    -   [`get*Attribute`](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor) methods
 -   #️⃣ Generate TS types for `counts`
 -   📖 Can generate pagination TS types for [Laravel pagination](https://laravel.com/docs/master/pagination)
 -   💾 Can generate simple PHP classes from Eloquent models
