@@ -33,6 +33,5 @@ it('config is ok', function () {
 it('thrown error with engine models', function () {
     config()->set('typescriptable.engine.eloquent', 'engine');
 
-    ray(TypescriptableConfig::engineEloquent());
     expect(fn () => TypescriptableConfig::engineEloquent())->toThrow(Exception::class);
 });
