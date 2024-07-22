@@ -4,7 +4,6 @@ namespace Kiwilan\Typescriptable\Typed\Database;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Kiwilan\Typescriptable\Typed\Database\Types\MongodbColumn;
 use Kiwilan\Typescriptable\Typed\Database\Types\MysqlColumn;
 use Kiwilan\Typescriptable\Typed\Database\Types\PostgreColumn;
 use Kiwilan\Typescriptable\Typed\Database\Types\SqliteColumn;
@@ -77,7 +76,7 @@ class Table
             'pgsql' => PostgreColumn::class,
             'sqlite' => SqliteColumn::class,
             'sqlsrv' => SqlServerColumn::class,
-            'mongodb' => MongodbColumn::class,
+            'mongodb' => 'mongodb',
             default => null,
         };
 
@@ -98,6 +97,9 @@ class Table
 
         $select = $this->driver === 'mongodb' ? [] : DB::select($this->select);
         foreach ($select as $data) {
+            if ($this->driver === 'mongodb') {
+                continue;
+            }
             $attribute = $driver::make($data);
             $attributes[$attribute->name()] = $attribute;
         }
