@@ -62,10 +62,10 @@ This version requires [PHP](https://www.php.net/) `8.2+` and supports [Laravel](
 >
 > Laravel 11 dropped [Doctrine DBAL](https://laravel.com/docs/11.x/upgrade#doctrine-dbal-removal). For previous Laravel versions, you can use `1.12.03` version.
 
-| Version                                                                          | L9                 | L10                | L11                |
-| -------------------------------------------------------------------------------- | ------------------ | ------------------ | ------------------ |
-| [1.12.03](https://packagist.org/packages/kiwilan/typescriptable-laravel#1.12.03) | :white_check_mark: | :white_check_mark: | :x:                |
-| [2.0.0](https://packagist.org/packages/kiwilan/typescriptable-laravel#2.0.0)     | :x:                | :x:                | :white_check_mark: |
+| Version                                                                           | L9                 | L10                | L11                |
+| --------------------------------------------------------------------------------- | ------------------ | ------------------ | ------------------ |
+| [v1.12.03](https://packagist.org/packages/kiwilan/typescriptable-laravel#1.12.03) | :white_check_mark: | :white_check_mark: | :x:                |
+| [v3+](https://packagist.org/packages/kiwilan/typescriptable-laravel)              | :x:                | :x:                | :white_check_mark: |
 
 You can install the package via composer:
 
