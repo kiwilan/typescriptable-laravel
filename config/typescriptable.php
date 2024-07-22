@@ -41,10 +41,6 @@ return [
          * Whether to add the LaravelPaginate type (with API type and view type).
          */
         'paginate' => true,
-        /**
-         * Whether to add the fake Jetstream Team type to avoid errors.
-         */
-        'fake_team' => false,
     ],
     /**
      * Options for the Spatie settings.

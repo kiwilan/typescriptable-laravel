@@ -67,11 +67,6 @@ class TypescriptableConfig
         return config('typescriptable.eloquent.paginate') ?? true;
     }
 
-    public static function eloquentFakeTeam(): bool
-    {
-        return config('typescriptable.eloquent.fake_team') ?? false;
-    }
-
     public static function settingsFilename(): string
     {
         return config('typescriptable.settings.filename') ?? 'types-settings.d.ts';

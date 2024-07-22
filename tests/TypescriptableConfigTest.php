@@ -15,7 +15,6 @@ it('config is ok', function () {
     expect(TypescriptableConfig::eloquentPhpPath())->toBeNull();
     expect(TypescriptableConfig::eloquentSkip())->toBeArray();
     expect(TypescriptableConfig::eloquentPaginate())->toBeBool();
-    expect(TypescriptableConfig::eloquentFakeTeam())->toBeBool();
     expect(TypescriptableConfig::settingsFilename())->toBeString();
     expect(TypescriptableConfig::settingsDirectory())->toBeString();
     expect(TypescriptableConfig::settingsSkip())->toBeArray();
