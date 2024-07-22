@@ -44,7 +44,6 @@ class Movie extends Model implements \Spatie\MediaLibrary\HasMedia
         'fetched_at',
         'fetched_has_failed',
         'slug',
-        'budget', // `200000000`
         'revenue', // `1056057273`
         'edition', // `Blu-ray`
         'version', // `Theatrical`
@@ -68,6 +67,7 @@ class Movie extends Model implements \Spatie\MediaLibrary\HasMedia
 
     protected $hidden = [
         'budget',
+        'edition',
     ];
 
     protected $queryDefaultSort = 'title';

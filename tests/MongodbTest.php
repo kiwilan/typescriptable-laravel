@@ -37,6 +37,9 @@ it('can be run', function (string $engine) {
 
     $movie = $data['Movie'];
 
+    $id = $movie['id'];
+    expect($id['type'])->toBe('string');
+
     $title = $movie['title'];
     expect($title['type'])->toBe('string');
 
@@ -60,6 +63,9 @@ it('can be run', function (string $engine) {
 
     $fetchedAt = $movie['fetched_at'];
     expect($fetchedAt['type'])->toBe('string');
+
+    $edition = $movie['edition'];
+    expect($edition['type'])->toBe('string');
 
     $showRoute = $movie['show_route'];
     expect($showRoute['type'])->toBe('string');
