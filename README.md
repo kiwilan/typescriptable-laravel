@@ -220,6 +220,8 @@ With options:
 
 `kiwilan/typescriptable-laravel` supports [MongoDB](https://github.com/mongodb/laravel-mongodb) with `mongodb/laravel-mongodb`. Due to the MongoDB structure, Typescript conversion aren't the same as SQL databases, precision is lower. If you want to improve it, you can add [an issue](https://github.com/kiwilan/typescriptable-laravel/issues/new/choose).
 
+Database isn't parsed like with relational databases. The package will parse `key`, `fillable` and `hidden` to get all fields. If some fields are missing, you can [override them manually](https://github.com/kiwilan/typescriptable-laravel#override-models). All relations and accessors are supported.
+
 ### Troubleshooting
 
 #### Database prefix
