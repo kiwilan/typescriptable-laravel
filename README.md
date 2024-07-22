@@ -239,7 +239,7 @@ You can use `prefix` variable into `config/database.php` file.
 `kiwilan/typescriptable-laravel` will cover many cases, but if you want to override some models, you can just create a type like `resources/js/types/index.ts` and extends `Model` type.
 
 ```ts
-interface BookAdvanced extends App.Models.Book {
+export interface BookAdvanced extends App.Models.Book {
     pivot: {
         created_at: string;
         updated_at: string;
@@ -248,6 +248,15 @@ interface BookAdvanced extends App.Models.Book {
 ```
 
 And you can import custom type in your code when you need to use advanced type.
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue";
+import { BookAdvanced } from "@/types";
+
+const book = ref<BookAdvanced>();
+</script>
+```
 
 ### Examples
 
