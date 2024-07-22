@@ -1,0 +1,23 @@
+<?php
+
+use Illuminate\Support\Facades\Artisan;
+use Kiwilan\Typescriptable\Typed\Utils\EloquentList;
+
+it('can list models', function () {
+    $list = EloquentList::make(models());
+
+    expect($list->models())->toBeArray();
+    expect($list->path())->toBe(models());
+    expect(count($list->models()))->toBe(9);
+});
+
+it('can use command', function () {
+    Artisan::call('eloquent:list', [
+        'modelPath' => models(),
+    ]);
+
+    $output = Artisan::output();
+    expect($output)->toContain('Name');
+    expect($output)->toContain('Namespace');
+    expect($output)->toContain('Path');
+});

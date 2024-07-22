@@ -52,7 +52,7 @@ class Story extends Model
 }
 ```
 
-TS file generated at `resources/js/types-models.d.ts`
+TS file generated at `resources/js/types-eloquent.d.ts`
 
 ```typescript
 declare namespace App {

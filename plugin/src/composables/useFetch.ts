@@ -1,5 +1,6 @@
 import { HttpRequest } from '../shared/http/HttpRequest'
 import { HttpResponse } from '../shared/http/HttpResponse'
+import { HttpDownload } from '@/shared/http/HttpDownload'
 import type { HttpRequestAnonymous, HttpRequestBody, HttpRequestQuery } from '@/types/http'
 
 /**
@@ -110,9 +111,25 @@ export function useFetch() {
     },
   }
 
+  const download = {
+    /**
+     * Trigger a download from the response (blob or array buffer).
+     */
+    async trigger(response: HttpResponse, filename?: string): Promise<HttpDownload> {
+      return await HttpDownload.create(response, filename)
+    },
+    /**
+     * Trigger a download from a URL.
+     */
+    triggerDirect(url: string | undefined, filename?: string): void {
+      return HttpDownload.direct(url, filename)
+    },
+  }
+
   return {
     http,
     laravel,
     inertia,
+    download,
   }
 }

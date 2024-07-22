@@ -4,7 +4,8 @@ namespace Kiwilan\Typescriptable\Typed;
 
 use Kiwilan\Typescriptable\Typed\Setting\SettingItem;
 use Kiwilan\Typescriptable\Typed\Setting\SettingTypescript;
-use Kiwilan\Typescriptable\Typed\Utils\ClassItem;
+use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class SettingType
@@ -15,8 +16,7 @@ class SettingType
     protected function __construct(
         public string $settingsPath,
         public string $outputPath,
-    ) {
-    }
+    ) {}
 
     public static function make(?string $settingsPath, ?string $outputPath, ?string $extends): ?self
     {
@@ -38,8 +38,8 @@ class SettingType
             return null;
         }
 
-        $items = ClassItem::list($settingsPath, TypescriptableConfig::settingsSkip());
-        $items = array_filter($items, fn (ClassItem $item) => $item->extends === $extends);
+        $collect = SchemaCollection::make($settingsPath, TypescriptableConfig::settingsSkip());
+        $items = array_filter($collect->items(), fn (SchemaClass $item) => $item->extends() === $extends);
 
         $self = new self($settingsPath, $outputPath);
 

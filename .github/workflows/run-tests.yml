@@ -23,8 +23,18 @@ jobs:
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      mariadb:
+        image: mariadb:11.4
+        ports:
+          - 3307:3306
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: testing
+          MARIADB_USER: testing
+          MARIADB_PASSWORD: testing
       pgsql:
-        image: postgres:13
+        image: postgres:16.3
         env:
           POSTGRES_USER: testing
           POSTGRES_PASSWORD: testing
@@ -39,11 +49,20 @@ jobs:
           MSSQL_SA_PASSWORD: 12345OHdf%e
         ports:
           - 1433:1433
+      mongodb:
+        image: mongo:7.0.12
+        env:
+          MONGO_INITDB_ROOT_USERNAME: testing
+          MONGO_INITDB_ROOT_PASSWORD: testing
+          MONGO_INITDB_DATABASE: admin
+        ports:
+          - 27017:27017
 
     name: P${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
+        # https://github.com/actions/checkout
         uses: actions/checkout@v4
 
       - name: Verify MySQL connection from host
@@ -52,6 +71,7 @@ jobs:
           mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "SHOW DATABASES"
 
       - name: Setup PHP
+        # https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
@@ -70,6 +90,7 @@ jobs:
         run: cp .env.example .env
 
       - name: Setup node
+        # https://github.com/actions/setup-node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
@@ -84,6 +105,7 @@ jobs:
         run: vendor/bin/pest --coverage
 
       - name: Send code coverage
+        # https://github.com/codecov/codecov-action
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

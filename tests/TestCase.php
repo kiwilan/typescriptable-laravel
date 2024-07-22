@@ -6,7 +6,9 @@ use Dotenv\Dotenv;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Kiwilan\Typescriptable\Tests\Utils\Driver;
 use Kiwilan\Typescriptable\TypescriptableServiceProvider;
+use MongoDB\Laravel\MongoDBServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use PDO;
 
@@ -65,12 +67,14 @@ class TestCase extends Orchestra
         $user = "DB_{$connection}_USER";
         $password = "DB_{$connection}_PASSWORD";
         $databaseName = "DB_{$connection}_DATABASE";
+        $prefix = 'DB_PREFIX';
 
         $driver->host = $data[$host] ? $data[$host] : getenv($host);
         $driver->port = $data[$port] ? $data[$port] : getenv($port);
         $driver->user = $data[$user] ? $data[$user] : getenv($user);
         $driver->password = $data[$password] ? $data[$password] : getenv($password);
         $driver->database = $data[$databaseName] ? $data[$databaseName] : getenv($databaseName);
+        $driver->prefix = $data[$prefix] ? $data[$prefix] : getenv($prefix);
 
         $driver->url = null;
         if ($driver->host && $driver->user && $driver->port) {
@@ -88,6 +92,7 @@ class TestCase extends Orchestra
     {
         return [
             TypescriptableServiceProvider::class,
+            MongoDBServiceProvider::class,
         ];
     }
 
@@ -96,8 +101,15 @@ class TestCase extends Orchestra
         self::setupDatabase();
     }
 
+    public static function init()
+    {
+        config()->set('media-library.media_model', \Spatie\MediaLibrary\MediaCollections\Models\Media::class);
+    }
+
     public static function setupDatabase(?string $type = null): void
     {
+        self::init();
+
         if (! $type) {
             return;
         }
@@ -106,13 +118,25 @@ class TestCase extends Orchestra
 
         $configs = [
             'sqlite' => [
-                'prefix' => '',
+                'prefix' => $driver->prefix,
             ],
             'mysql' => [
                 'unix_socket' => '',
                 'charset' => 'utf8mb4',
                 'collation' => 'utf8mb4_unicode_ci',
-                'prefix' => '',
+                'prefix' => $driver->prefix,
+                'prefix_indexes' => true,
+                'strict' => true,
+                'engine' => null,
+                'options' => extension_loaded('pdo_mysql') ? array_filter([
+                    PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                ]) : [],
+            ],
+            'mariadb' => [
+                'unix_socket' => '',
+                'charset' => 'utf8mb4',
+                'collation' => 'utf8mb4_unicode_ci',
+                'prefix' => $driver->prefix,
                 'prefix_indexes' => true,
                 'strict' => true,
                 'engine' => null,
@@ -122,17 +146,22 @@ class TestCase extends Orchestra
             ],
             'pgsql' => [
                 'charset' => 'utf8',
-                'prefix' => '',
+                'prefix' => $driver->prefix,
                 'prefix_indexes' => true,
                 'search_path' => 'public',
                 'sslmode' => 'prefer',
             ],
             'sqlsrv' => [
                 'charset' => 'utf8',
-                'prefix' => '',
+                'prefix' => $driver->prefix,
                 'prefix_indexes' => true,
                 // 'encrypt' => env('DB_ENCRYPT', 'yes'),
                 // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
+            ],
+            'mongodb' => [
+                'driver' => 'mongodb',
+                'dsn' => $driver->url,
+                'database' => $driver->database,
             ],
         ];
 
@@ -145,52 +174,32 @@ class TestCase extends Orchestra
             'database' => $driver->database,
             'username' => $driver->user,
             'password' => $driver->password,
+            'prefix' => $driver->prefix,
             ...$configs[$driver->name],
         ]);
 
+        // for github action
         if ($driver->name === 'sqlsrv') {
             $pdo = new PDO("sqlsrv:Server=$driver->host,$driver->port", $driver->user, $driver->password);
             $database = $driver->database;
-            $pdo->exec("IF EXISTS(SELECT * FROM sys.databases WHERE name='$database') DROP DATABASE $database");
+            // check if database exists
+            $stmt = $pdo->query("SELECT * FROM sys.databases WHERE name='$database'");
+            if ($stmt->fetch()) {
+                $pdo->exec("ALTER DATABASE $database SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+                $pdo->exec("DROP DATABASE $database");
+            }
             $pdo->exec("CREATE DATABASE $database");
         } else {
             Schema::dropIfExists($driver->database);
             Schema::dropAllTables($driver->database);
         }
 
-        $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
+        if ($driver->name === 'mongodb') {
+            $migration = include __DIR__.'/Data/database/migrations/create_models_tables_mongodb.php';
+        } else {
+            $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
+        }
+
         $migration->up();
-    }
-}
-
-class Driver
-{
-    public const SQLITE = 'sqlite';
-
-    public const MYSQL = 'mysql';
-
-    public const PGSQL = 'pgsql';
-
-    public const SQLSRV = 'sqlsrv';
-
-    public function __construct(
-        public ?string $name = null,
-        public ?string $host = null,
-        public ?string $port = null,
-        public ?string $url = null,
-        public ?string $database = null,
-        public ?string $user = null,
-        public ?string $password = null,
-    ) {
-    }
-
-    public static function all(): array
-    {
-        return [
-            self::SQLITE,
-            self::MYSQL,
-            self::PGSQL,
-            self::SQLSRV,
-        ];
     }
 }

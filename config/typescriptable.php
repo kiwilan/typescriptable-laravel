@@ -2,20 +2,26 @@
 
 return [
     /**
+     * Engine used for parsing.
+     */
+    'engine' => [
+        /**
+         * `artisan` will use the `php artisan model:show` command to parse the models.
+         * `parser` will use internal engine to parse the models.
+         */
+        'eloquent' => 'artisan', // artisan / parser
+    ],
+
+    /**
      * The path to the output directory.
      */
     'output_path' => resource_path('js'),
 
     /**
-     * The prefix for the database tables.
+     * Options for the Eloquent models.
      */
-    'database_prefix' => env('DB_PREFIX', ''),
-
-    /**
-     * Options for the models.
-     */
-    'models' => [
-        'filename' => 'types-models.d.ts',
+    'eloquent' => [
+        'filename' => 'types-eloquent.d.ts',
         /**
          * The path to the models directory.
          */
@@ -35,10 +41,6 @@ return [
          * Whether to add the LaravelPaginate type (with API type and view type).
          */
         'paginate' => true,
-        /**
-         * Whether to add the fake Jetstream Team type to avoid errors.
-         */
-        'fake_team' => false,
     ],
     /**
      * Options for the Spatie settings.

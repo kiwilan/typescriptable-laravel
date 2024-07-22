@@ -23,13 +23,13 @@ yarn add @kiwilan/typescriptable-laravel -D
 
 > [!IMPORTANT]
 >
-> -   [`tightenco/ziggy`](https://github.com/tighten/ziggy) is **REQUIRED**
-> -   PHP `composer` package [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is required.
+> -   [`tightenco/ziggy`](https://github.com/tighten/ziggy) is required for route helpers.
+> -   [`kiwilan/typescriptable-laravel`](https://github.com/kiwilan/typescriptable-laravel) is recommended for better experience with TypeScript.
 
 When you install [Inertia](https://inertiajs.com/) with Laravel, I advice to use [Jetstream](https://jetstream.laravel.com) to setup your project. If you don't want to use Jetstream, you can just manually add `ziggy` to `HandleInertiaRequests.php` middleware (or any other middleware added to `web` middleware) into `share()` method.
 
 > [!NOTE]
-> You can see an example of `HandleInertiaRequests.php` middleware here: <https://gist.github.com/ewilan-riviere/f1dbc20669ed2669f745e3e0e0771537>.
+> You can see an example of `HandleInertiaRequests.php` middleware with [this gist](https://gist.github.com/ewilan-riviere/f1dbc20669ed2669f745e3e0e0771537).
 
 Middleware `HandleInertiaRequests.php` have to be updated with `tightenco/ziggy`:
 
@@ -67,7 +67,7 @@ class HandleInertiaRequests extends Middleware
 ## Features
 
 -   🦾 Add TypeScript experience into `inertia`
--   💨 Vite plugin to execute automatically [kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel)'s commands :' `typescriptable:models`, `typescriptable:routes` and `typescriptable:routes` with watch mode.
+-   💨 Vite plugin to execute automatically [kiwilan/typescriptable-laravel](https://github.com/kiwilan/typescriptable-laravel)'s commands :' `typescriptable:eloquent`, `typescriptable:routes` and `typescriptable:routes` with watch mode.
 -   📦 Vue composables
     -   `useRouter()` composable with `isRouteEqualTo()` method, `currentRoute` computed and `route()` method
     -   `useInertia()` composable for `page` computed, `component` computed, `props` computed, `url` computed, `version` computed, `auth` computed, `user` computed and `isDev` computed
@@ -112,6 +112,12 @@ export default defineConfig({
 
 ### Inertia
 
+This below configuration is not required, if you want to use global methods into your `template`, you have to add `VueTypescriptable` into your Vue app.
+
+-   `resolveTitle()` is a helper to resolve title with `title` and `appName` parameters and `seperator` as optional parameter
+-   `resolvePages()` is a helper to resolve pages with `name` and `pages` parameters with right return type for TypeScript
+-   `VueTypescriptable` is a Vue plugin to add global methods for `template` into Vue components
+
 In your `resources/js/app.ts`:
 
 ```ts
@@ -135,6 +141,40 @@ createInertiaApp({
             .mount(el)
     },
 });
+```
+
+For SSR support, you have to add `VueTypescriptable` into your `ssr.ts`:
+
+```ts
+import { createInertiaApp } from "@inertiajs/vue3";
+import createServer from "@inertiajs/vue3/server";
+import { renderToString } from "@vue/server-renderer";
+import { createSSRApp, h } from "vue";
+import {
+    VueTypescriptable,
+    resolvePages,
+    resolveTitle,
+} from "@kiwilan/typescriptable-laravel";
+import { ZiggyVue } from "../../vendor/tightenco/ziggy";
+
+createServer((page) =>
+    createInertiaApp({
+        title: (title) => resolveTitle(title, "My App"), // Optional
+        page,
+        render: renderToString,
+        resolve: (name) =>
+            resolvePages(name, import.meta.glob("./Pages/**/*.vue")), // Optional
+        setup({ App, props, plugin }) {
+            return createSSRApp({ render: () => h(App, props) })
+                .use(plugin)
+                .use(VueTypescriptable) // Add Vue plugin
+                .use(ZiggyVue, {
+                    ...(page.props.ziggy as any),
+                    location: new URL((page.props.ziggy as any).location),
+                });
+        },
+    })
+);
 ```
 
 ## Usage

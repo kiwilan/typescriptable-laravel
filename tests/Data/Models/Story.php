@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
 use Kiwilan\Typescriptable\Tests\Data\Enums\StoryFormatEnum;
+use Kiwilan\Typescriptable\Tests\Data\Models\Nested\Author;
 
 class Story extends Model
 {

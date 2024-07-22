@@ -4,7 +4,7 @@ export interface ViteTypescriptableOptions {
    *
    * @default true
    */
-  models?: boolean
+  eloquent?: boolean
   /**
    * Enable types for Spatie
    *
@@ -17,6 +17,12 @@ export interface ViteTypescriptableOptions {
    * @default true
    */
   routes?: boolean
+  /**
+   * Print a list of routes.
+   *
+   * @default false
+   */
+  routesList?: boolean
   /**
    * Enable types for Inertia.
    *

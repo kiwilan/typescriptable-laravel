@@ -16,3 +16,4 @@ plugin/types
 *.tgz
 CHANGELOG-draft.md
 .phpunit.cache
+tests/EloquentLegacy

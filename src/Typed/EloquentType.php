@@ -2,167 +2,75 @@
 
 namespace Kiwilan\Typescriptable\Typed;
 
-use Illuminate\Support\Str;
-use Kiwilan\Typescriptable\Typed\Eloquent\ClassTemplate;
-use Kiwilan\Typescriptable\Typed\Eloquent\Output\EloquentPhp;
-use Kiwilan\Typescriptable\Typed\Eloquent\Output\EloquentTypescript;
-use Kiwilan\Typescriptable\Typed\Eloquent\Utils\EloquentProperty;
-use Kiwilan\Typescriptable\Typed\Utils\ClassItem;
-use Kiwilan\Typescriptable\Typed\Utils\LaravelTeamType;
-use Kiwilan\Typescriptable\TypescriptableConfig;
+use Kiwilan\Typescriptable\Typed\Eloquent\Converter\EloquentToPhp;
+use Kiwilan\Typescriptable\Typed\Eloquent\Converter\EloquentToTypescript;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeArtisan;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeParser;
+use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserModelFillable;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schema\SchemaApp;
+use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 
 class EloquentType
 {
-    /**
-     * @param  ClassItem[]  $items
-     * @param  array<string, EloquentProperty[]>  $eloquents
-     * @param  array<string, array<string, EloquentProperty>>  $pivots
-     * @param  array<string, array<string, array<string, string>>>  $list
-     */
+    protected ?SchemaApp $app = null;
+
     protected function __construct(
-        protected string $modelsPath,
-        protected string $outputPath,
-        protected array $items = [],
-        protected array $eloquents = [],
-        protected array $pivots = [],
-        protected array $list = [],
-    ) {
+        protected EloquentConfig $config,
+    ) {}
+
+    public static function make(EloquentConfig $config): self
+    {
+        return new self($config);
     }
 
-    public static function make(?string $modelsPath, ?string $outputPath, ?string $phpPath = null, bool $delete = true): self
+    public function execute(): self
     {
-        if (! $modelsPath) {
-            $modelsPath = TypescriptableConfig::modelsDirectory();
+        $type = null;
+        if ($this->config->useParser) {
+            $type = new EloquentTypeParser($this->config);
+        } else {
+            $type = new EloquentTypeArtisan($this->config);
         }
 
-        $tsFilename = TypescriptableConfig::modelsFilename();
-        if (! $outputPath) {
-            $outputPath = TypescriptableConfig::setPath();
+        $type->run();
+
+        $typescript = EloquentToTypescript::make($type->app()->models(), "{$type->config()->outputPath}/{$type->config()->tsFilename}");
+        $typescript->print();
+
+        if ($type->config()->phpPath) {
+            $php = EloquentToPhp::make($type->app()->models(), $type->config()->phpPath);
+            $php->print();
         }
 
-        if (! $phpPath) {
-            $phpPath = TypescriptableConfig::modelsPhpPath();
-        }
-
-        $self = new self($modelsPath, $outputPath);
-        $self->items = ClassItem::list($self->modelsPath, TypescriptableConfig::modelsSkip());
-        $self->items = array_filter($self->items, fn ($item) => $item->isModel);
-
-        $self->list = $self->setList();
-        $self->eloquents = $self->setEloquents();
-        $self->setPivots();
-
-        $typescript = EloquentTypescript::make($self->eloquents, "{$outputPath}/{$tsFilename}");
-        $typescript->print($delete);
-
-        if ($phpPath) {
-            $php = EloquentPhp::make($self->eloquents, $phpPath);
-            $php->print($delete);
-        }
-
-        // if (TypescriptableConfig::modelsFakeTeam()) {
-        //     $service->typeables['Team'] = ClassTemplate::fake('Team', LaravelTeamType::setFakeTeam());
-        // }
-
-        return $self;
+        return $type;
     }
 
-    public function modelsPath(): string
+    public function app(): SchemaApp
     {
-        return $this->modelsPath;
+        if (! $this->app) {
+            $this->app = SchemaApp::make($this->config->modelsPath, $this->config->phpPath);
+        }
+
+        return $this->app;
     }
 
-    public function outputPath(): string
+    public function config(): EloquentConfig
     {
-        return $this->outputPath;
+        return $this->config;
     }
 
     /**
-     * @return ClassItem[]
+     * Parse MongoDB model.
      */
-    public function items(): array
+    protected function parseMongoDb(SchemaClass $schemaClass, string $driver): ?array
     {
-        return $this->items;
-    }
-
-    /**
-     * @return array<string, EloquentProperty[]>
-     */
-    public function eloquents(): array
-    {
-        return $this->eloquents;
-    }
-
-    /**
-     * @return array<string, array<string, array<string, string>>>
-     */
-    public function list(): array
-    {
-        return $this->list;
-    }
-
-    private function setEloquents(): array
-    {
-        $eloquents = [];
-
-        foreach ($this->items as $key => $item) {
-            $modelName = $item->name;
-            $eloquents[$modelName] = [];
-
-            if (! empty($item->eloquent->morphRelations)) {
-                foreach ($item->eloquent->morphRelations as $relation) {
-                    if ($relation->hasPivot) {
-                        foreach ($relation->pivotAttributes as $a) {
-                            $this->pivots[$relation->pivotModel][$a->name()] = $a;
-                        }
-                    }
-                }
-            }
-
-            foreach ($item->eloquent->properties as $field => $property) {
-                $field = Str::snake($field);
-                $eloquents[$modelName][$field] = $property;
-            }
+        if ($driver !== 'mongodb') {
+            return null;
         }
 
-        return $eloquents;
-    }
+        $fillable = ParserModelFillable::make($schemaClass);
 
-    private function setPivots(): self
-    {
-        if ($this->pivots) {
-            foreach ($this->pivots as $pivot => $attributes) {
-                foreach ($attributes as $attribute) {
-                    $this->eloquents[$pivot]['pivot'][$attribute->name()] = $attribute;
-                }
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return array<string, array<string, array<string, string>>>
-     */
-    private function setList(): array
-    {
-        $list = [];
-
-        foreach ($this->items as $key => $item) {
-            $modelName = Str::slug($key);
-            $list[$modelName] = [];
-
-            foreach ($item->eloquent->properties as $field => $property) {
-                $field = Str::snake($field);
-                $list[$modelName][$field] = [
-                    'name' => $property->name(),
-                    'isArray' => $property->isArray(),
-                    'phpType' => $property->phpType(),
-                    'typescriptType' => $property->typescriptType(),
-                ];
-            }
-        }
-
-        return $list;
+        return $fillable->attributes();
     }
 }

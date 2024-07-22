@@ -3,5 +3,5 @@
     "target": "esnext",
     "module": "commonjs"
   },
-  "include": ["lib"]
+  "include": ["plugin"]
 }

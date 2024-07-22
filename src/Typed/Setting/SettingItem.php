@@ -2,8 +2,8 @@
 
 namespace Kiwilan\Typescriptable\Typed\Setting;
 
-use Kiwilan\Typescriptable\Typed\Eloquent\TypeConverter;
-use Kiwilan\Typescriptable\Typed\Utils\ClassItem;
+use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserPhpType;
+use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 use ReflectionNamedType;
 use ReflectionProperty;
 
@@ -13,17 +13,16 @@ class SettingItem
      * @param  SettingItemProperty[]  $properties
      */
     protected function __construct(
-        public ClassItem $class,
+        public SchemaClass $class,
         public string $name,
         public array $properties = [],
-    ) {
-    }
+    ) {}
 
-    public static function make(ClassItem $class): self
+    public static function make(SchemaClass $class): self
     {
         $properties = [];
-        foreach ($class->reflect->getProperties() as $property) {
-            if ($class->namespace === $property->class) {
+        foreach ($class->reflect()->getProperties() as $property) {
+            if ($class->namespace() === $property->class) {
                 $item = SettingItemProperty::make($property);
                 $properties[$item->name] = $item;
             }
@@ -31,7 +30,7 @@ class SettingItem
 
         $self = new self(
             class: $class,
-            name: $class->name,
+            name: $class->name(),
             properties: $properties,
         );
 
@@ -47,8 +46,7 @@ class SettingItemProperty
         public bool $isNullable = false,
         public bool $isBuiltin = false,
         public string $typeTs = 'any',
-    ) {
-    }
+    ) {}
 
     public static function make(ReflectionProperty $property): self
     {
@@ -74,8 +72,8 @@ class SettingItemProperty
             isBuiltin: $type instanceof ReflectionNamedType ? $type->isBuiltin() : false,
         );
 
-        $converter = TypeConverter::make($self->type);
-        $self->typeTs = $converter->getTypescriptType();
+        $parser = ParserPhpType::make($self->type);
+        $self->typeTs = $parser->typescriptType();
 
         return $self;
     }

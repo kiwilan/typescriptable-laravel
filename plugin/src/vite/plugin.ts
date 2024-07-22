@@ -4,9 +4,10 @@ import { InertiaType } from '../types/inertia'
 import { execute } from './server'
 
 const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
-  models: true,
+  eloquent: true,
   settings: false,
-  routes: false,
+  routes: true,
+  routesList: true,
   inertia: true,
   inertiaPaths: {
     base: 'resources/js',
@@ -27,9 +28,10 @@ const DEFAULT_OPTIONS: ViteTypescriptableOptions = {
  * export default defineConfig({
  *   plugins: [
  *     typescriptable({
- *       models: true,
+ *       eloquent: true,
  *       settings: false,
- *       routes: false,
+ *       routes: true,
+ *       routesList: true,
  *       inertia: true,
  *       inertiaPaths: {
  *         base: 'resources/js',
@@ -48,14 +50,17 @@ function ViteTypescriptable(userOptions: ViteTypescriptableOptions = {}): Plugin
     async buildStart() {
       const opts: ViteTypescriptableOptions = Object.assign({}, DEFAULT_OPTIONS, userOptions)
 
-      if (opts.models)
-        await execute('php artisan typescriptable:models')
+      if (opts.eloquent)
+        await execute('php artisan typescriptable:eloquent')
 
       if (opts.settings)
         await execute('php artisan typescriptable:settings')
 
       if (opts.routes)
         await execute('php artisan typescriptable:routes')
+
+      if (opts.routesList)
+        await execute('php artisan typescriptable:routes --list')
 
       if (opts.inertia)
         await InertiaType.make(opts)
