@@ -34,6 +34,7 @@
   "require-dev": {
     "larastan/larastan": "^2.8.0",
     "laravel/pint": "^1.0",
+    "mongodb/laravel-mongodb": "^4.7",
     "nunomaduro/collision": "^8.0",
     "orchestra/testbench": "^9.0",
     "pestphp/pest": "^2.8.1",

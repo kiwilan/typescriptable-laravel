@@ -14,6 +14,8 @@ class Driver
 
     public const SQLSRV = 'sqlsrv';
 
+    public const MONGODB = 'mongodb';
+
     public function __construct(
         public ?string $name = null,
         public ?string $host = null,
@@ -33,6 +35,7 @@ class Driver
             self::MARIADB,
             self::PGSQL,
             self::SQLSRV,
+            self::MONGODB,
         ];
     }
 }

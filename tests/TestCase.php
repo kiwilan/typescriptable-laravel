@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Kiwilan\Typescriptable\Tests\Utils\Driver;
 use Kiwilan\Typescriptable\TypescriptableServiceProvider;
+use MongoDB\Laravel\MongoDBServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use PDO;
 
@@ -91,6 +92,7 @@ class TestCase extends Orchestra
     {
         return [
             TypescriptableServiceProvider::class,
+            MongoDBServiceProvider::class,
         ];
     }
 
@@ -156,6 +158,11 @@ class TestCase extends Orchestra
                 // 'encrypt' => env('DB_ENCRYPT', 'yes'),
                 // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
             ],
+            'mongodb' => [
+                'driver' => 'mongodb',
+                'dsn' => $driver->url,
+                'database' => $driver->database,
+            ],
         ];
 
         config()->set('database.default', $driver->name);
@@ -187,7 +194,12 @@ class TestCase extends Orchestra
             Schema::dropAllTables($driver->database);
         }
 
-        $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
+        if ($driver->name === 'mongodb') {
+            $migration = include __DIR__.'/Data/database/migrations/create_models_tables_mongodb.php';
+        } else {
+            $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
+        }
+
         $migration->up();
     }
 }

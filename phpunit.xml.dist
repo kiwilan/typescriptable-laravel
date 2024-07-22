@@ -29,6 +29,11 @@
     <env name="DB_SQLSRV_USER" value="sa" />
     <env name="DB_SQLSRV_PASSWORD" value="" />
     <env name="DB_SQLSRV_DATABASE" value="testing" />
+    <env name="DB_MONGODB_HOST" value="127.0.0.1" />
+    <env name="DB_MONGODB_PORT" value="27017" />
+    <env name="DB_MONGODB_USER" value="testing" />
+    <env name="DB_MONGODB_PASSWORD" value="testing" />
+    <env name="DB_MONGODB_DATABASE" value="testing" />
   </php>
   <testsuites>
     <testsuite name="Kiwilan Test Suite">

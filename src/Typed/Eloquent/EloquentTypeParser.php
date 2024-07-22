@@ -20,6 +20,7 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
 
         $collect = SchemaCollection::make($this->config->modelsPath, $this->config->skipModels);
         $schemas = $collect->onlyModels();
+
         $this->app->parseBaseNamespace($schemas);
 
         $models = $this->parseModels($schemas);
@@ -55,6 +56,11 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
                 'attributes' => $table->attributes(),
                 'relations' => $relations,
             ], $schema);
+
+            $attributes = $this->parseMongoDb($schema, $this->app->driver());
+            if ($attributes) {
+                $models[$schema->namespace()]->setAttributes($attributes);
+            }
         }
 
         return $models;

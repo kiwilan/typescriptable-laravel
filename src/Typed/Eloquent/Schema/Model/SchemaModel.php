@@ -94,6 +94,19 @@ class SchemaModel
         return $this;
     }
 
+    /**
+     * @param  SchemaModelAttribute[]  $attributes
+     */
+    public function setAttributes(array $attributes): self
+    {
+        $this->attributes = [
+            ...$this->attributes,
+            ...$attributes,
+        ];
+
+        return $this;
+    }
+
     public function updateAccessor(ParserAccessor $accessor): self
     {
         $attribute = $this->attributes[$accessor->field] ?? null;

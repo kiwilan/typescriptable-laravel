@@ -9,6 +9,7 @@ enum DatabaseDriverEnum: string
     case mariadb = 'mariadb';
     case pgsql = 'pgsql';
     case sqlsrv = 'sqlsrv';
+    case mongodb = 'mongodb';
 
     /**
      * Convert database type to PHP type.
@@ -44,6 +45,7 @@ enum DatabaseDriverEnum: string
             self::mariadb => $this->mariadb($databaseType),
             self::pgsql => $this->pgsql($databaseType),
             self::sqlsrv => $this->sqlsrv($databaseType),
+            default => 'string',
         };
     }
 

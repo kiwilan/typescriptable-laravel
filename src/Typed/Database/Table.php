@@ -4,6 +4,7 @@ namespace Kiwilan\Typescriptable\Typed\Database;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Kiwilan\Typescriptable\Typed\Database\Types\MongodbColumn;
 use Kiwilan\Typescriptable\Typed\Database\Types\MysqlColumn;
 use Kiwilan\Typescriptable\Typed\Database\Types\PostgreColumn;
 use Kiwilan\Typescriptable\Typed\Database\Types\SqliteColumn;
@@ -71,11 +72,12 @@ class Table
         $attributes = [];
 
         $driver = match ($this->driver) {
-            'mysql' => fn ($data) => MysqlColumn::make($data),
-            'mariadb' => fn ($data) => MysqlColumn::make($data),
-            'pgsql' => fn ($data) => PostgreColumn::make($data),
-            'sqlite' => fn ($data) => SqliteColumn::make($data),
-            'sqlsrv' => fn ($data) => SqlServerColumn::make($data),
+            'mysql' => MysqlColumn::class,
+            'mariadb' => MysqlColumn::class,
+            'pgsql' => PostgreColumn::class,
+            'sqlite' => SqliteColumn::class,
+            'sqlsrv' => SqlServerColumn::class,
+            'mongodb' => MongodbColumn::class,
             default => null,
         };
 
@@ -94,15 +96,16 @@ class Table
             return [];
         }
 
-        foreach (DB::select($this->select) as $data) {
-            $attribute = $driver($data);
+        $select = $this->driver === 'mongodb' ? [] : DB::select($this->select);
+        foreach ($select as $data) {
+            $attribute = $driver::make($data);
             $attributes[$attribute->name()] = $attribute;
         }
 
         return $attributes;
     }
 
-    private function setSelect(): string
+    private function setSelect(): ?string
     {
         return match ($this->driver) {
             'mysql' => "SHOW COLUMNS FROM {$this->name}",
@@ -110,6 +113,7 @@ class Table
             'pgsql' => "SELECT column_name, data_type, is_nullable, column_default FROM information_schema.columns WHERE table_name = '{$this->name}'",
             'sqlite' => "PRAGMA table_info({$this->name})",
             'sqlsrv' => "SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_DEFAULT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{$this->name}'",
+            'mongodb' => null,
             default => "SHOW COLUMNS FROM {$this->name}",
         };
     }

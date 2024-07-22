@@ -7,7 +7,9 @@ use Kiwilan\Typescriptable\Typed\Eloquent\Converter\EloquentToTypescript;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeArtisan;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeParser;
+use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserModelFillable;
 use Kiwilan\Typescriptable\Typed\Eloquent\Schema\SchemaApp;
+use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 
 class EloquentType
 {
@@ -36,8 +38,8 @@ class EloquentType
         $typescript = EloquentToTypescript::make($type->app()->models(), "{$type->config()->outputPath}/{$type->config()->tsFilename}");
         $typescript->print();
 
-        if ($this->config()->phpPath) {
-            $php = EloquentToPhp::make($type->app()->models(), $this->config()->phpPath);
+        if ($type->config()->phpPath) {
+            $php = EloquentToPhp::make($type->app()->models(), $type->config()->phpPath);
             $php->print();
         }
 
@@ -56,5 +58,19 @@ class EloquentType
     public function config(): EloquentConfig
     {
         return $this->config;
+    }
+
+    /**
+     * Parse MongoDB model.
+     */
+    protected function parseMongoDb(SchemaClass $schemaClass, string $driver): ?array
+    {
+        if ($driver !== 'mongodb') {
+            return null;
+        }
+
+        $fillable = ParserModelFillable::make($schemaClass);
+
+        return $fillable->attributes();
     }
 }
