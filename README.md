@@ -214,9 +214,15 @@ With options:
 -   --`R`|`routes-path`: Path to routes directory.
 -   --`O`|`output-path`: Path to output.
 
-## Troubleshooting
+## More
 
-### Database prefix
+### MongoDB
+
+`kiwilan/typescriptable-laravel` supports [MongoDB](https://github.com/mongodb/laravel-mongodb) with `mongodb/laravel-mongodb`. Due to the MongoDB structure, Typescript conversion aren't the same as SQL databases, precision is lower. If you want to improve it, you can add [an issue](https://github.com/kiwilan/typescriptable-laravel/issues/new/choose).
+
+### Troubleshooting
+
+#### Database prefix
 
 You can use `prefix` variable into `config/database.php` file.
 
@@ -228,7 +234,7 @@ You can use `prefix` variable into `config/database.php` file.
 ],
 ```
 
-### Override models
+#### Override models
 
 `kiwilan/typescriptable-laravel` will cover many cases, but if you want to override some models, you can just create a type like `resources/js/types/index.ts` and extends `Model` type.
 
@@ -243,11 +249,11 @@ interface BookAdvanced extends App.Models.Book {
 
 And you can import custom type in your code when you need to use advanced type.
 
-## Examples
+### Examples
 
 Check [examples](docs/examples.md) documentation.
 
-## Testing
+### Testing
 
 Create a `.env` file with your database configuration
 
