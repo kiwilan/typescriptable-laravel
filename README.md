@@ -82,7 +82,7 @@ composer require kiwilan/typescriptable-laravel:1.12.03
 
 ### About TypeScript
 
-If you want to use `.d.ts` files, you need to use TypeScript in your Laravel project, you have to create a `tsconfig.json` file and add `.d.ts` paths in `compilerOptions.types`:
+If you want to use `.d.ts` files, you need to use TypeScript in your Laravel project, you have to create a `tsconfig.json` file and add `.d.ts` paths in `include`:
 
 > [!NOTE]
 >
