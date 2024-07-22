@@ -50,7 +50,6 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 
 ### Roadmap
 
--   [ ] Improve `Casts\Attribute` methods
 -   [ ] Add parser for [calebporzio/sushi](https://github.com/calebporzio/sushi)
 -   [ ] Add parser for [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
 
