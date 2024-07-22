@@ -89,7 +89,7 @@ If you want to use `.d.ts` files, you need to use TypeScript in your Laravel pro
 >
 > If you change paths into config or with options, adapt paths.
 
-```json
+```jsonc
 {
     "compilerOptions": {
         "types": ["vite/client"]
