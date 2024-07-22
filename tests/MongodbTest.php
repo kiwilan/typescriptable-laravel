@@ -11,14 +11,14 @@ beforeEach(function () {
     deleteDir(outputDir('php'));
 });
 
-it('can be run', function () {
+it('can be run', function (string $engine) {
     TestCase::setupDatabase('mongodb');
 
     $type = EloquentType::make(new EloquentConfig(
         modelsPath: models(),
         outputPath: outputDir(),
         phpPath: outputDir().'/php',
-        useParser: true,
+        useParser: $engine === 'parser',
         skipModels: ['Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest'],
     ))->execute();
 
@@ -88,4 +88,4 @@ it('can be run', function () {
 
     $classes = $ts->onlyModels();
     expect(count($app->models()))->toBe(count($classes));
-});
+})->with(['artisan', 'parser']);
