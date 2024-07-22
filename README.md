@@ -24,7 +24,7 @@ If you want to use some helpers with [Inertia](https://inertiajs.com/), you can 
 
 ## Features
 
--   💽 All Laravel databases are supported: MySQL, MariaDB, PostgreSQL, SQLite, SQL Server, [MongoDB](https://github.com/mongodb/laravel-mongodb)
+-   💽 Supported Laravel drivers: MySQL, MariaDB, PostgreSQL, SQLite, SQL Server, [MongoDB](https://github.com/mongodb/laravel-mongodb)
 -   💬 Generate TS types for [Eloquent models](https://laravel.com/docs/master/eloquent)
 -   👭 Generate TS types for [Eloquent relations](https://laravel.com/docs/master/eloquent-relationships)
 -   🪄 Generate TS types for [`casts`](https://laravel.com/docs/11.x/eloquent-mutators#attribute-casting) (include native `enum` support)
