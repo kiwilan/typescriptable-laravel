@@ -6,7 +6,7 @@ it('config is ok', function () {
     config()->set('typescriptable.engine.models', 'parser');
     deleteDir(TypescriptableConfig::outputPath());
 
-    expect(TypescriptableConfig::engineModels())->toBeString();
+    expect(TypescriptableConfig::engineEloquent())->toBeString();
     expect(TypescriptableConfig::outputPath())->toBeString();
     expect(TypescriptableConfig::setPath())->toBeString();
     expect(TypescriptableConfig::setPath('filename.js'))->toBeString();
@@ -33,5 +33,5 @@ it('config is ok', function () {
 it('thrown error with engine models', function () {
     config()->set('typescriptable.engine.models', 'engine');
 
-    expect(fn () => TypescriptableConfig::engineModels())->toThrow(Exception::class);
+    expect(fn () => TypescriptableConfig::engineEloquent())->toThrow(Exception::class);
 });

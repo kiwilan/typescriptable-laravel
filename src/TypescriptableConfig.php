@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\File;
 
 class TypescriptableConfig
 {
-    public static function engineModels(): string
+    public static function engineEloquent(): string
     {
-        $engine = config('typescriptable.engine.models') ?? 'artisan';
+        $engine = config('typescriptable.engine.eloquent') ?? 'artisan';
 
         if (! in_array($engine, ['artisan', 'parser'])) {
-            throw new \Exception('Invalid engine models');
+            throw new \Exception('Invalid engine eloquent');
         }
 
         return $engine;

@@ -160,7 +160,7 @@ php artisan vendor:publish --tag="typescriptable-config"
 
 > [!IMPORTANT]
 >
-> You can configure `engine.models` with `artisan` or `parser` to change parser engine. By default, it uses `artisan` command with [`model:show`](https://blog.laravel.com/laravel-new-model-show-command) command. `artisan` is default engine because it's more reliable and faster than `parser` engine.
+> You can configure `engine.eloquent` with `artisan` or `parser` to change parser engine. By default, it uses `artisan` command with [`model:show`](https://blog.laravel.com/laravel-new-model-show-command) command. `artisan` is default engine because it's more reliable and faster than `parser` engine.
 
 ## Usage
 

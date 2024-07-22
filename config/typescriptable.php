@@ -9,7 +9,7 @@ return [
          * `artisan` will use the `php artisan model:show` command to parse the models.
          * `parser` will use internal engine to parse the models.
          */
-        'models' => 'artisan', // artisan / parser
+        'eloquent' => 'artisan', // artisan / parser
     ],
 
     /**
