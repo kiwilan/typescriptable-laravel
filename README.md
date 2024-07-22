@@ -262,9 +262,9 @@ And you can run tests
 composer test
 ```
 
-### Docker database
-
-You can check <https://gist.github.com/ewilan-riviere/101cb03ee381b0adc2a22826d84e7577> gist to have a Docker database configuration.
+> [!NOTE]
+>
+> You can check [this gist](https://gist.github.com/ewilan-riviere/101cb03ee381b0adc2a22826d84e7577) to have a Docker database configuration.
 
 ## Changelog
 
