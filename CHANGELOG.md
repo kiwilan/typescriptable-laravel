@@ -2,6 +2,39 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v3.0.0 - 2024-07-22
+
+Refactoring with Artisan command `show:model`
+
+- `typescriptable:models` command is now `typescriptable:eloquent` command (old command still works)
+- Add more tests to valid Eloquent parsing
+- Add mongodb support
+- Add new option into config to handle engine with two options `artisan` or `parser`
+  - `artisan` will parse models with Artisan command `show:model`
+  - `parser` will parse models with internal engine
+  
+
+```php
+'engine' => [
+  /**
+   * `artisan` will use the `php artisan model:show` command to parse the models.
+   * `parser` will use internal engine to parse the models.
+   */
+  'eloquent' => 'artisan', // artisan / parser
+],
+
+```
+**BREAKING CHANGES**
+
+- Change `models` entry into config to `eloquent`
+
+```diff
+- 'models => [
++ 'eloquent' => [
+  // ...
+],
+
+```
 ## v2.0.07 - 2024-06-14
 
 - Fix `EloquentPhp::class` for `\` duplicates
@@ -42,6 +75,7 @@ To install package with old versions of Laravel, use the following command:
 
 ```bash
 composer require kiwilan/typescriptable-laravel:1.12.03
+
 
 
 
