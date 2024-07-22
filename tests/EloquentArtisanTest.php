@@ -107,7 +107,7 @@ it('can be run with artisan', function (string $driver) {
     expect($budget->nullable())->toBeFalse();
     expect($budget->default())->toBeIn(['draft', "'draft'", "'draft'::character varying", "('draft')"]);
     expect($budget->unique())->toBeFalse();
-    expect($budget->fillable())->toBeTrue();
+    expect($budget->fillable())->toBeFalse();
     expect($budget->hidden())->toBeTrue();
     expect($budget->appended())->toBeFalse();
     expect($budget->cast())->toBe('Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum');
