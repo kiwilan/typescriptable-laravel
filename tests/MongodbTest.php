@@ -36,7 +36,6 @@ it('can be run', function (string $engine) {
     $data = $ts->raw();
 
     $movie = $data['Movie'];
-    ray($movie);
 
     $title = $movie['title'];
     expect($title['type'])->toBe('string');

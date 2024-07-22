@@ -8,5 +8,5 @@ beforeEach(function () {
 
 it('can type routes', function () {
     $type = RouteType::make(routes(), true, outputDir());
-    ray($type);
+    // ray($type);
 });
