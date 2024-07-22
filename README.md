@@ -229,8 +229,6 @@ You can use `prefix` variable into `config/database.php` file.
 ],
 ```
 
-Two configs works.
-
 ### Override models
 
 `kiwilan/typescriptable-laravel` will cover many cases, but if you want to override some models, you can just create a type like `resources/js/types/index.ts` and extends `Model` type.
