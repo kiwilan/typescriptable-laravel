@@ -26,7 +26,7 @@ class ParserModelFillable
 
         $model = $self->namespace;
         /** @var Model */
-        $instance = new $model();
+        $instance = new $model;
 
         $key = $instance->getKeyName();
         $casts = $instance->getCasts();

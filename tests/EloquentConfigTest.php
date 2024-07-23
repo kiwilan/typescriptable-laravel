@@ -7,7 +7,7 @@ it('can use default config', function () {
         'Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest',
     ]]);
 
-    $config = new EloquentConfig();
+    $config = new EloquentConfig;
 
     expect($config->modelsPath)->toContain('vendor/orchestra/testbench-core/laravel/app/Models');
     expect($config->outputPath)->toContain('vendor/orchestra/testbench-core/laravel/resources/js');

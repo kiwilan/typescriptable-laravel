@@ -46,7 +46,7 @@ class TestCase extends Orchestra
      */
     private static function getDriver(?string $type = null): Driver
     {
-        $driver = new Driver();
+        $driver = new Driver;
 
         $dotenv = Dotenv::createMutable(getcwd());
         $data = $dotenv->load();
