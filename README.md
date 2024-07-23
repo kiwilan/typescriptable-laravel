@@ -214,7 +214,7 @@ With options:
 -   --`R`|`routes-path`: Path to routes directory.
 -   --`O`|`output-path`: Path to output.
 
-## More
+## Advanced
 
 ### MongoDB
 
@@ -222,9 +222,7 @@ With options:
 
 Database isn't parsed like with relational databases. The package will parse `key`, `fillable` and `hidden` to get all fields. If some fields are missing, you can [override them manually](https://github.com/kiwilan/typescriptable-laravel#override-models). All relations and accessors are supported.
 
-### Troubleshooting
-
-#### Database prefix
+### Database prefix
 
 You can use `prefix` variable into `config/database.php` file.
 
@@ -236,7 +234,7 @@ You can use `prefix` variable into `config/database.php` file.
 ],
 ```
 
-#### Override models
+### Override models
 
 `kiwilan/typescriptable-laravel` will cover many cases, but if you want to override some models, you can just create a type like `resources/js/types/index.ts` and extends `Model` type.
 
