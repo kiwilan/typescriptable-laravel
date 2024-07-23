@@ -2,13 +2,13 @@
 
 namespace Kiwilan\Typescriptable\Typed;
 
-use Kiwilan\Typescriptable\Typed\Eloquent\Converter\EloquentToPhp;
-use Kiwilan\Typescriptable\Typed\Eloquent\Converter\EloquentToTypescript;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeArtisan;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeParser;
 use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserModelFillable;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\SchemaApp;
+use Kiwilan\Typescriptable\Typed\Eloquent\Printer\PrinterToPhp;
+use Kiwilan\Typescriptable\Typed\Eloquent\Printer\PrinterToTypescript;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\SchemaApp;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 
 class EloquentType
@@ -35,11 +35,11 @@ class EloquentType
 
         $type->run();
 
-        $typescript = EloquentToTypescript::make($type->app()->models(), "{$type->config()->outputPath}/{$type->config()->tsFilename}");
+        $typescript = PrinterToTypescript::make($type->app()->models(), "{$type->config()->outputPath}/{$type->config()->tsFilename}");
         $typescript->print();
 
         if ($type->config()->phpPath) {
-            $php = EloquentToPhp::make($type->app()->models(), $type->config()->phpPath);
+            $php = PrinterToPhp::make($type->app()->models(), $type->config()->phpPath);
             $php->print();
         }
 

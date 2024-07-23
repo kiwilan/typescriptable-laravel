@@ -2,44 +2,109 @@
 
 namespace Kiwilan\Typescriptable\Typed;
 
+use Illuminate\Foundation\Console\RouteListCommand;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
-use Kiwilan\Typescriptable\Typed\Route\RouteGenerator;
-use Kiwilan\Typescriptable\Typed\Route\RouteList;
-use Kiwilan\Typescriptable\Typed\Route\RouteTypes;
+use Kiwilan\Typescriptable\Typed\Route\Printer\PrinterToList;
+use Kiwilan\Typescriptable\Typed\Route\Printer\PrinterToTypes;
+use Kiwilan\Typescriptable\Typed\Route\RouteConfig;
+use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItem;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class RouteType
 {
+    /**
+     * @param  Collection<string, RouteTypeItem>  $routes
+     */
     protected function __construct(
-        public string $path,
-        public string $pathList,
+        protected RouteConfig $config,
+        protected ?Collection $routes = null,
+        protected ?string $typescriptList = null,
+        protected ?string $typescriptTypes = null,
     ) {}
 
-    public static function make(?string $jsonOutput = null, bool $withList = false, ?string $outputPath = null): self
+    public static function make(RouteConfig $config): self
     {
-        $filename = TypescriptableConfig::routesFilename();
-        $filenameRoutes = TypescriptableConfig::routesFilenameList();
+        $self = new self($config);
+        $self->routes = $self->parseRoutes();
 
-        $routes = RouteGenerator::make($jsonOutput)->get();
-        $routeTypes = RouteTypes::make($routes)->get();
-        $routeList = RouteList::make($routes)->get();
+        $self->typescriptList = PrinterToList::make($self->routes);
+        ray($self->typescriptList);
+        $self->typescriptTypes = PrinterToTypes::make($self->routes);
+        ray($self->typescriptTypes);
 
-        $file = $outputPath.DIRECTORY_SEPARATOR.$filename;
-        $fileRoutes = $outputPath.DIRECTORY_SEPARATOR.$filenameRoutes;
+        // handle TypescriptableConfig::routesUsePath()
 
-        if (! $outputPath) {
-            $file = TypescriptableConfig::setPath($filename);
-            $fileRoutes = TypescriptableConfig::setPath($filenameRoutes);
-        }
+        // if (! $outputPath) {
+        //     $file = TypescriptableConfig::setPath($filename);
+        //     $fileRoutes = TypescriptableConfig::setPath($filenameRoutes);
+        // }
 
-        $self = new self($file, $fileRoutes);
-
-        $self->print($file, $routeTypes);
-        if ($withList) {
-            $self->print($fileRoutes, $routeList);
-        }
+        // $self->print($file, $routeTypes);
+        // if ($withList) {
+        //     $self->print($fileRoutes, $routeList);
+        // }
 
         return $self;
+    }
+
+    /**
+     * @return Collection<string, RouteTypeItem>
+     */
+    private function parseRoutes(): Collection
+    {
+        if ($this->config->json === null) {
+            Artisan::call(RouteListCommand::class);
+            $json = Artisan::output();
+            $this->config->json = json_decode($json, true);
+        }
+
+        $routes = $this->config->json;
+
+        $skipNames = $this->toSkip(TypescriptableConfig::routesSkipName());
+        $skipPaths = $this->toSkip(TypescriptableConfig::routesSkipPath());
+
+        $routes = array_filter($routes, fn ($route) => $this->filterBy($route, 'uri', $skipPaths));
+        $routes = array_filter($routes, fn ($route) => $this->filterBy($route, 'name', $skipNames));
+        $routes = array_values($routes);
+
+        $collect = collect();
+        foreach ($routes as $route) {
+            $item = RouteTypeItem::make($route);
+            $collect->put($item->id(), $item);
+        }
+
+        return $collect;
+    }
+
+    /**
+     * Get the routes to skip.
+     *
+     * @param  string[]  $toSkip
+     * @return string[]
+     */
+    private function toSkip(array $toSkip): array
+    {
+        $items = [];
+        foreach ($toSkip as $item) {
+            $item = str_replace('/*', '', $item);
+            $item = str_replace('.*', '', $item);
+            array_push($items, $item);
+        }
+
+        return $items;
+    }
+
+    private function filterBy(array $route, string $attribute, array $toSkip): bool
+    {
+        foreach ($toSkip as $skip) {
+            if (str_starts_with($route[$attribute], $skip)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function print(string $path, string $content): void

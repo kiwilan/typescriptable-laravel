@@ -1,14 +1,14 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent\Converter;
+namespace Kiwilan\Typescriptable\Typed\Eloquent\Printer;
 
 use Illuminate\Support\Facades\File;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModel;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModel;
 use Kiwilan\Typescriptable\Typed\Utils\LaravelPaginateType;
 use Kiwilan\Typescriptable\Typescriptable;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
-class EloquentToTypescript
+class PrinterToTypescript
 {
     protected function __construct(
         public string $path,

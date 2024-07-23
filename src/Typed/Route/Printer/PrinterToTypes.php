@@ -1,18 +1,15 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Route;
+namespace Kiwilan\Typescriptable\Typed\Route\Printer;
 
 use Closure;
 use Illuminate\Support\Collection;
-use Kiwilan\Typescriptable\Typed\Route\Models\TypeRoute;
-use Kiwilan\Typescriptable\Typed\Route\Models\TypeRouteParam;
+use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItem;
+use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItemParam;
 use Kiwilan\Typescriptable\Typescriptable;
 
-class RouteTypes
+class PrinterToTypes
 {
-    /** @var Collection<string, TypeRoute> */
-    protected Collection $routes;
-
     // ROUTE NAMES
 
     protected ?string $tsNames = null;
@@ -40,15 +37,24 @@ class RouteTypes
     protected ?string $tsGlobalTypesDelete = null;
 
     /**
-     * @param  Collection<string, TypeRoute>  $routes
+     * @param  Collection<string, RouteTypeItem>  $routes
      */
-    public static function make(Collection $routes): self
-    {
-        $self = new self();
-        $self->routes = $routes;
-        $self->parse();
+    protected function __construct(
+        protected Collection $routes,
+    ) {}
 
-        return $self;
+    /**
+     * @param  Collection<string, RouteTypeItem>  $routes
+     */
+    public static function make(Collection $routes): string
+    {
+        $self = new self($routes);
+
+        $self->tsNames = $self->typescriptNames();
+        $self->tsPaths = $self->typescriptPaths();
+        $self->tsParams = $self->typescriptParams();
+
+        return $self->get();
     }
 
     public function get(): string
@@ -86,17 +92,10 @@ class RouteTypes
         typescript;
     }
 
-    private function parse()
-    {
-        $this->tsNames = $this->setTsNames();
-        $this->tsPaths = $this->setTsPaths();
-        $this->tsParams = $this->setTsParams();
-    }
-
-    private function setTsNames(): string
+    private function typescriptNames(): string
     {
         $names = [];
-        $this->collectRoutes(function (TypeRoute $route) use (&$names) {
+        $this->collectRoutes(function (RouteTypeItem $route) use (&$names) {
             $names[] = "'{$route->name()}'";
         });
 
@@ -106,10 +105,10 @@ class RouteTypes
         return implode(' | ', $names);
     }
 
-    private function setTsPaths(): string
+    private function typescriptPaths(): string
     {
         $uri = [];
-        $this->collectRoutes(function (TypeRoute $route) use (&$uri) {
+        $this->collectRoutes(function (RouteTypeItem $route) use (&$uri) {
             if ($route->uri() === '/') {
                 $uri[] = "'/'";
 
@@ -125,14 +124,14 @@ class RouteTypes
         return implode(' | ', $uri);
     }
 
-    private function setTsParams(): string
+    private function typescriptParams(): string
     {
-        return $this->collectRoutes(function (TypeRoute $route) {
+        return $this->collectRoutes(function (RouteTypeItem $route) {
             $hasParams = count($route->parameters()) > 0;
 
             if ($hasParams) {
                 $params = collect($route->parameters())
-                    ->map(fn (TypeRouteParam $param) => "'{$param->name()}': App.Route.ParamType")
+                    ->map(fn (RouteTypeItemParam $param) => "'{$param->name()}': App.Route.ParamType")
                     ->join("\n");
 
                 return "    '{$route->name()}': {\n      {$params}\n    }";
@@ -144,7 +143,7 @@ class RouteTypes
 
     private function collectRoutes(Closure $closure, ?string $join = null): string|Collection
     {
-        $routes = $this->routes->map(fn (TypeRoute $route, string $key) => $closure($route, $key));
+        $routes = $this->routes->map(fn (RouteTypeItem $route, string $key) => $closure($route, $key));
 
         if ($join) {
             return $routes->join($join);

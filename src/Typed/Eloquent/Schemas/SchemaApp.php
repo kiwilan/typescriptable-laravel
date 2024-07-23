@@ -1,11 +1,11 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent\Schema;
+namespace Kiwilan\Typescriptable\Typed\Eloquent\Schemas;
 
 use Illuminate\Support\Facades\Schema;
 use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserAccessor;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModel;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModelAttribute;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModel;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModelAttribute;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 
 class SchemaApp

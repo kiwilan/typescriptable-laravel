@@ -4,6 +4,7 @@ namespace Kiwilan\Typescriptable;
 
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Typed\EloquentType;
+use Kiwilan\Typescriptable\Typed\Route\RouteConfig;
 use Kiwilan\Typescriptable\Typed\RouteType;
 use Kiwilan\Typescriptable\Typed\SettingType;
 
@@ -30,9 +31,9 @@ class Typescriptable
         return EloquentType::make($config)->execute();
     }
 
-    public static function routes(string $json_output, bool $with_list, string $output_path): RouteType
+    public static function routes(RouteConfig $config): RouteType
     {
-        return RouteType::make($json_output, $with_list, $output_path);
+        return RouteType::make($config);
     }
 
     public static function settings(string $settings_path, string $output_path, string $extends): ?SettingType

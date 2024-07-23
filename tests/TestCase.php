@@ -194,12 +194,7 @@ class TestCase extends Orchestra
             Schema::dropAllTables($driver->database);
         }
 
-        if ($driver->name === 'mongodb') {
-            $migration = include __DIR__.'/Data/database/migrations/create_models_tables_mongodb.php';
-        } else {
-            $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
-        }
-
+        $migration = include __DIR__.'/Data/database/migrations/create_models_tables.php';
         $migration->up();
     }
 }

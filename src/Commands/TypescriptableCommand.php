@@ -14,42 +14,34 @@ class TypescriptableCommand extends Command
 
     public $description = 'Generate types.';
 
-    public function __construct(
-        public bool $eloquent = false,
-        public bool $routes = false,
-        public bool $settings = false,
-    ) {
-        parent::__construct();
-    }
-
     public function handle(): int
     {
         $this->newLine();
         $this->info('Generating types...');
 
-        $this->eloquent = $this->option('eloquent') ?: false;
-        $this->routes = $this->option('routes') ?: false;
-        $this->settings = $this->option('settings') ?: false;
+        $eloquent = $this->option('eloquent') ?: false;
+        $routes = $this->option('routes') ?: false;
+        $settings = $this->option('settings') ?: false;
 
-        if (! $this->eloquent && ! $this->routes && ! $this->settings) {
-            $this->eloquent = true;
-            $this->routes = true;
-            $this->settings = true;
+        if (! $eloquent && ! $routes && ! $settings) {
+            $eloquent = true;
+            $routes = true;
+            $settings = true;
         }
 
-        if ($this->eloquent) {
+        if ($eloquent) {
             $this->info('Generating types for Eloquent...');
             Artisan::call('typescriptable:eloquent', [
             ], $this->output);
         }
 
-        if ($this->routes) {
+        if ($routes) {
             $this->info('Generating types for Routes...');
             Artisan::call('typescriptable:routes', [
             ], $this->output);
         }
 
-        if ($this->settings) {
+        if ($settings) {
             $this->info('Generating types for Settings...');
             Artisan::call('typescriptable:settings', [
             ], $this->output);

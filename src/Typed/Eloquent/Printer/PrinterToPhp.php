@@ -1,11 +1,11 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent\Converter;
+namespace Kiwilan\Typescriptable\Typed\Eloquent\Printer;
 
 use Illuminate\Support\Facades\File;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModel;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModel;
 
-class EloquentToPhp
+class PrinterToPhp
 {
     /** @var array<string,string> */
     public array $content;

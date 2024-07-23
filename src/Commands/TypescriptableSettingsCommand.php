@@ -14,21 +14,13 @@ class TypescriptableSettingsCommand extends Command
 
     public $description = 'Generate Spatie Settings types.';
 
-    public function __construct(
-        public ?string $settingsPath = null,
-        public ?string $outputPath = null,
-        public ?string $extends = null,
-    ) {
-        parent::__construct();
-    }
-
     public function handle(): int
     {
-        $this->settingsPath = (string) $this->option('settings-path');
-        $this->outputPath = (string) $this->option('output-path');
-        $this->extends = (string) $this->option('extends');
+        $settingsPath = (string) $this->option('settings-path');
+        $outputPath = (string) $this->option('output-path');
+        $extends = (string) $this->option('extends');
 
-        Typescriptable::settings($this->settingsPath, $this->outputPath, $this->extends);
+        Typescriptable::settings($settingsPath, $outputPath, $extends);
 
         $this->info('Generated settings types.');
 

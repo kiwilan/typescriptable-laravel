@@ -8,7 +8,7 @@ use Kiwilan\Typescriptable\Typed\Database\Types\MysqlColumn;
 use Kiwilan\Typescriptable\Typed\Database\Types\PostgreColumn;
 use Kiwilan\Typescriptable\Typed\Database\Types\SqliteColumn;
 use Kiwilan\Typescriptable\Typed\Database\Types\SqlServerColumn;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModelAttribute;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModelAttribute;
 
 class Table
 {

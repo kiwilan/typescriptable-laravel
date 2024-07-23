@@ -9,7 +9,6 @@ beforeEach(function () {
 
 it('can be run', function () {
     Artisan::call('typescriptable:routes', [
-        '--json' => routes(),
         '--list' => true,
         '--output-path' => outputDir(),
     ]);

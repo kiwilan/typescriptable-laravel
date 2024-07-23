@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model;
+namespace Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model;
 
 use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserAccessor;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;

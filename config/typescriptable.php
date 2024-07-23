@@ -62,8 +62,8 @@ return [
      * Options for the routes.
      */
     'routes' => [
-        'filename' => 'types-routes.d.ts',
-        'filename_list' => 'routes.ts',
+        'types' => 'types-routes.d.ts',
+        'list' => 'routes.ts',
         /**
          * Use routes `path` instead of `name` for the type name.
          */
@@ -73,19 +73,21 @@ return [
          */
         'skip' => [
             'name' => [
-                '__clockwork.*',
                 'debugbar.*',
                 'horizon.*',
                 'telescope.*',
                 'nova.*',
                 'lighthouse.*',
-                'livewire.*',
-                'ignition.*',
                 'filament.*',
                 'log-viewer.*',
+                'two-factor.*',
             ],
             'path' => [
-                'api/*',
+                '_ignition/*',
+                '__clockwork/*',
+                'clockwork/*',
+                'two-factor-challenge',
+                'livewire',
             ],
         ],
     ],

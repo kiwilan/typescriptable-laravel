@@ -5,17 +5,8 @@ namespace App\Models;
 class Movie extends \Illuminate\Database\Eloquent\Model
 {
     use \Illuminate\Database\Eloquent\Concerns\HasUlids;
-    use \Illuminate\Database\Eloquent\Factories\HasFactory;
 
-    protected $fillable = [
-        'title',
-        'subtitles',
-        'homepage',
-        'revenue',
-        'is_multilingual',
-        'added_at',
-        'fetched_at',
-    ];
+    protected $fillable = ['title', 'subtitles', 'homepage', 'revenue', 'is_multilingual', 'added_at', 'fetched_at'];
 
     protected $casts = [
         'subtitles' => 'array',
@@ -26,15 +17,9 @@ class Movie extends \Illuminate\Database\Eloquent\Model
         'added_at' => 'datetime:Y-m-d',
     ];
 
-    protected $appends = [
-        'show_route',
-        'api_route',
-    ];
+    protected $appends = ['show_route', 'api_route'];
 
-    protected $hidden = [
-        'budget',
-        'edition',
-    ];
+    protected $hidden = ['budget', 'edition'];
 
     public function getShowRouteAttribute(): string
     {
@@ -46,9 +31,7 @@ class Movie extends \Illuminate\Database\Eloquent\Model
      */
     protected function apiRoute(): \Illuminate\Database\Eloquent\Casts\Attribute
     {
-        return \Illuminate\Database\Eloquent\Casts\Attribute::make(
-            get: fn (?string $value) => ucfirst($value),
-        );
+        return \Illuminate\Database\Eloquent\Casts\Attribute::make(get: fn (?string $value) => ucfirst($value));
     }
 
     public function recommendations(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
