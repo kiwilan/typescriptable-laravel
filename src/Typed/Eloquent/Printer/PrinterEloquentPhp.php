@@ -5,7 +5,7 @@ namespace Kiwilan\Typescriptable\Typed\Eloquent\Printer;
 use Illuminate\Support\Facades\File;
 use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModel;
 
-class PrinterToPhp
+class PrinterEloquentPhp
 {
     /** @var array<string,string> */
     public array $content;

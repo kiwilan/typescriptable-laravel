@@ -19,7 +19,7 @@ class EloquentList
     public static function make(?string $path = null): self
     {
         if (! $path) {
-            $path = app_path().'/Models';
+            $path = TypescriptableConfig::eloquentDirectory();
         }
 
         $self = new self($path);

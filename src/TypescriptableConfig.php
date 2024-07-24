@@ -77,6 +77,11 @@ class TypescriptableConfig
         return config('typescriptable.settings.directory') ?? app_path('Settings');
     }
 
+    public static function settingsExtends(): ?string
+    {
+        return config('typescriptable.settings.extends') ?? null;
+    }
+
     public static function settingsSkip(): array
     {
         return config('typescriptable.settings.skip') ?? [];
@@ -90,6 +95,16 @@ class TypescriptableConfig
     public static function routesFilenameList(): string
     {
         return config('typescriptable.routes.filename_list') ?? 'routes.ts';
+    }
+
+    public static function routesPrintList(): bool
+    {
+        return config('typescriptable.routes.print_list') ?? true;
+    }
+
+    public static function routesAddToWindow(): bool
+    {
+        return config('typescriptable.routes.add_to_window') ?? true;
     }
 
     public static function routesUsePath(): bool

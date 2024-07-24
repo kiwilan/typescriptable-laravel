@@ -34,7 +34,7 @@ class RouteTypeItem
 
         $self = new self(
             domain: $route['domain'] ?? null,
-            uri: "/{$uri}",
+            uri: $uri === '/' ? $uri : "/{$uri}",
             name: $route['name'] ?? null,
             action: $route['action'] ?? null,
             methodMain: $methods[0] ?? 'GET',
@@ -45,7 +45,8 @@ class RouteTypeItem
         $self->parameters = $self->parseParameters();
 
         if (! $self->name) {
-            $self->name = Str::slug($self->uri, '.');
+            $name = str_replace('/', '.', $self->uri);
+            $self->name = Str::slug($name, '.');
         }
 
         return $self;

@@ -13,7 +13,7 @@ return [
     ],
 
     /**
-     * The path to the output directory.
+     * The path to the output directory for all the types.
      */
     'output_path' => resource_path('js'),
 
@@ -29,6 +29,8 @@ return [
         /**
          * The path to print PHP classes if you want to convert Models to simple classes.
          * If null will not print PHP classes.
+         *
+         * @example `app_path('Raw')`
          */
         'php_path' => null,
         /**
@@ -52,6 +54,10 @@ return [
          */
         'directory' => app_path('Settings'),
         /**
+         * Extended class for the settings.
+         */
+        'extends' => 'Spatie\LaravelSettings\Settings',
+        /**
          * Settings to skip.
          */
         'skip' => [
@@ -62,8 +68,22 @@ return [
      * Options for the routes.
      */
     'routes' => [
+        /**
+         * The path to the routes types.
+         */
         'types' => 'types-routes.d.ts',
+        /**
+         * The path to the routes list.
+         */
         'list' => 'routes.ts',
+        /**
+         * Whether to print the list of routes.
+         */
+        'print_list' => true,
+        /**
+         * Add routes to `window` from list, can be find with `window.Routes`.
+         */
+        'add_to_window' => true,
         /**
          * Use routes `path` instead of `name` for the type name.
          */

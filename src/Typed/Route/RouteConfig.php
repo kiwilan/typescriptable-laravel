@@ -6,12 +6,22 @@ use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class RouteConfig
 {
+    /**
+     * @param  string[]  $namesToSkip
+     * @param  string[]  $pathsToSkip
+     */
     public function __construct(
-        public ?string $pathTypes = null,
-        public ?string $pathList = null,
+        public ?string $filenameTypes = null,
+        public ?string $filenameList = null,
+        public bool $printList = true,
         public ?array $json = null,
+        public array $namesToSkip = [],
+        public array $pathsToSkip = [],
     ) {
-        $this->pathTypes = $pathTypes.DIRECTORY_SEPARATOR.TypescriptableConfig::routesFilename();
-        $this->pathList = $pathList.DIRECTORY_SEPARATOR.TypescriptableConfig::routesFilenameList();
+        $this->filenameTypes = TypescriptableConfig::routesFilename();
+        $this->filenameList = TypescriptableConfig::routesFilenameList();
+        $this->printList = TypescriptableConfig::routesPrintList();
+        $this->namesToSkip = TypescriptableConfig::routesSkipName();
+        $this->pathsToSkip = TypescriptableConfig::routesSkipPath();
     }
 }

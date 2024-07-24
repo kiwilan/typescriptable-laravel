@@ -6,17 +6,16 @@ use Kiwilan\Typescriptable\Tests\TestCase;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    deleteFile(outputDir('types-eloquent.d.ts'));
+    deleteFile(outputDir(TypescriptableConfig::eloquentFilename()));
+    config()->set('typescriptable.eloquent.directory', models());
+    config()->set('typescriptable.eloquent.php_path', outputDir('php'));
+    config()->set('typescriptable.eloquent.paginate', true);
 });
 
 it('can use command', function () {
+    config()->set('typescriptable.engine.eloquent', 'artisan');
     TestCase::setupDatabase('sqlite');
-    Artisan::call(TypescriptableEloquentCommand::class, [
-        '--models-path' => models(),
-        '--output-path' => outputDir(),
-        '--php-path' => outputDir().'/php',
-        '--parser' => false,
-    ]);
+    Artisan::call(TypescriptableEloquentCommand::class);
 
     expect(true)->toBeTrue(); // fake assertion to check if the command runs without error
     $eloquent = outputDir(TypescriptableConfig::eloquentFilename());
@@ -24,12 +23,8 @@ it('can use command', function () {
 });
 
 it('can use alias command', function () {
-    Artisan::call('typescriptable:models', [
-        '--models-path' => models(),
-        '--output-path' => outputDir(),
-        '--php-path' => outputDir().'/php',
-        '--parser' => true,
-    ]);
+    config()->set('typescriptable.engine.eloquent', 'parser');
+    Artisan::call('typescriptable:models');
 
     expect(true)->toBeTrue(); // fake assertion to check if the command runs without error
     $eloquent = outputDir(TypescriptableConfig::eloquentFilename());

@@ -6,8 +6,9 @@ use Illuminate\Support\Collection;
 use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItem;
 use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItemParam;
 use Kiwilan\Typescriptable\Typescriptable;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
-class PrinterToList
+class PrinterRouteList
 {
     /**
      * @param  Collection<string, RouteTypeItem>  $routes
@@ -29,24 +30,35 @@ class PrinterToList
         $head = Typescriptable::head();
         $appUrl = config('app.url');
 
+        $global = '';
+        $addToWindow = '';
+        if (TypescriptableConfig::routesAddToWindow()) {
+            $global = <<<'typescript'
+
+            declare global {
+              interface Window {
+                Routes: Record<App.Route.Name, App.Route.Link>
+              }
+            }
+
+            typescript;
+            $addToWindow = <<<'typescript'
+
+            if (typeof window !== 'undefined') {
+              window.Routes = Routes
+            }
+
+            typescript;
+        }
+
         return <<<typescript
         {$head}
         const Routes: Record<App.Route.Name, App.Route.Link> = {
-        {$contents},
+        {$contents}
         }
-
-        declare global {
-          interface Window {
-            Routes: Record<App.Route.Name, App.Route.Link>
-          }
-        }
-
+        {$global}
         const appUrl = '{$appUrl}'
-
-        if (typeof window !== 'undefined') {
-          window.Routes = Routes
-        }
-
+        {$addToWindow}
         export { Routes, appUrl }
 
         typescript;
@@ -80,13 +92,17 @@ class PrinterToList
         $methods = array_map(fn ($method) => "'{$method}'", $methods);
         $methods = implode(', ', $methods);
 
+        $name = TypescriptableConfig::routesUsePath()
+          ? $route->uri()
+          : $route->name();
+
         return <<<typescript
-          '{$route->name()}': {
+          '{$name}': {
             name: '{$route->name()}',
             path: '{$route->uri()}',
             {$params},
             methods: [{$methods}],
-          }
+          },
         typescript;
     }
 }

@@ -7,40 +7,18 @@ use Illuminate\Support\Collection;
 use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItem;
 use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItemParam;
 use Kiwilan\Typescriptable\Typescriptable;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
-class PrinterToTypes
+class PrinterRouteTypes
 {
-    // ROUTE NAMES
-
-    protected ?string $tsNames = null;
-
-    protected ?string $tsPaths = null;
-
-    protected ?string $tsParams = null;
-
-    // GLOBAL TYPES
-
-    protected ?string $tsTypes = null;
-
-    protected ?string $tsGlobalTypes = null;
-
-    // TYPES
-
-    protected ?string $tsGlobalTypesGet = null;
-
-    protected ?string $tsGlobalTypesPost = null;
-
-    protected ?string $tsGlobalTypesPut = null;
-
-    protected ?string $tsGlobalTypesPatch = null;
-
-    protected ?string $tsGlobalTypesDelete = null;
-
     /**
      * @param  Collection<string, RouteTypeItem>  $routes
      */
     protected function __construct(
         protected Collection $routes,
+        protected ?string $routeNames = null,
+        protected ?string $routePaths = null,
+        protected ?string $routeParams = null,
     ) {}
 
     /**
@@ -50,34 +28,28 @@ class PrinterToTypes
     {
         $self = new self($routes);
 
-        $self->tsNames = $self->typescriptNames();
-        $self->tsPaths = $self->typescriptPaths();
-        $self->tsParams = $self->typescriptParams();
+        $routeNames = $self->parseRouteNames();
+        $self->routeNames = empty($routeNames) ? 'never' : $routeNames;
 
-        return $self->get();
+        $routePaths = $self->parseRoutePaths();
+        $self->routePaths = empty($routePaths) ? 'never' : $routePaths;
+
+        $self->routeParams = $self->parseRouteParams();
+
+        return $self->typescript();
     }
 
-    public function get(): string
+    public function typescript(): string
     {
-        $this->tsNames = empty($this->tsNames) ? 'never' : $this->tsNames;
-        $this->tsPaths = empty($this->tsPaths) ? 'never' : $this->tsPaths;
-
-        $this->tsGlobalTypes = empty($this->tsGlobalTypes) ? 'never' : $this->tsGlobalTypes;
-        $this->tsGlobalTypesGet = empty($this->tsGlobalTypesGet) ? 'never' : $this->tsGlobalTypesGet;
-        $this->tsGlobalTypesPost = empty($this->tsGlobalTypesPost) ? 'never' : $this->tsGlobalTypesPost;
-        $this->tsGlobalTypesPut = empty($this->tsGlobalTypesPut) ? 'never' : $this->tsGlobalTypesPut;
-        $this->tsGlobalTypesPatch = empty($this->tsGlobalTypesPatch) ? 'never' : $this->tsGlobalTypesPatch;
-        $this->tsGlobalTypesDelete = empty($this->tsGlobalTypesDelete) ? 'never' : $this->tsGlobalTypesDelete;
-
         $head = Typescriptable::head();
 
         return <<<typescript
         {$head}
         declare namespace App.Route {
-          export type Name = {$this->tsNames};
-          export type Path = {$this->tsPaths};
+          export type Name = {$this->routeNames};
+          export type Path = {$this->routePaths};
           export interface Params {
-        {$this->tsParams}
+        {$this->routeParams}
           }
 
           export type Method = 'HEAD' | 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
@@ -92,11 +64,15 @@ class PrinterToTypes
         typescript;
     }
 
-    private function typescriptNames(): string
+    private function parseRouteNames(): string
     {
         $names = [];
         $this->collectRoutes(function (RouteTypeItem $route) use (&$names) {
-            $names[] = "'{$route->name()}'";
+            $name = TypescriptableConfig::routesUsePath()
+                ? $route->uri()
+                : $route->name();
+
+            $names[] = "'{$name}'";
         });
 
         $names = array_unique($names);
@@ -105,7 +81,7 @@ class PrinterToTypes
         return implode(' | ', $names);
     }
 
-    private function typescriptPaths(): string
+    private function parseRoutePaths(): string
     {
         $uri = [];
         $this->collectRoutes(function (RouteTypeItem $route) use (&$uri) {
@@ -115,7 +91,7 @@ class PrinterToTypes
                 return;
             }
 
-            $uri[] = "'/{$route->uri()}'";
+            $uri[] = "'{$route->uri()}'";
         });
 
         $uri = array_unique($uri);
@@ -124,19 +100,22 @@ class PrinterToTypes
         return implode(' | ', $uri);
     }
 
-    private function typescriptParams(): string
+    private function parseRouteParams(): string
     {
         return $this->collectRoutes(function (RouteTypeItem $route) {
             $hasParams = count($route->parameters()) > 0;
+            $name = TypescriptableConfig::routesUsePath()
+                ? $route->uri()
+                : $route->name();
 
             if ($hasParams) {
                 $params = collect($route->parameters())
                     ->map(fn (RouteTypeItemParam $param) => "'{$param->name()}': App.Route.ParamType")
-                    ->join("\n");
+                    ->join("\n      ");
 
-                return "    '{$route->name()}': {\n      {$params}\n    }";
+                return "    '$name}': {\n      {$params}\n    }";
             } else {
-                return "    '{$route->name()}': never";
+                return "    '{$name}': never";
             }
         }, "\n");
     }

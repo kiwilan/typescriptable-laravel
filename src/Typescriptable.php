@@ -6,7 +6,8 @@ use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Typed\EloquentType;
 use Kiwilan\Typescriptable\Typed\Route\RouteConfig;
 use Kiwilan\Typescriptable\Typed\RouteType;
-use Kiwilan\Typescriptable\Typed\SettingType;
+use Kiwilan\Typescriptable\Typed\Settings\SettingsConfig;
+use Kiwilan\Typescriptable\Typed\SettingsType;
 
 class Typescriptable
 {
@@ -26,18 +27,18 @@ class Typescriptable
         return implode(PHP_EOL, self::TS_HEAD);
     }
 
-    public static function models(EloquentConfig $config): EloquentType
+    public static function models(EloquentConfig $config = new EloquentConfig()): EloquentType
     {
         return EloquentType::make($config)->execute();
     }
 
-    public static function routes(RouteConfig $config): RouteType
+    public static function routes(RouteConfig $config = new RouteConfig()): RouteType
     {
         return RouteType::make($config);
     }
 
-    public static function settings(string $settings_path, string $output_path, string $extends): ?SettingType
+    public static function settings(SettingsConfig $config = new SettingsConfig()): ?SettingsType
     {
-        return SettingType::make($settings_path, $output_path, $extends);
+        return SettingsType::make($config);
     }
 }

@@ -6,10 +6,12 @@ use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeArtisan;
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeParser;
 use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserModelFillable;
-use Kiwilan\Typescriptable\Typed\Eloquent\Printer\PrinterToPhp;
-use Kiwilan\Typescriptable\Typed\Eloquent\Printer\PrinterToTypescript;
+use Kiwilan\Typescriptable\Typed\Eloquent\Printer\PrinterEloquentPhp;
+use Kiwilan\Typescriptable\Typed\Eloquent\Printer\PrinterEloquentTypescript;
 use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\SchemaApp;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Typed\Utils\TypescriptableUtils;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class EloquentType
 {
@@ -17,9 +19,10 @@ class EloquentType
 
     protected function __construct(
         protected EloquentConfig $config,
+        protected ?string $typescript = null,
     ) {}
 
-    public static function make(EloquentConfig $config): self
+    public static function make(EloquentConfig $config = new EloquentConfig()): self
     {
         return new self($config);
     }
@@ -35,12 +38,12 @@ class EloquentType
 
         $type->run();
 
-        $typescript = PrinterToTypescript::make($type->app()->models(), "{$type->config()->outputPath}/{$type->config()->tsFilename}");
-        $typescript->print();
+        $type->typescript = PrinterEloquentTypescript::make($type->app()->models());
+        TypescriptableUtils::print($type->typescript, TypescriptableConfig::setPath($type->config()->typescriptFilename));
 
         if ($type->config()->phpPath) {
-            $php = PrinterToPhp::make($type->app()->models(), $type->config()->phpPath);
-            $php->print();
+            $printer = PrinterEloquentPhp::make($type->app()->models(), $type->config()->phpPath);
+            $printer->print();
         }
 
         return $type;
@@ -58,6 +61,11 @@ class EloquentType
     public function config(): EloquentConfig
     {
         return $this->config;
+    }
+
+    public function typescript(): ?string
+    {
+        return $this->typescript;
     }
 
     /**

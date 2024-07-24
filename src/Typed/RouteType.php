@@ -5,11 +5,11 @@ namespace Kiwilan\Typescriptable\Typed;
 use Illuminate\Foundation\Console\RouteListCommand;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\File;
-use Kiwilan\Typescriptable\Typed\Route\Printer\PrinterToList;
-use Kiwilan\Typescriptable\Typed\Route\Printer\PrinterToTypes;
+use Kiwilan\Typescriptable\Typed\Route\Printer\PrinterRouteList;
+use Kiwilan\Typescriptable\Typed\Route\Printer\PrinterRouteTypes;
 use Kiwilan\Typescriptable\Typed\Route\RouteConfig;
 use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItem;
+use Kiwilan\Typescriptable\Typed\Utils\TypescriptableUtils;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class RouteType
@@ -24,29 +24,43 @@ class RouteType
         protected ?string $typescriptTypes = null,
     ) {}
 
-    public static function make(RouteConfig $config): self
+    public static function make(RouteConfig $config = new RouteConfig()): self
     {
         $self = new self($config);
         $self->routes = $self->parseRoutes();
 
-        $self->typescriptList = PrinterToList::make($self->routes);
-        ray($self->typescriptList);
-        $self->typescriptTypes = PrinterToTypes::make($self->routes);
-        ray($self->typescriptTypes);
+        $self->typescriptTypes = PrinterRouteTypes::make($self->routes);
+        $self->typescriptList = PrinterRouteList::make($self->routes);
 
-        // handle TypescriptableConfig::routesUsePath()
-
-        // if (! $outputPath) {
-        //     $file = TypescriptableConfig::setPath($filename);
-        //     $fileRoutes = TypescriptableConfig::setPath($filenameRoutes);
-        // }
-
-        // $self->print($file, $routeTypes);
-        // if ($withList) {
-        //     $self->print($fileRoutes, $routeList);
-        // }
+        TypescriptableUtils::print($self->typescriptTypes, TypescriptableConfig::setPath($self->config->filenameTypes));
+        if ($self->config->printList) {
+            TypescriptableUtils::print($self->typescriptList, TypescriptableConfig::setPath($self->config->filenameList));
+        }
 
         return $self;
+    }
+
+    public function config(): RouteConfig
+    {
+        return $this->config;
+    }
+
+    /**
+     * @return Collection<string, RouteTypeItem>
+     */
+    public function routes(): Collection
+    {
+        return $this->routes;
+    }
+
+    public function typescriptList(): ?string
+    {
+        return $this->typescriptList;
+    }
+
+    public function typescriptTypes(): ?string
+    {
+        return $this->typescriptTypes;
     }
 
     /**
@@ -62,9 +76,12 @@ class RouteType
 
         $routes = $this->config->json;
 
-        $skipNames = $this->toSkip(TypescriptableConfig::routesSkipName());
-        $skipPaths = $this->toSkip(TypescriptableConfig::routesSkipPath());
+        $skipNames = $this->toSkip($this->config->namesToSkip);
+        $skipPaths = $this->toSkip($this->config->pathsToSkip);
 
+        if (! $routes) {
+            throw new \Exception('No routes found.');
+        }
         $routes = array_filter($routes, fn ($route) => $this->filterBy($route, 'uri', $skipPaths));
         $routes = array_filter($routes, fn ($route) => $this->filterBy($route, 'name', $skipNames));
         $routes = array_values($routes);
@@ -105,16 +122,5 @@ class RouteType
         }
 
         return true;
-    }
-
-    private function print(string $path, string $content): void
-    {
-        if (! File::exists(dirname($path))) {
-            File::makeDirectory(dirname($path));
-        }
-
-        File::delete($path);
-
-        File::put($path, $content);
     }
 }

@@ -104,6 +104,20 @@ class TestCase extends Orchestra
     public static function init()
     {
         config()->set('media-library.media_model', \Spatie\MediaLibrary\MediaCollections\Models\Media::class);
+
+        config()->set('typescriptable.routes.filename', 'types-routes.d.ts');
+        config()->set('typescriptable.routes.filename_list', 'routes.ts');
+        config()->set('typescriptable.routes.print_list', true);
+        config()->set('typescriptable.routes.add_to_window', false);
+        config()->set('typescriptable.routes.use_path', false);
+
+        config()->set('typescriptable.output_path', outputDir());
+
+        config()->set('typescriptable.eloquent.directory', models());
+        config()->set('typescriptable.eloquent.php_path', outputDir('php'));
+        config()->set('typescriptable.eloquent.paginate', true);
+
+        config()->set('typescriptable.engine.eloquent', 'artisan');
     }
 
     public static function setupDatabase(?string $type = null): void
@@ -159,9 +173,7 @@ class TestCase extends Orchestra
                 // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
             ],
             'mongodb' => [
-                'driver' => 'mongodb',
                 'dsn' => $driver->url,
-                'database' => $driver->database,
             ],
         ];
 
