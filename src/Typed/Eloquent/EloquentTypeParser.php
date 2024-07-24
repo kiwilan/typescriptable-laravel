@@ -39,7 +39,7 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
         foreach ($schemas as $schema) {
             $namespace = $schema->namespace();
             /** @var Model */
-            $instance = new $namespace();
+            $instance = new $namespace;
             $tableName = $instance->getTable();
 
             if ($this->app->databasePrefix()) {

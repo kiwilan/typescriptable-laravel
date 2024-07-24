@@ -15,7 +15,7 @@ class PrinterRouteList
      */
     public static function make(Collection $routes): string
     {
-        $self = new self();
+        $self = new self;
 
         $contents = [];
         foreach ($routes as $route) {
