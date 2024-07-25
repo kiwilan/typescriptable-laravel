@@ -178,6 +178,8 @@ Generate `resources/js/types-eloquent.d.ts` file with all models types.
 php artisan typescriptable:eloquent
 ```
 
+Options can be set into `config/typescriptable.php` file.
+
 ### Spatie Settings
 
 If you use [`spatie/laravel-settings`](https://github.com/spatie/laravel-settings), you can generate `resources/js/types-settings.d.ts` file with all settings types.
@@ -185,6 +187,8 @@ If you use [`spatie/laravel-settings`](https://github.com/spatie/laravel-setting
 ```bash
 php artisan typescriptable:settings
 ```
+
+Options can be set into `config/typescriptable.php` file.
 
 ### Routes
 
@@ -194,6 +198,8 @@ Generate `resources/js/types-routes.d.ts` file with all routes types and `resour
 php artisan typescriptable:routes
 ```
 
+Options can be set into `config/typescriptable.php` file.
+
 ### Eloquent listing
 
 Show all Eloquent models with `eloquent:list` command.
@@ -201,6 +207,8 @@ Show all Eloquent models with `eloquent:list` command.
 ```bash
 php artisan eloquent:list
 ```
+
+Models are parsed from `config/typescriptable.php` with `eloquent.directory` variable.
 
 ## Advanced
 
