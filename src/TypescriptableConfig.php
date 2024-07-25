@@ -77,6 +77,11 @@ class TypescriptableConfig
         return config('typescriptable.settings.directory') ?? app_path('Settings');
     }
 
+    public static function settingsExtends(): ?string
+    {
+        return config('typescriptable.settings.extends') ?? null;
+    }
+
     public static function settingsSkip(): array
     {
         return config('typescriptable.settings.skip') ?? [];
@@ -92,6 +97,16 @@ class TypescriptableConfig
         return config('typescriptable.routes.filename_list') ?? 'routes.ts';
     }
 
+    public static function routesPrintList(): bool
+    {
+        return config('typescriptable.routes.print_list') ?? true;
+    }
+
+    public static function routesAddToWindow(): bool
+    {
+        return config('typescriptable.routes.add_to_window') ?? true;
+    }
+
     public static function routesUsePath(): bool
     {
         return config('typescriptable.routes.use_path') ?? false;
@@ -100,23 +115,25 @@ class TypescriptableConfig
     public static function routesSkipName(): array
     {
         return config('typescriptable.routes.skip.name') ?? [
-            '__clockwork.*',
             'debugbar.*',
             'horizon.*',
             'telescope.*',
             'nova.*',
             'lighthouse.*',
-            'livewire.*',
-            'ignition.*',
             'filament.*',
             'log-viewer.*',
+            'two-factor.*',
         ];
     }
 
     public static function routesSkipPath(): array
     {
         return config('typescriptable.routes.skip.path') ?? [
-            'api/*',
+            '_ignition/*',
+            '__clockwork/*',
+            'clockwork/*',
+            'two-factor-challenge',
+            'livewire',
         ];
     }
 

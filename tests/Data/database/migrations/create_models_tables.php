@@ -44,7 +44,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->string('slug')->unique()->index()->nullable();
+            $table->string('slug')->unique()->nullable();
             $table->string('avatar')->nullable();
 
             $table->timestamps();
@@ -65,7 +65,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->string('slug')->unique()->index()->nullable();
+            $table->string('slug')->unique()->nullable();
             $table->string('picture')->nullable();
             $table->string('color')->nullable();
 

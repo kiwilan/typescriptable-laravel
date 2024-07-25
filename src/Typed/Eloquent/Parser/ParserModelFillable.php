@@ -3,7 +3,7 @@
 namespace Kiwilan\Typescriptable\Typed\Eloquent\Parser;
 
 use Illuminate\Database\Eloquent\Model;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModelAttribute;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModelAttribute;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 
 class ParserModelFillable
@@ -26,7 +26,7 @@ class ParserModelFillable
 
         $model = $self->namespace;
         /** @var Model */
-        $instance = new $model();
+        $instance = new $model;
 
         $key = $instance->getKeyName();
         $casts = $instance->getCasts();

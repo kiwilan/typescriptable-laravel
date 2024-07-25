@@ -3,11 +3,12 @@
 use Illuminate\Support\Facades\Artisan;
 use Kiwilan\Typescriptable\Commands\TypescriptableCommand;
 use Kiwilan\Typescriptable\Tests\TestCase;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    deleteFile(outputDir('types-eloquent.d.ts'));
-    deleteFile(outputDir('types-routes.d.ts'));
-    deleteFile(outputDir('types-settings.d.ts'));
+    deleteFile(outputDir(TypescriptableConfig::eloquentFilename()));
+    deleteFile(outputDir(TypescriptableConfig::routesFilename()));
+    deleteFile(outputDir(TypescriptableConfig::settingsFilename()));
 });
 
 it('can use command', function () {

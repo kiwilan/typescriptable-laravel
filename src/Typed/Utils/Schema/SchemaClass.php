@@ -34,7 +34,7 @@ class SchemaClass
 
         $instance = null;
         try {
-            $instance = new $namespace();
+            $instance = new $namespace;
         } catch (\Throwable $th) {
             return null;
         }

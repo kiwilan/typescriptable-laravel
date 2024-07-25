@@ -1,26 +1,18 @@
 <?php
 
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Typed\Utils\TypescriptToPhp;
 use Kiwilan\Typescriptable\Typescriptable;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    deleteFile(outputDir('types-eloquent.d.ts'));
-    deleteDir(outputDir('php'));
+    eloquentConfig();
 });
 
 it('can be run', function (string $driver) {
     TestCase::setupDatabase($driver);
 
-    $type = Typescriptable::models(new EloquentConfig(
-        modelsPath: models(),
-        outputPath: outputDir(),
-        phpPath: outputDir().'/php',
-        useParser: false,
-        skipModels: ['Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest'],
-    ));
+    $type = Typescriptable::models();
 
     $app = $type->app();
     expect($app->driver())->toBe($driver);

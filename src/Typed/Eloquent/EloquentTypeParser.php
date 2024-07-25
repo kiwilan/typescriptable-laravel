@@ -5,10 +5,9 @@ namespace Kiwilan\Typescriptable\Typed\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Kiwilan\Typescriptable\Typed\Database\Table;
 use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserRelation;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModel;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModelAttribute;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\SchemaApp;
-use Kiwilan\Typescriptable\Typed\EloquentType;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModel;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModelAttribute;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\SchemaApp;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
 
@@ -39,7 +38,7 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
         foreach ($schemas as $schema) {
             $namespace = $schema->namespace();
             /** @var Model */
-            $instance = new $namespace();
+            $instance = new $namespace;
             $tableName = $instance->getTable();
 
             if ($this->app->databasePrefix()) {

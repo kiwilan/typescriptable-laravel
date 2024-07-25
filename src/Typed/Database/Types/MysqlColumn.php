@@ -2,7 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Typed\Database\Types;
 
-use Kiwilan\Typescriptable\Typed\Eloquent\Schema\Model\SchemaModelAttribute;
+use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModelAttribute;
 
 class MysqlColumn implements IColumn
 {

@@ -8,27 +8,29 @@ class EloquentConfig
 {
     public function __construct(
         public ?string $modelsPath = null,
-        public ?string $outputPath = null,
         public ?string $phpPath = null,
         public bool $useParser = false,
         public array $skipModels = [],
-        public ?string $tsFilename = null,
+        public ?string $typescriptFilename = null,
     ) {
         if (! $this->modelsPath) {
             $this->modelsPath = TypescriptableConfig::eloquentDirectory();
         }
 
-        $this->tsFilename = TypescriptableConfig::eloquentFilename();
-        if (! $this->outputPath) {
-            $this->outputPath = TypescriptableConfig::setPath();
+        if (! $this->useParser) {
+            $this->useParser = TypescriptableConfig::engineEloquent() === 'parser';
         }
 
         if (! $this->phpPath) {
             $this->phpPath = TypescriptableConfig::eloquentPhpPath();
         }
 
-        if (count($this->skipModels) === 0) {
+        if (! $this->skipModels) {
             $this->skipModels = TypescriptableConfig::eloquentSkip();
+        }
+
+        if (! $this->typescriptFilename) {
+            $this->typescriptFilename = TypescriptableConfig::eloquentFilename();
         }
     }
 }

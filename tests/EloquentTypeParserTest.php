@@ -1,20 +1,17 @@
 <?php
 
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
-use Kiwilan\Typescriptable\Typed\EloquentType;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentType;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
+
+beforeEach(function () {
+    eloquentConfig('parser');
+});
 
 it('can be run with parser', function (string $driver) {
     TestCase::setupDatabase($driver);
 
-    $type = EloquentType::make(new EloquentConfig(
-        modelsPath: models(),
-        outputPath: outputDir(),
-        phpPath: outputDir().'/php',
-        useParser: true,
-        skipModels: ['Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest'],
-    ))->execute();
+    $type = EloquentType::make()->execute();
 
     $app = $type->app();
     $movie = $app->getModel('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
@@ -44,7 +41,7 @@ it('can be run with parser', function (string $driver) {
 
     $id = $movie->getAttribute('id');
     expect($id->name())->toBe('id');
-    expect($id->databaseType())->toBeIn(['char(26)', 'varchar', 'character', 'nchar']);
+    expect($id->databaseType())->toBeIn(['char(26)', 'character(26)', 'varchar', 'character', 'nchar', 'nchar(52)']);
     expect($id->nullable())->toBeFalse();
     expect($id->default())->toBeNull();
     expect($id->fillable())->toBeFalse();
@@ -56,7 +53,7 @@ it('can be run with parser', function (string $driver) {
 
     $title = $movie->getAttribute('title');
     expect($title->name())->toBe('title');
-    expect($title->databaseType())->toBeIn(['varchar(255)', 'varchar', 'character varying', 'nvarchar']);
+    expect($title->databaseType())->toBeIn(['varchar(255)', 'character varying(255)', 'nvarchar(510)', 'varchar', 'character varying', 'nvarchar']);
     expect($title->nullable())->toBeTrue();
     expect($title->default())->toBeNull();
     expect($title->fillable())->toBeTrue();
@@ -68,7 +65,7 @@ it('can be run with parser', function (string $driver) {
 
     $budget = $movie->getAttribute('budget');
     expect($budget->name())->toBe('budget');
-    expect($budget->databaseType())->toBeIn(["enum('draft','scheduled','published')", 'varchar', 'character varying', 'nvarchar']);
+    expect($budget->databaseType())->toBeIn(["enum('draft','scheduled','published')", 'varchar', 'character varying(255)', 'nvarchar(510)', 'character varying', 'nvarchar']);
     expect($budget->increments())->toBeFalse();
     expect($budget->nullable())->toBeFalse();
     expect($budget->default())->toBeIn(['draft', "'draft'", "'draft'::character varying", "('draft')"]);

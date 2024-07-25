@@ -4,15 +4,11 @@ use Illuminate\Support\Facades\Artisan;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    deleteFile(outputDir('types-routes.d.ts'));
+    deleteFile(outputDir(TypescriptableConfig::routesFilename()));
 });
 
 it('can be run', function () {
-    Artisan::call('typescriptable:routes', [
-        '--json' => routes(),
-        '--list' => true,
-        '--output-path' => outputDir(),
-    ]);
+    Artisan::call('typescriptable:routes');
 
     $routes = outputDir(TypescriptableConfig::routesFilename());
     expect($routes)->toBeFile();

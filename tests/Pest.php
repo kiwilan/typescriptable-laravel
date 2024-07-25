@@ -2,6 +2,7 @@
 
 use Dotenv\Dotenv;
 use Kiwilan\Typescriptable\Tests\TestCase;
+use Kiwilan\Typescriptable\TypescriptableConfig;
 
 foreach (glob('.output/*') as $file) {
     if (basename($file) !== '.gitignore') {
@@ -51,6 +52,21 @@ function models(): string
     return "{$currentDir}/tests/Data/Models";
 }
 
+function eloquentConfig(string $eloquentEngine = 'artisan'): void
+{
+    deleteFile(outputDir(TypescriptableConfig::eloquentFilename()));
+    deleteDir(outputDir(TypescriptableConfig::eloquentPhpPath()));
+
+    config()->set('typescriptable.output_path', outputDir());
+    config()->set('typescriptable.engine.eloquent', $eloquentEngine);
+    config()->set('typescriptable.eloquent.directory', models());
+    config()->set('typescriptable.eloquent.php_path', outputDir('php'));
+    config()->set('typescriptable.eloquent.paginate', true);
+    config()->set('typescriptable.eloquent.skip', [
+        'Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest',
+    ]);
+}
+
 function routes(): string
 {
     $currentDir = getcwd();
@@ -74,21 +90,35 @@ function deleteFile(string $file): void
 
 function deleteDir(string $dir): void
 {
-    if (! is_dir($dir)) {
-        return;
-    }
+    // if (! is_dir($dir)) {
+    //     return;
+    // }
 
-    foreach (scandir($dir) as $file) {
+    // foreach (scandir($dir) as $file) {
+
+    //     if (is_dir("$dir/$file")) {
+    //         deleteDir("$dir/$file");
+    //     } else {
+    //         unlink("$dir/$file");
+    //     }
+    // }
+    // rmdir($dir);
+
+    $files = glob("{$dir}/*");
+    foreach ($files as $file) {
         if ($file === '.' || $file === '..') {
             continue;
         }
-        if (is_dir("$dir/$file")) {
-            deleteDir("$dir/$file");
-        } else {
-            unlink("$dir/$file");
+        if ($file === '.gitignore') {
+            continue;
+        }
+        if (is_file($file)) {
+            unlink($file);
+        } elseif (is_dir($file)) {
+            deleteDir($file);
+            rmdir($file);
         }
     }
-    rmdir($dir);
 }
 
 function settingsDir(): string

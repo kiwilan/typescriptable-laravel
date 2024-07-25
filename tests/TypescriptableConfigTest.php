@@ -4,6 +4,7 @@ use Kiwilan\Typescriptable\TypescriptableConfig;
 
 it('config is ok', function () {
     config()->set('typescriptable.engine.eloquent', 'parser');
+    config()->set('typescriptable.eloquent.php_path', null);
     deleteDir(TypescriptableConfig::outputPath());
 
     expect(TypescriptableConfig::engineEloquent())->toBeString();
@@ -17,9 +18,12 @@ it('config is ok', function () {
     expect(TypescriptableConfig::eloquentPaginate())->toBeBool();
     expect(TypescriptableConfig::settingsFilename())->toBeString();
     expect(TypescriptableConfig::settingsDirectory())->toBeString();
+    expect(TypescriptableConfig::settingsExtends())->toBeString();
     expect(TypescriptableConfig::settingsSkip())->toBeArray();
     expect(TypescriptableConfig::routesFilename())->toBeString();
     expect(TypescriptableConfig::routesFilenameList())->toBeString();
+    expect(TypescriptableConfig::routesPrintList())->toBeBool();
+    expect(TypescriptableConfig::routesAddToWindow())->toBeBool();
     expect(TypescriptableConfig::routesUsePath())->toBeBool();
     expect(TypescriptableConfig::routesSkipName())->toBeArray();
     expect(TypescriptableConfig::routesSkipPath())->toBeArray();

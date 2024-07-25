@@ -1,1289 +1,1421 @@
-{
-  "api/user": {
-    "name": null,
-    "methods": ["GET", "HEAD"],
-    "uri": "api/user",
-    "action": "Closure",
-    "middleware": ["api", "auth:sanctum"],
-    "example": "http://app.p1pdd.test/api/user",
-    "parameters": []
-  },
-  "current-user-photo.destroy": {
-    "name": "current-user-photo.destroy",
-    "methods": ["DELETE"],
-    "uri": "user/profile-photo",
-    "action": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\ProfilePhotoController@destroy",
-    "middleware": [
-      "web",
-      "auth:sanctum",
-      "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
-    ],
-    "example": "http://app.p1pdd.test/user/profile-photo",
-    "parameters": []
-  },
-  "current-user.destroy": {
-    "name": "current-user.destroy",
-    "methods": ["DELETE"],
-    "uri": "user",
-    "action": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\CurrentUserController@destroy",
-    "middleware": [
-      "web",
-      "auth:sanctum",
-      "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
-    ],
-    "example": "http://app.p1pdd.test/user",
-    "parameters": []
-  },
-  "dashboard": {
-    "name": "dashboard",
-    "methods": ["GET", "HEAD"],
-    "uri": "dashboard",
-    "action": "Closure",
-    "middleware": [
-      "web",
-      "auth:sanctum",
-      "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession",
-      "verified"
-    ],
-    "example": "http://app.p1pdd.test/dashboard",
-    "parameters": []
-  },
-  "download.show": {
-    "name": "download.show",
-    "methods": ["GET", "HEAD"],
-    "uri": "download/{feed_slug}/{podcast_slug}",
-    "action": "App\\Http\\Controllers\\DownloadController@show",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/download/{podcast_slug}",
-    "parameters": ["feed_slug", "podcast_slug"]
-  },
-  "feeds.index": {
-    "name": "feeds.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "feeds",
-    "action": "App\\Http\\Controllers\\FeedController@index",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/feeds",
-    "parameters": []
-  },
-  "feeds.show": {
-    "name": "feeds.show",
-    "methods": ["GET", "HEAD"],
-    "uri": "feeds/{feed_slug}",
-    "action": "App\\Http\\Controllers\\FeedController@show",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/feeds/{feed_slug}",
-    "parameters": ["feed_slug"]
-  },
-  "filament.asset": {
-    "name": "filament.asset",
-    "methods": ["GET", "HEAD"],
-    "uri": "filament/assets/{file}",
-    "action": "Filament\\Http\\Controllers\\AssetController",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages"
-    ],
-    "example": "http://app.p1pdd.test/filament/assets/{file}",
-    "parameters": ["file"]
-  },
-  "filament.auth.login": {
-    "name": "filament.auth.login",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/login",
-    "action": "App\\Filament\\Pages\\Auth\\Login",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages"
-    ],
-    "example": "http://app.p1pdd.test/admin/login",
-    "parameters": []
-  },
-  "filament.auth.logout": {
-    "name": "filament.auth.logout",
-    "methods": ["POST"],
-    "uri": "filament/logout",
-    "action": "Closure",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages"
-    ],
-    "example": "http://app.p1pdd.test/filament/logout",
-    "parameters": []
-  },
-  "filament.pages.dashboard": {
-    "name": "filament.pages.dashboard",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin",
-    "action": "Filament\\Pages\\Dashboard",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin",
-    "parameters": []
-  },
-  "filament.pages.page/home": {
-    "name": "filament.pages.page/home",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/page/home",
-    "action": "App\\Filament\\Pages\\ManageHome",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/page/home",
-    "parameters": []
-  },
-  "filament.resources.blog/categories.create": {
-    "name": "filament.resources.blog/categories.create",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/categories/create",
-    "action": "App\\Filament\\Resources\\CategoryResource\\Pages\\CreateCategory",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/categories/create",
-    "parameters": []
-  },
-  "filament.resources.blog/categories.edit": {
-    "name": "filament.resources.blog/categories.edit",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/categories/{record}/edit",
-    "action": "App\\Filament\\Resources\\CategoryResource\\Pages\\EditCategory",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/categories/{record}/edit",
-    "parameters": ["record"]
-  },
-  "filament.resources.blog/categories.index": {
-    "name": "filament.resources.blog/categories.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/categories",
-    "action": "App\\Filament\\Resources\\CategoryResource\\Pages\\ListCategories",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/categories",
-    "parameters": []
-  },
-  "filament.resources.blog/comments.create": {
-    "name": "filament.resources.blog/comments.create",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/comments/create",
-    "action": "App\\Filament\\Resources\\CommentResource\\Pages\\CreateComment",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/comments/create",
-    "parameters": []
-  },
-  "filament.resources.blog/comments.edit": {
-    "name": "filament.resources.blog/comments.edit",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/comments/{record}/edit",
-    "action": "App\\Filament\\Resources\\CommentResource\\Pages\\EditComment",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/comments/{record}/edit",
-    "parameters": ["record"]
-  },
-  "filament.resources.blog/comments.index": {
-    "name": "filament.resources.blog/comments.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/comments",
-    "action": "App\\Filament\\Resources\\CommentResource\\Pages\\ListComments",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/comments",
-    "parameters": []
-  },
-  "filament.resources.blog/posts.create": {
-    "name": "filament.resources.blog/posts.create",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/posts/create",
-    "action": "App\\Filament\\Resources\\PostResource\\Pages\\CreatePost",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/posts/create",
-    "parameters": []
-  },
-  "filament.resources.blog/posts.edit": {
-    "name": "filament.resources.blog/posts.edit",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/posts/{record}/edit",
-    "action": "App\\Filament\\Resources\\PostResource\\Pages\\EditPost",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/posts/{record}/edit",
-    "parameters": ["record"]
-  },
-  "filament.resources.blog/posts.index": {
-    "name": "filament.resources.blog/posts.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/posts",
-    "action": "App\\Filament\\Resources\\PostResource\\Pages\\ListPosts",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/posts",
-    "parameters": []
-  },
-  "filament.resources.blog/users.create": {
-    "name": "filament.resources.blog/users.create",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/users/create",
-    "action": "App\\Filament\\Resources\\UserResource\\Pages\\CreateUser",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/users/create",
-    "parameters": []
-  },
-  "filament.resources.blog/users.edit": {
-    "name": "filament.resources.blog/users.edit",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/users/{record}/edit",
-    "action": "App\\Filament\\Resources\\UserResource\\Pages\\EditUser",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/users/{record}/edit",
-    "parameters": ["record"]
-  },
-  "filament.resources.blog/users.index": {
-    "name": "filament.resources.blog/users.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/blog/users",
-    "action": "App\\Filament\\Resources\\UserResource\\Pages\\ListUsers",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/blog/users",
-    "parameters": []
-  },
-  "filament.resources.page/pages.create": {
-    "name": "filament.resources.page/pages.create",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/page/pages/create",
-    "action": "App\\Filament\\Resources\\PageResource\\Pages\\CreatePage",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/page/pages/create",
-    "parameters": []
-  },
-  "filament.resources.page/pages.edit": {
-    "name": "filament.resources.page/pages.edit",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/page/pages/{record}/edit",
-    "action": "App\\Filament\\Resources\\PageResource\\Pages\\EditPage",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/page/pages/{record}/edit",
-    "parameters": ["record"]
-  },
-  "filament.resources.page/pages.index": {
-    "name": "filament.resources.page/pages.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/page/pages",
-    "action": "App\\Filament\\Resources\\PageResource\\Pages\\ListPages",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/page/pages",
-    "parameters": []
-  },
-  "filament.resources.podcast/feeds.create": {
-    "name": "filament.resources.podcast/feeds.create",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/podcast/feeds/create",
-    "action": "App\\Filament\\Resources\\FeedResource\\Pages\\CreateFeed",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/podcast/feeds/create",
-    "parameters": []
-  },
-  "filament.resources.podcast/feeds.edit": {
-    "name": "filament.resources.podcast/feeds.edit",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/podcast/feeds/{record}/edit",
-    "action": "App\\Filament\\Resources\\FeedResource\\Pages\\EditFeed",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/podcast/feeds/{record}/edit",
-    "parameters": ["record"]
-  },
-  "filament.resources.podcast/feeds.index": {
-    "name": "filament.resources.podcast/feeds.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/podcast/feeds",
-    "action": "App\\Filament\\Resources\\FeedResource\\Pages\\ListFeeds",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/podcast/feeds",
-    "parameters": []
-  },
-  "filament.resources.podcast/podcasts.create": {
-    "name": "filament.resources.podcast/podcasts.create",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/podcast/podcasts/create",
-    "action": "App\\Filament\\Resources\\PodcastResource\\Pages\\CreatePodcast",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/podcast/podcasts/create",
-    "parameters": []
-  },
-  "filament.resources.podcast/podcasts.edit": {
-    "name": "filament.resources.podcast/podcasts.edit",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/podcast/podcasts/{record}/edit",
-    "action": "App\\Filament\\Resources\\PodcastResource\\Pages\\EditPodcast",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/podcast/podcasts/{record}/edit",
-    "parameters": ["record"]
-  },
-  "filament.resources.podcast/podcasts.index": {
-    "name": "filament.resources.podcast/podcasts.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/podcast/podcasts",
-    "action": "App\\Filament\\Resources\\PodcastResource\\Pages\\ListPodcasts",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/podcast/podcasts",
-    "parameters": []
-  },
-  "filament.resources.podcast/series.create": {
-    "name": "filament.resources.podcast/series.create",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/podcast/series/create",
-    "action": "App\\Filament\\Resources\\SerieResource\\Pages\\CreateSerie",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/podcast/series/create",
-    "parameters": []
-  },
-  "filament.resources.podcast/series.edit": {
-    "name": "filament.resources.podcast/series.edit",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/podcast/series/{record}/edit",
-    "action": "App\\Filament\\Resources\\SerieResource\\Pages\\EditSerie",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/podcast/series/{record}/edit",
-    "parameters": ["record"]
-  },
-  "filament.resources.podcast/series.index": {
-    "name": "filament.resources.podcast/series.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "admin/podcast/series",
-    "action": "App\\Filament\\Resources\\SerieResource\\Pages\\ListSeries",
-    "middleware": [
-      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
-      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
-      "Illuminate\\Session\\Middleware\\StartSession",
-      "Illuminate\\Session\\Middleware\\AuthenticateSession",
-      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
-      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent",
-      "Filament\\Http\\Middleware\\MirrorConfigToSubpackages",
-      "Filament\\Http\\Middleware\\Authenticate"
-    ],
-    "example": "http://app.p1pdd.test/admin/podcast/series",
-    "parameters": []
-  },
-  "home": {
-    "name": "home",
-    "methods": ["GET", "HEAD"],
+[
+  {
+    "domain": null,
+    "method": "GET|HEAD",
     "uri": "/",
-    "action": "App\\Http\\Controllers\\HomeController@index",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test//",
-    "parameters": []
+    "name": "home",
+    "action": "App\\Http\\Controllers\\App\\HomeController@index",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
   },
-  "ignition.executeSolution": {
-    "name": "ignition.executeSolution",
-    "methods": ["POST"],
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "__clockwork",
+    "name": null,
+    "action": "Clockwork\\Support\\Laravel\\ClockworkController@webRedirect",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "__clockwork/app",
+    "name": null,
+    "action": "Clockwork\\Support\\Laravel\\ClockworkController@webIndex",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "__clockwork/auth",
+    "name": null,
+    "action": "Clockwork\\Support\\Laravel\\ClockworkController@authenticate",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "PUT",
+    "uri": "__clockwork/{id}",
+    "name": null,
+    "action": "Clockwork\\Support\\Laravel\\ClockworkController@updateData",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "__clockwork/{id}/extended",
+    "name": null,
+    "action": "Clockwork\\Support\\Laravel\\ClockworkController@getExtendedData",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "__clockwork/{id}/{direction?}/{count?}",
+    "name": null,
+    "action": "Clockwork\\Support\\Laravel\\ClockworkController@getData",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "__clockwork/{path}",
+    "name": null,
+    "action": "Clockwork\\Support\\Laravel\\ClockworkController@webAsset",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "POST",
     "uri": "_ignition/execute-solution",
+    "name": "ignition.executeSolution",
     "action": "Spatie\\LaravelIgnition\\Http\\Controllers\\ExecuteSolutionController",
     "middleware": [
       "Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"
-    ],
-    "example": "http://app.p1pdd.test/_ignition/execute-solution",
-    "parameters": []
+    ]
   },
-  "ignition.healthCheck": {
-    "name": "ignition.healthCheck",
-    "methods": ["GET", "HEAD"],
+  {
+    "domain": null,
+    "method": "GET|HEAD",
     "uri": "_ignition/health-check",
+    "name": "ignition.healthCheck",
     "action": "Spatie\\LaravelIgnition\\Http\\Controllers\\HealthCheckController",
     "middleware": [
       "Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"
-    ],
-    "example": "http://app.p1pdd.test/_ignition/health-check",
-    "parameters": []
+    ]
   },
-  "ignition.updateConfig": {
-    "name": "ignition.updateConfig",
-    "methods": ["POST"],
+  {
+    "domain": null,
+    "method": "POST",
     "uri": "_ignition/update-config",
+    "name": "ignition.updateConfig",
     "action": "Spatie\\LaravelIgnition\\Http\\Controllers\\UpdateConfigController",
     "middleware": [
       "Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"
-    ],
-    "example": "http://app.p1pdd.test/_ignition/update-config",
-    "parameters": []
+    ]
   },
-  "livewire.message": {
-    "name": "livewire.message",
-    "methods": ["POST"],
-    "uri": "livewire/message/{name}",
-    "action": "Livewire\\Controllers\\HttpConnectionHandler",
-    "middleware": ["web"],
-    "example": "http://app.p1pdd.test/livewire/message/{name}",
-    "parameters": ["name"]
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "about",
+    "name": "about",
+    "action": "App\\Http\\Controllers\\App\\HomeController@about",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
   },
-  "livewire.message-localized": {
-    "name": "livewire.message-localized",
-    "methods": ["POST"],
-    "uri": "{locale}/livewire/message/{name}",
-    "action": "Livewire\\Controllers\\HttpConnectionHandler",
-    "middleware": ["web"],
-    "example": "http://app.p1pdd.test/{locale}/livewire/message/{name}",
-    "parameters": ["locale", "name"]
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "about/home",
+    "name": "about.home",
+    "action": "App\\Http\\Controllers\\App\\HomeController@aboutHome",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
   },
-  "livewire.preview-file": {
-    "name": "livewire.preview-file",
-    "methods": ["GET", "HEAD"],
-    "uri": "livewire/preview-file/{filename}",
-    "action": "Livewire\\Controllers\\FilePreviewHandler@handle",
-    "middleware": ["web"],
-    "example": "http://app.p1pdd.test/livewire/preview-file/{filename}",
-    "parameters": ["filename"]
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "about/home/{slug}",
+    "name": "about.home.slug",
+    "action": "App\\Http\\Controllers\\App\\HomeController@aboutHomeSlug",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
   },
-  "livewire.upload-file": {
-    "name": "livewire.upload-file",
-    "methods": ["POST"],
-    "uri": "livewire/upload-file",
-    "action": "Livewire\\Controllers\\FileUploadHandler@handle",
-    "middleware": ["web"],
-    "example": "http://app.p1pdd.test/livewire/upload-file",
-    "parameters": []
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "about/params/{author}",
+    "name": "about.params.author",
+    "action": "App\\Http\\Controllers\\App\\HomeController@aboutParamsAuthor",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
   },
-  "livewire/livewire.js": {
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin",
+    "name": "filament.admin.pages.dashboard",
+    "action": "Filament\\Pages\\Dashboard",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/audiobook-tracks",
+    "name": "filament.admin.resources.audiobook-tracks.index",
+    "action": "App\\Filament\\Resources\\AudiobookTrackResource\\Pages\\ListAudiobookTracks",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/audiobook-tracks/create",
+    "name": "filament.admin.resources.audiobook-tracks.create",
+    "action": "App\\Filament\\Resources\\AudiobookTrackResource\\Pages\\CreateAudiobookTrack",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/audiobook-tracks/{record}/edit",
+    "name": "filament.admin.resources.audiobook-tracks.edit",
+    "action": "App\\Filament\\Resources\\AudiobookTrackResource\\Pages\\EditAudiobookTrack",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/authors",
+    "name": "filament.admin.resources.authors.index",
+    "action": "App\\Filament\\Resources\\AuthorResource\\Pages\\ListAuthors",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/authors/create",
+    "name": "filament.admin.resources.authors.create",
+    "action": "App\\Filament\\Resources\\AuthorResource\\Pages\\CreateAuthor",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/authors/{record}/edit",
+    "name": "filament.admin.resources.authors.edit",
+    "action": "App\\Filament\\Resources\\AuthorResource\\Pages\\EditAuthor",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/books",
+    "name": "filament.admin.resources.books.index",
+    "action": "App\\Filament\\Resources\\BookResource\\Pages\\ListBooks",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/books/create",
+    "name": "filament.admin.resources.books.create",
+    "action": "App\\Filament\\Resources\\BookResource\\Pages\\CreateBook",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/books/{record}/edit",
+    "name": "filament.admin.resources.books.edit",
+    "action": "App\\Filament\\Resources\\BookResource\\Pages\\EditBook",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/downloads",
+    "name": "filament.admin.resources.downloads.index",
+    "action": "App\\Filament\\Resources\\DownloadResource\\Pages\\ListDownload",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/files",
+    "name": "filament.admin.resources.files.index",
+    "action": "App\\Filament\\Resources\\FileResource\\Pages\\ListFiles",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/files/create",
+    "name": "filament.admin.resources.files.create",
+    "action": "App\\Filament\\Resources\\FileResource\\Pages\\CreateFile",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/files/{record}/edit",
+    "name": "filament.admin.resources.files.edit",
+    "action": "App\\Filament\\Resources\\FileResource\\Pages\\EditFile",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/libraries",
+    "name": "filament.admin.resources.libraries.index",
+    "action": "App\\Filament\\Resources\\LibraryResource\\Pages\\ListLibraries",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/libraries/create",
+    "name": "filament.admin.resources.libraries.create",
+    "action": "App\\Filament\\Resources\\LibraryResource\\Pages\\CreateLibrary",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/libraries/{record}/edit",
+    "name": "filament.admin.resources.libraries.edit",
+    "action": "App\\Filament\\Resources\\LibraryResource\\Pages\\EditLibrary",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/login",
+    "name": "filament.admin.auth.login",
+    "action": "App\\Filament\\Pages\\Auth\\Login",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "admin/logout",
+    "name": "filament.admin.auth.logout",
+    "action": "Filament\\Http\\Controllers\\Auth\\LogoutController",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/queue-monitors",
+    "name": "filament.admin.resources.queue-monitors.index",
+    "action": "Croustibat\\FilamentJobsMonitor\\Resources\\QueueMonitorResource\\Pages\\ListQueueMonitors",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/series",
+    "name": "filament.admin.resources.series.index",
+    "action": "App\\Filament\\Resources\\SerieResource\\Pages\\ListSeries",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/series/create",
+    "name": "filament.admin.resources.series.create",
+    "action": "App\\Filament\\Resources\\SerieResource\\Pages\\CreateSerie",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "admin/series/{record}/edit",
+    "name": "filament.admin.resources.series.edit",
+    "action": "App\\Filament\\Resources\\SerieResource\\Pages\\EditSerie",
+    "middleware": [
+      "Filament\\Http\\Middleware\\SetUpPanel:admin",
+      "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+      "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+      "Illuminate\\Session\\Middleware\\StartSession",
+      "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+      "Filament\\Http\\Middleware\\Authenticate",
+      "Illuminate\\Session\\Middleware\\AuthenticateSession",
+      "Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken",
+      "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "Filament\\Http\\Middleware\\DisableBladeIconComponents",
+      "Filament\\Http\\Middleware\\DispatchServingFilamentEvent"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/authors/{author}/books",
+    "name": "api.authors.books",
+    "action": "App\\Http\\Controllers\\Api\\AuthorController@books",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/authors/{author}/counts",
+    "name": "api.authors.counts",
+    "action": "App\\Http\\Controllers\\Api\\AuthorController@counts",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/authors/{author}/series",
+    "name": "api.authors.series",
+    "action": "App\\Http\\Controllers\\Api\\AuthorController@series",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/books/latest",
+    "name": "api.books.latest",
+    "action": "App\\Http\\Controllers\\Api\\BookController@latest",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/books/latest/{library}",
+    "name": "api.books.latest.library",
+    "action": "App\\Http\\Controllers\\Api\\BookController@latestLibrary",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/books/related/{book}",
+    "name": "api.books.related",
+    "action": "App\\Http\\Controllers\\Api\\BookController@related",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/books/released",
+    "name": "api.books.released",
+    "action": "App\\Http\\Controllers\\Api\\BookController@released",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/downloads/book/{book}",
+    "name": "api.downloads.book",
+    "action": "App\\Http\\Controllers\\Api\\DownloadController@book",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/downloads/serie/{serie}",
+    "name": "api.downloads.serie",
+    "action": "App\\Http\\Controllers\\Api\\DownloadController@serie",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/languages",
+    "name": "api.languages.index",
+    "action": "App\\Http\\Controllers\\Api\\LanguageController@index",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/libraries",
+    "name": "api.libraries.index",
+    "action": "App\\Http\\Controllers\\Api\\LibraryController@index",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/search",
+    "name": "api.search.index",
+    "action": "App\\Http\\Controllers\\Api\\SearchController@index",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/size/book/{book}",
+    "name": "api.sizes.book",
+    "action": "App\\Http\\Controllers\\Api\\SizeController@book",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/size/serie/{serie}",
+    "name": "api.sizes.serie",
+    "action": "App\\Http\\Controllers\\Api\\SizeController@serie",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "authors",
+    "name": "authors.index",
+    "action": "App\\Http\\Controllers\\App\\AuthorController@index",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "authors/{author}",
+    "name": "authors.show",
+    "action": "App\\Http\\Controllers\\App\\AuthorController@show",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "clockwork",
     "name": null,
-    "methods": ["GET", "HEAD"],
+    "action": "Clockwork\\Support\\Laravel\\ClockworkController@webRedirect",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "clockwork/app",
+    "name": null,
+    "action": "Clockwork\\Support\\Laravel\\ClockworkController@webIndex",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "clockwork/{path}",
+    "name": null,
+    "action": "Clockwork\\Support\\Laravel\\ClockworkController@webAsset",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "email/verification-notification",
+    "name": "verification.send",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\EmailVerificationNotificationController@store",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\Authenticate:web",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:6,1"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "email/verify/{id}/{hash}",
+    "name": "verification.verify",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\VerifyEmailController@__invoke",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\Authenticate:web",
+      "Illuminate\\Routing\\Middleware\\ValidateSignature",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:6,1"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "filament/exports/{export}/download",
+    "name": "filament.exports.download",
+    "action": "Filament\\Actions\\Exports\\Http\\Controllers\\DownloadExport",
+    "middleware": ["filament.actions"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "filament/imports/{import}/failed-rows/download",
+    "name": "filament.imports.failed-rows.download",
+    "action": "Filament\\Actions\\Imports\\Http\\Controllers\\DownloadImportFailureCsv",
+    "middleware": ["filament.actions"]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "forgot-password",
+    "name": "password.email",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\PasswordResetLinkController@store",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated:web"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "form/message",
+    "name": "form.message",
+    "action": "App\\Http\\Controllers\\App\\FormController@message",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "form/message",
+    "name": "form.message.post",
+    "action": "App\\Http\\Controllers\\App\\FormController@messageSubmit",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "libraries",
+    "name": "libraries.index",
+    "action": "App\\Http\\Controllers\\App\\LibraryController@index",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "libraries/{library}",
+    "name": "libraries.show",
+    "action": "App\\Http\\Controllers\\App\\LibraryController@show",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "libraries/{library}/series",
+    "name": "series.index",
+    "action": "App\\Http\\Controllers\\App\\SerieController@index",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "libraries/{library}/series/{serie}",
+    "name": "series.show",
+    "action": "App\\Http\\Controllers\\App\\SerieController@show",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "libraries/{library}/{book}",
+    "name": "books.show",
+    "action": "App\\Http\\Controllers\\App\\BookController@show",
+    "middleware": ["web"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
     "uri": "livewire/livewire.js",
-    "action": "Livewire\\Controllers\\LivewireJavaScriptAssets@source",
-    "middleware": [],
-    "example": "http://app.p1pdd.test/livewire/livewire.js",
-    "parameters": []
-  },
-  "livewire/livewire.js.map": {
     "name": null,
-    "methods": ["GET", "HEAD"],
-    "uri": "livewire/livewire.js.map",
-    "action": "Livewire\\Controllers\\LivewireJavaScriptAssets@maps",
-    "middleware": [],
-    "example": "http://app.p1pdd.test/livewire/livewire.js.map",
-    "parameters": []
+    "action": "Livewire\\Mechanisms\\FrontendAssets\\FrontendAssets@returnJavaScriptAsFile",
+    "middleware": []
   },
-  "log-viewer.files": {
-    "name": "log-viewer.files",
-    "methods": ["GET", "HEAD"],
-    "uri": "log-viewer/api/files",
-    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@index",
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "livewire/livewire.min.js.map",
+    "name": null,
+    "action": "Livewire\\Mechanisms\\FrontendAssets\\FrontendAssets@maps",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "livewire/preview-file/{filename}",
+    "name": "livewire.preview-file",
+    "action": "Livewire\\Features\\SupportFileUploads\\FilePreviewController@handle",
+    "middleware": ["web"]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "livewire/update",
+    "name": "livewire.update",
+    "action": "Livewire\\Mechanisms\\HandleRequests\\HandleRequests@handleUpdate",
+    "middleware": ["web"]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "livewire/upload-file",
+    "name": "livewire.upload-file",
+    "action": "Livewire\\Features\\SupportFileUploads\\FileUploadController@handle",
     "middleware": [
-      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
-      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/files",
-    "parameters": []
+      "web",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:60,1"
+    ]
   },
-  "log-viewer.files.clear-cache": {
-    "name": "log-viewer.files.clear-cache",
-    "methods": ["POST"],
-    "uri": "log-viewer/api/files/{fileIdentifier}/clear-cache",
-    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@clearCache",
-    "middleware": [
-      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
-      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/files/{fileIdentifier}/clear-cache",
-    "parameters": ["fileIdentifier"]
-  },
-  "log-viewer.files.clear-cache-all": {
-    "name": "log-viewer.files.clear-cache-all",
-    "methods": ["POST"],
+  {
+    "domain": null,
+    "method": "POST",
     "uri": "log-viewer/api/clear-cache-all",
+    "name": "log-viewer.files.clear-cache-all",
     "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@clearCacheAll",
     "middleware": [
       "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
       "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/clear-cache-all",
-    "parameters": []
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
   },
-  "log-viewer.files.delete": {
-    "name": "log-viewer.files.delete",
-    "methods": ["DELETE"],
-    "uri": "log-viewer/api/files/{fileIdentifier}",
-    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@delete",
-    "middleware": [
-      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
-      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/files/{fileIdentifier}",
-    "parameters": ["fileIdentifier"]
-  },
-  "log-viewer.files.delete-multiple-files": {
-    "name": "log-viewer.files.delete-multiple-files",
-    "methods": ["POST"],
+  {
+    "domain": null,
+    "method": "POST",
     "uri": "log-viewer/api/delete-multiple-files",
+    "name": "log-viewer.files.delete-multiple-files",
     "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@deleteMultipleFiles",
     "middleware": [
       "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
       "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/delete-multiple-files",
-    "parameters": []
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
   },
-  "log-viewer.files.download": {
-    "name": "log-viewer.files.download",
-    "methods": ["GET", "HEAD"],
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "log-viewer/api/files",
+    "name": "log-viewer.files",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@index",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "DELETE",
+    "uri": "log-viewer/api/files/{fileIdentifier}",
+    "name": "log-viewer.files.delete",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@delete",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "log-viewer/api/files/{fileIdentifier}/clear-cache",
+    "name": "log-viewer.files.clear-cache",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@clearCache",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
     "uri": "log-viewer/api/files/{fileIdentifier}/download",
+    "name": "log-viewer.files.download",
     "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@download",
     "middleware": [
       "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
       "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/files/{fileIdentifier}/download",
-    "parameters": ["fileIdentifier"]
+      "Illuminate\\Routing\\Middleware\\ValidateSignature"
+    ]
   },
-  "log-viewer.folders": {
-    "name": "log-viewer.folders",
-    "methods": ["GET", "HEAD"],
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "log-viewer/api/files/{fileIdentifier}/download/request",
+    "name": "log-viewer.files.request-download",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FilesController@requestDownload",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
     "uri": "log-viewer/api/folders",
+    "name": "log-viewer.folders",
     "action": "Opcodes\\LogViewer\\Http\\Controllers\\FoldersController@index",
     "middleware": [
       "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
       "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/folders",
-    "parameters": []
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
   },
-  "log-viewer.folders.clear-cache": {
-    "name": "log-viewer.folders.clear-cache",
-    "methods": ["POST"],
-    "uri": "log-viewer/api/folders/{folderIdentifier}/clear-cache",
-    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FoldersController@clearCache",
-    "middleware": [
-      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
-      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/folders/{folderIdentifier}/clear-cache",
-    "parameters": ["folderIdentifier"]
-  },
-  "log-viewer.folders.delete": {
-    "name": "log-viewer.folders.delete",
-    "methods": ["DELETE"],
+  {
+    "domain": null,
+    "method": "DELETE",
     "uri": "log-viewer/api/folders/{folderIdentifier}",
+    "name": "log-viewer.folders.delete",
     "action": "Opcodes\\LogViewer\\Http\\Controllers\\FoldersController@delete",
     "middleware": [
       "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
       "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/folders/{folderIdentifier}",
-    "parameters": ["folderIdentifier"]
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
   },
-  "log-viewer.folders.download": {
-    "name": "log-viewer.folders.download",
-    "methods": ["GET", "HEAD"],
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "log-viewer/api/folders/{folderIdentifier}/clear-cache",
+    "name": "log-viewer.folders.clear-cache",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FoldersController@clearCache",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
     "uri": "log-viewer/api/folders/{folderIdentifier}/download",
+    "name": "log-viewer.folders.download",
     "action": "Opcodes\\LogViewer\\Http\\Controllers\\FoldersController@download",
     "middleware": [
       "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
       "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/folders/{folderIdentifier}/download",
-    "parameters": ["folderIdentifier"]
+      "Illuminate\\Routing\\Middleware\\ValidateSignature"
+    ]
   },
-  "log-viewer.hosts": {
-    "name": "log-viewer.hosts",
-    "methods": ["GET", "HEAD"],
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "log-viewer/api/folders/{folderIdentifier}/download/request",
+    "name": "log-viewer.folders.request-download",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\FoldersController@requestDownload",
+    "middleware": [
+      "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
     "uri": "log-viewer/api/hosts",
+    "name": "log-viewer.hosts",
     "action": "Opcodes\\LogViewer\\Http\\Controllers\\HostsController@index",
     "middleware": [
       "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
       "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/hosts",
-    "parameters": []
+    ]
   },
-  "log-viewer.index": {
-    "name": "log-viewer.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "log-viewer/{view?}",
-    "action": "Opcodes\\LogViewer\\Http\\Controllers\\IndexController",
-    "middleware": [
-      "web",
-      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/{view?}",
-    "parameters": ["view"]
-  },
-  "log-viewer.logs": {
-    "name": "log-viewer.logs",
-    "methods": ["GET", "HEAD"],
+  {
+    "domain": null,
+    "method": "GET|HEAD",
     "uri": "log-viewer/api/logs",
+    "name": "log-viewer.logs",
     "action": "Opcodes\\LogViewer\\Http\\Controllers\\LogsController@index",
     "middleware": [
       "Opcodes\\LogViewer\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
       "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer",
-      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware"
-    ],
-    "example": "http://app.p1pdd.test/log-viewer/api/logs",
-    "parameters": []
+      "Opcodes\\LogViewer\\Http\\Middleware\\ForwardRequestToHostMiddleware",
+      "Opcodes\\LogViewer\\Http\\Middleware\\JsonResourceWithoutWrappingMiddleware"
+    ]
   },
-  "login": {
-    "name": null,
-    "methods": ["POST"],
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "log-viewer/{view?}",
+    "name": "log-viewer.index",
+    "action": "Opcodes\\LogViewer\\Http\\Controllers\\IndexController",
+    "middleware": [
+      "web",
+      "Opcodes\\LogViewer\\Http\\Middleware\\AuthorizeLogViewer"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "POST",
     "uri": "login",
+    "name": null,
     "action": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@store",
-    "middleware": ["web", "guest:web", "throttle:login"],
-    "example": "http://app.p1pdd.test/login",
-    "parameters": []
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated:web",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:login"
+    ]
   },
-  "logout": {
-    "name": "logout",
-    "methods": ["POST"],
+  {
+    "domain": null,
+    "method": "POST",
     "uri": "logout",
+    "name": "logout",
     "action": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@destroy",
-    "middleware": ["web"],
-    "example": "http://app.p1pdd.test/logout",
-    "parameters": []
+    "middleware": ["web", "Illuminate\\Auth\\Middleware\\Authenticate:web"]
   },
-  "other-browser-sessions.destroy": {
-    "name": "other-browser-sessions.destroy",
-    "methods": ["DELETE"],
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds",
+    "name": "opds.index",
+    "action": "App\\Http\\Controllers\\Opds\\IndexController@index",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds/authors",
+    "name": "opds.authors.index",
+    "action": "App\\Http\\Controllers\\Opds\\AuthorController@index",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds/authors/{character}",
+    "name": "opds.authors.character",
+    "action": "App\\Http\\Controllers\\Opds\\AuthorController@character",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds/authors/{character}/{author}",
+    "name": "opds.authors.show",
+    "action": "App\\Http\\Controllers\\Opds\\AuthorController@show",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds/books/{book}",
+    "name": "opds.books.show",
+    "action": "App\\Http\\Controllers\\Opds\\BookController@show",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds/latest",
+    "name": "opds.latest",
+    "action": "App\\Http\\Controllers\\Opds\\IndexController@latest",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds/random",
+    "name": "opds.random",
+    "action": "App\\Http\\Controllers\\Opds\\IndexController@random",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds/search",
+    "name": "opds.search",
+    "action": "App\\Http\\Controllers\\Opds\\IndexController@search",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds/series",
+    "name": "opds.series.index",
+    "action": "App\\Http\\Controllers\\Opds\\SerieController@index",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds/series/{character}",
+    "name": "opds.series.character",
+    "action": "App\\Http\\Controllers\\Opds\\SerieController@character",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "opds/series/{character}/{serie}",
+    "name": "opds.series.show",
+    "action": "App\\Http\\Controllers\\Opds\\SerieController@show",
+    "middleware": ["api", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "pages/help",
+    "name": "pages.help",
+    "action": "App\\Http\\Controllers\\App\\PageController@help",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "register",
+    "name": null,
+    "action": "Laravel\\Fortify\\Http\\Controllers\\RegisteredUserController@store",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated:web"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "reset-password",
+    "name": "password.update",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\NewPasswordController@store",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated:web"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "sanctum/csrf-cookie",
+    "name": "sanctum.csrf-cookie",
+    "action": "Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController@show",
+    "middleware": ["web"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "search",
+    "name": "search.index",
+    "action": "App\\Http\\Controllers\\App\\SearchController@index",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "tags",
+    "name": "tags.index",
+    "action": "App\\Http\\Controllers\\App\\TagController@index",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "tags/{tag}",
+    "name": "tags.show",
+    "action": "App\\Http\\Controllers\\App\\TagController@show",
+    "middleware": ["web", "Illuminate\\Routing\\Middleware\\SubstituteBindings"]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "two-factor-challenge",
+    "name": null,
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticatedSessionController@store",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated:web",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:two-factor"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "up",
+    "name": null,
+    "action": "Closure",
+    "middleware": []
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "user/confirm-password",
+    "name": "password.confirm",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmablePasswordController@store",
+    "middleware": ["web", "Illuminate\\Auth\\Middleware\\Authenticate:web"]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "user/confirmed-password-status",
+    "name": "password.confirmation",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmedPasswordStatusController@show",
+    "middleware": ["web", "Illuminate\\Auth\\Middleware\\Authenticate:web"]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "user/confirmed-two-factor-authentication",
+    "name": "two-factor.confirm",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmedTwoFactorAuthenticationController@store",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\Authenticate:web",
+      "Illuminate\\Auth\\Middleware\\RequirePassword"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "DELETE",
     "uri": "user/other-browser-sessions",
+    "name": "other-browser-sessions.destroy",
     "action": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\OtherBrowserSessionsController@destroy",
     "middleware": [
       "web",
-      "auth:sanctum",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
       "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
-    ],
-    "example": "http://app.p1pdd.test/user/other-browser-sessions",
-    "parameters": []
+    ]
   },
-  "page.about": {
-    "name": "page.about",
-    "methods": ["GET", "HEAD"],
-    "uri": "a-propos",
-    "action": "App\\Http\\Controllers\\HomeController@page",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/a-propos",
-    "parameters": []
+  {
+    "domain": null,
+    "method": "PUT",
+    "uri": "user/password",
+    "name": "user-password.update",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\PasswordController@update",
+    "middleware": ["web", "Illuminate\\Auth\\Middleware\\Authenticate:web"]
   },
-  "page.p1pdd": {
-    "name": "page.p1pdd",
-    "methods": ["GET", "HEAD"],
-    "uri": "p1pdd",
-    "action": "App\\Http\\Controllers\\HomeController@p1pdd",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/p1pdd",
-    "parameters": []
-  },
-  "page.pqd2p": {
-    "name": "page.pqd2p",
-    "methods": ["GET", "HEAD"],
-    "uri": "pqd2p",
-    "action": "App\\Http\\Controllers\\HomeController@pqd2p",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/pqd2p",
-    "parameters": []
-  },
-  "page.subscribe": {
-    "name": "page.subscribe",
-    "methods": ["GET", "HEAD"],
-    "uri": "s-abonner",
-    "action": "App\\Http\\Controllers\\HomeController@subscribe",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/s-abonner",
-    "parameters": []
-  },
-  "password.confirm": {
-    "name": "password.confirm",
-    "methods": ["POST"],
-    "uri": "user/confirm-password",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmablePasswordController@store",
-    "middleware": ["web", "auth:web"],
-    "example": "http://app.p1pdd.test/user/confirm-password",
-    "parameters": []
-  },
-  "password.confirmation": {
-    "name": "password.confirmation",
-    "methods": ["GET", "HEAD"],
-    "uri": "user/confirmed-password-status",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmedPasswordStatusController@show",
-    "middleware": ["web", "auth:web"],
-    "example": "http://app.p1pdd.test/user/confirmed-password-status",
-    "parameters": []
-  },
-  "password.email": {
-    "name": "password.email",
-    "methods": ["POST"],
-    "uri": "forgot-password",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\PasswordResetLinkController@store",
-    "middleware": ["web", "guest:web"],
-    "example": "http://app.p1pdd.test/forgot-password",
-    "parameters": []
-  },
-  "password.request": {
-    "name": "password.request",
-    "methods": ["GET", "HEAD"],
-    "uri": "forgot-password",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\PasswordResetLinkController@create",
-    "middleware": ["web", "guest:web"],
-    "example": "http://app.p1pdd.test/forgot-password",
-    "parameters": []
-  },
-  "password.reset": {
-    "name": "password.reset",
-    "methods": ["GET", "HEAD"],
-    "uri": "reset-password/{token}",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\NewPasswordController@create",
-    "middleware": ["web", "guest:web"],
-    "example": "http://app.p1pdd.test/reset-password/{token}",
-    "parameters": ["token"]
-  },
-  "password.update": {
-    "name": "password.update",
-    "methods": ["POST"],
-    "uri": "reset-password",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\NewPasswordController@store",
-    "middleware": ["web", "guest:web"],
-    "example": "http://app.p1pdd.test/reset-password",
-    "parameters": []
-  },
-  "podcasts.index": {
-    "name": "podcasts.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "podcasts",
-    "action": "App\\Http\\Controllers\\PodcastController@index",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/podcasts",
-    "parameters": []
-  },
-  "podcasts.show": {
-    "name": "podcasts.show",
-    "methods": ["GET", "HEAD"],
-    "uri": "podcasts/{feed_slug}/{podcast_slug}",
-    "action": "App\\Http\\Controllers\\PodcastController@show",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/podcasts/{podcast_slug}",
-    "parameters": ["feed_slug", "podcast_slug"]
-  },
-  "posts.index": {
-    "name": "posts.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "blog",
-    "action": "App\\Http\\Controllers\\PostController@index",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/blog",
-    "parameters": []
-  },
-  "posts.show": {
-    "name": "posts.show",
-    "methods": ["GET", "HEAD"],
-    "uri": "blog/{post_slug}",
-    "action": "App\\Http\\Controllers\\PostController@show",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/blog/{post_slug}",
-    "parameters": ["post_slug"]
-  },
-  "profile.show": {
-    "name": "profile.show",
-    "methods": ["GET", "HEAD"],
+  {
+    "domain": null,
+    "method": "GET|HEAD",
     "uri": "user/profile",
+    "name": "profile.show",
     "action": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\UserProfileController@show",
     "middleware": [
       "web",
-      "auth:sanctum",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
       "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
-    ],
-    "example": "http://app.p1pdd.test/user/profile",
-    "parameters": []
+    ]
   },
-  "rss.index": {
-    "name": "rss.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "rss",
-    "action": "App\\Http\\Controllers\\RssController@index",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/rss",
-    "parameters": []
-  },
-  "rss.show": {
-    "name": "rss.show",
-    "methods": ["GET", "HEAD"],
-    "uri": "rss/{feed_slug}",
-    "action": "App\\Http\\Controllers\\RssController@show",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/rss/{feed_slug}",
-    "parameters": ["feed_slug"]
-  },
-  "sanctum.csrf-cookie": {
-    "name": "sanctum.csrf-cookie",
-    "methods": ["GET", "HEAD"],
-    "uri": "sanctum/csrf-cookie",
-    "action": "Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController@show",
-    "middleware": ["web"],
-    "example": "http://app.p1pdd.test/sanctum/csrf-cookie",
-    "parameters": []
-  },
-  "submission.index": {
-    "name": "submission.index",
-    "methods": ["GET", "HEAD"],
-    "uri": "contact",
-    "action": "App\\Http\\Controllers\\SubmissionController@index",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/contact",
-    "parameters": []
-  },
-  "submission.store": {
-    "name": "submission.store",
-    "methods": ["POST"],
-    "uri": "contact",
-    "action": "App\\Http\\Controllers\\SubmissionController@store",
-    "middleware": [
-      "web",
-      "Illuminate\\Routing\\Middleware\\SubstituteBindings"
-    ],
-    "example": "http://app.p1pdd.test/contact",
-    "parameters": []
-  },
-  "two-factor-challenge": {
-    "name": null,
-    "methods": ["POST"],
-    "uri": "two-factor-challenge",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticatedSessionController@store",
-    "middleware": ["web", "guest:web", "throttle:two-factor"],
-    "example": "http://app.p1pdd.test/two-factor-challenge",
-    "parameters": []
-  },
-  "two-factor.confirm": {
-    "name": "two-factor.confirm",
-    "methods": ["POST"],
-    "uri": "user/confirmed-two-factor-authentication",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmedTwoFactorAuthenticationController@store",
-    "middleware": ["web", "auth:web", "password.confirm"],
-    "example": "http://app.p1pdd.test/user/confirmed-two-factor-authentication",
-    "parameters": []
-  },
-  "two-factor.disable": {
-    "name": "two-factor.disable",
-    "methods": ["DELETE"],
-    "uri": "user/two-factor-authentication",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticationController@destroy",
-    "middleware": ["web", "auth:web", "password.confirm"],
-    "example": "http://app.p1pdd.test/user/two-factor-authentication",
-    "parameters": []
-  },
-  "two-factor.enable": {
-    "name": "two-factor.enable",
-    "methods": ["POST"],
-    "uri": "user/two-factor-authentication",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticationController@store",
-    "middleware": ["web", "auth:web", "password.confirm"],
-    "example": "http://app.p1pdd.test/user/two-factor-authentication",
-    "parameters": []
-  },
-  "two-factor.login": {
-    "name": "two-factor.login",
-    "methods": ["GET", "HEAD"],
-    "uri": "two-factor-challenge",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticatedSessionController@create",
-    "middleware": ["web", "guest:web"],
-    "example": "http://app.p1pdd.test/two-factor-challenge",
-    "parameters": []
-  },
-  "two-factor.qr-code": {
-    "name": "two-factor.qr-code",
-    "methods": ["GET", "HEAD"],
-    "uri": "user/two-factor-qr-code",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorQrCodeController@show",
-    "middleware": ["web", "auth:web", "password.confirm"],
-    "example": "http://app.p1pdd.test/user/two-factor-qr-code",
-    "parameters": []
-  },
-  "two-factor.recovery-codes": {
-    "name": "two-factor.recovery-codes",
-    "methods": ["GET", "HEAD"],
-    "uri": "user/two-factor-recovery-codes",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\RecoveryCodeController@index",
-    "middleware": ["web", "auth:web", "password.confirm"],
-    "example": "http://app.p1pdd.test/user/two-factor-recovery-codes",
-    "parameters": []
-  },
-  "two-factor.secret-key": {
-    "name": "two-factor.secret-key",
-    "methods": ["GET", "HEAD"],
-    "uri": "user/two-factor-secret-key",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorSecretKeyController@show",
-    "middleware": ["web", "auth:web", "password.confirm"],
-    "example": "http://app.p1pdd.test/user/two-factor-secret-key",
-    "parameters": []
-  },
-  "user-password.update": {
-    "name": "user-password.update",
-    "methods": ["PUT"],
-    "uri": "user/password",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\PasswordController@update",
-    "middleware": ["web", "auth:web"],
-    "example": "http://app.p1pdd.test/user/password",
-    "parameters": []
-  },
-  "user-profile-information.update": {
-    "name": "user-profile-information.update",
-    "methods": ["PUT"],
+  {
+    "domain": null,
+    "method": "PUT",
     "uri": "user/profile-information",
+    "name": "user-profile-information.update",
     "action": "Laravel\\Fortify\\Http\\Controllers\\ProfileInformationController@update",
-    "middleware": ["web", "auth:web"],
-    "example": "http://app.p1pdd.test/user/profile-information",
-    "parameters": []
+    "middleware": ["web", "Illuminate\\Auth\\Middleware\\Authenticate:web"]
   },
-  "user/confirm-password": {
-    "name": null,
-    "methods": ["GET", "HEAD"],
-    "uri": "user/confirm-password",
-    "action": "Laravel\\Fortify\\Http\\Controllers\\ConfirmablePasswordController@show",
-    "middleware": ["web", "auth:web"],
-    "example": "http://app.p1pdd.test/user/confirm-password",
-    "parameters": []
+  {
+    "domain": null,
+    "method": "DELETE",
+    "uri": "user/profile-photo",
+    "name": "current-user-photo.destroy",
+    "action": "Laravel\\Jetstream\\Http\\Controllers\\Inertia\\ProfilePhotoController@destroy",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession"
+    ]
   },
-  "user/two-factor-recovery-codes": {
-    "name": null,
-    "methods": ["POST"],
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "user/two-factor-authentication",
+    "name": "two-factor.enable",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticationController@store",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\Authenticate:web",
+      "Illuminate\\Auth\\Middleware\\RequirePassword"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "DELETE",
+    "uri": "user/two-factor-authentication",
+    "name": "two-factor.disable",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorAuthenticationController@destroy",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\Authenticate:web",
+      "Illuminate\\Auth\\Middleware\\RequirePassword"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "user/two-factor-qr-code",
+    "name": "two-factor.qr-code",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorQrCodeController@show",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\Authenticate:web",
+      "Illuminate\\Auth\\Middleware\\RequirePassword"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
     "uri": "user/two-factor-recovery-codes",
+    "name": "two-factor.recovery-codes",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\RecoveryCodeController@index",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\Authenticate:web",
+      "Illuminate\\Auth\\Middleware\\RequirePassword"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "user/two-factor-recovery-codes",
+    "name": null,
     "action": "Laravel\\Fortify\\Http\\Controllers\\RecoveryCodeController@store",
-    "middleware": ["web", "auth:web", "password.confirm"],
-    "example": "http://app.p1pdd.test/user/two-factor-recovery-codes",
-    "parameters": []
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\Authenticate:web",
+      "Illuminate\\Auth\\Middleware\\RequirePassword"
+    ]
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "user/two-factor-secret-key",
+    "name": "two-factor.secret-key",
+    "action": "Laravel\\Fortify\\Http\\Controllers\\TwoFactorSecretKeyController@show",
+    "middleware": [
+      "web",
+      "Illuminate\\Auth\\Middleware\\Authenticate:web",
+      "Illuminate\\Auth\\Middleware\\RequirePassword"
+    ]
   }
-}
+]

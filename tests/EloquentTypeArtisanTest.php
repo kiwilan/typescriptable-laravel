@@ -1,20 +1,17 @@
 <?php
 
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
-use Kiwilan\Typescriptable\Typed\EloquentType;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentType;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
+
+beforeEach(function () {
+    eloquentConfig();
+});
 
 it('can be run with artisan', function (string $driver) {
     TestCase::setupDatabase($driver);
 
-    $type = EloquentType::make(new EloquentConfig(
-        modelsPath: models(),
-        outputPath: outputDir(),
-        phpPath: outputDir().'/php',
-        useParser: false,
-        skipModels: ['Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest'],
-    ))->execute();
+    $type = EloquentType::make()->execute();
 
     $app = $type->app();
     $movie = $app->getModel('Kiwilan\Typescriptable\Tests\Data\Models\Movie');

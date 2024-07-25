@@ -1,19 +1,16 @@
 <?php
 
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
-use Kiwilan\Typescriptable\Typed\EloquentType;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentType;
+
+beforeEach(function () {
+    eloquentConfig();
+});
 
 it('can create schema app', function (string $driver) {
     TestCase::setupDatabase($driver);
 
-    $type = EloquentType::make(new EloquentConfig(
-        modelsPath: models(),
-        outputPath: outputDir(),
-        phpPath: outputDir().'/php',
-        useParser: false,
-        skipModels: ['Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest'],
-    ))->execute();
+    $type = EloquentType::make()->execute();
 
     $app = $type->app();
 
@@ -29,10 +26,9 @@ it('can create schema app', function (string $driver) {
     $config = $type->config();
 
     expect($config->modelsPath)->toBe(models());
-    expect($config->outputPath)->toBe(outputDir());
     expect($config->phpPath)->toBe(outputDir().'/php');
     expect($config->useParser)->toBeFalse();
-    expect($config->tsFilename)->toBe('types-eloquent.d.ts');
+    expect($config->typescriptFilename)->toBe('types-eloquent.d.ts');
     expect($config->skipModels)->toBeArray();
     expect(count($config->skipModels))->toBe(1);
     expect($config->skipModels[0])->toBe('Kiwilan\Typescriptable\Tests\Data\Models\SushiTest');
