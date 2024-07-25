@@ -12,7 +12,7 @@ it('can list models', function () {
 
     expect($list->models())->toBeArray();
     expect($list->path())->toBe(models());
-    expect(count($list->models()))->toBe(8);
+    expect(count($list->models()))->toBe(9);
 });
 
 it('can use command', function () {

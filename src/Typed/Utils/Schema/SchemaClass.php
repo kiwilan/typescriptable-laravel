@@ -59,7 +59,7 @@ class SchemaClass
             extends: $parent ? $parent->getName() : null,
         );
 
-        if ($parser->extends === 'Illuminate\Database\Eloquent\Model') {
+        if ($parser->extends === 'Illuminate\Database\Eloquent\Model' || $parser->extends === 'Illuminate\Foundation\Auth\User') {
             $parser->isModel = true;
         }
 
@@ -127,23 +127,6 @@ class SchemaClass
     {
         return $this->extends;
     }
-
-    // /**
-    //  * @param  ClassProperty[]  $properties
-    //  */
-    // public static function fake(string $name, array $properties): self
-    // {
-    //     $snake = Str::snake($name);
-    //     $table = Str::plural($snake);
-
-    //     $self = new self(
-    //         table: $table,
-    //         name: $name,
-    //     );
-    //     $class->typeableModel = EloquentModel::fake($class, $properties);
-
-    //     return $self;
-    // }
 
     private static function fileNamespace(SplFileInfo $file): string
     {

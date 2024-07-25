@@ -7,7 +7,7 @@ it('is correct from models', function () {
     $schemas = $collect->onlyModels();
 
     expect($schemas)->toBeArray();
-    expect(count($schemas))->toBe(9);
+    expect(count($schemas))->toBe(10);
 
     $movie = $schemas['Movie'];
     expect($movie->basePath())->toContain('tests/Data/Models');

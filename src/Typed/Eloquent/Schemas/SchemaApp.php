@@ -171,7 +171,7 @@ class SchemaApp
 
                 if ($relation->isMany()) {
                     $model->setAttribute(new SchemaModelAttribute(
-                        name: $relation->name().'_count',
+                        name: $relation->snakeCaseName().'_count',
                         databaseType: null,
                         increments: false,
                         nullable: true,

@@ -18,7 +18,7 @@ it('can create schema app', function (string $driver) {
     expect($app->useParser())->toBeFalse();
     expect($app->baseNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models');
     expect($app->models())->toBeArray();
-    expect(count($app->models()))->toBe(8);
+    expect(count($app->models()))->toBe(9);
     expect($app->driver())->toBe($driver);
     expect($app->databaseName())->toBeIn(['testing', ':memory:']);
     expect($app->databasePrefix())->toBe('ts_');
