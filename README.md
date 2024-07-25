@@ -57,8 +57,8 @@ This version requires [PHP](https://www.php.net/) `8.2+` and supports [Laravel](
 
 | Version                                                                           | L9                 | L10                | L11                |
 | --------------------------------------------------------------------------------- | ------------------ | ------------------ | ------------------ |
-| [v1.12.03](https://packagist.org/packages/kiwilan/typescriptable-laravel#1.12.03) | :white_check_mark: | :white_check_mark: | :x:                |
 | [v3+](https://packagist.org/packages/kiwilan/typescriptable-laravel)              | :x:                | :x:                | :white_check_mark: |
+| [v1.12.03](https://packagist.org/packages/kiwilan/typescriptable-laravel#1.12.03) | :white_check_mark: | :white_check_mark: | :x:                |
 
 You can install the package via composer:
 
