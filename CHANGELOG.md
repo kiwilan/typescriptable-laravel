@@ -2,6 +2,11 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v3.1.01 - 2024-07-25
+
+- Fix `RouteListCommand` with JSON format
+- Fix `}` for Routes types
+
 ## v3.1.0 - 2024-07-25
 
 - Remove options from `typescriptable:eloquent`, `typescriptable:settings` and `typescriptable:routes` because all parameters can be set from config
@@ -36,6 +41,7 @@ Refactoring with Artisan command `show:model`
 ],
 
 
+
 ```
 **BREAKING CHANGES**
 
@@ -46,6 +52,7 @@ Refactoring with Artisan command `show:model`
 + 'eloquent' => [
   // ...
 ],
+
 
 
 ```
@@ -89,6 +96,7 @@ To install package with old versions of Laravel, use the following command:
 
 ```bash
 composer require kiwilan/typescriptable-laravel:1.12.03
+
 
 
 
