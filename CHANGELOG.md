@@ -2,6 +2,18 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v3.1.0 - 2024-07-25
+
+- Remove options from `typescriptable:eloquent`, `typescriptable:settings` and `typescriptable:routes` because all parameters can be set from config
+- Add `eloquent:list` to show all Eloquent models
+- Routes are now generated from `route:list` command
+- Add more tests for routes and settings
+- Add config for routes
+  - `routes.print_list` to print `routes.ts` file
+  - `routes.add_to_window` to add routes into `window` to get it from `window.Routes` (SSR check), `routes.print_list` must be `true`
+  - `routes.use_path` to replace routes types names to routes paths
+  
+
 ## v3.0.0 - 2024-07-22
 
 Refactoring with Artisan command `show:model`
@@ -23,6 +35,7 @@ Refactoring with Artisan command `show:model`
   'eloquent' => 'artisan', // artisan / parser
 ],
 
+
 ```
 **BREAKING CHANGES**
 
@@ -33,6 +46,7 @@ Refactoring with Artisan command `show:model`
 + 'eloquent' => [
   // ...
 ],
+
 
 ```
 ## v2.0.07 - 2024-06-14
@@ -75,6 +89,7 @@ To install package with old versions of Laravel, use the following command:
 
 ```bash
 composer require kiwilan/typescriptable-laravel:1.12.03
+
 
 
 
