@@ -13,9 +13,24 @@ class EloquentConfig
         public array $skipModels = [],
         public ?string $typescriptFilename = null,
     ) {
-        $this->modelsPath = TypescriptableConfig::eloquentDirectory();
-        $this->typescriptFilename = TypescriptableConfig::eloquentFilename();
-        $this->phpPath = TypescriptableConfig::eloquentPhpPath();
-        $this->skipModels = TypescriptableConfig::eloquentSkip();
+        if (! $this->modelsPath) {
+            $this->modelsPath = TypescriptableConfig::eloquentDirectory();
+        }
+
+        if (! $this->useParser) {
+            $this->useParser = TypescriptableConfig::engineEloquent() === 'parser';
+        }
+
+        if (! $this->phpPath) {
+            $this->phpPath = TypescriptableConfig::eloquentPhpPath();
+        }
+
+        if (! $this->skipModels) {
+            $this->skipModels = TypescriptableConfig::eloquentSkip();
+        }
+
+        if (! $this->typescriptFilename) {
+            $this->typescriptFilename = TypescriptableConfig::eloquentFilename();
+        }
     }
 }

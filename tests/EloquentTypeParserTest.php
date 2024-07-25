@@ -1,20 +1,17 @@
 <?php
 
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Typed\EloquentType;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
+
+beforeEach(function () {
+    eloquentConfig('parser');
+});
 
 it('can be run with parser', function (string $driver) {
     TestCase::setupDatabase($driver);
 
-    $type = EloquentType::make(new EloquentConfig(
-        modelsPath: models(),
-        outputPath: outputDir(),
-        phpPath: outputDir().'/php',
-        useParser: true,
-        skipModels: ['Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest'],
-    ))->execute();
+    $type = EloquentType::make()->execute();
 
     $app = $type->app();
     $movie = $app->getModel('Kiwilan\Typescriptable\Tests\Data\Models\Movie');

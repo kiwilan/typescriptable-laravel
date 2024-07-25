@@ -15,9 +15,20 @@ class SettingsConfig
         public ?string $extends = null,
         public array $toSkip = [],
     ) {
-        $this->filename = TypescriptableConfig::settingsFilename();
-        $this->directory = TypescriptableConfig::settingsDirectory();
-        $this->extends = TypescriptableConfig::settingsExtends();
-        $this->toSkip = TypescriptableConfig::settingsSkip();
+        if (! $this->filename) {
+            $this->filename = TypescriptableConfig::settingsFilename();
+        }
+
+        if (! $this->directory) {
+            $this->directory = TypescriptableConfig::settingsDirectory();
+        }
+
+        if (! $this->extends) {
+            $this->extends = TypescriptableConfig::settingsExtends();
+        }
+
+        if (! $this->toSkip) {
+            $this->toSkip = TypescriptableConfig::settingsSkip();
+        }
     }
 }

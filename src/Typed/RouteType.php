@@ -80,7 +80,7 @@ class RouteType
         $skipPaths = $this->toSkip($this->config->pathsToSkip);
 
         if (! $routes) {
-            throw new \Exception('No routes found.');
+            return collect();
         }
         $routes = array_filter($routes, fn ($route) => $this->filterBy($route, 'uri', $skipPaths));
         $routes = array_filter($routes, fn ($route) => $this->filterBy($route, 'name', $skipNames));

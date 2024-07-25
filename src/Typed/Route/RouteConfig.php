@@ -18,10 +18,23 @@ class RouteConfig
         public array $namesToSkip = [],
         public array $pathsToSkip = [],
     ) {
-        $this->filenameTypes = TypescriptableConfig::routesFilename();
-        $this->filenameList = TypescriptableConfig::routesFilenameList();
-        $this->printList = TypescriptableConfig::routesPrintList();
-        $this->namesToSkip = TypescriptableConfig::routesSkipName();
-        $this->pathsToSkip = TypescriptableConfig::routesSkipPath();
+        if (! $this->filenameTypes) {
+            $this->filenameTypes = TypescriptableConfig::routesFilename();
+        }
+
+        if (! $this->filenameList) {
+            $this->filenameList = TypescriptableConfig::routesFilenameList();
+        }
+
+        if (! $this->printList) {
+            $this->printList = TypescriptableConfig::routesPrintList();
+        }
+        if (! $this->namesToSkip) {
+            $this->namesToSkip = TypescriptableConfig::routesSkipName();
+        }
+
+        if (! $this->pathsToSkip) {
+            $this->pathsToSkip = TypescriptableConfig::routesSkipPath();
+        }
     }
 }

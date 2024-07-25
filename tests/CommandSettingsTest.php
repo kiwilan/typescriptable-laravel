@@ -5,11 +5,10 @@ use Kiwilan\Typescriptable\Commands\TypescriptableSettingsCommand;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    deleteFile(outputDir('types-settings.d.ts'));
-
     deleteFile(outputDir(TypescriptableConfig::settingsFilename()));
-    config()->set('typescriptable.settings.filename', settingsDir());
-    config()->set('typescriptable.settings.directory', setttingsOutputDir());
+
+    config()->set('typescriptable.settings.filename', 'types-settings.d.ts');
+    config()->set('typescriptable.settings.directory', settingsDir());
     config()->set('typescriptable.settings.extends', settingsExtends());
     config()->set('typescriptable.settings.skip', []);
 });

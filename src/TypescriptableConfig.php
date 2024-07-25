@@ -115,23 +115,25 @@ class TypescriptableConfig
     public static function routesSkipName(): array
     {
         return config('typescriptable.routes.skip.name') ?? [
-            '__clockwork.*',
             'debugbar.*',
             'horizon.*',
             'telescope.*',
             'nova.*',
             'lighthouse.*',
-            'livewire.*',
-            'ignition.*',
             'filament.*',
             'log-viewer.*',
+            'two-factor.*',
         ];
     }
 
     public static function routesSkipPath(): array
     {
         return config('typescriptable.routes.skip.path') ?? [
-            'api/*',
+            '_ignition/*',
+            '__clockwork/*',
+            'clockwork/*',
+            'two-factor-challenge',
+            'livewire',
         ];
     }
 
