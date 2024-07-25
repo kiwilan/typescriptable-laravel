@@ -13,11 +13,11 @@ use Kiwilan\Typescriptable\TypescriptableConfig;
 class SettingsType
 {
     /**
-     * @param  array<string,SettingsItem>  $items
+     * @param  array<string,SettingsItem>  $settings
      */
     protected function __construct(
         protected SettingsConfig $config,
-        protected array $items = [],
+        protected array $settings = [],
         protected ?string $typescript = null,
     ) {}
 
@@ -30,15 +30,15 @@ class SettingsType
         }
 
         $collect = SchemaCollection::make($self->config->directory, $self->config->toSkip);
-        $items = array_filter($collect->items(), fn (SchemaClass $item) => $item->extends() === $self->config->extends);
+        $settings = array_filter($collect->items(), fn (SchemaClass $item) => $item->extends() === $self->config->extends);
 
-        foreach ($items as $item) {
-            $item = SettingsItem::make($item);
-            $self->items[$item->name()] = $item;
+        foreach ($settings as $setting) {
+            $setting = SettingsItem::make($setting);
+            $self->settings[$setting->name()] = $setting;
         }
 
-        $printer = PrinterSettings::make($self->items);
-        TypescriptableUtils::print($printer, TypescriptableConfig::setPath($self->config->filename));
+        $self->typescript = PrinterSettings::make($self->settings);
+        TypescriptableUtils::print($self->typescript, TypescriptableConfig::setPath($self->config->filename));
 
         return $self;
     }
@@ -51,14 +51,14 @@ class SettingsType
     /**
      * @return array<string,SettingsItem>
      */
-    public function items(): array
+    public function settings(): array
     {
-        return $this->items;
+        return $this->settings;
     }
 
-    public function item(string $name): SettingsItem
+    public function setting(string $name): SettingsItem
     {
-        return $this->items[$name];
+        return $this->settings[$name];
     }
 
     public function typescript(): ?string

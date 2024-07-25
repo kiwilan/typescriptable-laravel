@@ -18,26 +18,36 @@ class SettingItemProperty
 
     public static function make(ReflectionProperty $property): self
     {
-        $phpType = $property->getType();
-        $extra = $property->getDocComment();
+        $reflectionPropertyType = $property->getType();
+        $docComment = $property->getDocComment();
         $typeDoc = null;
-        if ($extra) {
+        if ($docComment) {
             $phpDoc = "/**\n* @var array<string, string>\n*/";
             $regex = '/@var\s+(.*)/';
             preg_match($regex, $phpDoc, $matches);
             $typeDoc = $matches[1];
         }
 
-        $phpType = $phpType instanceof ReflectionNamedType ? $phpType->getName() : 'mixed';
+        $name = $property->getName();
+        $phpType = 'mixed';
+        $isNullable = false;
+        $isBuiltin = false;
+
+        if ($reflectionPropertyType instanceof ReflectionNamedType) {
+            $phpType = $reflectionPropertyType->getName();
+            $isNullable = $reflectionPropertyType->allowsNull();
+            $isBuiltin = $reflectionPropertyType->isBuiltin();
+        }
+
         if ($typeDoc) {
             $phpType = $typeDoc;
         }
 
         $self = new self(
-            name: $property->getName(),
+            name: $name,
             phpType: $phpType,
-            // isNullable: $phpType->allowsNull(),
-            // isBuiltin: $phpType instanceof ReflectionNamedType ? $phpType->isBuiltin() : false,
+            isNullable: $isNullable,
+            isBuiltin: $isBuiltin,
         );
 
         $self->typescriptType = ParserPhpType::toTypescript($self->phpType);

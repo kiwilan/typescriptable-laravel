@@ -25,7 +25,6 @@ it('can use default config', function () {
         skipModels: ['App\\Models\\SushiTest'],
         typescriptFilename: 'eloquent.d.ts',
     );
-    ray($config);
 
     expect($config->modelsPath)->toBe(models());
     expect($config->phpPath)->toBe(outputDir('php'));
