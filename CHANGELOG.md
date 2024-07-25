@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v3.1.03 - 2024-07-25
+
+- Fix missing accessors with Eloquent `parser` engine
+
 ## v3.1.02 - 2024-07-25
 
 - Fix `isModel()` detection, add `Illuminate\Foundation\Auth\User` for models with `Authenticatable` trait.
@@ -48,6 +52,7 @@ Refactoring with Artisan command `show:model`
 
 
 
+
 ```
 **BREAKING CHANGES**
 
@@ -58,6 +63,7 @@ Refactoring with Artisan command `show:model`
 + 'eloquent' => [
   // ...
 ],
+
 
 
 
@@ -103,6 +109,7 @@ To install package with old versions of Laravel, use the following command:
 
 ```bash
 composer require kiwilan/typescriptable-laravel:1.12.03
+
 
 
 
