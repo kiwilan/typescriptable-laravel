@@ -3,11 +3,11 @@
 namespace Kiwilan\Typescriptable;
 
 use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
-use Kiwilan\Typescriptable\Typed\EloquentType;
+use Kiwilan\Typescriptable\Typed\Eloquent\EloquentType;
 use Kiwilan\Typescriptable\Typed\Route\RouteConfig;
-use Kiwilan\Typescriptable\Typed\RouteType;
+use Kiwilan\Typescriptable\Typed\Route\RouteType;
 use Kiwilan\Typescriptable\Typed\Settings\SettingsConfig;
-use Kiwilan\Typescriptable\Typed\SettingsType;
+use Kiwilan\Typescriptable\Typed\Settings\SettingsType;
 
 class Typescriptable
 {

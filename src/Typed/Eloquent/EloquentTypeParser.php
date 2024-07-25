@@ -8,7 +8,6 @@ use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserRelation;
 use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModel;
 use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModelAttribute;
 use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\SchemaApp;
-use Kiwilan\Typescriptable\Typed\EloquentType;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
 

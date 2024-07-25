@@ -1,9 +1,9 @@
 <?php
 
 use Kiwilan\Typescriptable\Typed\Route\RouteConfig;
+use Kiwilan\Typescriptable\Typed\Route\RouteType;
 use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItem;
 use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItemParam;
-use Kiwilan\Typescriptable\Typed\RouteType;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {

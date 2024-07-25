@@ -1,10 +1,9 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed;
+namespace Kiwilan\Typescriptable\Typed\Settings;
 
 use Kiwilan\Typescriptable\Typed\Settings\Printer\PrinterSettings;
 use Kiwilan\Typescriptable\Typed\Settings\Schemas\SettingsItem;
-use Kiwilan\Typescriptable\Typed\Settings\SettingsConfig;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
 use Kiwilan\Typescriptable\Typed\Utils\TypescriptableUtils;

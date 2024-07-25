@@ -152,6 +152,8 @@ You can publish the config file
 php artisan vendor:publish --tag="typescriptable-config"
 ```
 
+A config example is available here: [config/typescriptable.php](https://github.com/kiwilan/typescriptable-laravel/blob/main/config/typescriptable.php).
+
 > [!IMPORTANT]
 >
 > You can configure `engine.eloquent` with `artisan` or `parser` to change parser engine. By default, it uses `artisan` command with [`model:show`](https://blog.laravel.com/laravel-new-model-show-command) command. `artisan` is default engine because it's more reliable and faster than `parser` engine. With MongoDB, the engine doesn't matter because MongoDB database can't be parsed like relational databases.

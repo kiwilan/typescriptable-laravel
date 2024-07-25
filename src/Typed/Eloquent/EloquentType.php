@@ -1,10 +1,7 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed;
+namespace Kiwilan\Typescriptable\Typed\Eloquent;
 
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeArtisan;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentTypeParser;
 use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserModelFillable;
 use Kiwilan\Typescriptable\Typed\Eloquent\Printer\PrinterEloquentPhp;
 use Kiwilan\Typescriptable\Typed\Eloquent\Printer\PrinterEloquentTypescript;
