@@ -17,6 +17,7 @@ class TestCase extends Orchestra
     protected function setUp(): void
     {
         parent::setUp();
+        self::init();
 
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Kiwilan\\Typescriptable\\Database\\Factories\\'.class_basename($modelName).'Factory'
@@ -122,8 +123,6 @@ class TestCase extends Orchestra
 
     public static function setupDatabase(?string $type = null): void
     {
-        self::init();
-
         if (! $type) {
             return;
         }

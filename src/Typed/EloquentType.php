@@ -22,7 +22,7 @@ class EloquentType
         protected ?string $typescript = null,
     ) {}
 
-    public static function make(EloquentConfig $config = new EloquentConfig): self
+    public static function make(EloquentConfig $config = new EloquentConfig()): self
     {
         return new self($config);
     }
