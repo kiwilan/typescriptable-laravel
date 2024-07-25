@@ -8,6 +8,7 @@ class SchemaModelRelation
         protected string $name,
         protected ?string $laravelType = null,
         protected ?string $relatedToModel = null,
+        protected ?string $snakeCaseName = null,
         protected bool $isInternal = true,
         protected bool $isMany = false,
         protected string $phpType = 'mixed',
@@ -21,6 +22,7 @@ class SchemaModelRelation
             $data['type'] ?? null,
             $data['related'] ?? null,
         );
+        $self->snakeCaseName = $self->toSnakeCaseName($self->name);
         $self->isMany = $self->relationTypeisMany($self->laravelType);
         $self->phpType = $self->relatedToModel;
         if ($self->isMany) {
@@ -43,6 +45,11 @@ class SchemaModelRelation
     public function relatedToModel(): ?string
     {
         return $this->relatedToModel;
+    }
+
+    public function snakeCaseName(): string
+    {
+        return $this->snakeCaseName;
     }
 
     public function isInternal(): bool
@@ -83,7 +90,11 @@ class SchemaModelRelation
         }
 
         if ($this->isInternal) {
-            $this->typescriptType = "App.Models.{$typescriptType}";
+            if ($typescriptType === 'any') {
+                $this->typescriptType = 'any';
+            } else {
+                $this->typescriptType = "App.Models.{$typescriptType}";
+            }
         } else {
             $this->typescriptType = $typescriptType;
         }
@@ -93,6 +104,15 @@ class SchemaModelRelation
         }
 
         return $this;
+    }
+
+    private function toSnakeCaseName(string $string): string
+    {
+        $string = preg_replace('/\s+/', '', $string);
+        $string = preg_replace('/(?<!^)[A-Z]/', '_$0', $string);
+        $string = strtolower($string);
+
+        return $string;
     }
 
     private function relationTypeisMany(string $type): bool
