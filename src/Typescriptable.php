@@ -27,17 +27,17 @@ class Typescriptable
         return implode(PHP_EOL, self::TS_HEAD);
     }
 
-    public static function models(EloquentConfig $config = new EloquentConfig()): EloquentType
+    public static function models(EloquentConfig $config = new EloquentConfig): EloquentType
     {
         return EloquentType::make($config)->execute();
     }
 
-    public static function routes(RouteConfig $config = new RouteConfig()): RouteType
+    public static function routes(RouteConfig $config = new RouteConfig): RouteType
     {
         return RouteType::make($config);
     }
 
-    public static function settings(SettingsConfig $config = new SettingsConfig()): ?SettingsType
+    public static function settings(SettingsConfig $config = new SettingsConfig): ?SettingsType
     {
         return SettingsType::make($config);
     }

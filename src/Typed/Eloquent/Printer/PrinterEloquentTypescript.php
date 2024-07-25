@@ -14,7 +14,7 @@ class PrinterEloquentTypescript
      */
     public static function make(array $models): string
     {
-        $self = new self();
+        $self = new self;
 
         /** @var string[] */
         $contents = [];
