@@ -8,7 +8,7 @@ it('can use default config', function () {
         'Kiwilan\\Typescriptable\\Tests\\Data\\Models\\SushiTest',
     ]);
 
-    $config = new EloquentConfig();
+    $config = new EloquentConfig;
 
     expect($config->modelsPath)->toContain('tests/Data/Models');
     expect($config->phpPath)->toBeNull();

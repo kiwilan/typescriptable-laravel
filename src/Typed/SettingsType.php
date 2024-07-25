@@ -21,7 +21,7 @@ class SettingsType
         protected ?string $typescript = null,
     ) {}
 
-    public static function make(SettingsConfig $config = new SettingsConfig()): ?self
+    public static function make(SettingsConfig $config = new SettingsConfig): ?self
     {
         $self = new self($config);
 

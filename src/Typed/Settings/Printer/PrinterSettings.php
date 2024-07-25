@@ -12,7 +12,7 @@ class PrinterSettings
      */
     public static function make(array $items): string
     {
-        $self = new self();
+        $self = new self;
 
         /** @var string[] */
         $content = [];

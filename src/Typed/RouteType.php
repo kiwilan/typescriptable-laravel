@@ -24,7 +24,7 @@ class RouteType
         protected ?string $typescriptTypes = null,
     ) {}
 
-    public static function make(RouteConfig $config = new RouteConfig()): self
+    public static function make(RouteConfig $config = new RouteConfig): self
     {
         $self = new self($config);
         $self->routes = $self->parseRoutes();
