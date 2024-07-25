@@ -68,7 +68,9 @@ class RouteType
     private function parseRoutes(): Collection
     {
         if ($this->config->json === null) {
-            Artisan::call(RouteListCommand::class);
+            Artisan::call(RouteListCommand::class, [
+                '--json' => true,
+            ]);
             $json = Artisan::output();
             $this->config->json = json_decode($json, true);
         }

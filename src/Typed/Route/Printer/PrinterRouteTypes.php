@@ -113,7 +113,7 @@ class PrinterRouteTypes
                     ->map(fn (RouteTypeItemParam $param) => "'{$param->name()}': App.Route.ParamType")
                     ->join("\n      ");
 
-                return "    '$name}': {\n      {$params}\n    }";
+                return "    '{$name}': {\n      {$params}\n    }";
             } else {
                 return "    '{$name}': never";
             }
