@@ -71,8 +71,8 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
 
         $fillables = $model->getFillable();
         $hiddens = $model->getHidden();
-        $appendeds = $model->getAppends();
         $casts = $model->getCasts();
+        $accessors = $this->parseAccessors($model);
 
         foreach ($table->attributes() as $attribute) {
             if (in_array($attribute->name(), $fillables)) {
@@ -88,21 +88,33 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
             }
         }
 
-        foreach ($appendeds as $append) {
-            $attr = new SchemaModelAttribute(
-                name: $append,
+        foreach ($accessors as $accessor) {
+            $table->addAttribute($accessor);
+        }
+
+        return $table;
+    }
+
+    /**
+     * @return SchemaModelAttribute[]
+     */
+    private function parseAccessors(Model $model): array
+    {
+        $accessors = [];
+        foreach ($model->getMutatedAttributes() as $attribute) {
+            $accessors[] = new SchemaModelAttribute(
+                name: $attribute,
                 databaseType: null,
                 increments: false,
                 nullable: true,
                 default: null,
                 unique: false,
                 appended: true,
-                cast: 'accessor'
+                cast: 'accessor',
             );
-            $table->addAttribute($attr);
         }
 
-        return $table;
+        return $accessors;
     }
 
     private function parseRelations(\ReflectionClass $reflect)
