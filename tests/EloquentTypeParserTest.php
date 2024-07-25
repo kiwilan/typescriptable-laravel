@@ -41,7 +41,7 @@ it('can be run with parser', function (string $driver) {
 
     $id = $movie->getAttribute('id');
     expect($id->name())->toBe('id');
-    expect($id->databaseType())->toBeIn(['char(26)', 'varchar', 'character', 'nchar']);
+    expect($id->databaseType())->toBeIn(['character(26)', 'varchar', 'character', 'nchar']);
     expect($id->nullable())->toBeFalse();
     expect($id->default())->toBeNull();
     expect($id->fillable())->toBeFalse();
