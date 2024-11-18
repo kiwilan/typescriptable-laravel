@@ -106,7 +106,7 @@ jobs:
 
       - name: Send code coverage
         # https://github.com/codecov/codecov-action
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: false
