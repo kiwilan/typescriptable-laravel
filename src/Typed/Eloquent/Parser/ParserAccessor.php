@@ -71,7 +71,7 @@ class ParserAccessor
         $regex = '/(?m)@return *\K(?>(\S+) *)??(\S+)$/';
 
         if (preg_match($regex, $doc, $matches)) {
-            $return = $matches[0] ?? null;
+            $return = $matches[0];
         }
 
         $type = $method->getReturnType();
@@ -123,18 +123,16 @@ class ParserAccessor
         $regex = '/array<(.*?)\>/';
 
         if (preg_match($regex, $type, $matches)) {
-            if ($matches) {
-                $matches = $matches[1];
-                $matches = explode(',', $matches);
+            $matches = $matches[1];
+            $matches = explode(',', $matches);
 
-                return $matches[0];
-            }
+            return $matches[0];
         }
 
         $regex = '/(.*?)\[]/';
 
         if (preg_match($regex, $type, $matches)) {
-            return $matches ? $matches[1] : false;
+            return $matches[1];
         }
 
         return false;
