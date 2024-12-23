@@ -2,6 +2,11 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v3.1.05 - 2024-12-23
+
+- Fix for [SchemaClass](https://github.com/kiwilan/typescriptable-laravel/blob/main/src/Typed/Utils/Schema/SchemaClass.php) for #89, thanks to @PerryRylance
+- Upgrade `mongodb/laravel-mongodb` to v5.x.x
+
 ## v3.1.03 - 2024-07-25
 
 - Fix missing accessors with Eloquent `parser` engine
@@ -53,6 +58,7 @@ Refactoring with Artisan command `show:model`
 
 
 
+
 ```
 **BREAKING CHANGES**
 
@@ -63,6 +69,7 @@ Refactoring with Artisan command `show:model`
 + 'eloquent' => [
   // ...
 ],
+
 
 
 
@@ -109,6 +116,7 @@ To install package with old versions of Laravel, use the following command:
 
 ```bash
 composer require kiwilan/typescriptable-laravel:1.12.03
+
 
 
 
