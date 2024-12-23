@@ -108,7 +108,6 @@ class TypescriptToPhp
 
         if (preg_match($regex, $content, $matches)) {
             $className = $matches[1];
-            $typeParam = $matches[2] ?? null;
 
             return $className;
         }

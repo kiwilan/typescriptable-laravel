@@ -59,9 +59,7 @@ class SchemaClass
             extends: $parent ? $parent->getName() : null,
         );
 
-        if ($parser->extends === 'Illuminate\Database\Eloquent\Model' || $parser->extends === 'Illuminate\Foundation\Auth\User') {
-            $parser->isModel = true;
-        }
+        $parser->isModel = $reflect->isSubclassOf('Illuminate\Database\Eloquent\Model') || $reflect->isSubclassOf('Illuminate\Foundation\Auth\User');
 
         return $parser;
     }
