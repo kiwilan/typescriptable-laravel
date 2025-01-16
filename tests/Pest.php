@@ -90,20 +90,6 @@ function deleteFile(string $file): void
 
 function deleteDir(string $dir): void
 {
-    // if (! is_dir($dir)) {
-    //     return;
-    // }
-
-    // foreach (scandir($dir) as $file) {
-
-    //     if (is_dir("$dir/$file")) {
-    //         deleteDir("$dir/$file");
-    //     } else {
-    //         unlink("$dir/$file");
-    //     }
-    // }
-    // rmdir($dir);
-
     $files = glob("{$dir}/*");
     foreach ($files as $file) {
         if ($file === '.' || $file === '..') {

@@ -16,30 +16,30 @@ it('can be run with artisan', function (string $driver) {
     $app = $type->app();
     $movie = $app->getModel('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
 
-    expect($movie->schemaClass())->toBeInstanceOf(SchemaClass::class);
-    expect($movie->namespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
-    expect($movie->driver())->toBe($driver);
-    expect($movie->table())->toBe('ts_movies');
-    expect($movie->policy())->toBeNull();
-    expect($movie->attributes())->toBeArray();
-    expect(count($movie->attributes()))->toBe(43);
-    expect($movie->relations())->toBeArray();
-    expect(count($movie->relations()))->toBe(5);
-    expect($movie->observers())->toBeArray();
-    expect(count($movie->observers()))->toBe(1);
-    expect($movie->typescriptModelName())->toBe('Movie');
+    expect($movie->getSchemaClass())->toBeInstanceOf(SchemaClass::class);
+    expect($movie->getNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
+    expect($movie->getDriver())->toBe($driver);
+    expect($movie->getTable())->toBe('ts_movies');
+    expect($movie->getPolicy())->toBeNull();
+    expect($movie->getAttributes())->toBeArray();
+    expect(count($movie->getAttributes()))->toBe(43);
+    expect($movie->getRelations())->toBeArray();
+    expect(count($movie->getRelations()))->toBe(5);
+    expect($movie->getObservers())->toBeArray();
+    expect(count($movie->getObservers()))->toBe(6);
+    expect($movie->getTypescriptModelName())->toBe('Movie');
 
-    $schemaClass = $movie->schemaClass();
+    $schemaClass = $movie->getSchemaClass();
 
-    expect($schemaClass->basePath())->toBe(models());
-    expect($schemaClass->path())->toBe(models().'/Movie.php');
-    expect($schemaClass->namespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
-    expect($schemaClass->name())->toBe('Movie');
-    expect($schemaClass->fullname())->toBe('Movie');
+    expect($schemaClass->getBasePath())->toBe(models());
+    expect($schemaClass->getPath())->toBe(models().'/Movie.php');
+    expect($schemaClass->getNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
+    expect($schemaClass->getName())->toBe('Movie');
+    expect($schemaClass->getFullname())->toBe('Movie');
     expect($schemaClass->isModel())->toBeTrue();
-    expect($schemaClass->traits())->toBeArray();
-    expect(count($schemaClass->traits()))->toBe(3);
-    expect($schemaClass->extends())->toBe('Illuminate\Database\Eloquent\Model');
+    expect($schemaClass->getTraits())->toBeArray();
+    expect(count($schemaClass->getTraits()))->toBe(3);
+    expect($schemaClass->getExtends())->toBe('Illuminate\Database\Eloquent\Model');
 
     $id = $movie->getAttribute('id');
     expect($id->name())->toBe('id');
@@ -253,4 +253,14 @@ it('can be run with artisan', function (string $driver) {
     expect($members_count->name())->toBe('members_count');
     expect($members_count->phpType())->toBe('int');
     expect($members_count->typescriptType())->toBe('number');
+
+    $chapter = $app->getModel('Kiwilan\Typescriptable\Tests\Data\Models\Chapter');
+    expect($chapter->getAttribute('creation_date'))->not()->toBeNull();
+    expect($chapter->getAttribute('updated_date'))->not()->toBeNull();
+    expect($chapter->getAttribute('created_at'))->toBeNull();
+    expect($chapter->getAttribute('updated_at'))->toBeNull();
+
+    $category = $app->getModel('Kiwilan\Typescriptable\Tests\Data\Models\Category');
+    expect($category->getAttribute('created_at'))->toBeNull();
+    expect($category->getAttribute('updated_at'))->toBeNull();
 })->with(DatabaseDriverEnums());

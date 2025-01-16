@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Observers\MovieObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+
+#[ObservedBy([MovieObserver::class])]
 class Movie extends \Illuminate\Database\Eloquent\Model
 {
     use \Illuminate\Database\Eloquent\Concerns\HasUlids;

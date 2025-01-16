@@ -2,6 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Tests\Data\Models;
 
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,10 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
 use Kiwilan\Typescriptable\Tests\Data\Models\Nested\Author;
+use Kiwilan\Typescriptable\Tests\Data\Observers\MovieObserver;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+#[ObservedBy([MovieObserver::class])]
 class Movie extends Model implements \Spatie\MediaLibrary\HasMedia
 {
     use HasFactory;

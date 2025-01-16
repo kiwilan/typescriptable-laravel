@@ -11,6 +11,10 @@ class Chapter extends Model
 {
     use HasFactory;
 
+    const CREATED_AT = 'creation_date';
+
+    const UPDATED_AT = 'updated_date';
+
     protected $time_to_read_with = 'content';
 
     protected $fillable = [

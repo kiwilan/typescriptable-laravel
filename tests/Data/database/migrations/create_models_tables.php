@@ -58,7 +58,8 @@ return new class extends Migration
             $table->integer('time_to_read')->nullable();
             $table->integer('number')->nullable();
 
-            $table->timestamps();
+            $table->timestamp('creation_date')->nullable();
+            $table->timestamp('updated_date')->nullable();
         });
 
         Schema::create('categories', function (Blueprint $table) {
@@ -68,8 +69,6 @@ return new class extends Migration
             $table->string('slug')->unique()->nullable();
             $table->string('picture')->nullable();
             $table->string('color')->nullable();
-
-            $table->timestamps();
         });
 
         Schema::table('stories', function (Blueprint $table) {
