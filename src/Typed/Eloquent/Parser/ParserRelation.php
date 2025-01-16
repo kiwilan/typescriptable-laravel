@@ -82,7 +82,7 @@ class ParserRelation
                     $this->related = $external;
                 }
             } catch (\Throwable $th) {
-                //throw $th;
+                // throw $th;
             }
         }
     }
