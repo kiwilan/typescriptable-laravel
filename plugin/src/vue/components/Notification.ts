@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
-import { h, onMounted, ref } from 'vue'
 import type { NotificationExtended } from '../composables/useNotification'
+import { h, onMounted, ref } from 'vue'
 
 interface Props {
   notification: NotificationExtended

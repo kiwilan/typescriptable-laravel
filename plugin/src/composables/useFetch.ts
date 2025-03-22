@@ -1,7 +1,5 @@
-import { HttpRequest } from '../shared/http/HttpRequest'
-import { HttpResponse } from '../shared/http/HttpResponse'
-import { HttpDownload } from '@/shared/http/HttpDownload'
 import type { HttpRequestAnonymous, HttpRequestBody, HttpRequestQuery } from '@/types/http'
+import { HttpDownload, HttpRequest, HttpResponse } from '@/shared/http'
 
 /**
  * Composable for HTTP requests, with anonymous requests, Laravel or Inertia.
@@ -131,5 +129,6 @@ export function useFetch() {
     laravel,
     inertia,
     download,
+    HttpResponse,
   }
 }

@@ -5,13 +5,6 @@ export type RouteName = App.Route.Name
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 export type BodyType = 'json' | 'text' | 'blob' | 'formData' | 'arrayBuffer'
 
-export interface HttpRequestQuery {
-  /**
-   * Add query data to URL.
-   */
-  query?: Record<string, any>
-}
-
 export interface HttpRequestBody extends HttpRequestQuery {
   /**
    * Body data.
@@ -19,6 +12,13 @@ export interface HttpRequestBody extends HttpRequestQuery {
    * @default {}
    */
   body?: RequestPayload
+}
+
+export interface HttpRequestQuery extends HttpRequestAnonymous {
+  /**
+   * Add query data to URL.
+   */
+  query?: Record<string, any>
 }
 
 export interface HttpRequestAnonymous {

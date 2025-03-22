@@ -7,7 +7,7 @@ declare namespace App.Route {
     'logout': never
     'password.request': never
     'password.reset': {
-      'token'?: App.Route.Param
+      token?: App.Route.Param
     }
     'password.email': never
     'password.update': never
@@ -31,11 +31,11 @@ declare namespace App.Route {
     'current-user.destroy': never
     'sanctum.csrf-cookie': never
     'download.show': {
-      'podcast_slug': App.Route.Param
+      podcast_slug: App.Route.Param
     }
     'feeds.index': never
     'feeds.show': {
-      'feed_slug': App.Route.Param
+      feed_slug: App.Route.Param
     }
     'home': never
     'page.about': never
@@ -44,15 +44,15 @@ declare namespace App.Route {
     'page.pqd2p': never
     'podcasts.index': never
     'podcasts.show': {
-      'podcast_slug'?: App.Route.Param
+      podcast_slug?: App.Route.Param
     }
     'posts.index': never
     'posts.show': {
-      'post_slug': App.Route.Param
+      post_slug: App.Route.Param
     }
     'rss.index': never
     'rss.show': {
-      'feed_slug': App.Route.Param
+      feed_slug: App.Route.Param
     }
     'submission.index': never
     'submission.store': never

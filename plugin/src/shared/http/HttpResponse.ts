@@ -1,5 +1,5 @@
-import { HttpRequest } from './HttpRequest'
 import type { BodyType, HttpMethod, HttpRequestAnonymous } from '@/types/http'
+import { HttpRequest } from './HttpRequest'
 
 export class HttpResponse {
   private constructor(
@@ -48,15 +48,6 @@ export class HttpResponse {
    */
   public getHeader(name: string): string | null {
     return this.headers.get(name)
-  }
-
-  /**
-   * @deprecated Use `getStatusCode()` instead.
-   *
-   * Get status code of the response (200, 404, 500, etc.)
-   */
-  public getStatus(): number {
-    return this.statusCode
   }
 
   /**

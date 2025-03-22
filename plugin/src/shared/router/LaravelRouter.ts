@@ -245,6 +245,11 @@ export class LaravelRouter {
    * Parse `ziggy` shared props.
    */
   private parseZiggy() {
+    if (typeof window === 'undefined') {
+      console.warn('`@kiwilan/typescriptable-laravel` error: `window` is `undefined` in `parseZiggy()` method. This method should be used in the browser only.')
+      return
+    }
+
     const page = usePage()
 
     let ziggy = page.props?.ziggy as Ziggy | undefined

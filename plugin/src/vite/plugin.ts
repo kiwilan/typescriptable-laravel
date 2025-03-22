@@ -60,7 +60,7 @@ function ViteTypescriptable(userOptions: ViteTypescriptableOptions = {}): Plugin
         await execute('php artisan typescriptable:routes')
 
       if (opts.routesList)
-        await execute('php artisan typescriptable:routes --list')
+        await execute('php artisan typescriptable:routes')
 
       if (opts.inertia)
         await InertiaType.make(opts)
@@ -70,10 +70,10 @@ function ViteTypescriptable(userOptions: ViteTypescriptableOptions = {}): Plugin
 
       if (opts.autoreload) {
         const patterns = [
-          /^app\/Models\/[^\/]+\.php$/,
-          /^app\/Settings\/[^\/]+\.php$/,
-          /^app\/Http\/Controllers\/[^\/]+\.php$/,
-          /^routes\/[^\/]+\.php$/,
+          /^app\/Models\/[^/]+\.php$/,
+          /^app\/Settings\/[^/]+\.php$/,
+          /^app\/Http\/Controllers\/[^/]+\.php$/,
+          /^routes\/[^/]+\.php$/,
         ]
 
         const root = process.cwd()

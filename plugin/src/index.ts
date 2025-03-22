@@ -1,5 +1,5 @@
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import type { DefineComponent } from 'vue'
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { VueTypescriptable } from './vue/plugin'
 
 function resolveTitle(title: string, appName: string, seperator = '·'): string {
@@ -41,7 +41,7 @@ export {
 } from './shared'
 
 export {
-  VueTypescriptable,
-  resolveTitle,
   resolvePages,
+  resolveTitle,
+  VueTypescriptable,
 }

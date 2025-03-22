@@ -1,5 +1,5 @@
-import { write } from '../vite/server'
 import type { ViteTypescriptableOptions } from '../vite'
+import { write } from '../vite/server'
 
 export class InertiaType {
   readonly HEAD = [

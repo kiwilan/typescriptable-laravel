@@ -1,6 +1,6 @@
+import type { HttpMethod, HttpRequestAnonymous, HttpRequestQuery, RequestPayload } from '@/types/http'
 import { router as inertia } from '@inertiajs/vue3'
 import { LaravelRouter } from '../router/LaravelRouter'
-import type { HttpMethod, HttpRequestAnonymous, HttpRequestQuery, RequestPayload } from '@/types/http'
 
 export class HttpRequest {
   protected constructor(
@@ -15,13 +15,12 @@ export class HttpRequest {
    * Make a raw HTTP request.
    * Useful for API, use `fetch` under the hood.
    */
-  public async http(url: string, method: HttpMethod, options: HttpRequestAnonymous = { contentType: 'application/json' }): Promise<Response> {
+  public async http(url: string, method: HttpMethod, options: HttpRequestAnonymous = {}): Promise<Response> {
     const urlBuiltWithQuery = this.urlBuiltWithQuery(url, options.query)
 
     return await fetch(urlBuiltWithQuery, {
       method,
       headers: {
-        'Content-Type': options.contentType || 'application/json',
         ...options.headers,
       },
       body: options.body ? JSON.stringify(options.body) : undefined,
@@ -87,6 +86,11 @@ export class HttpRequest {
   }
 
   private sendInertia(method: HttpMethod, url: string, body?: Record<string, any>): void {
+    if (typeof window === 'undefined') {
+      console.error('Inertia can only be used in the browser')
+      return
+    }
+
     return inertia[method.toLowerCase()](url, this.inertiaBody(body))
   }
 

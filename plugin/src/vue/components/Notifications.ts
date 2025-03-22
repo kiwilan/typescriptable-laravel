@@ -21,11 +21,11 @@ export default {
         h('div', `notifications ${props.msg}`),
         h('div', [notifications.value.length
           ? h(
-            'div',
-            notifications.value.map((notification) => {
-              return h(Notification as any, { key: notification.id, notification })
-            }),
-          )
+              'div',
+              notifications.value.map((notification) => {
+                return h(Notification as any, { key: notification.id, notification })
+              }),
+            )
           : h('span'),
         ]),
       ]),

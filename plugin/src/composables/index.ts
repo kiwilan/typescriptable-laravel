@@ -1,3 +1,4 @@
+import type { Query, SortItem } from './useQuery'
 import { useClickOutside } from './useClickOutside'
 import { useDate } from './useDate'
 import { useFetch } from './useFetch'
@@ -10,9 +11,10 @@ import { useRouter } from './useRouter'
 import { useSearch } from './useSearch'
 import { useSidebar } from './useSidebar'
 import { useSlideover } from './useSlideover'
-import type { Query, SortItem } from './useQuery'
 
 export {
+  Query,
+  SortItem,
   useClickOutside,
   useDate,
   useFetch,
@@ -25,6 +27,4 @@ export {
   useSearch,
   useSidebar,
   useSlideover,
-  Query,
-  SortItem,
 }

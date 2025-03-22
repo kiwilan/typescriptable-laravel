@@ -4,7 +4,7 @@ export function useDate() {
     month: '2-digit',
     year: 'numeric',
   }
-  const language = 'en-US' || navigator?.language
+  const language = navigator?.language ? navigator.language : 'en-US'
   function toDate(date?: string | Date): Date {
     if (!date)
       return new Date()

@@ -33,6 +33,18 @@ export function useInertia<T = App.Models.User>() {
     return auth.value?.user as T
   })
 
+  const isAuth = computed((): boolean => {
+    return !!user.value
+  })
+
+  const csrfToken = computed((): string | null => {
+    const element = document.head.querySelector('meta[name="csrf-token"]') as HTMLMetaElement | null
+    if (!element)
+      return null
+
+    return element.content
+  })
+
   /**
    * Check if the app is running in development mode.
    */
@@ -52,6 +64,8 @@ export function useInertia<T = App.Models.User>() {
     version,
     auth,
     user,
+    isAuth,
+    csrfToken,
     isDev,
     isClient,
   }
