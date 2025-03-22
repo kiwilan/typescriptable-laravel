@@ -2,6 +2,10 @@
 
 All notable changes to `typescriptable-laravel` will be documented in this file.
 
+## v3.1.06 - 2025-03-22
+
+Support Laravel 12 by #96
+
 ## v3.1.05 - 2024-12-23
 
 - Fix for [SchemaClass](https://github.com/kiwilan/typescriptable-laravel/blob/main/src/Typed/Utils/Schema/SchemaClass.php) for #89, thanks to @PerryRylance
@@ -59,6 +63,7 @@ Refactoring with Artisan command `show:model`
 
 
 
+
 ```
 **BREAKING CHANGES**
 
@@ -69,6 +74,7 @@ Refactoring with Artisan command `show:model`
 + 'eloquent' => [
   // ...
 ],
+
 
 
 
@@ -116,6 +122,7 @@ To install package with old versions of Laravel, use the following command:
 
 ```bash
 composer require kiwilan/typescriptable-laravel:1.12.03
+
 
 
 
