@@ -17,11 +17,14 @@ class ParserModelFillable
         protected array $attributes = [],
     ) {}
 
+    /**
+     * Create new instance of `ParserModelFillable` from `SchemaClass`.
+     */
     public static function make(SchemaClass $schemaClass): self
     {
         $self = new self(
             $schemaClass,
-            $schemaClass->namespace(),
+            $schemaClass->getNamespace(),
         );
 
         $model = $self->namespace;
@@ -82,7 +85,7 @@ class ParserModelFillable
     /**
      * Get namespace.
      */
-    public function namespace(): string
+    public function getNamespace(): string
     {
         return $this->namespace;
     }
@@ -92,7 +95,7 @@ class ParserModelFillable
      *
      * @return SchemaModelAttribute[]
      */
-    public function attributes(): array
+    public function getAttributes(): array
     {
         return $this->attributes;
     }

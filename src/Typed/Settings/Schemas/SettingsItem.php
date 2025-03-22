@@ -15,11 +15,14 @@ class SettingsItem
         protected array $properties = [],
     ) {}
 
+    /**
+     * Create new instance of `SettingsItem` from `SchemaClass`.
+     */
     public static function make(SchemaClass $class): self
     {
         $properties = [];
-        foreach ($class->reflect()->getProperties() as $property) {
-            if ($class->namespace() === $property->class) {
+        foreach ($class->getReflect()->getProperties() as $property) {
+            if ($class->getNamespace() === $property->class) {
                 $item = SettingItemProperty::make($property);
                 $properties[$item->name()] = $item;
             }
@@ -27,32 +30,43 @@ class SettingsItem
 
         $self = new self(
             class: $class,
-            name: $class->name(),
+            name: $class->getName(),
             properties: $properties,
         );
 
         return $self;
     }
 
-    public function class(): SchemaClass
+    /**
+     * Get `SchemaClass` based on the model.
+     */
+    public function getClass(): SchemaClass
     {
         return $this->class;
     }
 
-    public function name(): string
+    /**
+     * Get the name of the setting item.
+     */
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
+     * Get all `SettingItemProperty` of the setting item.
+     *
      * @return SettingItemProperty[]
      */
-    public function properties(): array
+    public function getProperties(): array
     {
         return $this->properties;
     }
 
-    public function property(string $name): SettingItemProperty
+    /**
+     * Get a property of the setting item, based on the name.
+     */
+    public function getProperty(string $name): SettingItemProperty
     {
         return $this->properties[$name];
     }

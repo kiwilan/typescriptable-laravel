@@ -2,6 +2,9 @@
 
 namespace Kiwilan\Typescriptable\Typed\Database;
 
+/**
+ * Refer to specific database engine.
+ */
 enum DatabaseDriverEnum: string
 {
     case sqlite = 'sqlite';
@@ -9,7 +12,7 @@ enum DatabaseDriverEnum: string
     case mariadb = 'mariadb';
     case pgsql = 'pgsql';
     case sqlsrv = 'sqlsrv';
-    case mongodb = 'mongodb';
+    case mongodb = 'mongodb'; // MongoDB skipped because has no types
 
     /**
      * Convert database type to PHP type.
@@ -40,16 +43,19 @@ enum DatabaseDriverEnum: string
         }
 
         return match ($this) {
-            self::sqlite => $this->sqlite($databaseType),
-            self::mysql => $this->mysql($databaseType),
-            self::mariadb => $this->mariadb($databaseType),
-            self::pgsql => $this->pgsql($databaseType),
-            self::sqlsrv => $this->sqlsrv($databaseType),
+            self::sqlite => $this->toSqlite($databaseType),
+            self::mysql => $this->toMysql($databaseType),
+            self::mariadb => $this->toMariadb($databaseType),
+            self::pgsql => $this->toPgsql($databaseType),
+            self::sqlsrv => $this->toSqlsrv($databaseType),
             default => 'string',
         };
     }
 
-    private function mysql(string $type): string
+    /**
+     * Convert MySQL type to PHP type.
+     */
+    private function toMysql(string $type): string
     {
         return match ($type) {
             'tinyint' => 'int',
@@ -94,7 +100,10 @@ enum DatabaseDriverEnum: string
         };
     }
 
-    private function mariadb(string $type): string
+    /**
+     * Convert MariaDB type to PHP type.
+     */
+    private function toMariadb(string $type): string
     {
         return match ($type) {
             'tinyint' => 'int',
@@ -142,7 +151,10 @@ enum DatabaseDriverEnum: string
         };
     }
 
-    private function pgsql(string $type): string
+    /**
+     * Convert PostgreSQL type to PHP type.
+     */
+    private function toPgsql(string $type): string
     {
         return match ($type) {
             'bigint' => 'int',
@@ -204,7 +216,10 @@ enum DatabaseDriverEnum: string
         };
     }
 
-    private function sqlite(string $type): string
+    /**
+     * Convert SQLite type to PHP type.
+     */
+    private function toSqlite(string $type): string
     {
         return match ($type) {
             'int' => 'int',
@@ -234,7 +249,10 @@ enum DatabaseDriverEnum: string
         };
     }
 
-    private function sqlsrv(string $type): string
+    /**
+     * Convert SQL Server type to PHP type.
+     */
+    private function toSqlsrv(string $type): string
     {
         return match ($type) {
             'bigint' => 'int',

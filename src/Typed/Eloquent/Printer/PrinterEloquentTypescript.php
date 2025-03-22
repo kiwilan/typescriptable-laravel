@@ -10,6 +10,8 @@ use Kiwilan\Typescriptable\TypescriptableConfig;
 class PrinterEloquentTypescript
 {
     /**
+     * Create a new instance of `PrinterEloquentTypescript`.
+     *
      * @param  SchemaModel[]  $models
      */
     public static function make(array $models): string
@@ -23,15 +25,15 @@ class PrinterEloquentTypescript
         $contents[] = 'declare namespace App.Models {';
 
         foreach ($models as $modelNamespace => $model) {
-            $contents[] = "  export interface {$model->schemaClass()?->fullname()} {";
+            $contents[] = "  export interface {$model->getSchemaClass()?->getFullname()} {";
 
-            foreach ($model->attributes() as $attributeName => $attribute) {
-                $field = $attribute->nullable() ? "{$attributeName}?" : $attributeName;
-                $contents[] = "    {$field}: {$attribute->typescriptType()}";
+            foreach ($model->getAttributes() as $attributeName => $attribute) {
+                $field = $attribute->isNullable() ? "{$attributeName}?" : $attributeName;
+                $contents[] = "    {$field}: {$attribute->getTypescriptType()}";
             }
 
-            foreach ($model->relations() as $relationName => $relation) {
-                $contents[] = "    {$relationName}?: {$relation->typescriptType()}";
+            foreach ($model->getRelations() as $relationName => $relation) {
+                $contents[] = "    {$relationName}?: {$relation->getTypescriptType()}";
             }
 
             $contents[] = '  }';

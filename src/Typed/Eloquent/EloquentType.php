@@ -35,11 +35,11 @@ class EloquentType
 
         $type->run();
 
-        $type->typescript = PrinterEloquentTypescript::make($type->app()->models());
+        $type->typescript = PrinterEloquentTypescript::make($type->app()->getModels());
         TypescriptableUtils::print($type->typescript, TypescriptableConfig::setPath($type->config()->typescriptFilename));
 
         if ($type->config()->phpPath) {
-            $printer = PrinterEloquentPhp::make($type->app()->models(), $type->config()->phpPath);
+            $printer = PrinterEloquentPhp::make($type->app()->getModels(), $type->config()->phpPath);
             $printer->print();
         }
 
@@ -76,6 +76,6 @@ class EloquentType
 
         $fillable = ParserModelFillable::make($schemaClass);
 
-        return $fillable->attributes();
+        return $fillable->getAttributes();
     }
 }

@@ -15,7 +15,7 @@ it('can be run', function (string $driver) {
     $type = Typescriptable::models();
 
     $app = $type->app();
-    expect($app->driver())->toBe($driver);
+    expect($app->getDriver())->toBe($driver);
 
     $models = outputDir(TypescriptableConfig::eloquentFilename());
     expect($models)->toBeFile();
@@ -99,7 +99,7 @@ it('can be run', function (string $driver) {
     expect($members_count['nullable'])->toBeTrue();
 
     $classes = $ts->onlyModels();
-    expect(count($app->models()))->toBe(count($classes));
+    expect(count($app->getModels()))->toBe(count($classes));
 
     // foreach ($app->models() as $namespace => $model) {
     //     expect(array_key_exists($namespace, $classes))->toBeTrue();

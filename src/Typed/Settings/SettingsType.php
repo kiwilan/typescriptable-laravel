@@ -29,11 +29,11 @@ class SettingsType
         }
 
         $collect = SchemaCollection::make($self->config->directory, $self->config->toSkip);
-        $settings = array_filter($collect->items(), fn (SchemaClass $item) => $item->extends() === $self->config->extends);
+        $settings = array_filter($collect->getItems(), fn (SchemaClass $item) => $item->getExtends() === $self->config->extends);
 
         foreach ($settings as $setting) {
             $setting = SettingsItem::make($setting);
-            $self->settings[$setting->name()] = $setting;
+            $self->settings[$setting->getName()] = $setting;
         }
 
         $self->typescript = PrinterSettings::make($self->settings);

@@ -21,11 +21,11 @@ it('can type settings', function () {
     expect(count($settings))->toBe(1);
 
     $homeSetting = $type->setting('HomeSettings');
-    expect($homeSetting->name())->toBe('HomeSettings');
-    expect($homeSetting->properties())->toBeArray();
-    expect($homeSetting->properties())->toHaveKey('hero_title_main');
+    expect($homeSetting->getName())->toBe('HomeSettings');
+    expect($homeSetting->getProperties())->toBeArray();
+    expect($homeSetting->getProperties())->toHaveKey('hero_title_main');
 
-    $hero_title_main = $homeSetting->properties()['hero_title_main'];
+    $hero_title_main = $homeSetting->getProperties()['hero_title_main'];
     expect($hero_title_main->name())->toBe('hero_title_main');
     expect($hero_title_main->phpType())->toBe('string');
     expect($hero_title_main->isNullable())->toBeTrue();

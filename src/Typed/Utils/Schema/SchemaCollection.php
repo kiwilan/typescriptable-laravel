@@ -2,6 +2,9 @@
 
 namespace Kiwilan\Typescriptable\Typed\Utils\Schema;
 
+/**
+ * Represents a group of PHP class.
+ */
 class SchemaCollection
 {
     /**
@@ -15,7 +18,9 @@ class SchemaCollection
     ) {}
 
     /**
-     * @param  string[]  $skip
+     * Create new instance of `SchemaCollection` from base path, like `app/Models`.
+     *
+     * @param  string[]  $skip  Skip namespace.
      */
     public static function make(string $basePath, array $skip = []): self
     {
@@ -31,12 +36,12 @@ class SchemaCollection
         /** @var \SplFileInfo $file */
         foreach ($iterator as $file) {
             if (! $file->isDir()) {
-                $model = SchemaClass::make($file, $basePath);
-                if (! $model) {
+                $class = SchemaClass::make($file, $basePath);
+                if (! $class) {
                     continue;
                 }
 
-                $items[$model->fullname()] = $model;
+                $items[$class->getFullname()] = $class;
             }
         }
 
@@ -45,25 +50,27 @@ class SchemaCollection
         return $self;
     }
 
-    public function basePath(): string
+    /**
+     * Get base path.
+     */
+    public function getBasePath(): string
     {
         return $this->basePath;
     }
 
     /**
+     * Get all `SchemaClass` as array.
+     *
+     * @param  bool  $only_models  Get only models.
      * @return SchemaClass[]
      */
-    public function items(): array
+    public function getItems(bool $only_models = false): array
     {
-        return $this->items;
-    }
+        if ($only_models) {
+            return array_filter($this->items, fn (SchemaClass $item) => $item->isModel());
+        }
 
-    /**
-     * @return SchemaClass[]
-     */
-    public function onlyModels(): array
-    {
-        return array_filter($this->items, fn (SchemaClass $item) => $item->isModel());
+        return $this->items;
     }
 
     /**
@@ -72,6 +79,6 @@ class SchemaCollection
      */
     private function skipNamespace(array $classes, array $skip): array
     {
-        return array_filter($classes, fn (SchemaClass $item) => ! in_array($item->namespace(), $skip));
+        return array_filter($classes, fn (SchemaClass $item) => ! in_array($item->getNamespace(), $skip));
     }
 }

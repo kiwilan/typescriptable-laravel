@@ -2,6 +2,9 @@
 
 namespace Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model;
 
+/**
+ * Represents a model relation from Laravel.
+ */
 class SchemaModelRelation
 {
     protected function __construct(
@@ -15,6 +18,11 @@ class SchemaModelRelation
         protected string $typescriptType = 'any',
     ) {}
 
+    /**
+     * Create new Laravel relation from raw array.
+     *
+     * @param  array{name: mixed, type: mixed, related: mixed}  $data
+     */
     public static function make(array $data): self
     {
         $self = new self(
@@ -23,7 +31,7 @@ class SchemaModelRelation
             $data['related'] ?? null,
         );
         $self->snakeCaseName = $self->toSnakeCaseName($self->name);
-        $self->isMany = $self->relationTypeisMany($self->laravelType);
+        $self->isMany = $self->isManyRelationType($self->laravelType);
         $self->phpType = $self->relatedToModel;
         if ($self->isMany) {
             $self->phpType = "{$self->relatedToModel}[]";
@@ -32,22 +40,22 @@ class SchemaModelRelation
         return $self;
     }
 
-    public function name(): string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function laravelType(): ?string
+    public function getLaravelType(): ?string
     {
         return $this->laravelType;
     }
 
-    public function relatedToModel(): ?string
+    public function getRelatedToModel(): ?string
     {
         return $this->relatedToModel;
     }
 
-    public function snakeCaseName(): string
+    public function getSnakeCaseName(): string
     {
         return $this->snakeCaseName;
     }
@@ -62,7 +70,7 @@ class SchemaModelRelation
         return $this->isMany;
     }
 
-    public function phpType(): string
+    public function getPhpType(): string
     {
         return $this->phpType;
     }
@@ -77,7 +85,7 @@ class SchemaModelRelation
         return $this;
     }
 
-    public function typescriptType(): string
+    public function getTypescriptType(): string
     {
         return $this->typescriptType;
     }
@@ -115,7 +123,7 @@ class SchemaModelRelation
         return $string;
     }
 
-    private function relationTypeisMany(string $type): bool
+    private function isManyRelationType(string $type): bool
     {
         if (in_array($type, [
             'BelongsToMany',

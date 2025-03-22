@@ -22,7 +22,7 @@ class ParserAccessor
     {
         $items = [];
 
-        foreach ($schemaClass->reflect()->getMethods() as $method) {
+        foreach ($schemaClass->getReflect()->getMethods() as $method) {
             $name = $method->getName();
             $return = $method->getReturnType();
 

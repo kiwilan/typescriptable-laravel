@@ -5,10 +5,22 @@ namespace Kiwilan\Typescriptable\Typed\Utils\Schema;
 use ReflectionClass;
 use SplFileInfo;
 
+/**
+ * Represents basics of PHP class.
+ */
 class SchemaClass
 {
     /**
-     * @param  string[]  $traits
+     * @param  string  $basePath  Base path where this class exists.
+     * @param  string  $path  Full path of this class.
+     * @param  SplFileInfo  $file  `SplFileInfo` instance for this class.
+     * @param  string  $namespace  Namespace used by this class.
+     * @param  string  $name  Name of this class.
+     * @param  string  $fullname  Name of this class with potential subdirectory before to have unique name.
+     * @param  ReflectionClass  $reflect  `ReflectionClass` instance for this class.
+     * @param  bool  $isModel  To know if this class is a Laravel model.
+     * @param  string[]  $traits  PHP traits used by this class.
+     * @param  string  $extends  If class is extended by another class.
      */
     protected function __construct(
         protected string $basePath,
@@ -23,6 +35,12 @@ class SchemaClass
         protected ?string $extends = null,
     ) {}
 
+    /**
+     * Create new instance of `SchemaClass` from `SplFileInfo` and base path.
+     *
+     * @param  SplFileInfo  $file  Contains all informations about PHP file.
+     * @param  string  $basePath  Define base path.
+     */
     public static function make(SplFileInfo $file, string $basePath): ?self
     {
         $ext = $file->getExtension();
@@ -30,7 +48,7 @@ class SchemaClass
             return null;
         }
 
-        $namespace = SchemaClass::fileNamespace($file);
+        $namespace = SchemaClass::findNamespace($file);
 
         $instance = null;
         try {
@@ -65,68 +83,91 @@ class SchemaClass
     }
 
     /**
-     * Get base path.
+     * Get base path of the model.
      */
-    public function basePath(): string
+    public function getBasePath(): string
     {
         return $this->basePath;
     }
 
     /**
-     * Get path of the file.
+     * Get path of the model file.
      */
-    public function path(): string
+    public function getPath(): string
     {
         return $this->path;
     }
 
     /**
-     * Get file info.
+     * Get `SplFileInfo` from the model file.
      */
-    public function file(): SplFileInfo
+    public function getFile(): SplFileInfo
     {
         return $this->file;
     }
 
-    public function namespace(): string
+    /**
+     * Get namespace of the model.
+     */
+    public function getNamespace(): string
     {
         return $this->namespace;
     }
 
-    public function name(): string
+    /**
+     * Get name of the model.
+     */
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function fullname(): string
+    /**
+     * Get full name of the model, if model is into sub-directory, it will be like `FolderName\ModelName`.
+     */
+    public function getFullname(): string
     {
         return $this->fullname;
     }
 
-    public function reflect(): ReflectionClass
+    /**
+     * Get `ReflectionClass` of the model.
+     */
+    public function getReflect(): ReflectionClass
     {
         return $this->reflect;
     }
 
     /**
+     * Get all traits used by the model.
+     *
      * @return string[]
      */
-    public function traits(): array
+    public function getTraits(): array
     {
         return $this->traits;
     }
 
+    /**
+     * Check if class is a model.
+     */
     public function isModel(): bool
     {
         return $this->isModel;
     }
 
-    public function extends(): ?string
+    /**
+     * Get extends class name, if exists.
+     */
+    public function getExtends(): ?string
     {
         return $this->extends;
     }
 
-    private static function fileNamespace(SplFileInfo $file): string
+    /**
+     * Get PHP class namespace from `SplFileInfo`.
+     */
+    private static function findNamespace(SplFileInfo $file): string
     {
         $path = $file->getPathName();
         $name = $file->getBasename('.php');

@@ -24,6 +24,9 @@ class SchemaApp
         protected ?string $databasePrefix = null,
     ) {}
 
+    /**
+     * Create new instance of `SchemaApp` from model path, and php path (optional).
+     */
     public static function make(string $modelPath, ?string $phpPath): self
     {
         $self = new self($modelPath, $phpPath);
@@ -43,28 +46,33 @@ class SchemaApp
         return $self;
     }
 
-    public function modelPath(): string
+    /**
+     * Get model path.
+     */
+    public function getModelPath(): string
     {
         return $this->modelPath;
     }
 
-    public function phpPath(): ?string
+    /**
+     * Get PHP path.
+     */
+    public function getPhpPath(): ?string
     {
         return $this->phpPath;
     }
 
-    public function setPhpPath(string $phpPath): self
-    {
-        $this->phpPath = $phpPath;
-
-        return $this;
-    }
-
+    /**
+     * Use parser.
+     */
     public function useParser(): bool
     {
         return $this->useParser;
     }
 
+    /**
+     * Enable parser.
+     */
     public function enableParer(): self
     {
         $this->useParser = true;
@@ -72,40 +80,69 @@ class SchemaApp
         return $this;
     }
 
-    public function baseNamespace(): ?string
+    /**
+     * Get base namespace.
+     */
+    public function getBaseNamespace(): ?string
     {
         return $this->baseNamespace;
     }
 
     /**
+     * Get all `SchemaModel` as array.
+     *
      * @return SchemaModel[]
      */
-    public function models(): array
+    public function getModels(): array
     {
         return $this->models;
     }
 
+    /**
+     * Get `SchemaModel` from namespace.
+     */
     public function getModel(string $namespace): ?SchemaModel
     {
         return $this->models[$namespace] ?? null;
     }
 
-    public function driver(): string
+    /**
+     * Get database driver.
+     */
+    public function getDriver(): string
     {
         return $this->driver;
     }
 
-    public function databaseName(): ?string
+    /**
+     * Get database name.
+     */
+    public function getDatabaseName(): ?string
     {
         return $this->databaseName;
     }
 
-    public function databasePrefix(): ?string
+    /**
+     * Get database prefix, if any.
+     */
+    public function getDatabasePrefix(): ?string
     {
         return $this->databasePrefix;
     }
 
     /**
+     * Set PHP path.
+     */
+    public function setPhpPath(string $phpPath): self
+    {
+        $this->phpPath = $phpPath;
+
+        return $this;
+    }
+
+    /**
+     * Set models.
+     *
      * @param  SchemaModel[]  $models
      */
     public function setModels(array $models): self
@@ -113,7 +150,7 @@ class SchemaApp
         $this->models = $this->improveRelations($models);
 
         foreach ($this->models as $model) {
-            $accessors = ParserAccessor::collection($model->schemaClass());
+            $accessors = ParserAccessor::collection($model->getSchemaClass());
             foreach ($accessors as $accessor) {
                 $model->updateAccessor($accessor);
             }
@@ -135,7 +172,7 @@ class SchemaApp
             return $this;
         }
 
-        $namespace = $schemaClass->namespace();
+        $namespace = $schemaClass->getNamespace();
         $lastBasePathPart = collect(explode(DIRECTORY_SEPARATOR, $this->modelPath))->last(); // `Models` into `App\Models`
 
         $baseNamespace = substr($namespace, 0, strpos($namespace, $lastBasePathPart)); // `App\`
@@ -154,24 +191,24 @@ class SchemaApp
         $outputs = $models;
 
         foreach ($models as $model) {
-            foreach ($model->relations() as $relation) {
+            foreach ($model->getRelations() as $relation) {
                 $typescript = 'any';
-                $relationNamespace = $relation->relatedToModel();
+                $relationNamespace = $relation->getRelatedToModel();
 
                 if ($relationNamespace) {
-                    $modelNamespace = array_filter($models, fn (SchemaModel $m) => $m->namespace() === $relationNamespace);
+                    $modelNamespace = array_filter($models, fn (SchemaModel $m) => $m->getNamespace() === $relationNamespace);
                     $first = reset($modelNamespace);
                     if ($first) {
-                        $relation->setPhpType($first->schemaClass()?->fullname());
-                        $typescript = $first->typescriptModelName();
+                        $relation->setPhpType($first->getSchemaClass()?->getFullname());
+                        $typescript = $first->getTypescriptModelName();
                     }
                 }
 
                 $relation->setTypescriptType($typescript, $this->baseNamespace);
 
                 if ($relation->isMany()) {
-                    $model->setAttribute(new SchemaModelAttribute(
-                        name: $relation->snakeCaseName().'_count',
+                    $model->addAttribute(new SchemaModelAttribute(
+                        name: $relation->getSnakeCaseName().'_count',
                         databaseType: null,
                         increments: false,
                         nullable: true,

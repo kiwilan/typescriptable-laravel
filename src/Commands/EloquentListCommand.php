@@ -19,9 +19,9 @@ class EloquentListCommand extends Command
         $this->table(
             ['Name', 'Namespace', 'Path'],
             array_map(fn (SchemaClass $model) => [
-                $model->name(),
-                $model->namespace(),
-                $model->path(),
+                $model->getName(),
+                $model->getNamespace(),
+                $model->getPath(),
             ], $list->models())
         );
 

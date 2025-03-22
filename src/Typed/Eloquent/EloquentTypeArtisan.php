@@ -15,7 +15,7 @@ class EloquentTypeArtisan extends EloquentType implements IEloquentType
         $this->app = SchemaApp::make($this->config->modelsPath, $this->config->phpPath);
 
         $collect = SchemaCollection::make($this->config->modelsPath, $this->config->skipModels);
-        $schemas = $collect->onlyModels();
+        $schemas = $collect->getItems(only_models: true);
 
         $this->app->parseBaseNamespace($schemas);
 
@@ -34,14 +34,16 @@ class EloquentTypeArtisan extends EloquentType implements IEloquentType
         $models = [];
         foreach ($schemas as $schema) {
             Artisan::call('model:show', [
-                'model' => $schema->namespace(),
+                'model' => $schema->getNamespace(),
                 '--json' => true,
             ]);
 
-            $models[$schema->namespace()] = SchemaModel::make(json_decode(Artisan::output(), true), $schema);
-            $attributes = $this->parseMongoDb($schema, $this->app->driver());
+            $output = json_decode(Artisan::output(), true);
+            $models[$schema->getNamespace()] = SchemaModel::make($output, $schema);
+
+            $attributes = $this->parseMongoDb($schema, $this->app->getDriver());
             if ($attributes) {
-                $models[$schema->namespace()]->setAttributes($attributes);
+                $models[$schema->getNamespace()]->addAttributes($attributes);
             }
         }
 

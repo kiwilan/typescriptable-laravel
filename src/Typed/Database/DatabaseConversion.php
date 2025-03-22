@@ -6,6 +6,9 @@ use BackedEnum;
 use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserPhpType;
 use UnitEnum;
 
+/**
+ * Convert database type to PHP type.
+ */
 class DatabaseConversion
 {
     protected function __construct(
@@ -17,7 +20,7 @@ class DatabaseConversion
     ) {}
 
     /**
-     * Make a new instance.
+     * Make a new instance to create a new `DatabaseConversion`.
      *
      * @param  string  $databaseDriver  Database driver.
      * @param  string|null  $databaseType  Database type.
@@ -31,9 +34,10 @@ class DatabaseConversion
         );
 
         $self->phpType = $self->databaseDriver->toPhp($self->databaseType);
-        $self->castType = $cast;
+
         if ($cast) {
-            $self->parseCast($cast);
+            $self->castType = $cast;
+            $self->parseCast($self->castType);
         } else {
             $self->typescriptType = ParserPhpType::toTypescript($self->phpType);
         }
@@ -44,7 +48,7 @@ class DatabaseConversion
     /**
      * Get database driver.
      */
-    public function databaseDriver(): DatabaseDriverEnum
+    public function getDatabaseDriver(): DatabaseDriverEnum
     {
         return $this->databaseDriver;
     }
@@ -52,7 +56,7 @@ class DatabaseConversion
     /**
      * Get database type.
      */
-    public function databaseType(): string
+    public function getDatabaseType(): string
     {
         return $this->databaseType;
     }
@@ -60,7 +64,7 @@ class DatabaseConversion
     /**
      * Get PHP type.
      */
-    public function phpType(): string
+    public function getPhpType(): string
     {
         return $this->phpType;
     }
@@ -68,7 +72,7 @@ class DatabaseConversion
     /**
      * Get Laravel cast type.
      */
-    public function castType(): ?string
+    public function getCastType(): ?string
     {
         return $this->castType;
     }
@@ -76,11 +80,14 @@ class DatabaseConversion
     /**
      * Get TypeScript type.
      */
-    public function typescriptType(): string
+    public function getTypescriptType(): string
     {
         return $this->typescriptType;
     }
 
+    /**
+     * Parse all datetime labels to create a cast `DateTime`.
+     */
     private function parseDateTimePhpCast(string $cast): self
     {
         if (! in_array($cast, ['date',

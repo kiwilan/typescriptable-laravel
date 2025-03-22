@@ -4,6 +4,9 @@ namespace Kiwilan\Typescriptable\Typed\Database\Types;
 
 use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModelAttribute;
 
+/**
+ * Handle SQLite database.
+ */
 class SqliteColumn implements IColumn
 {
     protected function __construct(

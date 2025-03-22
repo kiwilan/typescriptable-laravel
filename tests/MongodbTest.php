@@ -15,7 +15,7 @@ it('can be run', function (string $engine) {
     $movie = $app->getModel('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
 
     $app = $type->app();
-    expect($app->driver())->toBe('mongodb');
+    expect($app->getDriver())->toBe('mongodb');
 
     $models = outputDir(TypescriptableConfig::eloquentFilename());
     expect($models)->toBeFile();
@@ -81,5 +81,5 @@ it('can be run', function (string $engine) {
     expect($members_count['type'])->toBe('number');
 
     $classes = $ts->onlyModels();
-    expect(count($app->models()))->toBe(count($classes));
+    expect(count($app->getModels()))->toBe(count($classes));
 })->with(['artisan', 'parser']);

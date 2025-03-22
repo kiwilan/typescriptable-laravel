@@ -22,7 +22,7 @@ class PrinterSettings
 
         foreach ($items as $model => $item) {
             $content[] = "  export interface {$model} {";
-            foreach ($item->properties() as $field => $property) {
+            foreach ($item->getProperties() as $field => $property) {
                 $field = $property->isNullable() ? "{$field}?" : $field;
                 $content[] = "    {$field}: {$property->typescriptType()}";
             }

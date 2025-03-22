@@ -6,10 +6,14 @@ use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
 use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
+/**
+ * Represents a group of `SchemaClass` extended by Laravel model.
+ */
 class EloquentList
 {
     /**
-     * @param  SchemaClass[]  $models
+     * @param  string  $path  Base path where models parsed.
+     * @param  SchemaClass[]  $models  All classes extended by Laravel model.
      */
     protected function __construct(
         protected string $path,
@@ -24,7 +28,7 @@ class EloquentList
 
         $self = new self($path);
         $collect = SchemaCollection::make($self->path, TypescriptableConfig::eloquentSkip());
-        $self->models = $collect->onlyModels();
+        $self->models = $collect->getItems(only_models: true);
 
         return $self;
     }

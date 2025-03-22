@@ -18,7 +18,7 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
         $this->app = SchemaApp::make($this->config->modelsPath, $this->config->phpPath)->enableParer();
 
         $collect = SchemaCollection::make($this->config->modelsPath, $this->config->skipModels);
-        $schemas = $collect->onlyModels();
+        $schemas = $collect->getItems(only_models: true);
 
         $this->app->parseBaseNamespace($schemas);
 
@@ -36,29 +36,29 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
     {
         $models = [];
         foreach ($schemas as $schema) {
-            $namespace = $schema->namespace();
+            $namespace = $schema->getNamespace();
             /** @var Model */
             $instance = new $namespace;
             $tableName = $instance->getTable();
 
-            if ($this->app->databasePrefix()) {
-                $tableName = $this->app->databasePrefix().$tableName;
+            if ($this->app->getDatabasePrefix()) {
+                $tableName = $this->app->getDatabasePrefix().$tableName;
             }
 
-            $table = $this->parseModel($instance, $this->app->databasePrefix());
-            $relations = $this->parseRelations($schema->reflect());
+            $table = $this->parseModel($instance, $this->app->getDatabasePrefix());
+            $relations = $this->parseRelations($schema->getReflect());
 
-            $models[$schema->namespace()] = SchemaModel::make([
-                'class' => $schema->namespace(),
-                'database' => $this->app->driver(),
+            $models[$schema->getNamespace()] = SchemaModel::make([
+                'class' => $schema->getNamespace(),
+                'database' => $this->app->getDriver(),
                 'table' => $tableName,
-                'attributes' => $table->attributes(),
+                'attributes' => $table->getAttributes(),
                 'relations' => $relations,
             ], $schema);
 
-            $attributes = $this->parseMongoDb($schema, $this->app->driver());
+            $attributes = $this->parseMongoDb($schema, $this->app->getDriver());
             if ($attributes) {
-                $models[$schema->namespace()]->setAttributes($attributes);
+                $models[$schema->getNamespace()]->addAttributes($attributes);
             }
         }
 
@@ -74,17 +74,20 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
         $casts = $model->getCasts();
         $accessors = $this->parseAccessors($model);
 
-        foreach ($table->attributes() as $attribute) {
-            if (in_array($attribute->name(), $fillables)) {
-                $attribute->isFillable();
+        foreach ($table->getAttributes() as $attribute) {
+            // Know if attribute is fillable
+            if (in_array($attribute->getName(), $fillables)) {
+                $attribute->setFillable(true);
             }
 
-            if (in_array($attribute->name(), $hiddens)) {
-                $attribute->isHidden();
+            // Know if attribute is hidden
+            if (in_array($attribute->getName(), $hiddens)) {
+                $attribute->setHidden(true);
             }
 
-            if (array_key_exists($attribute->name(), $casts)) {
-                $attribute->setCast($casts[$attribute->name()]);
+            // Know if attribute use Laravel cast type
+            if (array_key_exists($attribute->getName(), $casts)) {
+                $attribute->setCast($casts[$attribute->getName()]);
             }
         }
 
@@ -132,7 +135,7 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
                 continue;
             }
 
-            $relation = ParserRelation::make($method, $this->app()->baseNamespace());
+            $relation = ParserRelation::make($method, $this->app()->getBaseNamespace());
             $relations[$relation->name()] = [
                 'name' => $relation->name(),
                 'type' => $relation->type(),

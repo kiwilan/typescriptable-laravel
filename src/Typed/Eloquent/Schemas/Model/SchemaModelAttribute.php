@@ -4,6 +4,10 @@ namespace Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model;
 
 use Kiwilan\Typescriptable\Typed\Database\DatabaseConversion;
 
+/**
+ * Represents a model attribute from database column.
+ * Can be an accessor without database column.
+ */
 class SchemaModelAttribute
 {
     public function __construct(
@@ -23,21 +27,24 @@ class SchemaModelAttribute
     ) {}
 
     /**
-     * Make a new instance.
+     * Make a new instance of `SchemaModelAttribute` to get PHP type and Typescript type
+     * from database column (or Laravel `cast`).
      *
-     * @param  string  $driver  Database driver.
-     * @param  array<string, mixed>  $data  Attribute data.
+     * @param  string  $driver  Database driver, like `mysql` or `sqlite`.
+     * @param  array<string, mixed>  $data  Attribute data, from raw array or `SchemaModelAttribute`.
      */
     public static function make(string $driver, array|SchemaModelAttribute $data): self
     {
+        // Already `SchemaModelAttribute`
         if ($data instanceof self) {
             $types = DatabaseConversion::make($driver, $data->databaseType, $data->cast);
-            $data->phpType = $types->phpType();
-            $data->typescriptType = $types->typescriptType();
+            $data->phpType = $types->getPhpType();
+            $data->typescriptType = $types->getTypescriptType();
 
             return $data;
         }
 
+        // Raw array
         $self = new self(
             $data['name'] ?? null,
             $data['type'] ?? null,
@@ -56,83 +63,125 @@ class SchemaModelAttribute
         }
 
         $types = DatabaseConversion::make($driver, $self->databaseType, $self->cast);
-        $self->phpType = $types->phpType();
-        $self->typescriptType = $types->typescriptType();
+        $self->phpType = $types->getPhpType();
+        $self->typescriptType = $types->getPhpType();
 
         return $self;
     }
 
-    public function name(): string
+    /**
+     * Get attribute name.
+     */
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function databaseType(): ?string
+    /**
+     * Get database raw type.
+     */
+    public function getDatabaseType(): ?string
     {
         return $this->databaseType;
     }
 
-    public function increments(): bool
+    /**
+     * Know if database column has auto-increment.
+     */
+    public function isIncrements(): bool
     {
         return $this->increments ?? false;
     }
 
-    public function nullable(): bool
+    /**
+     * Know if database column is nullable.
+     */
+    public function isNullable(): bool
     {
         return $this->nullable ?? false;
     }
 
-    public function default(): mixed
+    /**
+     * Get database colum default value.
+     */
+    public function getDefault(): mixed
     {
         return $this->default;
     }
 
-    public function unique(): bool
+    /**
+     * Know if database column has unique value.
+     */
+    public function isUnique(): bool
     {
         return $this->unique ?? false;
     }
 
-    public function fillable(): bool
+    /**
+     * Know if Laravel model's attribute is `fillable`.
+     */
+    public function isFillable(): bool
     {
         return $this->fillable ?? false;
     }
 
-    public function isFillable(): self
+    /**
+     * Set `fillable` property.
+     */
+    public function setFillable(bool $fillable): self
     {
-        $this->fillable = true;
+        $this->fillable = $fillable;
 
         return $this;
     }
 
-    public function hidden(): bool
+    /**
+     * Know if Laravel model's attribute is `hidden`.
+     */
+    public function isHidden(): bool
     {
         return $this->hidden ?? false;
     }
 
-    public function isHidden(): self
+    /**
+     * Set attribute `hidden`.
+     */
+    public function setHidden(bool $hidden): self
     {
-        $this->hidden = true;
+        $this->hidden = $hidden;
 
         return $this;
     }
 
-    public function appended(): bool
+    /**
+     * Know if Laravel model's attribute is `appended`.
+     */
+    public function isAppended(): bool
     {
         return $this->appended ?? false;
     }
 
-    public function isAppended(): self
+    /**
+     * Set attribute `appended`.
+     */
+    public function setAppended(bool $appended): self
     {
-        $this->appended = true;
+        $this->appended = $appended;
 
         return $this;
     }
 
-    public function cast(): ?string
+    /**
+     * Get Laravel cast type, if any.
+     */
+    public function getCast(): ?string
     {
         return $this->cast;
     }
 
+    /**
+     * Set attribute `cast`.
+     */
     public function setCast(string $cast): self
     {
         $this->cast = $cast;
@@ -140,11 +189,17 @@ class SchemaModelAttribute
         return $this;
     }
 
-    public function phpType(): ?string
+    /**
+     * Get PHP type.
+     */
+    public function getPhpType(): ?string
     {
         return $this->phpType;
     }
 
+    /**
+     * Set attribute `phpType`.
+     */
     public function setPhpType(string $phpType): self
     {
         $this->phpType = $phpType;
@@ -152,11 +207,17 @@ class SchemaModelAttribute
         return $this;
     }
 
-    public function typescriptType(): ?string
+    /**
+     * Get Typescript type.
+     */
+    public function getTypescriptType(): ?string
     {
         return $this->typescriptType;
     }
 
+    /**
+     * Set attribute `typescriptType`.
+     */
     public function setTypescriptType(string $typescriptType): self
     {
         $this->typescriptType = $typescriptType;

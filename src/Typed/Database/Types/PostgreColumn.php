@@ -4,6 +4,9 @@ namespace Kiwilan\Typescriptable\Typed\Database\Types;
 
 use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModelAttribute;
 
+/**
+ * Handle PostgreSQL database.
+ */
 class PostgreColumn implements IColumn
 {
     protected function __construct(

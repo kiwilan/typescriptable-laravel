@@ -25,8 +25,8 @@ class TypescriptableEloquentCommand extends Command
         $service = Typescriptable::models();
         $namespaces = [];
 
-        foreach ($service->app()->models() as $model) {
-            $namespaces[] = [$model->schemaClass()->namespace()];
+        foreach ($service->app()->getModels() as $model) {
+            $namespaces[] = [$model->getSchemaClass()->getNamespace()];
         }
         $this->table(['Models'], $namespaces);
 
