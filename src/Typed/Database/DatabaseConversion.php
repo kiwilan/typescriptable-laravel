@@ -3,7 +3,7 @@
 namespace Kiwilan\Typescriptable\Typed\Database;
 
 use BackedEnum;
-use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserPhpType;
+use Kiwilan\Typescriptable\Typed\Parser\ParserPhpType;
 use UnitEnum;
 
 class DatabaseConversion
@@ -44,7 +44,7 @@ class DatabaseConversion
     /**
      * Get database driver.
      */
-    public function databaseDriver(): DatabaseDriverEnum
+    public function getDatabaseDriver(): DatabaseDriverEnum
     {
         return $this->databaseDriver;
     }
@@ -52,7 +52,7 @@ class DatabaseConversion
     /**
      * Get database type.
      */
-    public function databaseType(): string
+    public function getDatabaseType(): string
     {
         return $this->databaseType;
     }
@@ -60,7 +60,7 @@ class DatabaseConversion
     /**
      * Get PHP type.
      */
-    public function phpType(): string
+    public function getPhpType(): string
     {
         return $this->phpType;
     }
@@ -68,7 +68,7 @@ class DatabaseConversion
     /**
      * Get Laravel cast type.
      */
-    public function castType(): ?string
+    public function getCastType(): ?string
     {
         return $this->castType;
     }
@@ -76,7 +76,7 @@ class DatabaseConversion
     /**
      * Get TypeScript type.
      */
-    public function typescriptType(): string
+    public function getTypescriptType(): string
     {
         return $this->typescriptType;
     }

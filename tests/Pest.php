@@ -2,7 +2,90 @@
 
 use Dotenv\Dotenv;
 use Kiwilan\Typescriptable\Tests\TestCase;
+use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
 use Kiwilan\Typescriptable\TypescriptableConfig;
+
+const STORY_ID = new SchemaAttribute(
+    name: 'id',
+    driver: 'mysql',
+    databaseType: 'bigint unsigned',
+    increments: true,
+    nullable: false,
+    default: null,
+    unique: false,
+    fillable: false,
+    hidden: false,
+    appended: null,
+    cast: 'int',
+    phpType: null,
+    typescriptType: null,
+    databaseFields: [
+        'Field' => 'id',
+        'Type' => 'bigint unsigned',
+        'Null' => 'NO',
+        'Key' => 'PRI',
+        'Default' => null,
+        'Extra' => 'auto_increment',
+    ],
+);
+
+const STORY_TITLE = new SchemaAttribute(
+    name: 'title',
+    driver: 'mysql',
+    databaseType: 'varchar(255)',
+    increments: false,
+    nullable: false,
+    default: null,
+    unique: false,
+    fillable: true,
+    hidden: false,
+    appended: null,
+    cast: null,
+    phpType: null,
+    typescriptType: null,
+    databaseFields: [
+        'Field' => 'title',
+        'Type' => 'varchar(255)',
+        'Null' => 'NO',
+        'Key' => '',
+        'Default' => null,
+        'Extra' => '',
+    ],
+);
+const STORY_PUBLISHED_AT = new SchemaAttribute(
+    name: 'published_at',
+    driver: 'mysql',
+    databaseType: 'datetime',
+    increments: false,
+    nullable: true,
+    default: null,
+    unique: false,
+    fillable: true,
+    hidden: false,
+    appended: null,
+    cast: 'datetime',
+    phpType: null,
+    typescriptType: null,
+    databaseFields: [
+        'Field' => 'published_at',
+        'Type' => 'datetime',
+        'Null' => 'YES',
+        'Key' => '',
+        'Default' => null,
+        'Extra' => '',
+    ],
+);
+
+const STORY_RELATION_CHAPTERS = [
+    'name' => 'chapters',
+    'type' => 'HasMany',
+    'related' => 'Kiwilan\Typescriptable\Tests\Data\Models\Chapter',
+];
+const STORY_RELATION_CATEGORY = [
+    'name' => 'category',
+    'type' => 'BelongsTo',
+    'related' => 'Kiwilan\Typescriptable\Tests\Data\Models\Category',
+];
 
 foreach (glob('.output/*') as $file) {
     if (basename($file) !== '.gitignore') {
@@ -138,6 +221,15 @@ function setttingsOutputDir(): string
 function settingsExtends(): string
 {
     return 'Kiwilan\Typescriptable\Tests\Data\Settings\Settings';
+}
+
+function getModelPath(string $model): string
+{
+    $currentDir = getcwd();
+    $model = str_replace('\\', '/', $model);
+    $model = str_replace('App/Models/', '', $model);
+
+    return "{$currentDir}/tests/Data/Models/{$model}.php";
 }
 
 uses(TestCase::class)->in(__DIR__);

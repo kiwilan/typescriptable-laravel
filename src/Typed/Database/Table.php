@@ -4,15 +4,11 @@ namespace Kiwilan\Typescriptable\Typed\Database;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Kiwilan\Typescriptable\Typed\Database\Types\MysqlColumn;
-use Kiwilan\Typescriptable\Typed\Database\Types\PostgreColumn;
-use Kiwilan\Typescriptable\Typed\Database\Types\SqliteColumn;
-use Kiwilan\Typescriptable\Typed\Database\Types\SqlServerColumn;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModelAttribute;
+use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
 
 class Table
 {
-    /** @var SchemaModelAttribute[] */
+    /** @var SchemaAttribute[] */
     protected array $attributes = [];
 
     protected function __construct(
@@ -35,47 +31,47 @@ class Table
     }
 
     /**
-     * @return SchemaModelAttribute[]
+     * @return SchemaAttribute[]
      */
-    public function attributes(): array
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
 
-    public function addAttribute(SchemaModelAttribute $attribute): void
+    public function addAttribute(SchemaAttribute $attribute): void
     {
-        $this->attributes[$attribute->name()] = $attribute;
+        $this->attributes[$attribute->getName()] = $attribute;
     }
 
-    public function name(): string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function driver(): string
+    public function getDriver(): string
     {
         return $this->driver;
     }
 
-    public function select(): string
+    public function getSelect(): string
     {
         return $this->select;
     }
 
     /**
-     * @return SchemaModelAttribute[]
+     * @return SchemaAttribute[]
      */
     private function setAttributes(): array
     {
-        /** @var SchemaModelAttribute[] */
+        /** @var SchemaAttribute[] */
         $attributes = [];
 
         $driver = match ($this->driver) {
-            'mysql' => MysqlColumn::class,
-            'mariadb' => MysqlColumn::class,
-            'pgsql' => PostgreColumn::class,
-            'sqlite' => SqliteColumn::class,
-            'sqlsrv' => SqlServerColumn::class,
+            'mysql' => \Kiwilan\Typescriptable\Typed\Database\Driver\MysqlColumn::class,
+            'mariadb' => \Kiwilan\Typescriptable\Typed\Database\Driver\MysqlColumn::class,
+            'pgsql' => \Kiwilan\Typescriptable\Typed\Database\Driver\PostgreColumn::class,
+            'sqlite' => \Kiwilan\Typescriptable\Typed\Database\Driver\SqliteColumn::class,
+            'sqlsrv' => \Kiwilan\Typescriptable\Typed\Database\Driver\SqlServerColumn::class,
             'mongodb' => 'mongodb',
             default => null,
         };
@@ -100,8 +96,9 @@ class Table
             if ($this->driver === 'mongodb') {
                 continue;
             }
+            /** @var SchemaAttribute */
             $attribute = $driver::make($data);
-            $attributes[$attribute->name()] = $attribute;
+            $attributes[$attribute->getName()] = $attribute;
         }
 
         return $attributes;

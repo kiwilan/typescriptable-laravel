@@ -2,6 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Tests\Data\Models;
 
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,9 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
 use Kiwilan\Typescriptable\Tests\Data\Enums\StoryFormatEnum;
 use Kiwilan\Typescriptable\Tests\Data\Models\Nested\Author;
+use Kiwilan\Typescriptable\Tests\Data\Observers\StoryObserver;
 
+#[ObservedBy([StoryObserver::class])]
 class Story extends Model
 {
     use HasFactory;
@@ -89,9 +92,9 @@ class Story extends Model
         return $this->hasMany(Chapter::class);
     }
 
-    public function category(): BelongsTo
+    public function storyCategory(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(StoryCategory::class, 'story_category_id');
     }
 
     public function author(): BelongsTo

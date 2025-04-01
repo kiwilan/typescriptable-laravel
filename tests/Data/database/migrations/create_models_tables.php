@@ -61,7 +61,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('story_categories', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
@@ -74,7 +74,7 @@ return new class extends Migration
 
         Schema::table('stories', function (Blueprint $table) {
             $table->foreignId('author_id')->nullable()->constrained('authors')->nullOnDelete();
-            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->foreignId('story_category_id')->nullable()->constrained('story_categories')->nullOnDelete();
         });
 
         Schema::table('chapters', function (Blueprint $table) {
@@ -223,7 +223,7 @@ return new class extends Migration
         Schema::dropIfExists('stories');
         Schema::dropIfExists('authors');
         Schema::dropIfExists('chapters');
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('story_categories');
         Schema::dropIfExists('tags');
         Schema::dropIfExists('story_tag');
         Schema::dropIfExists('comments');
