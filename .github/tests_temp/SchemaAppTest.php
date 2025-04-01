@@ -32,4 +32,4 @@ it('can create schema app', function (string $driver) {
     expect($config->skipModels)->toBeArray();
     expect(count($config->skipModels))->toBe(1);
     expect($config->skipModels[0])->toBe('Kiwilan\Typescriptable\Tests\Data\Models\SushiTest');
-})->with(DatabaseDriverEnums());
+})->with(DriverEnums());

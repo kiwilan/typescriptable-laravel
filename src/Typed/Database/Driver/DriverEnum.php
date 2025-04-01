@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Database;
+namespace Kiwilan\Typescriptable\Typed\Database\Driver;
 
-enum DatabaseDriverEnum: string
+enum DriverEnum: string
 {
     case sqlite = 'sqlite';
     case mysql = 'mysql';

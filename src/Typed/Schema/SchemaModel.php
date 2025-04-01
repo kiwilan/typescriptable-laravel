@@ -18,7 +18,6 @@ class SchemaModel
      */
     protected function __construct(
         protected SchemaClass $schemaClass,
-        protected string $namespace, // e.g. `App\Models`
         protected string $driver, // e.g. `mysql`
         protected string $table, // e.g. `movies`
         protected mixed $policy = null,
@@ -35,7 +34,6 @@ class SchemaModel
      * $class = SchemaClass::make($spl, models());
      * $model = SchemaModel::make(
      *      schemaClass: $class,
-     *      namespace: $class->getNamespace(),
      *      driver: $this->app->getDriver(),
      *      table: $tableName,
      *      attributes: $table->getAttributes(),
@@ -45,7 +43,6 @@ class SchemaModel
      */
     public static function make(
         SchemaClass $schemaClass,
-        string $namespace,
         string $driver,
         string $table,
         ?array $attributes = [],
@@ -55,7 +52,6 @@ class SchemaModel
     ): self {
         $self = new self(
             $schemaClass,
-            $namespace,
             $driver,
             $table,
             $observers ?? [],
@@ -84,35 +80,38 @@ class SchemaModel
     }
 
     /**
-     * DEPRECATED: Get the class name of the model.
-     * Use `getSchemaClass()->getNamespace()` instead.
-     *
-     * Get the namespace of the model.
-     */
-    public function getNamespace(): string
-    {
-        return $this->namespace;
-    }
-
-    /**
      * Get the database driver of the model.
+     *
+     * Example: `mysql`
      */
     public function getDriver(): string
     {
         return $this->driver;
     }
 
+    /**
+     * Get the database table name of the model.
+     *
+     * Example: `movies`
+     */
     public function getTable(): string
     {
         return $this->table;
     }
 
+    /**
+     * Get the database policy of the model.
+     *
+     * Example: `App\Policies\MoviePolicy`
+     */
     public function getPolicy(): mixed
     {
         return $this->policy;
     }
 
     /**
+     * Get the model attributes.
+     *
      * @return SchemaAttribute[]
      */
     public function getAttributes(): array
@@ -120,11 +119,19 @@ class SchemaModel
         return $this->attributes;
     }
 
+    /**
+     * Get the model attribute by name.
+     *
+     * @param  string  $name  Fillable attribute name
+     */
     public function getAttribute(string $name): ?SchemaAttribute
     {
         return $this->attributes[$name] ?? null;
     }
 
+    /**
+     * Add a new attribute to the model.
+     */
     public function setAttribute(SchemaAttribute $attribute): self
     {
         $this->attributes[$attribute->getName()] = $attribute;
@@ -132,6 +139,11 @@ class SchemaModel
         return $this;
     }
 
+    /**
+     * Remove an attribute from the model.
+     *
+     * @param  string  $name  Fillable attribute name
+     */
     public function removeAttribute(string $name): self
     {
         if (isset($this->attributes[$name])) {
@@ -142,6 +154,8 @@ class SchemaModel
     }
 
     /**
+     * Set multiple attributes to the model.
+     *
      * @param  SchemaAttribute[]  $attributes
      */
     public function setAttributes(array $attributes): self
@@ -166,6 +180,11 @@ class SchemaModel
         return $this;
     }
 
+    /**
+     * Update an existing attribute in the model with the given accessor.
+     *
+     * @param  ParserAccessor  $accessor  Accessor to update
+     */
     public function updateAccessor(ParserAccessor $accessor): self
     {
         $attribute = $this->attributes[$accessor->getField()] ?? null;
@@ -178,6 +197,8 @@ class SchemaModel
     }
 
     /**
+     * Get the model relations as an array of `SchemaRelation`.
+     *
      * @return SchemaRelation[]
      */
     public function getRelations(): array
@@ -185,16 +206,29 @@ class SchemaModel
         return $this->relations;
     }
 
+    /**
+     * Get a specific relation by name.
+     *
+     * @param  string  $name  Relation name
+     */
     public function getRelation(string $name): ?SchemaRelation
     {
         return $this->relations[$name] ?? null;
     }
 
+    /**
+     * Get the model observers as an array.
+     */
     public function getObservers(): array
     {
         return $this->observers;
     }
 
+    /**
+     * Get the Typescript model name.
+     *
+     * Example: `Movie`
+     */
     public function getTypescriptModelName(): ?string
     {
         return $this->typescriptModelName;

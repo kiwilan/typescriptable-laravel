@@ -121,4 +121,4 @@ it('can be run', function (string $driver) {
     //         // expect($property->isNullable())->toBe($tsProperty->isNullable());
     //     }
     // }
-})->with(DatabaseDriverEnums());
+})->with(DriverEnums());

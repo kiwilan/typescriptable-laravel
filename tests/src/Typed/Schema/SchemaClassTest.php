@@ -5,36 +5,44 @@ use Kiwilan\Typescriptable\Typed\Schema\SchemaClass;
 it('can parse php class', function () {
     $path = getModelPath('Movie');
     $spl = new SplFileInfo($path);
-    $schemaClass = SchemaClass::make($spl, models());
+    $class = SchemaClass::make($spl, models());
 
-    expect($schemaClass)->toBeInstanceOf(SchemaClass::class);
-    expect($schemaClass->getBasePath())->toContain('laravel-typescriptable/tests/Data/Models');
-    expect(substr($schemaClass->getBasePath(), 0, 1))->toBe('/');
-    expect($schemaClass->getPath())->toBe($path);
-    expect($schemaClass->getFile())->toBe($spl);
-    expect($schemaClass->getNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
-    expect($schemaClass->getName())->toBe('Movie');
-    expect($schemaClass->getFullname())->toBe('Movie');
-    expect($schemaClass->getReflect())->toBeInstanceOf(ReflectionClass::class);
-    expect($schemaClass->getTraits())->toBe([
+    expect($class)->toBeInstanceOf(SchemaClass::class);
+    expect($class->getBasePath())->toContain('laravel-typescriptable/tests/Data/Models');
+    expect(substr($class->getBasePath(), 0, 1))->toBe('/');
+    expect($class->getPath())->toBe($path);
+    expect($class->getFile())->toBe($spl);
+    expect($class->getNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
+    expect($class->getName())->toBe('Movie');
+    expect($class->getFullname())->toBe('Movie');
+    expect($class->getReflect())->toBeInstanceOf(ReflectionClass::class);
+    expect($class->getTraits())->toBe([
         "Illuminate\Database\Eloquent\Factories\HasFactory",
         "Illuminate\Database\Eloquent\Concerns\HasUlids",
         "Spatie\MediaLibrary\InteractsWithMedia",
     ]);
-    expect($schemaClass->isModel())->toBeTrue();
-    expect($schemaClass->getExtends())->toBe('Illuminate\Database\Eloquent\Model');
+    expect($class->isModel())->toBeTrue();
+    expect($class->getExtends())->toBe('Illuminate\Database\Eloquent\Model');
 
     $path = getModelPath('Nested/Author');
     $spl = new SplFileInfo($path);
-    $schemaClass = SchemaClass::make($spl, models());
+    $class = SchemaClass::make($spl, models());
 
-    expect($schemaClass->getName())->toBe('Author');
-    expect($schemaClass->getFullname())->toBe('NestedAuthor');
+    expect($class->getName())->toBe('Author');
+    expect($class->getFullname())->toBe('NestedAuthor');
 
     $path = getModelPath('NotModel');
     $spl = new SplFileInfo($path);
-    $schemaClass = SchemaClass::make($spl, models());
+    $class = SchemaClass::make($spl, models());
 
-    expect($schemaClass->getName())->toBe('NotModel');
-    expect($schemaClass->isModel())->toBeFalse();
+    expect($class->getName())->toBe('NotModel');
+    expect($class->isModel())->toBeFalse();
+});
+
+it('cannot parse no php file', function () {
+    $path = getModelPath('Chapter', 'ts');
+    $spl = new SplFileInfo($path);
+    $class = SchemaClass::make($spl, models());
+
+    expect($class)->toBeNull();
 });

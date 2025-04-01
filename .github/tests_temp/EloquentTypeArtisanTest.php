@@ -253,4 +253,4 @@ it('can be run with artisan', function (string $driver) {
     expect($members_count->name())->toBe('members_count');
     expect($members_count->phpType())->toBe('int');
     expect($members_count->typescriptType())->toBe('number');
-})->with(DatabaseDriverEnums());
+})->with(DriverEnums());

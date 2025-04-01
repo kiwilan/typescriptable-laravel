@@ -1,35 +1,35 @@
 <?php
 
-use Kiwilan\Typescriptable\Typed\Database\DatabaseDriverEnum;
+use Kiwilan\Typescriptable\Typed\Database\DriverEnum;
 
 it('returns mixed for null or empty database type', function () {
-    expect(DatabaseDriverEnum::sqlite->toPhp(null))->toBe('mixed');
-    expect(DatabaseDriverEnum::sqlite->toPhp(''))->toBe('mixed');
-    expect(DatabaseDriverEnum::mysql->toPhp(null))->toBe('mixed');
-    expect(DatabaseDriverEnum::mysql->toPhp(''))->toBe('mixed');
-    expect(DatabaseDriverEnum::mariadb->toPhp(null))->toBe('mixed');
-    expect(DatabaseDriverEnum::mariadb->toPhp(''))->toBe('mixed');
-    expect(DatabaseDriverEnum::pgsql->toPhp(null))->toBe('mixed');
-    expect(DatabaseDriverEnum::pgsql->toPhp(''))->toBe('mixed');
-    expect(DatabaseDriverEnum::sqlsrv->toPhp(null))->toBe('mixed');
-    expect(DatabaseDriverEnum::sqlsrv->toPhp(''))->toBe('mixed');
+    expect(DriverEnum::sqlite->toPhp(null))->toBe('mixed');
+    expect(DriverEnum::sqlite->toPhp(''))->toBe('mixed');
+    expect(DriverEnum::mysql->toPhp(null))->toBe('mixed');
+    expect(DriverEnum::mysql->toPhp(''))->toBe('mixed');
+    expect(DriverEnum::mariadb->toPhp(null))->toBe('mixed');
+    expect(DriverEnum::mariadb->toPhp(''))->toBe('mixed');
+    expect(DriverEnum::pgsql->toPhp(null))->toBe('mixed');
+    expect(DriverEnum::pgsql->toPhp(''))->toBe('mixed');
+    expect(DriverEnum::sqlsrv->toPhp(null))->toBe('mixed');
+    expect(DriverEnum::sqlsrv->toPhp(''))->toBe('mixed');
 });
 
 it('removes unwanted keywords and parentheses', function () {
-    expect(DatabaseDriverEnum::mysql->toPhp('int unsigned'))->toBe('int');
-    expect(DatabaseDriverEnum::mysql->toPhp('varchar(255)'))->toBe('string');
-    expect(DatabaseDriverEnum::pgsql->toPhp('character varying(255)'))->toBe('string');
-    expect(DatabaseDriverEnum::sqlsrv->toPhp('numeric(10, 2)'))->toBe('string');
-    expect(DatabaseDriverEnum::mariadb->toPhp('int unsigned'))->toBe('int');
-    expect(DatabaseDriverEnum::sqlite->toPhp('big int'))->toBe('int');
+    expect(DriverEnum::mysql->toPhp('int unsigned'))->toBe('int');
+    expect(DriverEnum::mysql->toPhp('varchar(255)'))->toBe('string');
+    expect(DriverEnum::pgsql->toPhp('character varying(255)'))->toBe('string');
+    expect(DriverEnum::sqlsrv->toPhp('numeric(10, 2)'))->toBe('string');
+    expect(DriverEnum::mariadb->toPhp('int unsigned'))->toBe('int');
+    expect(DriverEnum::sqlite->toPhp('big int'))->toBe('int');
 });
 
 it('handles complex database types', function () {
-    expect(DatabaseDriverEnum::mysql->toPhp('tinyint(4) unsigned'))->toBe('int');
-    expect(DatabaseDriverEnum::pgsql->toPhp('character varying (255)'))->toBe('string');
-    expect(DatabaseDriverEnum::sqlsrv->toPhp('decimal (10, 2) unsigned'))->toBe('string');
-    expect(DatabaseDriverEnum::mariadb->toPhp('int (11) unsigned'))->toBe('int');
-    expect(DatabaseDriverEnum::sqlite->toPhp('big int (20)'))->toBe('int');
+    expect(DriverEnum::mysql->toPhp('tinyint(4) unsigned'))->toBe('int');
+    expect(DriverEnum::pgsql->toPhp('character varying (255)'))->toBe('string');
+    expect(DriverEnum::sqlsrv->toPhp('decimal (10, 2) unsigned'))->toBe('string');
+    expect(DriverEnum::mariadb->toPhp('int (11) unsigned'))->toBe('int');
+    expect(DriverEnum::sqlite->toPhp('big int (20)'))->toBe('int');
 });
 
 it('converts MySQL types to PHP types', function () {
@@ -76,7 +76,7 @@ it('converts MySQL types to PHP types', function () {
     ];
 
     foreach ($types as $dbType => $phpType) {
-        expect(DatabaseDriverEnum::mysql->toPhp($dbType))->toBe($phpType);
+        expect(DriverEnum::mysql->toPhp($dbType))->toBe($phpType);
     }
 });
 
@@ -127,7 +127,7 @@ it('converts MariaDB types to PHP types', function () {
     ];
 
     foreach ($types as $dbType => $phpType) {
-        expect(DatabaseDriverEnum::mariadb->toPhp($dbType))->toBe($phpType);
+        expect(DriverEnum::mariadb->toPhp($dbType))->toBe($phpType);
     }
 });
 
@@ -192,7 +192,7 @@ it('converts PostgreSQL types to PHP types', function () {
     ];
 
     foreach ($types as $dbType => $phpType) {
-        expect(DatabaseDriverEnum::pgsql->toPhp($dbType))->toBe($phpType);
+        expect(DriverEnum::pgsql->toPhp($dbType))->toBe($phpType);
     }
 });
 
@@ -226,7 +226,7 @@ it('converts SQLite types to PHP types', function () {
     ];
 
     foreach ($types as $dbType => $phpType) {
-        expect(DatabaseDriverEnum::sqlite->toPhp($dbType))->toBe($phpType);
+        expect(DriverEnum::sqlite->toPhp($dbType))->toBe($phpType);
     }
 });
 
@@ -269,6 +269,6 @@ it('converts SQL Server types to PHP types', function () {
     ];
 
     foreach ($types as $dbType => $phpType) {
-        expect(DatabaseDriverEnum::sqlsrv->toPhp($dbType))->toBe($phpType);
+        expect(DriverEnum::sqlsrv->toPhp($dbType))->toBe($phpType);
     }
 });

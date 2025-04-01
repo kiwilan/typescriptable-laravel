@@ -3,34 +3,38 @@
 namespace Kiwilan\Typescriptable\Typed\Database;
 
 use BackedEnum;
+use Kiwilan\Typescriptable\Typed\Database\Driver\DriverEnum;
 use Kiwilan\Typescriptable\Typed\Parser\ParserPhpType;
 use UnitEnum;
 
+/**
+ * Conversion between database types and PHP/TypeScript types.
+ */
 class DatabaseConversion
 {
     protected function __construct(
-        protected DatabaseDriverEnum $databaseDriver,
-        protected ?string $databaseType,
-        protected ?string $phpType = 'mixed',
-        protected ?string $castType = null,
-        protected string $typescriptType = 'any',
+        protected DriverEnum $driver, // `mysql`, `pgsql`, `sqlite`, etc.
+        protected ?string $databaseType, // `varchar(255)`, `int`, `json`, etc.
+        protected ?string $phpType = 'mixed', // PHP type, e.g. `string`, `int`, `array`, etc.
+        protected ?string $castType = null, // Laravel cast type, e.g. `date`, `array`, `json`, etc.
+        protected string $typescriptType = 'any', // TypeScript type, e.g. `string`, `number`, `any[]`, etc.
     ) {}
 
     /**
      * Make a new instance.
      *
-     * @param  string  $databaseDriver  Database driver.
+     * @param  string  $driver  Database driver.
      * @param  string|null  $databaseType  Database type.
      * @param  string|null  $cast  Laravel cast.
      */
-    public static function make(string $databaseDriver, ?string $databaseType, ?string $cast): self
+    public static function make(string $driver, ?string $databaseType, ?string $cast): self
     {
         $self = new self(
-            databaseDriver: DatabaseDriverEnum::tryFrom(strtolower($databaseDriver)),
+            driver: DriverEnum::tryFrom(strtolower($driver)),
             databaseType: $databaseType,
         );
 
-        $self->phpType = $self->databaseDriver->toPhp($self->databaseType);
+        $self->phpType = $self->driver->toPhp($self->databaseType);
         $self->castType = $cast;
         if ($cast) {
             $self->parseCast($cast);
@@ -44,9 +48,9 @@ class DatabaseConversion
     /**
      * Get database driver.
      */
-    public function getDatabaseDriver(): DatabaseDriverEnum
+    public function getDatabaseDriver(): DriverEnum
     {
-        return $this->databaseDriver;
+        return $this->driver;
     }
 
     /**

@@ -2,14 +2,14 @@
 
 use Kiwilan\Typescriptable\Tests\TestCase;
 use Kiwilan\Typescriptable\Typed\Database\DatabaseConversion;
-use Kiwilan\Typescriptable\Typed\Database\DatabaseDriverEnum;
+use Kiwilan\Typescriptable\Typed\Database\DriverEnum;
 
 it('can convert database type', function () {
     TestCase::setupDatabase('mysql');
 
     $db = DatabaseConversion::make('mysql', 'int', null);
 
-    $enum = DatabaseDriverEnum::tryFrom('mysql');
+    $enum = DriverEnum::tryFrom('mysql');
     expect($db->databaseDriver())->toBe($enum);
     expect($db->databaseType())->toBe('int');
     expect($db->phpType())->toBe('int');

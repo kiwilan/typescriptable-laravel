@@ -13,7 +13,6 @@ it('can parse php class', function () {
 
     $model = SchemaModel::make(
         schemaClass: $class,
-        namespace: $class->getNamespace(),
         driver: 'mysql',
         table: 'ts_stories',
         attributes: [
@@ -28,7 +27,7 @@ it('can parse php class', function () {
 
     expect($model)->toBeInstanceOf(SchemaModel::class);
     expect($model->getSchemaClass())->toBeInstanceOf(SchemaClass::class);
-    expect($model->getNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Story');
+    expect($model->getSchemaClass()->getNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Story');
     expect($model->getDriver())->toBe('mysql');
     expect($model->getTable())->toBe('ts_stories');
     expect($model->getPolicy())->toBeArray();

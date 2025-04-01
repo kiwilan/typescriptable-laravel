@@ -119,4 +119,4 @@ it('can be run with parser', function (string $driver) {
     expect($members_count->getName())->toBe('members_count');
     expect($members_count->getPhpType())->toBe('int');
     expect($members_count->getTypescriptType())->toBe('number');
-})->with(DatabaseDriverEnums());
+})->with(DriverEnums());

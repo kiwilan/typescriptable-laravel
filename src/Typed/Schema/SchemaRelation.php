@@ -2,6 +2,12 @@
 
 namespace Kiwilan\Typescriptable\Typed\Schema;
 
+/**
+ * A `SchemaRelation` contains information about a relation.
+ * It contains the relation name, type, related model, and other information.
+ *
+ * Compatible with any PHP class, with `bool` to indicate if the class is a Laravel Model.
+ */
 class SchemaRelation
 {
     protected function __construct(

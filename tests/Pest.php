@@ -97,7 +97,7 @@ foreach (glob('.output/*') as $file) {
     }
 }
 
-function DatabaseDriverEnums(): array
+function DriverEnums(): array
 {
     $dotenv = Dotenv::createMutable(getcwd());
     $data = $dotenv->load();
@@ -107,9 +107,9 @@ function DatabaseDriverEnums(): array
     return $types;
 }
 
-function DatabaseDriverEnumsWithoutSqlsrv(): array
+function DriverEnumsWithoutSqlsrv(): array
 {
-    $drivers = DatabaseDriverEnums();
+    $drivers = DriverEnums();
     if (($key = array_search('sqlsrv', $drivers)) !== false) {
         unset($drivers[$key]);
     }
@@ -223,13 +223,13 @@ function settingsExtends(): string
     return 'Kiwilan\Typescriptable\Tests\Data\Settings\Settings';
 }
 
-function getModelPath(string $model): string
+function getModelPath(string $model, string $extension = 'php'): string
 {
     $currentDir = getcwd();
     $model = str_replace('\\', '/', $model);
     $model = str_replace('App/Models/', '', $model);
 
-    return "{$currentDir}/tests/Data/Models/{$model}.php";
+    return "{$currentDir}/tests/Data/Models/{$model}.{$extension}";
 }
 
 uses(TestCase::class)->in(__DIR__);
