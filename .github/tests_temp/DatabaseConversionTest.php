@@ -1,13 +1,13 @@
 <?php
 
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Database\DatabaseConversion;
+use Kiwilan\Typescriptable\Typed\Database\DatabaseConverter;
 use Kiwilan\Typescriptable\Typed\Database\DriverEnum;
 
 it('can convert database type', function () {
     TestCase::setupDatabase('mysql');
 
-    $db = DatabaseConversion::make('mysql', 'int', null);
+    $db = DatabaseConverter::make('mysql', 'int', null);
 
     $enum = DriverEnum::tryFrom('mysql');
     expect($db->databaseDriver())->toBe($enum);
@@ -16,7 +16,7 @@ it('can convert database type', function () {
     expect($db->castType())->toBeNull();
     expect($db->typescriptType())->toBe('number');
 
-    $db = DatabaseConversion::make('mysql', 'integer', 'int');
+    $db = DatabaseConverter::make('mysql', 'integer', 'int');
     expect($db->databaseType())->toBe('integer');
     expect($db->phpType())->toBe('string');
     expect($db->castType())->toBe('int');
@@ -26,7 +26,7 @@ it('can convert database type', function () {
 it('can convert types', function (string $cast) {
     TestCase::setupDatabase('mysql');
 
-    $db = DatabaseConversion::make('mysql', 'string', $cast);
+    $db = DatabaseConverter::make('mysql', 'string', $cast);
     expect($db->castType())->toBe($cast);
 })->with([
     'collection',

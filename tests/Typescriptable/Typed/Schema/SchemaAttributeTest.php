@@ -49,7 +49,6 @@ it('can parse model attribute', function () {
         'Default' => null,
         'Extra' => '',
     ]);
-    ray($attribute);
 });
 
 it('is SchemaAttribute', function () {

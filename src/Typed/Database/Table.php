@@ -6,31 +6,48 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
 
+/**
+ * Represents a database table with its columns.
+ */
 class Table
 {
     /** @var SchemaAttribute[] */
     protected array $attributes = [];
 
     protected function __construct(
-        protected string $driver,
-        protected string $name,
-        protected ?string $select = null,
+        protected DriverEnum $driver, // `mysql`, `pgsql`, `sqlite`, etc.
+        protected string $name, // Table name, e.g., `users`
+        protected ?string $select = null, // SQL query to select columns
+        protected array $columns = [], // Columns of the table
     ) {}
 
-    public static function make(string $table): self
+    /**
+     * Creates a new instance of `Table`.
+     *
+     * @param  string  $table  The name of the table.
+     * @param  DriverEnum|null  $driverOverride  The database driver to override the default one.
+     */
+    public static function make(string $table, ?DriverEnum $driverOverride = null): self
     {
         $self = new self(
-            driver: Schema::getConnection()->getDriverName(),
-            name: $table
+            driver: $driverOverride ?? DriverEnum::tryFrom(Schema::getConnection()->getDriverName()),
+            name: $table,
         );
 
-        $self->select = $self->setSelect();
-        $self->attributes = $self->setAttributes();
+        if ($self->driver === DriverEnum::mongodb) {
+            throw new \Exception('MongoDB driver use manual parser.');
+        }
+
+        $self->select = $self->writeSelect();
+        $self->columns = $self->parseColumns();
+        $self->attributes = $self->parseAttributes();
 
         return $self;
     }
 
     /**
+     * Get attributes (converted columns) of the table.
+     *
      * @return SchemaAttribute[]
      */
     public function getAttributes(): array
@@ -38,82 +55,119 @@ class Table
         return $this->attributes;
     }
 
+    /**
+     * Get a specific attribute by its name.
+     */
+    public function getAttribute(string $name): ?SchemaAttribute
+    {
+        return $this->attributes[$name] ?? null;
+    }
+
+    /**
+     * Add a attribute.
+     */
     public function addAttribute(SchemaAttribute $attribute): void
     {
         $this->attributes[$attribute->getName()] = $attribute;
     }
 
+    /**
+     * Get the columns of the table.
+     */
+    public function getColumns(): array
+    {
+        return $this->columns;
+    }
+
+    /**
+     * Get the name of the table.
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function getDriver(): string
+    /**
+     * Get the database driver name.
+     */
+    public function getDriver(): DriverEnum
     {
         return $this->driver;
     }
 
+    /**
+     * Get the SQL query to select the columns of the table.
+     */
     public function getSelect(): string
     {
         return $this->select;
     }
 
     /**
+     * Converts the columns of the table into `SchemaAttribute` objects.
+     *
      * @return SchemaAttribute[]
      */
-    private function setAttributes(): array
+    private function parseAttributes(): array
     {
         /** @var SchemaAttribute[] */
         $attributes = [];
 
-        $driver = match ($this->driver) {
-            'mysql' => \Kiwilan\Typescriptable\Typed\Database\Driver\MysqlColumn::class,
-            'mariadb' => \Kiwilan\Typescriptable\Typed\Database\Driver\MysqlColumn::class,
-            'pgsql' => \Kiwilan\Typescriptable\Typed\Database\Driver\PostgreColumn::class,
-            'sqlite' => \Kiwilan\Typescriptable\Typed\Database\Driver\SqliteColumn::class,
-            'sqlsrv' => \Kiwilan\Typescriptable\Typed\Database\Driver\SqlServerColumn::class,
-            'mongodb' => 'mongodb',
-            default => null,
-        };
+        $converter = ColumnConverter::make($this->driver);
 
-        if ($driver === null) {
-            throw new \Exception("Database driver not supported: {$this->driver}");
-        }
-
-        $schemaTables = [];
-        if (intval(app()->version()) >= 11) {
-            $schemaTables = Schema::getTableListing();
-        } else {
-            $schemaTables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames(); // @phpstan-ignore-line
-        }
-
-        if (! in_array($this->name, $schemaTables)) {
-            return [];
-        }
-
-        $select = $this->driver === 'mongodb' ? [] : DB::select($this->select);
-        foreach ($select as $data) {
-            if ($this->driver === 'mongodb') {
-                continue;
-            }
-            /** @var SchemaAttribute */
-            $attribute = $driver::make($data);
+        // Convert each column into a `SchemaAttribute`
+        foreach ($this->columns as $column) {
+            $attribute = $converter->parse($column);
             $attributes[$attribute->getName()] = $attribute;
         }
 
         return $attributes;
     }
 
-    private function setSelect(): ?string
+    /**
+     * If the driver is MongoDB, we don't need to select columns. Otherwise, we execute the SQL query to get the columns.
+     */
+    private function parseColumns(): array
+    {
+        return $this->driver === DriverEnum::mongodb ? [] : DB::select($this->select);
+    }
+
+    // /**
+    //  * Get the list of tables in the database.
+    //  *
+    //  * @return string[]
+    //  */
+    // private function getTableList(): array
+    // {
+    //     // Get the list of tables in the database
+    //     $tables = [];
+    //     if (intval(app()->version()) >= 11) {
+    //         $tables = Schema::getTableListing(); // For Laravel 11 and above
+    //     } else {
+    //         // For Laravel 10 and below
+    //         $tables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
+    //     }
+
+    //     // If the table is not in the schema, return an empty array
+    //     if (! in_array($this->name, $tables)) {
+    //         return [];
+    //     }
+
+    //     return $tables;
+    // }
+
+    /**
+     * Write the SQL query to select the columns of the table.
+     */
+    private function writeSelect(): ?string
     {
         return match ($this->driver) {
-            'mysql' => "SHOW COLUMNS FROM {$this->name}",
-            'mariadb' => "SHOW COLUMNS FROM {$this->name}",
-            'pgsql' => "SELECT column_name, data_type, is_nullable, column_default FROM information_schema.columns WHERE table_name = '{$this->name}'",
-            'sqlite' => "PRAGMA table_info({$this->name})",
-            'sqlsrv' => "SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_DEFAULT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{$this->name}'",
-            'mongodb' => null,
-            default => "SHOW COLUMNS FROM {$this->name}",
+            DriverEnum::mysql => "SHOW COLUMNS FROM {$this->name}",
+            DriverEnum::mariadb => "SHOW COLUMNS FROM {$this->name}",
+            DriverEnum::pgsql => "SELECT column_name, data_type, is_nullable, column_default FROM information_schema.columns WHERE table_name = '{$this->name}'",
+            DriverEnum::sqlite => "PRAGMA table_info({$this->name})",
+            DriverEnum::sqlsrv => "SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_DEFAULT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{$this->name}'",
+            DriverEnum::mongodb => null,
         };
     }
 }

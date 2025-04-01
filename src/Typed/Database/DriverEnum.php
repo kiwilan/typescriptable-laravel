@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Database\Driver;
+namespace Kiwilan\Typescriptable\Typed\Database;
 
 enum DriverEnum: string
 {
@@ -10,6 +10,29 @@ enum DriverEnum: string
     case pgsql = 'pgsql';
     case sqlsrv = 'sqlsrv';
     case mongodb = 'mongodb';
+
+    public static function getRelationalDrivers(): array
+    {
+        return [
+            self::mysql,
+            self::mariadb,
+            self::pgsql,
+            self::sqlsrv,
+            self::sqlite,
+        ];
+    }
+
+    public static function toArray(): array
+    {
+        return [
+            self::mysql,
+            self::mariadb,
+            self::pgsql,
+            self::sqlsrv,
+            self::sqlite,
+            self::mongodb,
+        ];
+    }
 
     /**
      * Convert database type to PHP type.

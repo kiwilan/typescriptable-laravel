@@ -3,14 +3,13 @@
 namespace Kiwilan\Typescriptable\Typed\Database;
 
 use BackedEnum;
-use Kiwilan\Typescriptable\Typed\Database\Driver\DriverEnum;
 use Kiwilan\Typescriptable\Typed\Parser\ParserPhpType;
 use UnitEnum;
 
 /**
  * Conversion between database types and PHP/TypeScript types.
  */
-class DatabaseConversion
+class DatabaseConverter
 {
     protected function __construct(
         protected DriverEnum $driver, // `mysql`, `pgsql`, `sqlite`, etc.

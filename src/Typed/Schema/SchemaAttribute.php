@@ -2,7 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Typed\Schema;
 
-use Kiwilan\Typescriptable\Typed\Database\DatabaseConversion;
+use Kiwilan\Typescriptable\Typed\Database\DatabaseConverter;
 
 /**
  * A `SchemaAttribute` represents a Laravel model attribute, like `title` for `App\Models\Movie` (a `SchemaModel`).
@@ -60,7 +60,7 @@ class SchemaAttribute
      */
     public function handleTypes(): self
     {
-        $conversion = DatabaseConversion::make($this->driver, $this->databaseType, $this->cast);
+        $conversion = DatabaseConverter::make($this->driver, $this->databaseType, $this->cast);
         $this->phpType = $conversion->getPhpType();
         $this->typescriptType = $conversion->getTypescriptType();
 

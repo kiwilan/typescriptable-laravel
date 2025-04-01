@@ -4,7 +4,6 @@ use Kiwilan\Typescriptable\Typed\Schema\SchemaRelation;
 
 it('can parse relation', function () {
     $relation = SchemaRelation::make(STORY_RELATION_CHAPTERS);
-    ray($relation);
 
     expect($relation->getName())->toBe('chapters');
     expect($relation->getLaravelType())->toBe('HasMany');

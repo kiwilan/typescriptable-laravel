@@ -61,7 +61,7 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
                 namespace: $class->getNamespace(),
                 driver: $this->app->getDriver(),
                 table: $tableName,
-                attributes: $table->getAttributes(),
+                attributes: $table->getFields(),
                 relations: $relations,
             );
 
@@ -83,7 +83,7 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
         $casts = $model->getCasts();
         $accessors = $this->parseAccessors($model);
 
-        foreach ($table->getAttributes() as $attribute) {
+        foreach ($table->getFields() as $attribute) {
             if (in_array($attribute->getName(), $fillables)) {
                 $attribute->setFillable(true);
             }
@@ -98,7 +98,7 @@ class EloquentTypeParser extends EloquentType implements IEloquentType
         }
 
         foreach ($accessors as $accessor) {
-            $table->addAttribute($accessor);
+            $table->addField($accessor);
         }
 
         return $table;
