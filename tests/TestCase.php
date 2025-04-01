@@ -4,9 +4,8 @@ namespace Kiwilan\Typescriptable\Tests;
 
 use Dotenv\Dotenv;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Kiwilan\Typescriptable\Tests\Utils\Driver;
+use Kiwilan\Typescriptable\Tests\Data\Utils\Driver;
 use Kiwilan\Typescriptable\TypescriptableServiceProvider;
 use MongoDB\Laravel\MongoDBServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;

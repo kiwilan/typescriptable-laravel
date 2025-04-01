@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Tests\Utils;
+namespace Kiwilan\Typescriptable\Tests\Data\Utils;
 
 class Driver
 {
