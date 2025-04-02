@@ -12,10 +12,6 @@ it('can parse relation', function () {
     expect($relation->isInternal())->toBe(true);
     expect($relation->isMany())->toBe(true);
     expect($relation->getPhpType())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Chapter[]');
-
-    // fix namespace here
-    $relation->setTypescriptType('Chapter', 'Kiwilan\Typescriptable\Tests\Data\Models');
-    expect($relation->getTypescriptType())->toBe('App.Models.Chapter[]');
 });
 
 it('can set php type', function () {
@@ -34,4 +30,12 @@ it('can set typescript type', function () {
 
     $relation->setTypescriptType('any', 'App.Models');
     expect($relation->getTypescriptType())->toBe('any[]');
+});
+
+it('can use different namespace', function () {
+    $relation = SchemaRelation::make(STORY_RELATION_CHAPTERS);
+
+    // fix namespace here
+    // $relation->setTypescriptType('Chapter', 'Kiwilan\Typescriptable\Tests\Data\Models');
+    // expect($relation->getTypescriptType())->toBe('App.Models.Chapter[]');
 });

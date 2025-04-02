@@ -6,25 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
 
+/**
+ * `ParserFillable` is a parser for Laravel Eloquent models.
+ *
+ * Used for `mongodb` driver.
+ */
 class ParserFillable
 {
     /**
      * @param  SchemaAttribute[]  $attributes
      */
     protected function __construct(
-        protected SchemaClass $schemaClass,
-        protected string $namespace,
+        protected SchemaClass $class,
         protected array $attributes = [],
     ) {}
 
-    public static function make(SchemaClass $schemaClass): self
+    public static function make(SchemaClass $class): self
     {
-        $self = new self(
-            $schemaClass,
-            $schemaClass->getNamespace(),
-        );
+        $self = new self($class);
 
-        $model = $self->namespace;
+        $model = $self->class->getNamespace();
         /** @var Model */
         $instance = new $model;
 
@@ -32,62 +33,31 @@ class ParserFillable
         $casts = $instance->getCasts();
 
         if ($key) {
-            $self->attributes[$key] = new SchemaAttribute(
+            $self->attributes[$key] = $self->parseMongoDBAttribute(
+                casts: $casts,
                 name: $key,
-                driver: 'mongodb',
-                databaseType: 'string',
-                increments: false,
                 nullable: false,
-                default: null,
                 unique: true,
                 fillable: false,
-                hidden: false,
-                appended: false,
-                cast: $casts[$key] ?? null,
             );
         }
 
         foreach ($instance->getHidden() as $field) {
-            $self->attributes[$field] = new SchemaAttribute(
+            $self->attributes[$field] = $self->parseMongoDBAttribute(
+                casts: $casts,
                 name: $field,
-                driver: 'mongodb',
-                databaseType: 'string',
-                increments: false,
-                nullable: true,
-                default: null,
-                unique: false,
-                fillable: true,
                 hidden: true,
-                appended: false,
-                cast: $casts[$field] ?? null,
             );
         }
 
         foreach ($instance->getFillable() as $field) {
-            $self->attributes[$field] = new SchemaAttribute(
+            $self->attributes[$field] = $self->parseMongoDBAttribute(
+                casts: $casts,
                 name: $field,
-                driver: 'mongodb',
-                databaseType: 'string',
-                increments: false,
-                nullable: true,
-                default: null,
-                unique: false,
-                fillable: true,
-                hidden: false,
-                appended: false,
-                cast: $casts[$field] ?? null,
             );
         }
 
         return $self;
-    }
-
-    /**
-     * Get namespace.
-     */
-    public function getNamespace(): string
-    {
-        return $this->namespace;
     }
 
     /**
@@ -98,5 +68,28 @@ class ParserFillable
     public function getAttributes(): array
     {
         return $this->attributes;
+    }
+
+    private function parseMongoDBAttribute(
+        array $casts,
+        string $name,
+        bool $nullable = true,
+        bool $unique = false,
+        bool $fillable = true,
+        bool $hidden = false,
+    ): SchemaAttribute {
+        return new SchemaAttribute(
+            name: $name,
+            driver: 'mongodb',
+            databaseType: 'string',
+            increments: false,
+            nullable: $nullable,
+            default: null,
+            unique: $unique,
+            fillable: $fillable,
+            hidden: $hidden,
+            appended: false,
+            cast: $casts[$name] ?? null,
+        );
     }
 }

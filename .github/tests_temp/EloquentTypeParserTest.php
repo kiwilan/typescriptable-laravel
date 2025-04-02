@@ -16,7 +16,7 @@ it('can be run with parser', function (string $driver) {
     $app = $type->getApp();
     $movie = $app->getModel('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
 
-    expect($movie->getSchemaClass())->toBeInstanceOf(SchemaClass::class);
+    expect($movie->getClass())->toBeInstanceOf(SchemaClass::class);
     expect($movie->getNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
     expect($movie->getDriver())->toBe($driver);
     expect($movie->getTable())->toBe('ts_movies');
@@ -27,7 +27,7 @@ it('can be run with parser', function (string $driver) {
     expect(count($movie->getRelations()))->toBe(5);
     expect($movie->getTypescriptModelName())->toBe('Movie');
 
-    $schemaClass = $movie->getSchemaClass();
+    $schemaClass = $movie->getClass();
 
     expect($schemaClass->getBasePath())->toBe(models());
     expect($schemaClass->getPath())->toBe(models().'/Movie.php');

@@ -1,7 +1,7 @@
 <?php
 
+use Kiwilan\Typescriptable\Eloquent\Database\DatabaseTable;
 use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
-use Kiwilan\Typescriptable\Eloquent\Database\Table;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 use Kiwilan\Typescriptable\Tests\TestCase;
 
@@ -11,7 +11,7 @@ beforeEach(function () {
 
 it('can parse database', function (DriverEnum $driver) {
     TestCase::setupDatabase($driver->value);
-    $table = Table::make('ts_movies', $driver);
+    $table = DatabaseTable::make('ts_movies', $driver);
 
     expect($table->getName())->toBe('ts_movies');
     expect($table->getDriver())->toBe($driver);
@@ -35,5 +35,5 @@ it('can parse database', function (DriverEnum $driver) {
 
 it('fail on mongodb (because mongodb use manual parser)', function () {
     TestCase::setupDatabase('mongodb');
-    expect(fn () => Table::make('ts_movies', DriverEnum::mongodb))->toThrow(Exception::class);
+    expect(fn () => DatabaseTable::make('ts_movies', DriverEnum::mongodb))->toThrow(Exception::class);
 });

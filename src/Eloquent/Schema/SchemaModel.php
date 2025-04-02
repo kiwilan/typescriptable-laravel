@@ -17,7 +17,7 @@ class SchemaModel
      * @param  SchemaRelation[]  $relations
      */
     protected function __construct(
-        protected SchemaClass $schemaClass,
+        protected SchemaClass $class,
         protected string $driver, // e.g. `mysql`
         protected string $table, // e.g. `movies`
         protected mixed $policy = null,
@@ -42,7 +42,7 @@ class SchemaModel
      * ```
      */
     public static function make(
-        SchemaClass $schemaClass,
+        SchemaClass $class,
         string $driver,
         string $table,
         ?array $attributes = [],
@@ -51,7 +51,7 @@ class SchemaModel
         mixed $policy = null,
     ): self {
         $self = new self(
-            $schemaClass,
+            $class,
             $driver,
             $table,
             $observers ?? [],
@@ -66,7 +66,7 @@ class SchemaModel
             $self->relations[$relation->getName()] = $relation;
         }
 
-        $self->typescriptModelName = $self->schemaClass->getFullname();
+        $self->typescriptModelName = $self->class->getFullname();
 
         return $self;
     }
@@ -74,9 +74,9 @@ class SchemaModel
     /**
      * Get `SchemaClass` instance (base information about the class).
      */
-    public function getSchemaClass(): ?SchemaClass
+    public function getClass(): ?SchemaClass
     {
-        return $this->schemaClass;
+        return $this->class;
     }
 
     /**

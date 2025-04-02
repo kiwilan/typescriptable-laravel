@@ -9,7 +9,7 @@ use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 /**
  * Represents a database table with its columns.
  */
-class Table
+class DatabaseTable
 {
     /** @var SchemaAttribute[] */
     protected array $attributes = [];

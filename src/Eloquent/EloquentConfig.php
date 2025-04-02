@@ -1,9 +1,12 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Eloquent\Eloquent;
+namespace Kiwilan\Typescriptable\Eloquent;
 
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
+/**
+ * A `EloquentConfig` represents the configuration for Eloquent models.
+ */
 class EloquentConfig
 {
     public function __construct(

@@ -4,6 +4,10 @@ namespace Kiwilan\Typescriptable\Eloquent\Parser;
 
 use ReflectionMethod;
 
+/**
+ * `ParserRelation` can parse a Laravel relation from a method in a model file.
+ * It can parse the relation name, type and related model.
+ */
 class ParserRelation
 {
     public function __construct(
@@ -13,6 +17,12 @@ class ParserRelation
         protected ?string $relatedBase = null,
     ) {}
 
+    /**
+     * Create a new `ParserRelation` that contains information about a Laravel relation.
+     *
+     * @param  \ReflectionMethod  $method  The method to parse.
+     * @param  string  $baseNamespace  The base namespace of the model.
+     */
     public static function make(ReflectionMethod $method, string $baseNamespace): self
     {
         $defaultNamespace = "{$baseNamespace}\\";
@@ -52,21 +62,39 @@ class ParserRelation
         return $self;
     }
 
+    /**
+     * Get name of the relation.
+     *
+     * E.g. `chapters`, `category`, etc.
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * Get type of the relation.
+     *
+     * E.g. `HasMany`, `BelongsTo`, etc.
+     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
+    /**
+     * Get related model of the relation.
+     *
+     * E.g. `App\Models\Chapter`
+     */
     public function getRelated(): ?string
     {
         return $this->related;
     }
 
+    /**
+     * Parse the last line of the method to get the related model.
+     */
     private function parseExternalClass(string $lastLine, ReflectionMethod $method): void
     {
         $this->related = null;
@@ -87,6 +115,9 @@ class ParserRelation
         }
     }
 
+    /**
+     * Parse the return type of the method to get the type of the relation.
+     */
     private function parseReturnType(\ReflectionMethod $method): string
     {
         $reflectionNamedType = $method->getReturnType();
@@ -103,6 +134,9 @@ class ParserRelation
         return $returnType;
     }
 
+    /**
+     * Parse the last line of the method to get the related model.
+     */
     private function parseRelationModel(string $lastLine): ?string
     {
         $type = null;
@@ -116,6 +150,9 @@ class ParserRelation
         return $type;
     }
 
+    /**
+     * Parse not internal class.
+     */
     private function parseNotInternalClass(string $lastLine): ?string
     {
         if (preg_match('/\((.*?)\)/', $lastLine, $matches)) {
@@ -131,6 +168,9 @@ class ParserRelation
         return null;
     }
 
+    /**
+     * Get the last line of the method.
+     */
     private function getLastLine(\ReflectionMethod $method): string
     {
         $startLine = $method->getStartLine();
@@ -152,6 +192,9 @@ class ParserRelation
         return $line;
     }
 
+    /**
+     * Get the use lines of the method.
+     */
     private function getUseLines(\ReflectionMethod $method): array
     {
         $lines = [];
