@@ -1,10 +1,10 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Parser;
+namespace Kiwilan\Typescriptable\Eloquent\Parser;
 
 use Illuminate\Database\Eloquent\Model;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
 
 class ParserFillable
 {

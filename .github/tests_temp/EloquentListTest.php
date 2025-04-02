@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
-use Kiwilan\Typescriptable\Typed\Utils\EloquentList;
+use Kiwilan\Typescriptable\Eloquent\Utils\EloquentList;
 
 beforeEach(function () {
     eloquentConfig();

@@ -1,7 +1,7 @@
 <?php
 
-use Kiwilan\Typescriptable\Typed\Settings\SettingsConfig;
-use Kiwilan\Typescriptable\Typed\Settings\SettingsType;
+use Kiwilan\Typescriptable\Eloquent\Settings\SettingsConfig;
+use Kiwilan\Typescriptable\Eloquent\Settings\SettingsType;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {

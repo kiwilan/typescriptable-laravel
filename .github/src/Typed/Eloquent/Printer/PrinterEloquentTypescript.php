@@ -1,9 +1,9 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent\Printer;
+namespace Kiwilan\Typescriptable\Eloquent\Eloquent\Printer;
 
-use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModel;
-use Kiwilan\Typescriptable\Typed\Utils\LaravelPaginateType;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Schemas\Model\SchemaModel;
+use Kiwilan\Typescriptable\Eloquent\Utils\LaravelPaginateType;
 use Kiwilan\Typescriptable\Typescriptable;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 

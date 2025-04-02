@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Database;
+namespace Kiwilan\Typescriptable\Eloquent\Database;
 
-use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 
 /**
  * Converts database fields into `SchemaAttribute` objects.

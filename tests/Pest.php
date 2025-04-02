@@ -1,8 +1,8 @@
 <?php
 
 use Dotenv\Dotenv;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 const STORY_ID = new SchemaAttribute(

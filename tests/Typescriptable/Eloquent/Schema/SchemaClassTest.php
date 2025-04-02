@@ -1,6 +1,6 @@
 <?php
 
-use Kiwilan\Typescriptable\Typed\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
 
 it('can parse php class', function () {
     $path = getModelPath('Movie');

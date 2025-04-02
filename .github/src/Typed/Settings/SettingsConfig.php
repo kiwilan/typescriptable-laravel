@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Settings;
+namespace Kiwilan\Typescriptable\Eloquent\Settings;
 
 use Kiwilan\Typescriptable\TypescriptableConfig;
 

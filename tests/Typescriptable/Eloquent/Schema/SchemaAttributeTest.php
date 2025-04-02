@@ -1,6 +1,6 @@
 <?php
 
-use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 
 it('can parse model attribute', function () {
     $attribute = new SchemaAttribute(

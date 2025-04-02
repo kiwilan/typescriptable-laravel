@@ -1,13 +1,13 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent;
+namespace Kiwilan\Typescriptable\Eloquent\Eloquent;
 
-use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserFillable;
-use Kiwilan\Typescriptable\Typed\Eloquent\Printer\PrinterEloquentPhp;
-use Kiwilan\Typescriptable\Typed\Eloquent\Printer\PrinterEloquentTypescript;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\SchemaApp;
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
-use Kiwilan\Typescriptable\Typed\Utils\TypescriptableUtils;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Parser\ParserFillable;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Printer\PrinterEloquentPhp;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Printer\PrinterEloquentTypescript;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Schemas\SchemaApp;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Utils\TypescriptableUtils;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class EloquentType

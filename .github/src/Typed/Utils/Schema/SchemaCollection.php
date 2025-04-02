@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Utils\Schema;
+namespace Kiwilan\Typescriptable\Eloquent\Utils\Schema;
 
 class SchemaCollection
 {

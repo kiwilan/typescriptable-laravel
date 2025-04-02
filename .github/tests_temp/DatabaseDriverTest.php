@@ -1,6 +1,6 @@
 <?php
 
-use Kiwilan\Typescriptable\Typed\Database\DriverEnum;
+use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 
 it('returns mixed for null or empty database type', function () {
     expect(DriverEnum::sqlite->toPhp(null))->toBe('mixed');

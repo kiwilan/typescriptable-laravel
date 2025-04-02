@@ -1,8 +1,8 @@
 <?php
 
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentType;
-use Kiwilan\Typescriptable\Typed\Utils\TypescriptToPhp;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\EloquentType;
+use Kiwilan\Typescriptable\Eloquent\Utils\TypescriptToPhp;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 it('can be run', function (string $engine) {

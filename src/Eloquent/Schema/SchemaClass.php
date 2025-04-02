@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Schema;
+namespace Kiwilan\Typescriptable\Eloquent\Schema;
 
 use ReflectionClass;
 use SplFileInfo;

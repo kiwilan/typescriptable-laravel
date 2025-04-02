@@ -1,9 +1,9 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Database;
+namespace Kiwilan\Typescriptable\Eloquent\Database;
 
 use BackedEnum;
-use Kiwilan\Typescriptable\Typed\Parser\ParserPhpType;
+use Kiwilan\Typescriptable\Eloquent\Parser\ParserPhpType;
 use UnitEnum;
 
 /**

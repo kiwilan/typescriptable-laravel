@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Settings\Schemas;
+namespace Kiwilan\Typescriptable\Eloquent\Settings\Schemas;
 
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaClass;
 
 class SettingsItem
 {

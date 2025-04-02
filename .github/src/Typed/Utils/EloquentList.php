@@ -1,9 +1,9 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Utils;
+namespace Kiwilan\Typescriptable\Eloquent\Utils;
 
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaCollection;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class EloquentList

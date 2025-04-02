@@ -1,12 +1,12 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent\Schemas;
+namespace Kiwilan\Typescriptable\Eloquent\Eloquent\Schemas;
 
 use Illuminate\Support\Facades\Schema;
-use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserAccessor;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModel;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Parser\ParserAccessor;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Schemas\Model\SchemaModel;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaClass;
 
 /**
  * A SchemaApp contains models, database information (driver, table, policy), and a base namespace.

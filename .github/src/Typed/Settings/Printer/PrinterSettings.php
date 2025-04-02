@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Settings\Printer;
+namespace Kiwilan\Typescriptable\Eloquent\Settings\Printer;
 
-use Kiwilan\Typescriptable\Typed\Settings\Schemas\SettingsItem;
+use Kiwilan\Typescriptable\Eloquent\Settings\Schemas\SettingsItem;
 use Kiwilan\Typescriptable\Typescriptable;
 
 class PrinterSettings

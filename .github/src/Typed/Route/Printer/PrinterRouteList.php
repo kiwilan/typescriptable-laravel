@@ -1,10 +1,10 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Route\Printer;
+namespace Kiwilan\Typescriptable\Eloquent\Route\Printer;
 
 use Illuminate\Support\Collection;
-use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItem;
-use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItemParam;
+use Kiwilan\Typescriptable\Eloquent\Route\Schemas\RouteTypeItem;
+use Kiwilan\Typescriptable\Eloquent\Route\Schemas\RouteTypeItemParam;
 use Kiwilan\Typescriptable\Typescriptable;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 

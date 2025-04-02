@@ -1,9 +1,9 @@
 <?php
 
+use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
+use Kiwilan\Typescriptable\Eloquent\Database\Table;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Database\DriverEnum;
-use Kiwilan\Typescriptable\Typed\Database\Table;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
 
 beforeEach(function () {
     eloquentConfig();

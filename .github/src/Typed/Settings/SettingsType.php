@@ -1,12 +1,12 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Settings;
+namespace Kiwilan\Typescriptable\Eloquent\Settings;
 
-use Kiwilan\Typescriptable\Typed\Settings\Printer\PrinterSettings;
-use Kiwilan\Typescriptable\Typed\Settings\Schemas\SettingsItem;
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
-use Kiwilan\Typescriptable\Typed\Utils\TypescriptableUtils;
+use Kiwilan\Typescriptable\Eloquent\Settings\Printer\PrinterSettings;
+use Kiwilan\Typescriptable\Eloquent\Settings\Schemas\SettingsItem;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaCollection;
+use Kiwilan\Typescriptable\Eloquent\Utils\TypescriptableUtils;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class SettingsType

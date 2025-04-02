@@ -1,6 +1,6 @@
 <?php
 
-use Kiwilan\Typescriptable\Typed\Schema\SchemaRelation;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaRelation;
 
 it('can parse relation', function () {
     $relation = SchemaRelation::make(STORY_RELATION_CHAPTERS);
@@ -16,15 +16,22 @@ it('can parse relation', function () {
     // fix namespace here
     $relation->setTypescriptType('Chapter', 'Kiwilan\Typescriptable\Tests\Data\Models');
     expect($relation->getTypescriptType())->toBe('App.Models.Chapter[]');
+});
 
-    // $relation = SchemaRelation::make(STORY_RELATION_CATEGORY);
+it('can set php type', function () {
+    $relation = SchemaRelation::make(STORY_RELATION_CHAPTERS);
+    expect($relation->getPhpType())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Chapter[]');
 
-    // expect($relation->getName())->toBe('category');
-    // expect($relation->getLaravelType())->toBe('belongsTo');
-    // expect($relation->getRelatedToModel())->toBe('App\Models\Category');
-    // expect($relation->getSnakeCaseName())->toBe('category');
-    // expect($relation->isInternal())->toBe(true);
-    // expect($relation->isMany())->toBe(false);
-    // expect($relation->getPhpType())->toBe('App\Models\Category');
-    // expect($relation->getTypescriptType())->toBe('Category');
+    $relation->setPhpType('App\Models\Chapter');
+    expect($relation->getPhpType())->toBe('App\Models\Chapter[]');
+
+    $relation->setPhpType('App\Models\Chapter[]');
+    expect($relation->getPhpType())->toBe('App\Models\Chapter[]');
+});
+
+it('can set typescript type', function () {
+    $relation = SchemaRelation::make(STORY_RELATION_CHAPTERS);
+
+    $relation->setTypescriptType('any', 'App.Models');
+    expect($relation->getTypescriptType())->toBe('any[]');
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Parser;
+namespace Kiwilan\Typescriptable\Eloquent\Parser;
 
 class ParserPhpType
 {

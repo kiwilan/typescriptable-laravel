@@ -1,6 +1,6 @@
 <?php
 
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\EloquentConfig;
 
 it('can use default config', function () {
     config()->set('typescriptable.eloquent.php_path', null);

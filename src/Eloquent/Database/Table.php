@@ -1,10 +1,10 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Database;
+namespace Kiwilan\Typescriptable\Eloquent\Database;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 
 /**
  * Represents a database table with its columns.

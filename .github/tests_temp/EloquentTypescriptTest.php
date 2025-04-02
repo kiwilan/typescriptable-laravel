@@ -1,7 +1,7 @@
 <?php
 
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Utils\TypescriptToPhp;
+use Kiwilan\Typescriptable\Eloquent\Utils\TypescriptToPhp;
 use Kiwilan\Typescriptable\Typescriptable;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 

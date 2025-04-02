@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Schema;
+namespace Kiwilan\Typescriptable\Eloquent\Schema;
 
-use Kiwilan\Typescriptable\Typed\Parser\ParserAccessor;
+use Kiwilan\Typescriptable\Eloquent\Parser\ParserAccessor;
 
 /**
  * A `SchemaModel` represents a Laravel model, like `App\Models\Movie`.

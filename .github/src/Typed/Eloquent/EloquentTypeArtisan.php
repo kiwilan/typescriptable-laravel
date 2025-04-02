@@ -1,12 +1,12 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent;
+namespace Kiwilan\Typescriptable\Eloquent\Eloquent;
 
 use Illuminate\Support\Facades\Artisan;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModel;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\SchemaApp;
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Schemas\Model\SchemaModel;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Schemas\SchemaApp;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaCollection;
 
 class EloquentTypeArtisan extends EloquentType implements IEloquentType
 {

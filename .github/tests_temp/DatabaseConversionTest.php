@@ -1,8 +1,8 @@
 <?php
 
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Database\DatabaseConverter;
-use Kiwilan\Typescriptable\Typed\Database\DriverEnum;
+use Kiwilan\Typescriptable\Eloquent\Database\DatabaseConverter;
+use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 
 it('can convert database type', function () {
     TestCase::setupDatabase('mysql');

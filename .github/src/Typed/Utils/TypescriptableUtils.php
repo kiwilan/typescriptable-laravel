@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Utils;
+namespace Kiwilan\Typescriptable\Eloquent\Utils;
 
 use Illuminate\Support\Facades\File;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Route\Schemas;
+namespace Kiwilan\Typescriptable\Eloquent\Route\Schemas;
 
 use Illuminate\Support\Str;
 

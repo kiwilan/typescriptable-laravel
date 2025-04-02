@@ -1,14 +1,14 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Route;
+namespace Kiwilan\Typescriptable\Eloquent\Route;
 
 use Illuminate\Foundation\Console\RouteListCommand;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
-use Kiwilan\Typescriptable\Typed\Route\Printer\PrinterRouteList;
-use Kiwilan\Typescriptable\Typed\Route\Printer\PrinterRouteTypes;
-use Kiwilan\Typescriptable\Typed\Route\Schemas\RouteTypeItem;
-use Kiwilan\Typescriptable\Typed\Utils\TypescriptableUtils;
+use Kiwilan\Typescriptable\Eloquent\Route\Printer\PrinterRouteList;
+use Kiwilan\Typescriptable\Eloquent\Route\Printer\PrinterRouteTypes;
+use Kiwilan\Typescriptable\Eloquent\Route\Schemas\RouteTypeItem;
+use Kiwilan\Typescriptable\Eloquent\Utils\TypescriptableUtils;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 class RouteType

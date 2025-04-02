@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Route;
+namespace Kiwilan\Typescriptable\Eloquent\Route;
 
 use Kiwilan\Typescriptable\TypescriptableConfig;
 

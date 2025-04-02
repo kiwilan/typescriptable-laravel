@@ -1,10 +1,10 @@
 <?php
 
-use Kiwilan\Typescriptable\Typed\Parser\ParserAccessor;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaAttribute;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaClass;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaModel;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaRelation;
+use Kiwilan\Typescriptable\Eloquent\Parser\ParserAccessor;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaModel;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaRelation;
 
 it('can parse php class', function () {
     $path = getModelPath('Story');

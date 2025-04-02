@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Settings\Schemas;
+namespace Kiwilan\Typescriptable\Eloquent\Settings\Schemas;
 
-use Kiwilan\Typescriptable\Typed\Eloquent\Parser\ParserPhpType;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Parser\ParserPhpType;
 use ReflectionNamedType;
 use ReflectionProperty;
 

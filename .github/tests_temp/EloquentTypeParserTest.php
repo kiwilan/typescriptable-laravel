@@ -1,8 +1,8 @@
 <?php
 
 use Kiwilan\Typescriptable\Tests\TestCase;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentType;
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\EloquentType;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaClass;
 
 beforeEach(function () {
     eloquentConfig('parser');

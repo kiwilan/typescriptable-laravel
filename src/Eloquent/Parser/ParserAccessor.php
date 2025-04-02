@@ -1,9 +1,9 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Parser;
+namespace Kiwilan\Typescriptable\Eloquent\Parser;
 
 use Illuminate\Support\Str;
-use Kiwilan\Typescriptable\Typed\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
 
 class ParserAccessor
 {

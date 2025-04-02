@@ -3,8 +3,8 @@
 namespace Kiwilan\Typescriptable\Commands;
 
 use Illuminate\Console\Command;
-use Kiwilan\Typescriptable\Typed\Utils\EloquentList;
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Utils\EloquentList;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaClass;
 
 class EloquentListCommand extends Command
 {

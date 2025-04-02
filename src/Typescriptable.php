@@ -2,12 +2,12 @@
 
 namespace Kiwilan\Typescriptable;
 
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentConfig;
-use Kiwilan\Typescriptable\Typed\Eloquent\EloquentType;
-use Kiwilan\Typescriptable\Typed\Route\RouteConfig;
-use Kiwilan\Typescriptable\Typed\Route\RouteType;
-use Kiwilan\Typescriptable\Typed\Settings\SettingsConfig;
-use Kiwilan\Typescriptable\Typed\Settings\SettingsType;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\EloquentConfig;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\EloquentType;
+use Kiwilan\Typescriptable\Eloquent\Route\RouteConfig;
+use Kiwilan\Typescriptable\Eloquent\Route\RouteType;
+use Kiwilan\Typescriptable\Eloquent\Settings\SettingsConfig;
+use Kiwilan\Typescriptable\Eloquent\Settings\SettingsType;
 
 class Typescriptable
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Eloquent\Printer;
+namespace Kiwilan\Typescriptable\Eloquent\Eloquent\Printer;
 
 use Illuminate\Support\Facades\File;
-use Kiwilan\Typescriptable\Typed\Eloquent\Schemas\Model\SchemaModel;
+use Kiwilan\Typescriptable\Eloquent\Eloquent\Schemas\Model\SchemaModel;
 
 class PrinterEloquentPhp
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Database;
+namespace Kiwilan\Typescriptable\Eloquent\Database;
 
 enum DriverEnum: string
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Typed\Schema;
+namespace Kiwilan\Typescriptable\Eloquent\Schema;
 
-use Kiwilan\Typescriptable\Typed\Database\DatabaseConverter;
+use Kiwilan\Typescriptable\Eloquent\Database\DatabaseConverter;
 
 /**
  * A `SchemaAttribute` represents a Laravel model attribute, like `title` for `App\Models\Movie` (a `SchemaModel`).

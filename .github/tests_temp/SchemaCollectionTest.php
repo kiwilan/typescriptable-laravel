@@ -1,6 +1,6 @@
 <?php
 
-use Kiwilan\Typescriptable\Typed\Utils\Schema\SchemaCollection;
+use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaCollection;
 
 it('is correct from models', function () {
     $collect = SchemaCollection::make(models());
