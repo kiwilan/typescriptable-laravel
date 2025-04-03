@@ -160,6 +160,7 @@ class SchemaRelation
             $this->isInternal = false;
         }
 
+        // to refactoring
         if ($this->isInternal) {
             if ($typescriptType === 'any') {
                 $this->typescriptType = 'any';

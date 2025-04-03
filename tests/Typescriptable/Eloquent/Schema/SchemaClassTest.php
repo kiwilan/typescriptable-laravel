@@ -5,7 +5,7 @@ use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
 it('can parse php class', function () {
     $path = getModelPath('Movie');
     $spl = new SplFileInfo($path);
-    $class = SchemaClass::make($spl, models());
+    $class = SchemaClass::make($spl, getModelsPath());
 
     expect($class)->toBeInstanceOf(SchemaClass::class);
     expect($class->getBasePath())->toContain('laravel-typescriptable/tests/Data/Models');
@@ -26,14 +26,14 @@ it('can parse php class', function () {
 
     $path = getModelPath('Nested/Author');
     $spl = new SplFileInfo($path);
-    $class = SchemaClass::make($spl, models());
+    $class = SchemaClass::make($spl, getModelsPath());
 
     expect($class->getName())->toBe('Author');
     expect($class->getFullname())->toBe('NestedAuthor');
 
     $path = getModelPath('NotModel');
     $spl = new SplFileInfo($path);
-    $class = SchemaClass::make($spl, models());
+    $class = SchemaClass::make($spl, getModelsPath());
 
     expect($class->getName())->toBe('NotModel');
     expect($class->isModel())->toBeFalse();
@@ -42,7 +42,7 @@ it('can parse php class', function () {
 it('cannot parse no php file', function () {
     $path = getModelPath('Chapter', 'ts');
     $spl = new SplFileInfo($path);
-    $class = SchemaClass::make($spl, models());
+    $class = SchemaClass::make($spl, getModelsPath());
 
     expect($class)->toBeNull();
 });

@@ -2,6 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Eloquent\Eloquent;
 
+use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 use Kiwilan\Typescriptable\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Eloquent\Parser\ParserFillable;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
@@ -75,9 +76,9 @@ class EngineBase
     /**
      * Parse MongoDB model.
      */
-    protected function parseMongoDB(SchemaClass $class, string $driver): ?array
+    protected function parseMongoDB(SchemaClass $class, DriverEnum $driver): ?array
     {
-        if ($driver !== 'mongodb') {
+        if ($driver !== DriverEnum::mongodb) {
             return null;
         }
 

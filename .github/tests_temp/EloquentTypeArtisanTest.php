@@ -31,8 +31,8 @@ it('can be run with artisan', function (string $driver) {
 
     $schemaClass = $movie->schemaClass();
 
-    expect($schemaClass->basePath())->toBe(models());
-    expect($schemaClass->path())->toBe(models().'/Movie.php');
+    expect($schemaClass->basePath())->toBe(getModelsPath());
+    expect($schemaClass->path())->toBe(getModelsPath().'/Movie.php');
     expect($schemaClass->namespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
     expect($schemaClass->name())->toBe('Movie');
     expect($schemaClass->fullname())->toBe('Movie');

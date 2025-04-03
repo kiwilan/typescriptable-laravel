@@ -1,11 +1,12 @@
 <?php
 
+use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 
 it('can parse model attribute', function () {
     $attribute = new SchemaAttribute(
         name: 'title',
-        driver: 'mysql',
+        driver: DriverEnum::mysql,
         databaseType: 'varchar(255)',
         increments: false,
         nullable: false,
@@ -28,7 +29,7 @@ it('can parse model attribute', function () {
     );
 
     expect($attribute->getName())->toBe('title');
-    expect($attribute->getDriver())->toBe('mysql');
+    expect($attribute->getDriver())->toBe(DriverEnum::mysql);
     expect($attribute->getDatabaseType())->toBe('varchar(255)');
     expect($attribute->isIncremental())->toBeFalse();
     expect($attribute->isNullable())->toBeFalse();
@@ -54,7 +55,6 @@ it('can parse model attribute', function () {
 it('is SchemaAttribute', function () {
     $attribute = new SchemaAttribute(
         name: 'title',
-        driver: 'mysql',
     );
     expect($attribute)->toBeInstanceOf(SchemaAttribute::class);
 });
@@ -76,7 +76,7 @@ it('can update', function () {
 it('can use setters', function () {
     $attribute = new SchemaAttribute(
         name: 'title',
-        driver: 'mysql',
+        driver: DriverEnum::mysql,
         fillable: true,
         hidden: false,
         appended: false,
@@ -87,4 +87,16 @@ it('can use setters', function () {
     expect($attribute->setHidden(true)->isHidden())->toBeTrue();
     expect($attribute->setAppended(true)->isAppended())->toBeTrue();
     expect($attribute->setCast('string')->getCast())->toBe('string');
+});
+
+it('can parse artisan output', function () {
+    $json = file_get_contents(getArtisanOutput('movie'));
+    $array = json_decode($json, true);
+    $attributes = SchemaAttribute::fromArtisan(DriverEnum::mysql, $array);
+
+    expect($attributes)->toBeArray();
+    expect(count($attributes))->toBe(52);
+    expect($attributes)->each(function (Pest\Expectation $attribute) {
+        expect($attribute->value)->toBeInstanceOf(SchemaAttribute::class);
+    });
 });

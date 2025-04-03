@@ -8,11 +8,11 @@ beforeEach(function () {
 });
 
 it('can list models', function () {
-    $list = EloquentList::make(models());
+    $list = EloquentList::make(getModelsPath());
 
-    expect($list->models())->toBeArray();
-    expect($list->path())->toBe(models());
-    expect(count($list->models()))->toBe(9);
+    expect($list->getModelsPath())->toBeArray();
+    expect($list->path())->toBe(getModelsPath());
+    expect(count($list->getModelsPath()))->toBe(9);
 });
 
 it('can use command', function () {

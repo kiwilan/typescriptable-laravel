@@ -2,6 +2,7 @@
 
 namespace Kiwilan\Typescriptable\Eloquent\Schema;
 
+use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 use Kiwilan\Typescriptable\Eloquent\Parser\ParserAccessor;
 
 /**
@@ -18,7 +19,7 @@ class SchemaModel
      */
     protected function __construct(
         protected SchemaClass $class,
-        protected string $driver, // e.g. `mysql`
+        protected DriverEnum $driver, // e.g. `mysql`
         protected string $table, // e.g. `movies`
         protected mixed $policy = null,
         protected ?array $attributes = [],
@@ -28,10 +29,10 @@ class SchemaModel
     ) {}
 
     /**
-     * Create a new `SchemaModel` instance.
+     * Create a new `SchemaModel` instance for `EngineParser`.
      *
      * ```php
-     * $class = SchemaClass::make($spl, models());
+     * $class = SchemaClass::make($spl, $modelsPath);
      * $model = SchemaModel::make(
      *      schemaClass: $class,
      *      driver: $this->app->getDriver(),
@@ -41,9 +42,9 @@ class SchemaModel
      * );
      * ```
      */
-    public static function make(
+    public static function parser(
         SchemaClass $class,
-        string $driver,
+        DriverEnum $driver,
         string $table,
         ?array $attributes = [],
         ?array $relations = [],
@@ -51,21 +52,40 @@ class SchemaModel
         mixed $policy = null,
     ): self {
         $self = new self(
-            $class,
-            $driver,
-            $table,
-            $observers ?? [],
-            $policy,
+            class: $class,
+            driver: $driver,
+            table: $table,
+            observers: $observers ?? [],
+            policy: $policy,
         );
 
-        foreach (array_map(fn ($item) => $item, $attributes) as $attribute) {
-            $self->attributes[$attribute->getName()] = $attribute;
-        }
+        $self->handleAttributes($attributes);
+        $self->handleRelations($relations);
+        $self->typescriptModelName = $self->class->getFullname();
 
-        foreach (array_map(fn ($item) => SchemaRelation::make($item), $relations) as $relation) {
-            $self->relations[$relation->getName()] = $relation;
-        }
+        return $self;
+    }
 
+    /**
+     * Create a new `SchemaModel` instance for `EngineArtisan`.
+     *
+     * @param  SchemaClass  $class  Class instance
+     * @param  DriverEnum  $driver  Database driver
+     * @param  array  $artisan  Artisan command output from `model:show`
+     */
+    public static function fromArtisan(SchemaClass $class, DriverEnum $driver, array $artisan): self
+    {
+        $self = new self(
+            class: $class,
+            driver: $driver,
+            table: $artisan['table'],
+            policy: $artisan['policy'] ?? null,
+        );
+
+        ray($artisan);
+        $self->handleAttributes(SchemaAttribute::fromArtisan($driver, $artisan));
+        $self->handleRelations($artisan['relations'] ?? []);
+        // $observers = $artisan['observers'] ?? [];
         $self->typescriptModelName = $self->class->getFullname();
 
         return $self;
@@ -84,7 +104,7 @@ class SchemaModel
      *
      * Example: `mysql`
      */
-    public function getDriver(): string
+    public function getDriver(): DriverEnum
     {
         return $this->driver;
     }
@@ -232,5 +252,33 @@ class SchemaModel
     public function getTypescriptModelName(): ?string
     {
         return $this->typescriptModelName;
+    }
+
+    /**
+     * Handle attributes.
+     *
+     * @param  SchemaAttribute[]  $attributes
+     */
+    private function handleAttributes(array $attributes): self
+    {
+        foreach (array_map(fn (SchemaAttribute $item) => $item, $attributes) as $attribute) {
+            $this->attributes[$attribute->getName()] = $attribute;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Handle relations.
+     *
+     * @param  SchemaRelation[]  $relations
+     */
+    private function handleRelations(array $relations): self
+    {
+        foreach (array_map(fn (array $item) => SchemaRelation::make($item), $relations) as $relation) {
+            $this->relations[$relation->getName()] = $relation;
+        }
+
+        return $this;
     }
 }

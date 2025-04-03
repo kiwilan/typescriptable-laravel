@@ -3,6 +3,13 @@
 namespace Kiwilan\Typescriptable\Eloquent\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Kiwilan\Typescriptable\Eloquent\Database\DatabaseTable;
+use Kiwilan\Typescriptable\Eloquent\Parser\ParserRelation;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaCollection;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaLaravel;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaModel;
 
 /**
  * `EngineParser` is a manual engine for Laravel Eloquent models.
@@ -11,142 +18,172 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EngineParser extends EngineBase
 {
+    /**
+     * Execute the engine.
+     */
     public function run(): self
     {
-        $this->app = SchemaLaravel::make($this->config->modelsPath, $this->config->phpPath)->enableParer();
+        // Define Laravel schema, base for models and database information
+        $this->laravel = SchemaLaravel::make(
+            modelPath: $this->config->modelsPath,
+            phpPath: $this->config->phpPath
+        )->enableParser();
 
-        $collect = SchemaCollection::make($this->config->modelsPath, $this->config->skipModels);
-        $schemas = $collect->getOnlyModels();
+        // Parse classes from the given path
+        // and skip models if needed
+        $collect = SchemaCollection::make(
+            basePath: $this->config->modelsPath,
+            skip: $this->config->skipModels
+        );
+        $models = $collect->getOnlyModels();
 
-        $this->app->parseBaseNamespace($schemas);
+        $this->laravel->parseBaseNamespace($models);
 
-        $models = $this->parseModels($schemas);
-        $this->app->setModels($models);
+        // Parse models to find attributes and relations
+        $models = $this->parseModels($models);
+        $this->laravel->setModels($models);
 
         return $this;
     }
 
-    // /**
-    //  * @param  SchemaClass[]  $classes
-    //  * @return SchemaModel[]
-    //  */
-    // private function parseModels(array $classes): array
-    // {
-    //     $models = [];
-    //     foreach ($classes as $class) {
-    //         $namespace = $class->getNamespace();
-    //         /** @var Model */
-    //         $instance = new $namespace;
-    //         $tableName = $instance->getTable();
+    /**
+     * Parse models from the given array of `SchemaClass`.
+     *
+     * @param  SchemaClass[]  $models
+     * @return SchemaModel[]
+     */
+    private function parseModels(array $models): array
+    {
+        $items = [];
+        foreach ($models as $model) {
+            $namespace = $model->getNamespace();
+            /** @var Model */
+            $instance = new $namespace;
+            $tableName = $instance->getTable();
 
-    //         if ($this->app->getDatabasePrefix()) {
-    //             $tableName = $this->app->getDatabasePrefix().$tableName;
-    //         }
+            if ($this->laravel->getDatabasePrefix()) {
+                $tableName = $this->laravel->getDatabasePrefix().$tableName;
+            }
 
-    //         $table = $this->parseModel($instance, $this->app->getDatabasePrefix());
-    //         $relations = $this->parseRelations($class->getReflect());
+            $table = $this->parseModel($instance, $this->laravel->getDatabasePrefix());
+            $relations = $this->parseRelations($model->getReflect());
 
-    //         // $models[$class->getNamespace()] = SchemaModel::make([
-    //         //     'class' => $class->getNamespace(),
-    //         //     'database' => $this->app->getDriver(),
-    //         //     'table' => $tableName,
-    //         //     'attributes' => $table->getAttributes(),
-    //         //     'relations' => $relations,
-    //         // ], $class);
+            // $items[$model->getNamespace()] = SchemaModel::make([
+            //     'class' => $model->getNamespace(),
+            //     'database' => $this->app->getDriver(),
+            //     'table' => $tableName,
+            //     'attributes' => $table->getAttributes(),
+            //     'relations' => $relations,
+            // ], $model);
 
-    //         $models[$class->getNamespace()] = SchemaModel::make(
-    //             schemaClass: $class,
-    //             namespace: $class->getNamespace(),
-    //             driver: $this->app->getDriver(),
-    //             table: $tableName,
-    //             attributes: $table->getFields(),
-    //             relations: $relations,
-    //         );
+            $items[$model->getNamespace()] = SchemaModel::parser(
+                class: $model,
+                driver: $this->laravel->getDriver(),
+                table: $tableName,
+                attributes: $table->getAttributes(),
+                relations: $relations,
+            );
 
-    //         $attributes = $this->parseMongoDB($class, $this->app->getDriver());
-    //         if ($attributes) {
-    //             $models[$class->getNamespace()]->setAttributes($attributes);
-    //         }
-    //     }
+            // check mongodb here
+            $attributes = $this->parseMongoDB($model, $this->laravel->getDriver());
+            if ($attributes) {
+                $items[$model->getNamespace()]->setAttributes($attributes);
+            }
+        }
 
-    //     return $models;
-    // }
+        return $items;
+    }
 
-    // private function parseModel(Model $model, ?string $prefix): Table
-    // {
-    //     $table = Table::make($prefix.$model->getTable());
+    /**
+     * Parse model to find attributes.
+     *
+     * Define database table, fillables, hiddens, casts, and accessors.
+     */
+    private function parseModel(Model $model, ?string $prefix): DatabaseTable
+    {
+        $table = DatabaseTable::make($prefix.$model->getTable());
 
-    //     $fillables = $model->getFillable();
-    //     $hiddens = $model->getHidden();
-    //     $casts = $model->getCasts();
-    //     $accessors = $this->parseAccessors($model);
+        $fillables = $model->getFillable();
+        $hiddens = $model->getHidden();
+        $casts = $model->getCasts();
+        $accessors = $this->parseAccessors($model);
 
-    //     foreach ($table->getFields() as $attribute) {
-    //         if (in_array($attribute->getName(), $fillables)) {
-    //             $attribute->setFillable(true);
-    //         }
+        foreach ($table->getAttributes() as $attribute) {
+            if (in_array($attribute->getName(), $fillables)) {
+                $attribute->setFillable(true);
+            }
 
-    //         if (in_array($attribute->getName(), $hiddens)) {
-    //             $attribute->setHidden(true);
-    //         }
+            if (in_array($attribute->getName(), $hiddens)) {
+                $attribute->setHidden(true);
+            }
 
-    //         if (array_key_exists($attribute->getName(), $casts)) {
-    //             $attribute->setCast($casts[$attribute->getName()]);
-    //         }
-    //     }
+            if (array_key_exists($attribute->getName(), $casts)) {
+                $attribute->setCast($casts[$attribute->getName()]);
+            }
+        }
 
-    //     foreach ($accessors as $accessor) {
-    //         $table->addField($accessor);
-    //     }
+        foreach ($accessors as $accessor) {
+            $table->addAttribute($accessor);
+        }
 
-    //     return $table;
-    // }
+        return $table;
+    }
 
-    // /**
-    //  * @return SchemaAttribute[]
-    //  */
-    // private function parseAccessors(Model $model): array
-    // {
-    //     $accessors = [];
-    //     foreach ($model->getMutatedAttributes() as $attribute) {
-    //         $accessors[] = new SchemaAttribute(
-    //             name: $attribute,
-    //             databaseType: null,
-    //             increments: false,
-    //             nullable: true,
-    //             default: null,
-    //             unique: false,
-    //             appended: true,
-    //             cast: 'accessor',
-    //         );
-    //     }
+    /**
+     * Parse model to find accessors.
+     *
+     * @return SchemaAttribute[]
+     */
+    private function parseAccessors(Model $model): array
+    {
+        $accessors = [];
+        foreach ($model->getMutatedAttributes() as $attribute) {
+            $accessors[] = new SchemaAttribute(
+                name: $attribute,
+                databaseType: null,
+                increments: false,
+                nullable: true,
+                default: null,
+                unique: false,
+                appended: true,
+                cast: 'accessor',
+            );
+        }
 
-    //     return $accessors;
-    // }
+        return $accessors;
+    }
 
-    // private function parseRelations(\ReflectionClass $reflect)
-    // {
-    //     $relations = [];
+    /**
+     * Parse model to find relations.
+     *
+     * @return array<string, array<string, string>>
+     */
+    private function parseRelations(\ReflectionClass $reflect): array
+    {
+        $relations = [];
 
-    //     foreach ($reflect->getMethods() as $method) {
-    //         if (! $method->getReturnType()) {
-    //             continue;
-    //         }
+        // Parse every model methods
+        foreach ($reflect->getMethods() as $method) {
+            // Skip methods without return type
+            if (! $method->getReturnType()) {
+                continue;
+            }
 
-    //         $isRelation = str_contains($method->getReturnType(), 'Illuminate\Database\Eloquent\Relations');
+            // Determine Laravel relations
+            // Skip if not a Laravel relation
+            if (! str_contains($method->getReturnType(), 'Illuminate\Database\Eloquent\Relations')) {
+                continue;
+            }
 
-    //         if (! $isRelation) {
-    //             continue;
-    //         }
+            // Parse each relation
+            $relation = ParserRelation::make($method, $this->getLaravel()->getBaseNamespace());
+            $relations[$relation->getName()] = [
+                'name' => $relation->getName(),
+                'type' => $relation->getType(),
+                'related' => $relation->getRelated(),
+            ];
+        }
 
-    //         $relation = ParserRelation::make($method, $this->getApp()->getBaseNamespace());
-    //         $relations[$relation->getName()] = [
-    //             'name' => $relation->getName(),
-    //             'type' => $relation->getType(),
-    //             'related' => $relation->getRelated(),
-    //         ];
-    //     }
-
-    //     return $relations;
-    // }
+        return $relations;
+    }
 }

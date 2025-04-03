@@ -1,13 +1,16 @@
 <?php
 
 use Dotenv\Dotenv;
+use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaModel;
 use Kiwilan\Typescriptable\Tests\TestCase;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 const STORY_ID = new SchemaAttribute(
     name: 'id',
-    driver: 'mysql',
+    driver: DriverEnum::mysql,
     databaseType: 'bigint unsigned',
     increments: true,
     nullable: false,
@@ -31,7 +34,7 @@ const STORY_ID = new SchemaAttribute(
 
 const STORY_TITLE = new SchemaAttribute(
     name: 'title',
-    driver: 'mysql',
+    driver: DriverEnum::mysql,
     databaseType: 'varchar(255)',
     increments: false,
     nullable: false,
@@ -54,7 +57,7 @@ const STORY_TITLE = new SchemaAttribute(
 );
 const STORY_PUBLISHED_AT = new SchemaAttribute(
     name: 'published_at',
-    driver: 'mysql',
+    driver: DriverEnum::mysql,
     databaseType: 'datetime',
     increments: false,
     nullable: true,
@@ -86,6 +89,15 @@ const STORY_RELATION_CATEGORY = [
     'type' => 'BelongsTo',
     'related' => 'Kiwilan\Typescriptable\Tests\Data\Models\Category',
 ];
+
+const STORY_CLASS = SchemaClass::make(
+    file: getModelSpl('Story'),
+    basePath: getModelsPath(),
+);
+
+const STORY_MODEL = SchemaModel::parser(
+
+);
 
 foreach (glob('.output/*') as $file) {
     if (basename($file) !== '.gitignore') {
@@ -128,11 +140,18 @@ function outputDir(?string $file = null): string
     return "{$currentDir}/tests/output";
 }
 
-function models(): string
+function getModelsPath(): string
 {
     $currentDir = getcwd();
 
     return "{$currentDir}/tests/Data/Models";
+}
+
+function getPhpPath(): string
+{
+    $currentDir = getcwd();
+
+    return "{$currentDir}/tests/output";
 }
 
 function eloquentConfig(string $eloquentEngine = 'artisan'): void
@@ -142,7 +161,7 @@ function eloquentConfig(string $eloquentEngine = 'artisan'): void
 
     config()->set('typescriptable.output_path', outputDir());
     config()->set('typescriptable.engine.eloquent', $eloquentEngine);
-    config()->set('typescriptable.eloquent.directory', models());
+    config()->set('typescriptable.eloquent.directory', getModelsPath());
     config()->set('typescriptable.eloquent.php_path', outputDir('php'));
     config()->set('typescriptable.eloquent.paginate', true);
     config()->set('typescriptable.eloquent.skip', [
@@ -216,6 +235,20 @@ function getModelPath(string $model, string $extension = 'php'): string
     $model = str_replace('App/Models/', '', $model);
 
     return "{$currentDir}/tests/Data/Models/{$model}.{$extension}";
+}
+
+function getArtisanOutput(string $file): string
+{
+    $currentDir = getcwd();
+
+    return "{$currentDir}/tests/Data/ModelsJson/{$file}.json";
+}
+
+function getModelSpl(string $file): SplFileInfo
+{
+    $currentDir = getcwd();
+
+    return new SplFileInfo("{$currentDir}/tests/Data/Models/{$file}.php");
 }
 
 uses(TestCase::class)->in(__DIR__);

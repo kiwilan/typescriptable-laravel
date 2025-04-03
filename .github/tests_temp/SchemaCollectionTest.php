@@ -3,7 +3,7 @@
 use Kiwilan\Typescriptable\Eloquent\Utils\Schema\SchemaCollection;
 
 it('is correct from models', function () {
-    $collect = SchemaCollection::make(models());
+    $collect = SchemaCollection::make(getModelsPath());
     $schemas = $collect->onlyModels();
 
     expect($schemas)->toBeArray();

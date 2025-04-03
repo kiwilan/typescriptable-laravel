@@ -45,6 +45,9 @@ class SchemaLaravel
             }
 
             $self->databasePrefix = config("database.connections.{$self->driver->value}.prefix");
+            if (empty($self->databasePrefix)) {
+                $self->databasePrefix = null;
+            }
         } catch (\Exception $e) {
         }
 
@@ -92,7 +95,7 @@ class SchemaLaravel
     /**
      * Set the use parser flag.
      */
-    public function enableParer(): self
+    public function enableParser(): self
     {
         $this->useParser = true;
 
@@ -179,7 +182,7 @@ class SchemaLaravel
     }
 
     /**
-     * Parse base namespace.
+     * Parse base namespace from first model.
      *
      * @param  SchemaClass[]  $schemas
      */

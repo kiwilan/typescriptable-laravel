@@ -29,8 +29,8 @@ it('can be run with parser', function (string $driver) {
 
     $schemaClass = $movie->getClass();
 
-    expect($schemaClass->getBasePath())->toBe(models());
-    expect($schemaClass->getPath())->toBe(models().'/Movie.php');
+    expect($schemaClass->getBasePath())->toBe(getModelsPath());
+    expect($schemaClass->getPath())->toBe(getModelsPath().'/Movie.php');
     expect($schemaClass->getNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Movie');
     expect($schemaClass->getName())->toBe('Movie');
     expect($schemaClass->getFullname())->toBe('Movie');

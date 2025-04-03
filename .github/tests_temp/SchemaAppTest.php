@@ -14,18 +14,18 @@ it('can create schema app', function (string $driver) {
 
     $app = $type->app();
 
-    expect($app->modelPath())->toBe(models());
+    expect($app->modelPath())->toBe(getModelsPath());
     expect($app->useParser())->toBeFalse();
     expect($app->baseNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models');
-    expect($app->models())->toBeArray();
-    expect(count($app->models()))->toBe(9);
+    expect($app->getModelsPath())->toBeArray();
+    expect(count($app->getModelsPath()))->toBe(9);
     expect($app->driver())->toBe($driver);
     expect($app->databaseName())->toBeIn(['testing', ':memory:']);
     expect($app->databasePrefix())->toBe('ts_');
 
     $config = $type->config();
 
-    expect($config->modelsPath)->toBe(models());
+    expect($config->modelsPath)->toBe(getModelsPath());
     expect($config->phpPath)->toBe(outputDir().'/php');
     expect($config->useParser)->toBeFalse();
     expect($config->typescriptFilename)->toBe('types-eloquent.d.ts');

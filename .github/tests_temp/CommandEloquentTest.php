@@ -7,7 +7,7 @@ use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
     deleteFile(outputDir(TypescriptableConfig::eloquentFilename()));
-    config()->set('typescriptable.eloquent.directory', models());
+    config()->set('typescriptable.eloquent.directory', getModelsPath());
     config()->set('typescriptable.eloquent.php_path', outputDir('php'));
     config()->set('typescriptable.eloquent.paginate', true);
 });

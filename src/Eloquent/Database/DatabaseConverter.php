@@ -22,14 +22,14 @@ class DatabaseConverter
     /**
      * Make a new instance.
      *
-     * @param  string  $driver  Database driver.
+     * @param  DriverEnum  $driver  Database driver.
      * @param  string|null  $databaseType  Database type.
      * @param  string|null  $cast  Laravel cast.
      */
-    public static function make(string $driver, ?string $databaseType, ?string $cast): self
+    public static function make(DriverEnum $driver, ?string $databaseType, ?string $cast): self
     {
         $self = new self(
-            driver: DriverEnum::tryFrom(strtolower($driver)),
+            driver: $driver,
             databaseType: $databaseType,
         );
 

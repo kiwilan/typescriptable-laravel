@@ -81,5 +81,5 @@ it('can be run', function (string $engine) {
     expect($members_count['type'])->toBe('number');
 
     $classes = $ts->onlyModels();
-    expect(count($app->models()))->toBe(count($classes));
+    expect(count($app->getModelsPath()))->toBe(count($classes));
 })->with(['artisan', 'parser']);

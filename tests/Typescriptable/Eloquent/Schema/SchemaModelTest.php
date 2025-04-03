@@ -1,5 +1,6 @@
 <?php
 
+use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 use Kiwilan\Typescriptable\Eloquent\Parser\ParserAccessor;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
@@ -9,11 +10,11 @@ use Kiwilan\Typescriptable\Eloquent\Schema\SchemaRelation;
 it('can parse php class', function () {
     $path = getModelPath('Story');
     $spl = new SplFileInfo($path);
-    $class = SchemaClass::make($spl, models());
+    $class = SchemaClass::make($spl, getModelsPath());
 
-    $model = SchemaModel::make(
+    $model = SchemaModel::parser(
         class: $class,
-        driver: 'mysql',
+        driver: DriverEnum::mysql,
         table: 'ts_stories',
         attributes: [
             STORY_ID,
@@ -28,9 +29,9 @@ it('can parse php class', function () {
     expect($model)->toBeInstanceOf(SchemaModel::class);
     expect($model->getClass())->toBeInstanceOf(SchemaClass::class);
     expect($model->getClass()->getNamespace())->toBe('Kiwilan\Typescriptable\Tests\Data\Models\Story');
-    expect($model->getDriver())->toBe('mysql');
+    expect($model->getDriver())->toBe(DriverEnum::mysql);
     expect($model->getTable())->toBe('ts_stories');
-    expect($model->getPolicy())->toBeArray();
+    expect($model->getPolicy())->toBeNull();
     expect($model->getAttributes())->toBeArray();
     expect(count($model->getAttributes()))->toBe(2);
     expect($model->getRelations())->toBeArray();
@@ -66,4 +67,18 @@ it('can parse php class', function () {
 
     expect($model->getObservers())->toBeArray();
     expect(count($model->getObservers()))->toBe(0);
+});
+
+it('can parse artisan output', function () {
+    $json = file_get_contents(getArtisanOutput('movie'));
+    $array = json_decode($json, true);
+    $spl = getModelSpl('Movie');
+    $class = SchemaClass::make($spl, getModelsPath());
+    $model = SchemaModel::fromArtisan($class, DriverEnum::mysql, $array);
+
+    expect($model)->toBeInstanceOf(SchemaModel::class);
+    expect($model->getClass())->toBeInstanceOf(SchemaClass::class);
+    expect($model->getTable())->toBe('movies');
+    expect($model->getDriver())->toBe(DriverEnum::mysql);
+    expect($model->getAttributes())->toHaveCount(52);
 });

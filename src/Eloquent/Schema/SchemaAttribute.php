@@ -3,6 +3,7 @@
 namespace Kiwilan\Typescriptable\Eloquent\Schema;
 
 use Kiwilan\Typescriptable\Eloquent\Database\DatabaseConverter;
+use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 
 /**
  * A `SchemaAttribute` represents a Laravel model attribute, like `title` for `App\Models\Movie` (a `SchemaModel`).
@@ -14,7 +15,7 @@ class SchemaAttribute
 {
     public function __construct(
         protected string $name,
-        protected string $driver = 'mysql',
+        protected DriverEnum $driver = DriverEnum::mysql,
         protected ?string $databaseType = null,
         protected ?bool $increments = false,
         protected ?bool $nullable = false,
@@ -31,6 +32,35 @@ class SchemaAttribute
         if ($default === 'NULL') {
             $this->default = null;
         }
+    }
+
+    /**
+     * Create a collection of `SchemaAttribute` from Artisan command.
+     *
+     * @return SchemaAttribute[]
+     */
+    public static function fromArtisan(DriverEnum $driver, array $artisan): array
+    {
+        $attributes = $artisan['attributes'] ?? [];
+        $items = [];
+
+        foreach ($attributes as $attribute) {
+            $items[$attribute['name']] = new self(
+                name: $attribute['name'],
+                driver: $driver,
+                databaseType: $attribute['type'],
+                increments: $attribute['increments'],
+                nullable: $attribute['nullable'],
+                default: $attribute['default'],
+                unique: $attribute['unique'],
+                fillable: $attribute['fillable'],
+                hidden: $attribute['hidden'],
+                appended: $attribute['appended'],
+                cast: $attribute['cast'],
+            );
+        }
+
+        return $items;
     }
 
     /**
@@ -72,7 +102,7 @@ class SchemaAttribute
      *
      * Example: `mysql`
      */
-    public function getDriver(): string
+    public function getDriver(): DriverEnum
     {
         return $this->driver;
     }

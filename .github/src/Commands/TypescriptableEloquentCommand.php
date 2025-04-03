@@ -22,10 +22,10 @@ class TypescriptableEloquentCommand extends Command
 
     public function handle(): int
     {
-        $service = Typescriptable::models();
+        $service = Typescriptable::getModelsPath();
         $namespaces = [];
 
-        foreach ($service->app()->models() as $model) {
+        foreach ($service->app()->getModelsPath() as $model) {
             $namespaces[] = [$model->schemaClass()->namespace()];
         }
         $this->table(['Models'], $namespaces);

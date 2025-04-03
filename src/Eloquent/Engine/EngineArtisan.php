@@ -3,6 +3,10 @@
 namespace Kiwilan\Typescriptable\Eloquent\Eloquent;
 
 use Illuminate\Support\Facades\Artisan;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaCollection;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaLaravel;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaModel;
 
 /**
  * `EngineArtisan` is an engine for Laravel Eloquent models from `Artisan`.
@@ -11,41 +15,57 @@ use Illuminate\Support\Facades\Artisan;
  */
 class EngineArtisan extends EngineBase
 {
-    // public function run(): self
-    // {
-    //     $this->app = SchemaLaravel::make($this->config->modelsPath, $this->config->phpPath);
+    /**
+     * Execute the engine.
+     */
+    public function run(): self
+    {
+        $this->laravel = SchemaLaravel::make(
+            modelPath: $this->config->modelsPath,
+            phpPath: $this->config->phpPath,
+        );
 
-    //     $collect = SchemaCollection::make($this->config->modelsPath, $this->config->skipModels);
-    //     $schemas = $collect->getOnlyModels();
+        $collect = SchemaCollection::make(
+            basePath: $this->config->modelsPath,
+            skip: $this->config->skipModels,
+        );
+        $schemas = $collect->getOnlyModels();
 
-    //     $this->app->parseBaseNamespace($schemas);
+        $this->laravel->parseBaseNamespace($schemas);
 
-    //     $models = $this->parseModels($schemas);
-    //     $this->app->setModels($models);
+        $models = $this->parseModels($schemas);
+        $this->laravel->setModels($models);
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // /**
-    //  * @param  SchemaClass[]  $schemas
-    //  * @return SchemaModel[]
-    //  */
-    // private function parseModels(array $schemas): array
-    // {
-    //     $models = [];
-    //     foreach ($schemas as $schema) {
-    //         Artisan::call('model:show', [
-    //             'model' => $schema->getNamespace(),
-    //             '--json' => true,
-    //         ]);
+    /**
+     * Parse models from Laravel Artisan command.
+     *
+     * @param  SchemaClass[]  $classes
+     * @return SchemaModel[]
+     */
+    private function parseModels(array $classes): array
+    {
+        $models = [];
+        foreach ($classes as $class) {
+            Artisan::call('model:show', [
+                'model' => $class->getNamespace(),
+                '--json' => true,
+            ]);
 
-    //         $models[$schema->getNamespace()] = SchemaModel::make(json_decode(Artisan::output(), true), $schema);
-    //         $attributes = $this->parseMongoDB($schema, $this->app->getDriver());
-    //         if ($attributes) {
-    //             $models[$schema->getNamespace()]->setAttributes($attributes);
-    //         }
-    //     }
+            $models[$class->getNamespace()] = SchemaModel::fromArtisan(
+                class: $class,
+                driver: $this->laravel->getDriver(),
+                artisan: json_decode(Artisan::output(), true),
+            );
 
-    //     return $models;
-    // }
+            $attributes = $this->parseMongoDB($class, $this->laravel->getDriver());
+            if ($attributes) {
+                $models[$class->getNamespace()]->setAttributes($attributes);
+            }
+        }
+
+        return $models;
+    }
 }

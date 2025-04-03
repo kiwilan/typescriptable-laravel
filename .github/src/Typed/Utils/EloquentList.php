@@ -42,7 +42,7 @@ class EloquentList
      *
      * @return SchemaClass[]
      */
-    public function models(): array
+    public function getModelsPath(): array
     {
         return $this->models;
     }

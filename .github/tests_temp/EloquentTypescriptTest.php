@@ -12,7 +12,7 @@ beforeEach(function () {
 it('can be run', function (string $driver) {
     TestCase::setupDatabase($driver);
 
-    $type = Typescriptable::models();
+    $type = Typescriptable::getModelsPath();
 
     $app = $type->app();
     expect($app->driver())->toBe($driver);
@@ -99,9 +99,9 @@ it('can be run', function (string $driver) {
     expect($members_count['nullable'])->toBeTrue();
 
     $classes = $ts->onlyModels();
-    expect(count($app->models()))->toBe(count($classes));
+    expect(count($app->getModelsPath()))->toBe(count($classes));
 
-    // foreach ($app->models() as $namespace => $model) {
+    // foreach ($app->getModelsPath() as $namespace => $model) {
     //     expect(array_key_exists($namespace, $classes))->toBeTrue();
 
     //     $tsProperties = $classes[$namespace]->properties();

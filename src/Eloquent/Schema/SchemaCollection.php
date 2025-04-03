@@ -1,20 +1,25 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Eloquent\Utils\Schema;
+namespace Kiwilan\Typescriptable\Eloquent\Schema;
 
+/**
+ * `SchemaCollection` is a collection of schema classes.
+ */
 class SchemaCollection
 {
     /**
      * @param  string[]  $skip
-     * @param  SchemaClass[]  $items
+     * @param  SchemaClass[]  $classes
      */
     protected function __construct(
         protected string $basePath,
         protected array $skip = [],
-        protected array $items = [],
+        protected array $classes = [],
     ) {}
 
     /**
+     * Create a new instance of `SchemaCollection`, parse the files in the given path, and return a collection of schema classes.
+     *
      * @param  string[]  $skip
      */
     public static function make(string $basePath, array $skip = []): self
@@ -22,7 +27,7 @@ class SchemaCollection
         $self = new self($basePath, $skip);
 
         /** @var SchemaClass[] */
-        $items = [];
+        $classes = [];
 
         $iterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($basePath, \FilesystemIterator::SKIP_DOTS)
@@ -36,37 +41,46 @@ class SchemaCollection
                     continue;
                 }
 
-                $items[$model->getFullname()] = $model;
+                $classes[$model->getFullname()] = $model;
             }
         }
 
-        $self->items = $self->skipNamespace($items, $self->skip);
+        $self->classes = $self->skipNamespace($classes, $self->skip);
 
         return $self;
     }
 
+    /**
+     * Get the base path.
+     */
     public function getBasePath(): string
     {
         return $this->basePath;
     }
 
     /**
+     * Get all classes.
+     *
      * @return SchemaClass[]
      */
-    public function getItems(): array
+    public function getClasses(): array
     {
-        return $this->items;
+        return $this->classes;
     }
 
     /**
+     * Get only classes that are Laravel models.
+     *
      * @return SchemaClass[]
      */
     public function getOnlyModels(): array
     {
-        return array_filter($this->items, fn (SchemaClass $item) => $item->isModel());
+        return array_filter($this->classes, fn (SchemaClass $item) => $item->isModel());
     }
 
     /**
+     * Filter the classes by namespace.
+     *
      * @param  SchemaClass[]  $classes
      * @param  string[]  $skip
      */
