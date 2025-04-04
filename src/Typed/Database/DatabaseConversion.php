@@ -114,6 +114,9 @@ class DatabaseConversion
             'object' => 'any',
 
             'AsStringable::class' => 'string',
+            'AsCollection::class' => 'any[]',
+            \Illuminate\Database\Eloquent\Casts\AsStringable::class => 'string',
+            \Illuminate\Database\Eloquent\Casts\AsCollection::class => 'any[]',
 
             'boolean' => 'boolean',
 
