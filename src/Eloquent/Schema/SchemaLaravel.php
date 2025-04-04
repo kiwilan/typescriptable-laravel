@@ -9,6 +9,8 @@ use Kiwilan\Typescriptable\Eloquent\Parser\ParserAccessor;
 /**
  * A `SchemaLaravel` contains models, database information (driver, table, policy), and a base namespace.
  * It is used to parse models and their relations.
+ *
+ * Used by `EngineParser` and `EngineArtisan`.
  */
 class SchemaLaravel
 {
@@ -169,7 +171,9 @@ class SchemaLaravel
      */
     public function setModels(array $models): self
     {
-        $this->models = $this->improveRelations($models);
+        foreach ($this->models as $model) {
+            $this->improveModelRelations($model, $models);
+        }
 
         foreach ($this->models as $model) {
             $accessors = ParserAccessor::collection($model->getClass());
@@ -182,7 +186,7 @@ class SchemaLaravel
     }
 
     /**
-     * Parse base namespace from first model.
+     * Parse base namespace from first model to get the base namespace.
      *
      * @param  SchemaClass[]  $schemas
      */
@@ -204,50 +208,50 @@ class SchemaLaravel
     }
 
     /**
-     * Improve relations.
+     * Improve relations for a model.
      *
      * @param  SchemaModel[]  $models
      */
-    private function improveRelations(array $models): array
+    private function improveModelRelations(SchemaModel $model, array $models): void
     {
-        $outputs = $models;
+        foreach ($model->getRelations() as $relation) {
+            $typescript = 'any';
+            $relationNamespace = $relation->getRelatedToModel();
 
-        foreach ($models as $model) {
-            foreach ($model->getRelations() as $relation) {
-                $typescript = 'any';
-                $relationNamespace = $relation->getRelatedToModel();
-
-                if ($relationNamespace) {
-                    $modelNamespace = array_filter($models, fn (SchemaModel $m) => $m->getClass()->getNamespace() === $relationNamespace);
-                    $first = reset($modelNamespace);
-                    if ($first) {
-                        $relation->setPhpType($first->getClass()?->getFullname());
-                        $typescript = $first->getTypescriptModelName();
-                    }
-                }
-
-                $relation->setTypescriptType($typescript, $this->baseNamespace);
-
-                if ($relation->isMany()) {
-                    $model->setAttribute(new SchemaAttribute(
-                        name: $relation->getSnakeCaseName().'_count',
-                        databaseType: null,
-                        increments: false,
-                        nullable: true,
-                        default: null,
-                        unique: false,
-                        fillable: false,
-                        hidden: false,
-                        appended: false,
-                        cast: false,
-                        phpType: 'int',
-                        typescriptType: 'number',
-                        databaseFields: null,
-                    ));
+            // Find relation namespace
+            // e.g. `App\Models\Movie` for `movies()`
+            if ($relationNamespace) {
+                $modelNamespace = array_filter($models, fn (SchemaModel $m) => $m->getClass()->getNamespace() === $relationNamespace);
+                $first = reset($modelNamespace);
+                if ($first) {
+                    $relation->setPhpType($first->getClass()?->getFullname());
+                    $typescript = $first->getTypescriptModelName();
                 }
             }
-        }
 
-        return $outputs;
+            // Set the relation type
+            // e.g. `App.Models.Movie[]` for `movies()`
+            $relation->setTypescriptType($typescript, $this->baseNamespace);
+
+            // Add count attribute for many relations
+            // e.g. `movies_count` for `movies()`
+            if ($relation->isMany()) {
+                $model->setAttribute(new SchemaAttribute(
+                    name: $relation->getSnakeCaseName().'_count',
+                    databaseType: null,
+                    increments: false,
+                    nullable: true,
+                    default: null,
+                    unique: false,
+                    fillable: false,
+                    hidden: false,
+                    appended: false,
+                    cast: false,
+                    phpType: 'int',
+                    typescriptType: 'number',
+                    databaseFields: null,
+                ));
+            }
+        }
     }
 }

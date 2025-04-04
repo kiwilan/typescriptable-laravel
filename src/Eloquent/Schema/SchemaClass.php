@@ -6,6 +6,8 @@ use ReflectionClass;
 use SplFileInfo;
 
 /**
+ * Used only by `EngineParser`.
+ *
  * A `SchemaClass` contains information about a class.
  * It contains the class name, namespace, file path, and other information.
  *

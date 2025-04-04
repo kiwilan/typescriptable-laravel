@@ -4,6 +4,9 @@ namespace Kiwilan\Typescriptable\Eloquent\Schema;
 
 /**
  * `SchemaCollection` is a collection of schema classes.
+ * Used to list all classes in a given path.
+ *
+ * Used by `EngineParser` and `EngineArtisan`.
  */
 class SchemaCollection
 {

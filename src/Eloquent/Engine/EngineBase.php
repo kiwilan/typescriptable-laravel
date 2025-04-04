@@ -6,12 +6,14 @@ use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 use Kiwilan\Typescriptable\Eloquent\EloquentConfig;
 use Kiwilan\Typescriptable\Eloquent\Parser\ParserFillable;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaCollection;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaLaravel;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaModel;
 
 /**
  * Base class for Eloquent engines.
  */
-class EngineBase
+abstract class EngineBase
 {
     protected ?SchemaLaravel $laravel = null;
 
@@ -20,30 +22,72 @@ class EngineBase
         protected ?string $typescript = null,
     ) {}
 
-    public static function make(EloquentConfig $config = new EloquentConfig): self
-    {
-        return new self($config);
-    }
+    /**
+     * Execute the engine.
+     */
+    abstract public static function run(EloquentConfig $config = new EloquentConfig): self;
 
-    public function execute(): self
+    /**
+     * Parse models from the given array of `SchemaClass` with `EngineParser` or `EngineArtisan`
+     *
+     * @param  SchemaClass[]  $classes
+     * @return SchemaModel[]
+     */
+    abstract protected function parseModels(array $classes): array;
+
+    /**
+     * Create new `SchemaLaravel` instance
+     */
+    protected function parse(bool $enableParser = false)
     {
-        $engine = new EngineParser($this->config);
-        if (! $this->config->useParser) {
-            $engine = new EngineArtisan($this->config);
+        // Define Laravel schema, base for models and database information
+        $this->laravel = SchemaLaravel::make(
+            modelPath: $this->config->modelsPath,
+            phpPath: $this->config->phpPath,
+        );
+
+        if ($enableParser) {
+            $this->laravel->enableParser();
         }
 
-        $engine->run();
+        // Parse classes from the given path and skip models if needed
+        $collect = SchemaCollection::make(
+            basePath: $this->config->modelsPath,
+            skip: $this->config->skipModels
+        );
+        $models = $collect->getOnlyModels();
 
-        // $type->typescript = PrinterEloquentTypescript::make($type->getApp()->getModels());
-        // TypescriptableUtils::print($type->typescript, TypescriptableConfig::setPath($type->getConfig()->typescriptFilename));
+        $this->laravel->parseBaseNamespace($models);
 
-        // if ($type->getConfig()->phpPath) {
-        //     $printer = PrinterEloquentPhp::make($type->getApp()->getModels(), $type->getConfig()->phpPath);
-        //     $printer->print();
-        // }
-
-        return $engine;
+        // Parse models to find attributes and relations
+        $models = $this->parseModels($models);
+        $this->laravel->setModels($models);
     }
+
+    // public static function make(EloquentConfig $config = new EloquentConfig): self
+    // {
+    //     return new self($config);
+    // }
+
+    // public function execute(): self
+    // {
+    //     $engine = new EngineParser($this->config);
+    //     if (! $this->config->useParser) {
+    //         $engine = new EngineArtisan($this->config);
+    //     }
+
+    //     $engine->run();
+
+    //     // $type->typescript = PrinterEloquentTypescript::make($type->getApp()->getModels());
+    //     // TypescriptableUtils::print($type->typescript, TypescriptableConfig::setPath($type->getConfig()->typescriptFilename));
+
+    //     // if ($type->getConfig()->phpPath) {
+    //     //     $printer = PrinterEloquentPhp::make($type->getApp()->getModels(), $type->getConfig()->phpPath);
+    //     //     $printer->print();
+    //     // }
+
+    //     return $engine;
+    // }
 
     /**
      * Get the Laravel schema with models and database information.

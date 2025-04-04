@@ -3,9 +3,9 @@
 namespace Kiwilan\Typescriptable\Eloquent\Eloquent;
 
 use Illuminate\Support\Facades\Artisan;
+use Kiwilan\Typescriptable\Eloquent\EloquentConfig;
+use Kiwilan\Typescriptable\Eloquent\Schema\SchemaAttribute;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaClass;
-use Kiwilan\Typescriptable\Eloquent\Schema\SchemaCollection;
-use Kiwilan\Typescriptable\Eloquent\Schema\SchemaLaravel;
 use Kiwilan\Typescriptable\Eloquent\Schema\SchemaModel;
 
 /**
@@ -15,57 +15,81 @@ use Kiwilan\Typescriptable\Eloquent\Schema\SchemaModel;
  */
 class EngineArtisan extends EngineBase
 {
-    /**
-     * Execute the engine.
-     */
-    public function run(): self
+    public static function run(EloquentConfig $config = new EloquentConfig): self
     {
-        $this->laravel = SchemaLaravel::make(
-            modelPath: $this->config->modelsPath,
-            phpPath: $this->config->phpPath,
-        );
+        $self = new self(config: $config);
+        $self->parse();
 
-        $collect = SchemaCollection::make(
-            basePath: $this->config->modelsPath,
-            skip: $this->config->skipModels,
-        );
-        $schemas = $collect->getOnlyModels();
-
-        $this->laravel->parseBaseNamespace($schemas);
-
-        $models = $this->parseModels($schemas);
-        $this->laravel->setModels($models);
-
-        return $this;
+        return $self;
     }
 
-    /**
-     * Parse models from Laravel Artisan command.
-     *
-     * @param  SchemaClass[]  $classes
-     * @return SchemaModel[]
-     */
-    private function parseModels(array $classes): array
+    protected function parseModels(array $classes): array
     {
         $models = [];
         foreach ($classes as $class) {
+            // Get model information from Artisan
             Artisan::call('model:show', [
                 'model' => $class->getNamespace(),
                 '--json' => true,
             ]);
 
-            $models[$class->getNamespace()] = SchemaModel::fromArtisan(
+            // Create a new SchemaModel instance with output
+            $models[$class->getNamespace()] = $this->createModel(
                 class: $class,
-                driver: $this->laravel->getDriver(),
                 artisan: json_decode(Artisan::output(), true),
             );
 
-            $attributes = $this->parseMongoDB($class, $this->laravel->getDriver());
-            if ($attributes) {
-                $models[$class->getNamespace()]->setAttributes($attributes);
-            }
+            // $attributes = $this->parseMongoDB($class, $this->laravel->getDriver());
+            // if ($attributes) {
+            //     $models[$class->getNamespace()]->setAttributes($attributes);
+            // }
         }
 
         return $models;
+    }
+
+    /**
+     * Create a new `SchemaModel` instance from Artisan output.
+     */
+    private function createModel(SchemaClass $class, array $artisan): SchemaModel
+    {
+        $model = new SchemaModel(
+            class: $class,
+            driver: $this->laravel->getDriver(),
+            table: $artisan['table'],
+            policy: $artisan['policy'] ?? null,
+        );
+
+        $artisanAttributes = $artisan['attributes'] ?? [];
+        $attributes = [];
+
+        foreach ($artisanAttributes as $artisanAttribute) {
+            $schema = $this->parseAttribute($artisanAttribute);
+            $attributes[$schema->getName()] = $schema;
+        }
+
+        // $model->handleAttributes(SchemaAttribute::fromArtisan($model->getDriver(), $artisan));
+
+        return $model;
+    }
+
+    /**
+     * Parse a single attribute from Artisan output.
+     */
+    private function parseAttribute(array $attribute): SchemaAttribute
+    {
+        return new SchemaAttribute(
+            name: $attribute['name'],
+            driver: $this->laravel->getDriver(),
+            databaseType: $attribute['type'],
+            increments: $attribute['increments'],
+            nullable: $attribute['nullable'],
+            default: $attribute['default'],
+            unique: $attribute['unique'],
+            fillable: $attribute['fillable'],
+            hidden: $attribute['hidden'],
+            appended: $attribute['appended'],
+            cast: $attribute['cast'],
+        );
     }
 }

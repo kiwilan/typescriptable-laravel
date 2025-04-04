@@ -35,35 +35,6 @@ class SchemaAttribute
     }
 
     /**
-     * Create a collection of `SchemaAttribute` from Artisan command.
-     *
-     * @return SchemaAttribute[]
-     */
-    public static function fromArtisan(DriverEnum $driver, array $artisan): array
-    {
-        $attributes = $artisan['attributes'] ?? [];
-        $items = [];
-
-        foreach ($attributes as $attribute) {
-            $items[$attribute['name']] = new self(
-                name: $attribute['name'],
-                driver: $driver,
-                databaseType: $attribute['type'],
-                increments: $attribute['increments'],
-                nullable: $attribute['nullable'],
-                default: $attribute['default'],
-                unique: $attribute['unique'],
-                fillable: $attribute['fillable'],
-                hidden: $attribute['hidden'],
-                appended: $attribute['appended'],
-                cast: $attribute['cast'],
-            );
-        }
-
-        return $items;
-    }
-
-    /**
      * Update the current attribute with another attribute and handle types.
      */
     public function update(self $self): self

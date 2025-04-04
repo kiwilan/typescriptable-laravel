@@ -95,9 +95,8 @@ const STORY_CLASS = SchemaClass::make(
     basePath: getModelsPath(),
 );
 
-const STORY_MODEL = SchemaModel::parser(
-
-);
+// const STORY_MODEL = SchemaModel::parser(
+// );
 
 foreach (glob('.output/*') as $file) {
     if (basename($file) !== '.gitignore') {

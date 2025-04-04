@@ -67,31 +67,6 @@ class SchemaModel
     }
 
     /**
-     * Create a new `SchemaModel` instance for `EngineArtisan`.
-     *
-     * @param  SchemaClass  $class  Class instance
-     * @param  DriverEnum  $driver  Database driver
-     * @param  array  $artisan  Artisan command output from `model:show`
-     */
-    public static function fromArtisan(SchemaClass $class, DriverEnum $driver, array $artisan): self
-    {
-        $self = new self(
-            class: $class,
-            driver: $driver,
-            table: $artisan['table'],
-            policy: $artisan['policy'] ?? null,
-        );
-
-        ray($artisan);
-        $self->handleAttributes(SchemaAttribute::fromArtisan($driver, $artisan));
-        $self->handleRelations($artisan['relations'] ?? []);
-        // $observers = $artisan['observers'] ?? [];
-        $self->typescriptModelName = $self->class->getFullname();
-
-        return $self;
-    }
-
-    /**
      * Get `SchemaClass` instance (base information about the class).
      */
     public function getClass(): ?SchemaClass
@@ -259,7 +234,7 @@ class SchemaModel
      *
      * @param  SchemaAttribute[]  $attributes
      */
-    private function handleAttributes(array $attributes): self
+    public function handleAttributes(array $attributes): self
     {
         foreach (array_map(fn (SchemaAttribute $item) => $item, $attributes) as $attribute) {
             $this->attributes[$attribute->getName()] = $attribute;
@@ -273,7 +248,7 @@ class SchemaModel
      *
      * @param  SchemaRelation[]  $relations
      */
-    private function handleRelations(array $relations): self
+    public function handleRelations(array $relations): self
     {
         foreach (array_map(fn (array $item) => SchemaRelation::make($item), $relations) as $relation) {
             $this->relations[$relation->getName()] = $relation;
