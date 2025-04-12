@@ -111,10 +111,10 @@ class TestCase extends Orchestra
         config()->set('typescriptable.routes.add_to_window', false);
         config()->set('typescriptable.routes.use_path', false);
 
-        config()->set('typescriptable.output_path', outputDir());
+        config()->set('typescriptable.output_path', pathOutput());
 
         config()->set('typescriptable.eloquent.directory', getModelsPath());
-        config()->set('typescriptable.eloquent.php_path', outputDir('php'));
+        config()->set('typescriptable.eloquent.php_path', pathOutput('php'));
         config()->set('typescriptable.eloquent.paginate', true);
 
         config()->set('typescriptable.engine.eloquent', 'artisan');

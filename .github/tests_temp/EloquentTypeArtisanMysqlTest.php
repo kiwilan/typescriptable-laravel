@@ -13,6 +13,6 @@ it('can be run with artisan', function () {
 
     EloquentType::make()->execute();
 
-    $eloquent = outputDir(TypescriptableConfig::eloquentFilename());
+    $eloquent = pathOutput(TypescriptableConfig::eloquentFilename());
     expect($eloquent)->toBeFile();
 });

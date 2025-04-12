@@ -7,8 +7,8 @@ use Kiwilan\Typescriptable\Eloquent\Route\Schemas\RouteTypeItemParam;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    deleteFile(outputDir(TypescriptableConfig::routesFilename()));
-    deleteFile(outputDir(TypescriptableConfig::routesFilenameList()));
+    deleteFile(pathOutput(TypescriptableConfig::routesFilename()));
+    deleteFile(pathOutput(TypescriptableConfig::routesFilenameList()));
 
     config()->set('typescriptable.routes.filename', TypescriptableConfig::routesFilename());
     config()->set('typescriptable.routes.filename_list', TypescriptableConfig::routesFilenameList());

@@ -6,9 +6,9 @@ use Kiwilan\Typescriptable\Tests\TestCase;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    deleteFile(outputDir(TypescriptableConfig::eloquentFilename()));
+    deleteFile(pathOutput(TypescriptableConfig::eloquentFilename()));
     config()->set('typescriptable.eloquent.directory', getModelsPath());
-    config()->set('typescriptable.eloquent.php_path', outputDir('php'));
+    config()->set('typescriptable.eloquent.php_path', pathOutput('php'));
     config()->set('typescriptable.eloquent.paginate', true);
 });
 
@@ -18,7 +18,7 @@ it('can use command', function () {
     Artisan::call(TypescriptableEloquentCommand::class);
 
     expect(true)->toBeTrue(); // fake assertion to check if the command runs without error
-    $eloquent = outputDir(TypescriptableConfig::eloquentFilename());
+    $eloquent = pathOutput(TypescriptableConfig::eloquentFilename());
     expect($eloquent)->toBeFile();
 });
 
@@ -27,6 +27,6 @@ it('can use alias command', function () {
     Artisan::call('typescriptable:models');
 
     expect(true)->toBeTrue(); // fake assertion to check if the command runs without error
-    $eloquent = outputDir(TypescriptableConfig::eloquentFilename());
+    $eloquent = pathOutput(TypescriptableConfig::eloquentFilename());
     expect($eloquent)->toBeFile();
 });

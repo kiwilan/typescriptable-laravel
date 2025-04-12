@@ -6,9 +6,9 @@ use Kiwilan\Typescriptable\Tests\TestCase;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    deleteFile(outputDir(TypescriptableConfig::eloquentFilename()));
-    deleteFile(outputDir(TypescriptableConfig::routesFilename()));
-    deleteFile(outputDir(TypescriptableConfig::settingsFilename()));
+    deleteFile(pathOutput(TypescriptableConfig::eloquentFilename()));
+    deleteFile(pathOutput(TypescriptableConfig::routesFilename()));
+    deleteFile(pathOutput(TypescriptableConfig::settingsFilename()));
 });
 
 it('can use command', function () {

@@ -20,14 +20,14 @@ it('can use default config', function () {
 
     $config = new EloquentConfig(
         modelsPath: getModelsPath(),
-        phpPath: outputDir('php'),
+        phpPath: pathOutput('php'),
         useParser: false,
         skipModels: ['App\\Models\\SushiTest'],
         typescriptFilename: 'eloquent.d.ts',
     );
 
     expect($config->modelsPath)->toBe(getModelsPath());
-    expect($config->phpPath)->toBe(outputDir('php'));
+    expect($config->phpPath)->toBe(pathOutput('php'));
     expect($config->useParser)->toBeFalse();
     expect($config->typescriptFilename)->toBe('eloquent.d.ts');
     expect($config->skipModels)->toBeArray();

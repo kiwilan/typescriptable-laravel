@@ -17,10 +17,10 @@ it('can be run', function (string $engine) {
     $app = $type->app();
     expect($app->driver())->toBe('mongodb');
 
-    $models = outputDir(TypescriptableConfig::eloquentFilename());
+    $models = pathOutput(TypescriptableConfig::eloquentFilename());
     expect($models)->toBeFile();
 
-    $models = outputDir(TypescriptableConfig::eloquentFilename());
+    $models = pathOutput(TypescriptableConfig::eloquentFilename());
     $ts = TypescriptToPhp::make($models);
     $data = $ts->raw();
 

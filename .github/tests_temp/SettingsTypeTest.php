@@ -5,7 +5,7 @@ use Kiwilan\Typescriptable\Eloquent\Settings\SettingsType;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    deleteFile(outputDir(TypescriptableConfig::settingsFilename()));
+    deleteFile(pathOutput(TypescriptableConfig::settingsFilename()));
 
     config()->set('typescriptable.settings.filename', TypescriptableConfig::settingsFilename());
     config()->set('typescriptable.settings.directory', settingsDir());

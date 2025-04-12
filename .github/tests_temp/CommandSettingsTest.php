@@ -5,7 +5,7 @@ use Kiwilan\Typescriptable\Commands\TypescriptableSettingsCommand;
 use Kiwilan\Typescriptable\TypescriptableConfig;
 
 beforeEach(function () {
-    deleteFile(outputDir(TypescriptableConfig::settingsFilename()));
+    deleteFile(pathOutput(TypescriptableConfig::settingsFilename()));
 
     config()->set('typescriptable.settings.filename', 'types-settings.d.ts');
     config()->set('typescriptable.settings.directory', settingsDir());
@@ -16,6 +16,6 @@ beforeEach(function () {
 it('can be run', function () {
     Artisan::call(TypescriptableSettingsCommand::class);
 
-    $settings = outputDir(TypescriptableConfig::settingsFilename());
+    $settings = pathOutput(TypescriptableConfig::settingsFilename());
     expect($settings)->toBeFile();
 });

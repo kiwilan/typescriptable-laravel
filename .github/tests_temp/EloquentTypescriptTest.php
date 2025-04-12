@@ -17,10 +17,10 @@ it('can be run', function (string $driver) {
     $app = $type->app();
     expect($app->driver())->toBe($driver);
 
-    $models = outputDir(TypescriptableConfig::eloquentFilename());
+    $models = pathOutput(TypescriptableConfig::eloquentFilename());
     expect($models)->toBeFile();
 
-    $models = outputDir(TypescriptableConfig::eloquentFilename());
+    $models = pathOutput(TypescriptableConfig::eloquentFilename());
     $ts = TypescriptToPhp::make($models);
     $data = $ts->raw();
 

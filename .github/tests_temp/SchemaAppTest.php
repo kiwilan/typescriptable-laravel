@@ -26,7 +26,7 @@ it('can create schema app', function (string $driver) {
     $config = $type->config();
 
     expect($config->modelsPath)->toBe(getModelsPath());
-    expect($config->phpPath)->toBe(outputDir().'/php');
+    expect($config->phpPath)->toBe(pathOutput().'/php');
     expect($config->useParser)->toBeFalse();
     expect($config->typescriptFilename)->toBe('types-eloquent.d.ts');
     expect($config->skipModels)->toBeArray();
