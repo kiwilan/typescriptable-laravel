@@ -272,3 +272,32 @@ it('converts SQL Server types to PHP types', function () {
         expect(DriverEnum::sqlsrv->toPhp($dbType))->toBe($phpType);
     }
 });
+
+it('can convert string to enum', function () {
+    $enum = DriverEnum::tryFrom('mysql');
+    expect($enum)->toBeInstanceOf(DriverEnum::class);
+    expect($enum->value)->toBe('mysql');
+
+    $enum = DriverEnum::tryFrom('pgsql');
+    expect($enum)->toBeInstanceOf(DriverEnum::class);
+    expect($enum->value)->toBe('pgsql');
+
+    $enum = DriverEnum::tryFrom('sqlite');
+    expect($enum)->toBeInstanceOf(DriverEnum::class);
+    expect($enum->value)->toBe('sqlite');
+
+    $enum = DriverEnum::tryFrom('sqlsrv');
+    expect($enum)->toBeInstanceOf(DriverEnum::class);
+    expect($enum->value)->toBe('sqlsrv');
+
+    $enum = DriverEnum::tryFrom('mariadb');
+    expect($enum)->toBeInstanceOf(DriverEnum::class);
+    expect($enum->value)->toBe('mariadb');
+
+    $enum = DriverEnum::tryFrom('mongodb');
+    expect($enum)->toBeInstanceOf(DriverEnum::class);
+    expect($enum->value)->toBe('mongodb');
+
+    $enum = DriverEnum::tryFrom('unknown');
+    expect($enum)->toBeNull();
+});

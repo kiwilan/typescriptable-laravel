@@ -8,6 +8,8 @@ use Kiwilan\Typescriptable\TypescriptableConfig;
 
 /**
  * Default config for eloquent engine.
+ *
+ * @param  string  $eloquentEngine  Could be `artisan` or `eloquent`.
  */
 function eloquentConfig(string $eloquentEngine = 'artisan'): void
 {
@@ -24,92 +26,130 @@ function eloquentConfig(string $eloquentEngine = 'artisan'): void
     ]);
 }
 
-const STORY_ID = new SchemaAttribute(
-    name: 'id',
-    driver: DriverEnum::mysql,
-    databaseType: 'bigint unsigned',
-    increments: true,
-    nullable: false,
-    default: null,
-    unique: false,
-    fillable: false,
-    hidden: false,
-    appended: null,
-    cast: 'int',
-    phpType: null,
-    typescriptType: null,
-    databaseFields: [
-        'Field' => 'id',
-        'Type' => 'bigint unsigned',
-        'Null' => 'NO',
-        'Key' => 'PRI',
-        'Default' => null,
-        'Extra' => 'auto_increment',
-    ],
-);
+/**
+ * Seed `id` for `Story` model.
+ */
+function seedStoryId(): SchemaAttribute
+{
+    return new SchemaAttribute(
+        name: 'id',
+        driver: DriverEnum::mysql,
+        databaseType: 'bigint unsigned',
+        increments: true,
+        nullable: false,
+        default: null,
+        unique: false,
+        fillable: false,
+        hidden: false,
+        appended: null,
+        cast: 'int',
+        phpType: null,
+        typescriptType: null,
+        databaseFields: [
+            'Field' => 'id',
+            'Type' => 'bigint unsigned',
+            'Null' => 'NO',
+            'Key' => 'PRI',
+            'Default' => null,
+            'Extra' => 'auto_increment',
+        ],
+    );
+}
 
-const STORY_TITLE = new SchemaAttribute(
-    name: 'title',
-    driver: DriverEnum::mysql,
-    databaseType: 'varchar(255)',
-    increments: false,
-    nullable: false,
-    default: null,
-    unique: false,
-    fillable: true,
-    hidden: false,
-    appended: null,
-    cast: null,
-    phpType: null,
-    typescriptType: null,
-    databaseFields: [
-        'Field' => 'title',
-        'Type' => 'varchar(255)',
-        'Null' => 'NO',
-        'Key' => '',
-        'Default' => null,
-        'Extra' => '',
-    ],
-);
-const STORY_PUBLISHED_AT = new SchemaAttribute(
-    name: 'published_at',
-    driver: DriverEnum::mysql,
-    databaseType: 'datetime',
-    increments: false,
-    nullable: true,
-    default: null,
-    unique: false,
-    fillable: true,
-    hidden: false,
-    appended: null,
-    cast: 'datetime',
-    phpType: null,
-    typescriptType: null,
-    databaseFields: [
-        'Field' => 'published_at',
-        'Type' => 'datetime',
-        'Null' => 'YES',
-        'Key' => '',
-        'Default' => null,
-        'Extra' => '',
-    ],
-);
+/**
+ * Seed `title` for `Story` model.
+ */
+function seedStoryTitle(): SchemaAttribute
+{
+    return new SchemaAttribute(
+        name: 'title',
+        driver: DriverEnum::mysql,
+        databaseType: 'varchar(255)',
+        increments: false,
+        nullable: false,
+        default: null,
+        unique: false,
+        fillable: true,
+        hidden: false,
+        appended: null,
+        cast: null,
+        phpType: null,
+        typescriptType: null,
+        databaseFields: [
+            'Field' => 'title',
+            'Type' => 'varchar(255)',
+            'Null' => 'NO',
+            'Key' => '',
+            'Default' => null,
+            'Extra' => '',
+        ],
+    );
+}
 
-const STORY_RELATION_CHAPTERS = [
-    'name' => 'chapters',
-    'type' => 'HasMany',
-    'related' => 'Kiwilan\Typescriptable\Tests\Data\Models\Chapter',
-];
-const STORY_RELATION_CATEGORY = [
-    'name' => 'category',
-    'type' => 'BelongsTo',
-    'related' => 'Kiwilan\Typescriptable\Tests\Data\Models\Category',
-];
+/**
+ * Seed `published_at` for `Story` model.
+ */
+function seedStoryPublishedAt(): SchemaAttribute
+{
+    return new SchemaAttribute(
+        name: 'published_at',
+        driver: DriverEnum::mysql,
+        databaseType: 'datetime',
+        increments: false,
+        nullable: true,
+        default: null,
+        unique: false,
+        fillable: true,
+        hidden: false,
+        appended: null,
+        cast: 'datetime',
+        phpType: null,
+        typescriptType: null,
+        databaseFields: [
+            'Field' => 'published_at',
+            'Type' => 'datetime',
+            'Null' => 'YES',
+            'Key' => '',
+            'Default' => null,
+            'Extra' => '',
+        ],
+    );
+}
 
-const STORY_CLASS = SchemaClass::make(
-    file: getModelSpl('Story'),
-    basePath: pathModels(),
-);
+/**
+ * Seed raw relation `Category` for `Story` model.
+ */
+function seedStoryRelationCategory(): array
+{
+    return [
+        'name' => 'category',
+        'type' => 'BelongsTo',
+        'related' => 'Kiwilan\Typescriptable\Tests\Data\Models\Category',
+    ];
+}
+
+/**
+ * Seed raw relation `Chapter` for `Story` model.
+ */
+function seedStoryRelationChapters(): array
+{
+    return [
+        'name' => 'chapters',
+        'type' => 'HasMany',
+        'related' => 'Kiwilan\Typescriptable\Tests\Data\Models\Chapter',
+    ];
+}
+
+/**
+ * Seed `Story` PHP class.
+ */
+function seedStoryClass(): SchemaCLass
+{
+    return SchemaClass::make(
+        file: getModelSpl('Story'),
+        basePath: pathModels(),
+    );
+}
 
 // const STORY_MODEL = SchemaModel::parser(
 // );

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Eloquent\Eloquent;
+namespace Kiwilan\Typescriptable\Eloquent\Engine;
 
 use Illuminate\Support\Facades\Artisan;
 use Kiwilan\Typescriptable\Eloquent\EloquentConfig;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Eloquent\Eloquent;
+namespace Kiwilan\Typescriptable\Eloquent\Engine;
 
 use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 use Kiwilan\Typescriptable\Eloquent\EloquentConfig;

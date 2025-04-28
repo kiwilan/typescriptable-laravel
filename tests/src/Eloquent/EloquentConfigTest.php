@@ -1,6 +1,6 @@
 <?php
 
-use Kiwilan\Typescriptable\Eloquent\Eloquent\EloquentConfig;
+use Kiwilan\Typescriptable\Eloquent\EloquentConfig;
 
 it('can use default config', function () {
     config()->set('typescriptable.eloquent.php_path', null);
@@ -19,14 +19,14 @@ it('can use default config', function () {
     expect($config->skipModels[0])->toBe('Kiwilan\Typescriptable\Tests\Data\Models\SushiTest');
 
     $config = new EloquentConfig(
-        modelsPath: getModelsPath(),
+        modelsPath: pathModels(),
         phpPath: pathOutput('php'),
         useParser: false,
         skipModels: ['App\\Models\\SushiTest'],
         typescriptFilename: 'eloquent.d.ts',
     );
 
-    expect($config->modelsPath)->toBe(getModelsPath());
+    expect($config->modelsPath)->toBe(pathModels());
     expect($config->phpPath)->toBe(pathOutput('php'));
     expect($config->useParser)->toBeFalse();
     expect($config->typescriptFilename)->toBe('eloquent.d.ts');

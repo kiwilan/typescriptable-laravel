@@ -62,14 +62,6 @@ function pathModel(string $model, string $extension = 'php'): string
 }
 
 /**
- * Get `SplFileInfo` for a specific model file.
- */
-function getModelSpl(string $file): SplFileInfo
-{
-    return new SplFileInfo(pathModel($file));
-}
-
-/**
  * Get the path to the PHP output directory.
  *
  * Path: `laravel-typescriptable/tests/output`

@@ -17,7 +17,7 @@ class SchemaModel
      * @param  SchemaAttribute[]  $attributes
      * @param  SchemaRelation[]  $relations
      */
-    protected function __construct(
+    public function __construct(
         protected SchemaClass $class,
         protected DriverEnum $driver, // e.g. `mysql`
         protected string $table, // e.g. `movies`

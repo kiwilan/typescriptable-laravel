@@ -1,24 +1,22 @@
 <?php
 
-// function driverEnums(): array
-// {
-//     $dotenv = Dotenv::createMutable(getcwd());
-//     $data = $dotenv->load();
-//     $types = $data['DATABASE_TYPES'] ?? 'mysql,mariadb,sqlite,pgsql,sqlsrv';
-//     $types = explode(',', $types);
+use Dotenv\Dotenv;
 
-//     return $types;
-// }
+function driverEnums(bool $with_sqlsrv = true): array
+{
+    $dotenv = Dotenv::createMutable(getcwd());
+    $data = $dotenv->load();
+    $types = $data['DATABASE_TYPES'] ?? 'mysql,mariadb,sqlite,pgsql,sqlsrv';
+    $types = explode(',', $types);
 
-// function driverEnumsWithoutSqlsrv(): array
-// {
-//     $drivers = DriverEnums();
-//     if (($key = array_search('sqlsrv', $drivers)) !== false) {
-//         unset($drivers[$key]);
-//     }
+    if (! $with_sqlsrv) {
+        $types = array_filter($types, function ($type) {
+            return $type !== 'sqlsrv';
+        });
+    }
 
-//     return $drivers;
-// }
+    return $types;
+}
 
 /**
  * Delete a file if it exists.
@@ -52,4 +50,12 @@ function deleteDirectory(string $directory): void
             rmdir($file);
         }
     }
+}
+
+/**
+ * Get `SplFileInfo` for a specific model file.
+ */
+function getModelSpl(string $file): SplFileInfo
+{
+    return new SplFileInfo(pathModel($file));
 }

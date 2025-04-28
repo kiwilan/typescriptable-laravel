@@ -5,6 +5,7 @@ namespace Kiwilan\Typescriptable\Tests;
 use Dotenv\Dotenv;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Schema;
+use Kiwilan\Typescriptable\Eloquent\Database\DriverEnum;
 use Kiwilan\Typescriptable\Tests\Data\Utils\Driver;
 use Kiwilan\Typescriptable\TypescriptableServiceProvider;
 use MongoDB\Laravel\MongoDBServiceProvider;
@@ -113,20 +114,20 @@ class TestCase extends Orchestra
 
         config()->set('typescriptable.output_path', pathOutput());
 
-        config()->set('typescriptable.eloquent.directory', getModelsPath());
+        config()->set('typescriptable.eloquent.directory', pathModels());
         config()->set('typescriptable.eloquent.php_path', pathOutput('php'));
         config()->set('typescriptable.eloquent.paginate', true);
 
         config()->set('typescriptable.engine.eloquent', 'artisan');
     }
 
-    public static function setupDatabase(?string $type = null): void
+    public static function setupDatabase(?DriverEnum $type = null): void
     {
         if (! $type) {
             return;
         }
 
-        $driver = self::getDriver($type);
+        $driver = self::getDriver($type->value);
 
         $configs = [
             'sqlite' => [

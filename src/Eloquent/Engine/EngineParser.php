@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiwilan\Typescriptable\Eloquent\Eloquent;
+namespace Kiwilan\Typescriptable\Eloquent\Engine;
 
 use Illuminate\Database\Eloquent\Model;
 use Kiwilan\Typescriptable\Eloquent\Database\DatabaseTable;
@@ -25,9 +25,9 @@ class EngineParser extends EngineBase
         return $self;
     }
 
-    protected function parseModels(): self
+    protected function parseModels(array $classes): array
     {
-        return $this;
+        return [];
     }
 
     // /**
