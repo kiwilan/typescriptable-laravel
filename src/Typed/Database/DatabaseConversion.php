@@ -114,6 +114,9 @@ class DatabaseConversion
             'object' => 'any',
 
             'AsStringable::class' => 'string',
+            'AsCollection::class' => 'any[]',
+            \Illuminate\Database\Eloquent\Casts\AsStringable::class => 'string',
+            \Illuminate\Database\Eloquent\Casts\AsCollection::class => 'any[]',
 
             'boolean' => 'boolean',
 
@@ -143,7 +146,12 @@ class DatabaseConversion
             if (str_contains($cast, '\\')) {
                 $this->phpType = "\\{$cast}";
                 $enums = $this->parseEnum($cast);
-                $this->typescriptType = $this->arrayToTypescriptTypes($enums);
+                $candidate = $this->arrayToTypescriptTypes($enums);
+
+                // Prevent empty string
+                if ($candidate) {
+                    $this->typescriptType = $candidate;
+                }
 
                 return $this;
             } else {
