@@ -63,7 +63,7 @@ jobs:
     steps:
       - name: Checkout code
         # https://github.com/actions/checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Verify MySQL connection from host
         run: |
