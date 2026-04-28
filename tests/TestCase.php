@@ -4,13 +4,13 @@ namespace Kiwilan\Typescriptable\Tests;
 
 use Dotenv\Dotenv;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Kiwilan\Typescriptable\Tests\Utils\Driver;
 use Kiwilan\Typescriptable\TypescriptableServiceProvider;
 use MongoDB\Laravel\MongoDBServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use PDO;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class TestCase extends Orchestra
 {
@@ -104,7 +104,7 @@ class TestCase extends Orchestra
 
     public static function init()
     {
-        config()->set('media-library.media_model', \Spatie\MediaLibrary\MediaCollections\Models\Media::class);
+        config()->set('media-library.media_model', Media::class);
 
         config()->set('typescriptable.routes.filename', 'types-routes.d.ts');
         config()->set('typescriptable.routes.filename_list', 'routes.ts');

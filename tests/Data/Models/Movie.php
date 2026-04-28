@@ -7,13 +7,16 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Kiwilan\Typescriptable\Tests\Data\Enums\PublishStatusEnum;
 use Kiwilan\Typescriptable\Tests\Data\Models\Nested\Author;
 use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Movie extends Model implements \Spatie\MediaLibrary\HasMedia
+class Movie extends Model implements HasMedia
 {
     use HasFactory;
     use HasUlids;
@@ -99,17 +102,17 @@ class Movie extends Model implements \Spatie\MediaLibrary\HasMedia
         );
     }
 
-    public function similars(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function similars(): BelongsToMany
     {
         return $this->belongsToMany(Movie::class, 'similars', 'movie_id', 'similar_id');
     }
 
-    public function recommendations(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function recommendations(): BelongsToMany
     {
         return $this->belongsToMany(Movie::class, 'recommendations', 'movie_id', 'recommendation_id');
     }
 
-    public function members(): \Illuminate\Database\Eloquent\Relations\MorphToMany
+    public function members(): MorphToMany
     {
         return $this
             ->morphToMany(Member::class, 'memberable')

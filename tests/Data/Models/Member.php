@@ -4,6 +4,7 @@ namespace Kiwilan\Typescriptable\Tests\Data\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Member extends Model
@@ -45,7 +46,7 @@ class Member extends Model
         return 'members.show';
     }
 
-    public function memberable(): \Illuminate\Database\Eloquent\Relations\MorphTo
+    public function memberable(): MorphTo
     {
         return $this->morphTo();
     }

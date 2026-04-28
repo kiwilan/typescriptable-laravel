@@ -2,16 +2,26 @@
 
 namespace App\Models;
 
-class Movie extends \Illuminate\Database\Eloquent\Model
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Kiwilan\Typescriptable\Tests\Data\Enums\BudgetEnum;
+use Kiwilan\Typescriptable\Tests\Data\Enums\HomePageEnum;
+use Kiwilan\Typescriptable\Tests\Data\Models\Nested\Author;
+
+class Movie extends Model
 {
-    use \Illuminate\Database\Eloquent\Concerns\HasUlids;
+    use HasUlids;
 
     protected $fillable = ['title', 'subtitles', 'homepage', 'revenue', 'is_multilingual', 'added_at', 'fetched_at'];
 
     protected $casts = [
         'subtitles' => 'array',
-        'budget' => \Kiwilan\Typescriptable\Tests\Data\Enums\BudgetEnum::class,
-        'homepage' => \Kiwilan\Typescriptable\Tests\Data\Enums\HomePageEnum::class,
+        'budget' => BudgetEnum::class,
+        'homepage' => HomePageEnum::class,
         'revenue' => 'integer',
         'is_multilingual' => 'boolean',
         'added_at' => 'datetime:Y-m-d',
@@ -29,23 +39,23 @@ class Movie extends \Illuminate\Database\Eloquent\Model
     /**
      * @return string
      */
-    protected function apiRoute(): \Illuminate\Database\Eloquent\Casts\Attribute
+    protected function apiRoute(): Attribute
     {
-        return \Illuminate\Database\Eloquent\Casts\Attribute::make(get: fn (?string $value) => ucfirst($value));
+        return Attribute::make(get: fn (?string $value) => ucfirst($value));
     }
 
-    public function recommendations(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function recommendations(): BelongsToMany
     {
         return $this->belongsToMany(Movie::class, 'recommendations', 'movie_id', 'recommendation_id');
     }
 
-    public function members(): \Illuminate\Database\Eloquent\Relations\MorphToMany
+    public function members(): MorphToMany
     {
         return $this->morphToMany(Member::class, 'memberable');
     }
 
-    public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(\Kiwilan\Typescriptable\Tests\Data\Models\Nested\Author::class, 'author_id');
+        return $this->belongsTo(Author::class, 'author_id');
     }
 }

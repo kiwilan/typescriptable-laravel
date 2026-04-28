@@ -1,19 +1,24 @@
 <?php
 
-return new class extends \Illuminate\Database\Migrations\Migration
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Kiwilan\Typescriptable\Tests\Data\Enums\BudgetEnum;
+
+return new class extends Migration
 {
     public function up(): void
     {
-        \Illuminate\Support\Facades\Schema::create('movies', function (\Illuminate\Database\Schema\Blueprint $table) {
+        Schema::create('movies', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('title')->nullable()->unique();
             $table->json('subtitles');
             $table->string('homepage')->nullable();
             $table->enum('budget', [
-                \Kiwilan\Typescriptable\Tests\Data\Enums\BudgetEnum::high->value,
-                \Kiwilan\Typescriptable\Tests\Data\Enums\BudgetEnum::middle->value,
-                \Kiwilan\Typescriptable\Tests\Data\Enums\BudgetEnum::low->value,
-            ])->default(\Kiwilan\Typescriptable\Tests\Data\Enums\BudgetEnum::high);
+                BudgetEnum::high->value,
+                BudgetEnum::middle->value,
+                BudgetEnum::low->value,
+            ])->default(BudgetEnum::high);
             $table->bigInteger('revenue')->nullable();
             $table->boolean('is_multilingual')->default(false);
             $table->foreignId('author_id')->nullable()->constrained('authors')->nullOnDelete();

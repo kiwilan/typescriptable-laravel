@@ -82,12 +82,12 @@ class ParserRelation
                     $this->related = $external;
                 }
             } catch (\Throwable $th) {
-                //throw $th;
+                // throw $th;
             }
         }
     }
 
-    private function parseReturnType(\ReflectionMethod $method): string
+    private function parseReturnType(ReflectionMethod $method): string
     {
         $reflectionNamedType = $method->getReturnType();
         $returnType = 'BelongsToMany';
@@ -131,7 +131,7 @@ class ParserRelation
         return null;
     }
 
-    private function getLastLine(\ReflectionMethod $method): string
+    private function getLastLine(ReflectionMethod $method): string
     {
         $startLine = $method->getStartLine();
         $endLine = $method->getEndLine();
@@ -152,7 +152,7 @@ class ParserRelation
         return $line;
     }
 
-    private function getUseLines(\ReflectionMethod $method): array
+    private function getUseLines(ReflectionMethod $method): array
     {
         $lines = [];
         $contents = file($method->getFileName());
