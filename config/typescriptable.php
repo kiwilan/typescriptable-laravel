@@ -15,13 +15,13 @@ return [
     /**
      * The path to the output directory for all the types.
      */
-    'output_path' => resource_path('js'),
+    'output_path' => resource_path('js/types'),
 
     /**
      * Options for the Eloquent models.
      */
     'eloquent' => [
-        'filename' => 'types-eloquent.d.ts',
+        'filename' => 'eloquent.d.ts',
         /**
          * The path to the models directory.
          */
@@ -48,7 +48,7 @@ return [
      * Options for the Spatie settings.
      */
     'settings' => [
-        'filename' => 'types-settings.d.ts',
+        'filename' => 'settings.d.ts',
         /**
          * The path to the settings directory.
          */
