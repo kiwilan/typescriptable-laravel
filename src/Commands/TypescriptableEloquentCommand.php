@@ -11,7 +11,7 @@ class TypescriptableEloquentCommand extends Command
 
     public $description = 'Generate Eloquent models types.';
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setAliases([
             'typescriptable:models',
